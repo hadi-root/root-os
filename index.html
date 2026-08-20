@@ -2,340 +2,590 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#05080d">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="theme-color" content="#05070d">
 <title>ROOT OS</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#05070d;
+  --panel:rgba(13,18,30,.92);
+  --panel2:#111827;
+  --border:#263246;
+  --text:#f5f7fb;
+  --muted:#8792a6;
+  --accent:#43e6b0;
+  --blue:#4db7ff;
+  --danger:#ff6474;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: #05080d;
-  color: #ffffff;
-  min-height: 100vh;
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
 }
 
-header {
-  height: 65px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: #080d14;
-  border-bottom: 1px solid #1c2938;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 18px;
-  z-index: 100;
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#05070d;
+  color:var(--text);
 }
 
-.logo {
-  font-size: 20px;
-  font-weight: bold;
-  letter-spacing: 2px;
+/* ================= LOCK SCREEN ================= */
+
+#lockScreen{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(67,230,176,.12),transparent 30%),
+    radial-gradient(circle at 80% 70%,rgba(77,183,255,.12),transparent 30%),
+    linear-gradient(135deg,#03050a,#0a1020);
 }
 
-.logo span {
-  color: #35e6ad;
+.lock-content{
+  padding:30px;
 }
 
-.header-button {
-  background: #111a25;
-  border: 1px solid #263647;
-  color: white;
-  border-radius: 10px;
-  padding: 10px 12px;
+.lock-logo{
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:5px;
+  margin-bottom:35px;
 }
 
-main {
-  padding: 85px 15px 90px;
-  max-width: 900px;
-  margin: auto;
+.lock-logo span{
+  color:var(--accent);
 }
 
-.page {
-  display: none;
+.lock-time{
+  font-size:clamp(55px,16vw,110px);
+  font-weight:200;
+  letter-spacing:-4px;
 }
 
-.page.active {
-  display: block;
+.lock-date{
+  color:var(--muted);
+  margin-top:8px;
+  font-size:15px;
 }
 
-.hero {
-  background: linear-gradient(145deg, #0b1621, #091018);
-  border: 1px solid #1e3042;
-  border-radius: 22px;
-  padding: 28px 22px;
-  margin-bottom: 18px;
+.unlock-btn{
+  margin-top:40px;
+  padding:14px 25px;
+  border:1px solid #315d50;
+  border-radius:30px;
+  background:rgba(67,230,176,.08);
+  color:var(--accent);
+  font-weight:bold;
 }
 
-.tag {
-  color: #35e6ad;
-  font-size: 11px;
-  letter-spacing: 3px;
-  margin-bottom: 12px;
+/* ================= DESKTOP ================= */
+
+#desktop{
+  position:fixed;
+  inset:0;
+  display:none;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(67,230,176,.09),transparent 30%),
+    radial-gradient(circle at 85% 75%,rgba(77,183,255,.09),transparent 30%),
+    linear-gradient(135deg,#05070d,#090f1b);
 }
 
-.hero h1 {
-  font-size: 36px;
-  line-height: 1.1;
-  margin-bottom: 12px;
+/* ================= TOP SYSTEM BAR ================= */
+
+.topbar{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:45px;
+  background:rgba(4,7,12,.78);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 14px;
+  z-index:1000;
 }
 
-.hero p {
-  color: #8997a8;
-  line-height: 1.6;
+.top-left,
+.top-right{
+  display:flex;
+  align-items:center;
+  gap:13px;
 }
 
-.status {
-  display: inline-block;
-  margin-top: 18px;
-  padding: 8px 12px;
-  border-radius: 20px;
-  background: #0a1b16;
-  border: 1px solid #214d40;
-  color: #35e6ad;
-  font-size: 11px;
+.system-name{
+  font-weight:bold;
+  letter-spacing:2px;
+  font-size:13px;
 }
 
-.widgets {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 20px;
+.system-name span{
+  color:var(--accent);
 }
 
-.widget {
-  background: #0b1119;
-  border: 1px solid #1b2938;
-  border-radius: 15px;
-  padding: 16px;
+.status-text{
+  color:var(--muted);
+  font-size:11px;
 }
 
-.widget small {
-  color: #758397;
-  display: block;
-  margin-bottom: 8px;
+.top-clock{
+  font-size:12px;
+  color:#dce4ee;
 }
 
-.widget strong {
-  font-size: 20px;
+/* ================= DESKTOP ICONS ================= */
+
+.desktop-icons{
+  position:absolute;
+  top:65px;
+  left:18px;
+  display:grid;
+  grid-template-columns:82px;
+  gap:12px;
+  z-index:5;
 }
 
-.green {
-  color: #35e6ad;
+.desktop-icon{
+  width:76px;
+  min-height:78px;
+  border:1px solid transparent;
+  border-radius:12px;
+  background:transparent;
+  color:white;
+  padding:7px 3px;
+  text-align:center;
+  cursor:pointer;
 }
 
-.section-title {
-  margin: 22px 0 12px;
-  font-size: 18px;
+.desktop-icon:hover,
+.desktop-icon:focus{
+  background:rgba(255,255,255,.08);
+  border-color:rgba(255,255,255,.08);
 }
 
-.apps {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+.desktop-icon .icon{
+  width:42px;
+  height:42px;
+  margin:0 auto 6px;
+  display:grid;
+  place-items:center;
+  border-radius:11px;
+  background:rgba(16,25,40,.95);
+  border:1px solid #26354a;
+  font-size:21px;
 }
 
-.app {
-  background: #0b1119;
-  border: 1px solid #1b2938;
-  border-radius: 16px;
-  padding: 17px;
-  min-height: 130px;
-  color: white;
-  text-align: left;
-  transition: 0.2s;
+.desktop-icon span{
+  display:block;
+  font-size:10px;
+  color:#e3e9f1;
 }
 
-.app:active {
-  transform: scale(0.98);
+/* ================= DOCK ================= */
+
+.dock{
+  position:absolute;
+  left:50%;
+  bottom:16px;
+  transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:8px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:18px;
+  background:rgba(9,14,23,.85);
+  backdrop-filter:blur(20px);
+  box-shadow:0 15px 50px rgba(0,0,0,.4);
+  z-index:900;
 }
 
-.app-icon {
-  font-size: 25px;
-  margin-bottom: 13px;
+.dock button{
+  width:48px;
+  height:48px;
+  border:1px solid transparent;
+  border-radius:13px;
+  background:#111a29;
+  color:white;
+  font-size:21px;
+  cursor:pointer;
 }
 
-.app h3 {
-  font-size: 15px;
-  margin-bottom: 6px;
+.dock button:hover{
+  border-color:#3a4d67;
+  transform:translateY(-2px);
 }
 
-.app p {
-  color: #758397;
-  font-size: 12px;
-  line-height: 1.4;
+/* ================= WINDOWS ================= */
+
+.window{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:min(680px,calc(100vw - 30px));
+  height:min(480px,calc(100vh - 115px));
+  transform:translate(-50%,-50%);
+  display:none;
+  flex-direction:column;
+  overflow:hidden;
+  background:var(--panel);
+  border:1px solid #34445b;
+  border-radius:15px;
+  box-shadow:0 30px 90px rgba(0,0,0,.6);
+  backdrop-filter:blur(18px);
+  z-index:100;
 }
 
-.panel {
-  background: #0b1119;
-  border: 1px solid #1b2938;
-  border-radius: 18px;
-  padding: 20px;
-  margin-bottom: 15px;
+.window.open{
+  display:flex;
 }
 
-.panel h2 {
-  font-size: 20px;
-  margin-bottom: 8px;
+.window.maximized{
+  left:10px;
+  top:55px;
+  width:calc(100vw - 20px);
+  height:calc(100vh - 110px);
+  transform:none;
 }
 
-.panel p {
-  color: #758397;
-  line-height: 1.6;
-  margin-bottom: 15px;
+.window-header{
+  height:43px;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 9px 0 14px;
+  background:rgba(9,14,23,.94);
+  border-bottom:1px solid var(--border);
+  cursor:grab;
+  user-select:none;
 }
 
-input,
-textarea {
-  width: 100%;
-  background: #05080d;
-  border: 1px solid #263647;
-  border-radius: 10px;
-  color: white;
-  padding: 12px;
-  margin-bottom: 10px;
+.window-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  font-weight:bold;
 }
 
-textarea {
-  min-height: 180px;
-  resize: vertical;
+.window-controls{
+  display:flex;
+  gap:5px;
 }
 
-button {
-  font-family: inherit;
+.window-controls button{
+  width:29px;
+  height:27px;
+  border:0;
+  border-radius:7px;
+  background:#172131;
+  color:white;
+  cursor:pointer;
 }
 
-.primary {
-  background: #35e6ad;
-  color: #03100b;
-  border: none;
-  border-radius: 10px;
-  padding: 11px 15px;
-  font-weight: bold;
+.window-controls button:hover{
+  background:#26364d;
 }
 
-.secondary {
-  background: #111a25;
-  color: white;
-  border: 1px solid #263647;
-  border-radius: 10px;
-  padding: 11px 15px;
+.window-controls .close:hover{
+  background:var(--danger);
 }
 
-.info {
-  color: #8997a8;
-  font-size: 13px;
-  line-height: 1.8;
-  word-break: break-word;
+.window-body{
+  flex:1;
+  overflow:auto;
+  padding:20px;
 }
 
-.file {
-  background: #070c12;
-  border: 1px solid #1c2938;
-  border-radius: 10px;
-  padding: 12px;
-  margin-top: 8px;
+/* ================= APPS ================= */
+
+.welcome{
+  padding:25px;
+  border:1px solid var(--border);
+  border-radius:15px;
+  background:linear-gradient(135deg,rgba(67,230,176,.07),rgba(77,183,255,.05));
 }
 
-.settings-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 0;
-  border-bottom: 1px solid #1c2938;
+.welcome .small{
+  color:var(--accent);
+  font-size:10px;
+  letter-spacing:3px;
+  margin-bottom:10px;
 }
 
-.settings-row:last-child {
-  border-bottom: none;
+.welcome h1{
+  font-size:32px;
+  margin-bottom:10px;
 }
 
-.settings-row p {
-  margin: 4px 0 0;
-  font-size: 12px;
+.welcome p{
+  color:var(--muted);
+  line-height:1.7;
 }
 
-.toggle {
-  width: 48px;
-  height: 27px;
-  border-radius: 20px;
-  border: none;
-  background: #283443;
-  position: relative;
+.app-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:18px;
 }
 
-.toggle::after {
-  content: "";
-  position: absolute;
-  width: 21px;
-  height: 21px;
-  top: 3px;
-  left: 4px;
-  background: white;
-  border-radius: 50%;
-  transition: 0.2s;
+.app-tile{
+  padding:17px;
+  border-radius:13px;
+  border:1px solid var(--border);
+  background:#0b111c;
+  color:white;
+  text-align:left;
+  cursor:pointer;
 }
 
-.toggle.on {
-  background: #35e6ad;
+.app-tile:hover{
+  border-color:#40536d;
 }
 
-.toggle.on::after {
-  left: 23px;
+.app-tile .big{
+  font-size:23px;
+  margin-bottom:10px;
 }
 
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 68px;
-  background: #080d14;
-  border-top: 1px solid #1c2938;
-  display: flex;
-  z-index: 100;
+.app-tile strong{
+  display:block;
+  font-size:13px;
+  margin-bottom:5px;
 }
 
-.bottom-nav button {
-  flex: 1;
-  background: none;
-  border: none;
-  color: #718095;
-  font-size: 10px;
+.app-tile small{
+  color:var(--muted);
 }
 
-.bottom-nav button.active {
-  color: #35e6ad;
+/* ================= FILE MANAGER ================= */
+
+.file-area{
+  border:1px dashed #3a4b62;
+  border-radius:13px;
+  padding:25px;
+  text-align:center;
+  color:var(--muted);
 }
 
-.bottom-nav span {
-  display: block;
-  font-size: 19px;
-  margin-bottom: 3px;
+.file-list{
+  margin-top:15px;
 }
 
-@media (min-width: 700px) {
-  main {
-    padding-bottom: 30px;
+.file-item{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px;
+  margin-top:7px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:#09101a;
+  font-size:12px;
+}
+
+.file-item small{
+  color:var(--muted);
+}
+
+/* ================= TEXT EDITOR ================= */
+
+.editor{
+  width:100%;
+  height:330px;
+  resize:none;
+  background:#05080e;
+  border:1px solid var(--border);
+  border-radius:10px;
+  color:#e9eef5;
+  padding:15px;
+  font-family:monospace;
+  font-size:13px;
+  outline:none;
+}
+
+/* ================= CALCULATOR ================= */
+
+.calc{
+  max-width:330px;
+  margin:auto;
+}
+
+.calc-display{
+  width:100%;
+  height:65px;
+  background:#05080e;
+  border:1px solid var(--border);
+  border-radius:10px;
+  color:white;
+  padding:12px;
+  text-align:right;
+  font-size:24px;
+  margin-bottom:9px;
+}
+
+.calc-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+}
+
+.calc-grid button{
+  height:54px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:#111a28;
+  color:white;
+  font-size:16px;
+}
+
+.calc-grid button:hover{
+  background:#1a273a;
+}
+
+/* ================= SETTINGS ================= */
+
+.setting{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:15px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.setting:last-child{
+  border-bottom:0;
+}
+
+.setting small{
+  display:block;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+.btn{
+  padding:10px 14px;
+  border-radius:9px;
+  border:1px solid var(--border);
+  background:#111a28;
+  color:white;
+  cursor:pointer;
+}
+
+.green-btn{
+  background:var(--accent);
+  color:#04100b;
+  border:0;
+}
+
+/* ================= POWER MENU ================= */
+
+#powerMenu{
+  position:absolute;
+  right:15px;
+  top:55px;
+  width:190px;
+  display:none;
+  padding:8px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  background:#0b111b;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+  z-index:2000;
+}
+
+#powerMenu button{
+  width:100%;
+  padding:11px;
+  border:0;
+  border-radius:8px;
+  background:transparent;
+  color:white;
+  text-align:left;
+}
+
+#powerMenu button:hover{
+  background:#172235;
+}
+
+/* ================= MOBILE ================= */
+
+.mobile-nav{
+  display:none;
+}
+
+@media(max-width:650px){
+
+  .topbar{
+    height:42px;
   }
 
-  .apps {
-    grid-template-columns: repeat(4, 1fr);
+  .status-text{
+    display:none;
   }
 
-  .widgets {
-    grid-template-columns: repeat(4, 1fr);
+  .desktop-icons{
+    top:58px;
+    left:10px;
+    grid-template-columns:repeat(4,70px);
+    gap:10px;
   }
 
-  .bottom-nav {
-    display: none;
+  .desktop-icon{
+    width:65px;
+  }
+
+  .dock{
+    bottom:10px;
+    max-width:calc(100vw - 18px);
+    overflow:auto;
+  }
+
+  .dock button{
+    flex-shrink:0;
+    width:43px;
+    height:43px;
+  }
+
+  .window{
+    left:8px;
+    top:52px;
+    width:calc(100vw - 16px);
+    height:calc(100vh - 105px);
+    transform:none;
+    border-radius:12px;
+  }
+
+  .window.maximized{
+    left:4px;
+    top:48px;
+    width:calc(100vw - 8px);
+    height:calc(100vh - 95px);
+  }
+
+  .window-body{
+    padding:14px;
+  }
+
+  .app-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .welcome h1{
+    font-size:26px;
   }
 }
 </style>
@@ -343,107 +593,26 @@ button {
 
 <body>
 
-<header>
-  <div class="logo">ROOT <span>OS</span></div>
-  <button class="header-button" onclick="notify('ROOT OS is online')">🔔</button>
-</header>
+<!-- LOCK SCREEN -->
 
-<main>
+<section id="lockScreen">
 
-<!-- HOME -->
-<section id="home" class="page active">
+  <div class="lock-content">
 
-  <div class="hero">
-    <div class="tag">PERSONAL WEB OPERATING SYSTEM</div>
-
-    <h1>
-      Your Web.<br>
-      Your Workspace.<br>
-      Your OS.
-    </h1>
-
-    <p>
-      A futuristic personal workspace built for the modern web.
-      Access your tools, notes, files and device utilities from one place.
-    </p>
-
-    <div class="status">● ROOT OS ONLINE</div>
-  </div>
-
-  <div class="widgets">
-
-    <div class="widget">
-      <small>TIME</small>
-      <strong id="clock" class="green">--:--</strong>
+    <div class="lock-logo">
+      ROOT <span>OS</span>
     </div>
 
-    <div class="widget">
-      <small>DATE</small>
-      <strong id="date">--</strong>
+    <div id="lockTime" class="lock-time">
+      --:--
     </div>
 
-    <div class="widget">
-      <small>NETWORK</small>
-      <strong id="network" class="green">ONLINE</strong>
+    <div id="lockDate" class="lock-date">
+      --
     </div>
 
-    <div class="widget">
-      <small>SYSTEM</small>
-      <strong>READY</strong>
-    </div>
-
-  </div>
-
-  <div class="section-title">Core Apps</div>
-
-  <div class="apps">
-
-    <button class="app" onclick="showPage('files')">
-      <div class="app-icon">📁</div>
-      <h3>File Hub</h3>
-      <p>Select and view information about files.</p>
-    </button>
-
-    <button class="app" onclick="showPage('notes')">
-      <div class="app-icon">📝</div>
-      <h3>Notes</h3>
-      <p>Create notes saved locally on your device.</p>
-    </button>
-
-    <button class="app" onclick="showPage('security')">
-      <div class="app-icon">🔐</div>
-      <h3>Security</h3>
-      <p>Password generator and SHA-256 tools.</p>
-    </button>
-
-    <button class="app" onclick="showPage('device')">
-      <div class="app-icon">📱</div>
-      <h3>Device</h3>
-      <p>View available browser and device information.</p>
-    </button>
-
-    <button class="app" onclick="networkInfo()">
-      <div class="app-icon">🌐</div>
-      <h3>Network</h3>
-      <p>Check your current browser connection.</p>
-    </button>
-
-    <button class="app" onclick="getLocation()">
-      <div class="app-icon">📍</div>
-      <h3>Location</h3>
-      <p>Request your location with your permission.</p>
-    </button>
-
-    <button class="app" onclick="notify('AI is planned for a future ROOT OS release')">
-      <div class="app-icon">🤖</div>
-      <h3>AI</h3>
-      <p>AI workspace coming in a future version.</p>
-    </button>
-
-    <button class="app" onclick="showPage('settings')">
-      <div class="app-icon">⚙️</div>
-      <h3>Settings</h3>
-      <p>Customize your ROOT OS experience.</p>
+    <button class="unlock-btn" onclick="unlockOS()">
+      🔓 Enter ROOT OS
     </button>
 
   </div>
@@ -451,370 +620,788 @@ button {
 </section>
 
 
-<!-- FILES -->
-<section id="files" class="page">
+<!-- DESKTOP -->
 
-  <div class="section-title">📁 File Hub</div>
+<section id="desktop">
 
-  <div class="panel">
+  <!-- TOP BAR -->
 
-    <h2>Select Files</h2>
+  <header class="topbar">
 
-    <p>
-      Files are processed only inside your browser.
-      ROOT OS does not upload them to a server.
-    </p>
+    <div class="top-left">
 
-    <input id="fileInput" type="file" multiple onchange="showFiles()">
-
-    <div id="fileList"></div>
-
-  </div>
-
-</section>
-
-
-<!-- NOTES -->
-<section id="notes" class="page">
-
-  <div class="section-title">📝 Notes</div>
-
-  <div class="panel">
-
-    <h2>Quick Note</h2>
-
-    <p>
-      Your note is stored locally in your browser.
-    </p>
-
-    <textarea id="noteText" placeholder="Write your note..."></textarea>
-
-    <button class="primary" onclick="saveNote()">
-      Save Note
-    </button>
-
-    <button class="secondary" onclick="clearNote()">
-      Clear
-    </button>
-
-    <p id="noteStatus" class="info"></p>
-
-  </div>
-
-</section>
-
-
-<!-- SECURITY -->
-<section id="security" class="page">
-
-  <div class="section-title">🔐 Security Center</div>
-
-  <div class="panel">
-
-    <h2>Password Generator</h2>
-
-    <p>
-      Generates a random password locally in your browser.
-    </p>
-
-    <input id="password" readonly placeholder="Generated password">
-
-    <button class="primary" onclick="generatePassword()">
-      Generate
-    </button>
-
-    <button class="secondary" onclick="copyPassword()">
-      Copy
-    </button>
-
-  </div>
-
-
-  <div class="panel">
-
-    <h2>SHA-256 Hash</h2>
-
-    <p>
-      Convert text into a SHA-256 hash.
-    </p>
-
-    <input id="hashText" placeholder="Enter text">
-
-    <button class="primary" onclick="makeHash()">
-      Generate Hash
-    </button>
-
-    <p id="hashResult" class="info"></p>
-
-  </div>
-
-</section>
-
-
-<!-- DEVICE -->
-<section id="device" class="page">
-
-  <div class="section-title">📱 Device Center</div>
-
-  <div class="panel">
-
-    <h2>Device Information</h2>
-
-    <p>
-      Information available to your browser.
-    </p>
-
-    <button class="primary" onclick="deviceInfo()">
-      Show Information
-    </button>
-
-    <div id="deviceResult" class="info"></div>
-
-  </div>
-
-</section>
-
-
-<!-- SETTINGS -->
-<section id="settings" class="page">
-
-  <div class="section-title">⚙️ Settings</div>
-
-  <div class="panel">
-
-    <div class="settings-row">
-
-      <div>
-        <strong>Dark Theme</strong>
-        <p class="info">ROOT OS futuristic dark interface.</p>
+      <div class="system-name">
+        ROOT <span>OS</span>
       </div>
 
-      <button id="themeButton"
-              class="toggle on"
-              onclick="toggleTheme()">
+      <div class="status-text">
+        SYSTEM READY
+      </div>
+
+    </div>
+
+    <div class="top-right">
+
+      <div id="topClock" class="top-clock">
+        --:--
+      </div>
+
+      <button
+        class="btn"
+        onclick="togglePower()">
+        ⚡
       </button>
 
     </div>
 
+  </header>
 
-    <div class="settings-row">
 
-      <div>
-        <strong>Notifications</strong>
-        <p class="info">Control ROOT OS notifications.</p>
+  <!-- DESKTOP ICONS -->
+
+  <div class="desktop-icons">
+
+    <button class="desktop-icon"
+            onclick="openWindow('computerWindow')">
+      <div class="icon">💻</div>
+      <span>My Computer</span>
+    </button>
+
+    <button class="desktop-icon"
+            onclick="openWindow('filesWindow')">
+      <div class="icon">📁</div>
+      <span>Files</span>
+    </button>
+
+    <button class="desktop-icon"
+            onclick="openWindow('editorWindow')">
+      <div class="icon">📝</div>
+      <span>Editor</span>
+    </button>
+
+    <button class="desktop-icon"
+            onclick="openWindow('calculatorWindow')">
+      <div class="icon">🧮</div>
+      <span>Calculator</span>
+    </button>
+
+    <button class="desktop-icon"
+            onclick="openWindow('settingsWindow')">
+      <div class="icon">⚙️</div>
+      <span>Settings</span>
+    </button>
+
+  </div>
+
+
+  <!-- DOCK -->
+
+  <nav class="dock">
+
+    <button onclick="openWindow('launcherWindow')">
+      ⬢
+    </button>
+
+    <button onclick="openWindow('filesWindow')">
+      📁
+    </button>
+
+    <button onclick="openWindow('editorWindow')">
+      📝
+    </button>
+
+    <button onclick="openWindow('calculatorWindow')">
+      🧮
+    </button>
+
+    <button onclick="openWindow('computerWindow')">
+      💻
+    </button>
+
+    <button onclick="openWindow('settingsWindow')">
+      ⚙️
+    </button>
+
+  </nav>
+
+
+  <!-- POWER MENU -->
+
+  <div id="powerMenu">
+
+    <button onclick="lockOS()">
+      🔒 Lock ROOT OS
+    </button>
+
+    <button onclick="restartOS()">
+      🔄 Restart Interface
+    </button>
+
+    <button onclick="closePower()">
+      ✕ Close
+    </button>
+
+  </div>
+
+
+  <!-- LAUNCHER WINDOW -->
+
+  <div id="launcherWindow" class="window">
+
+    <div class="window-header"
+         onmousedown="startDrag(event,this.parentElement)">
+
+      <div class="window-title">
+        ⬢ ROOT Launcher
       </div>
 
-      <button id="notificationButton"
-              class="toggle on"
-              onclick="toggleNotifications()">
-      </button>
+      <div class="window-controls">
+
+        <button onclick="minimizeWindow('launcherWindow')">
+          —
+        </button>
+
+        <button onclick="maximizeWindow('launcherWindow')">
+          □
+        </button>
+
+        <button class="close"
+                onclick="closeWindow('launcherWindow')">
+          ×
+        </button>
+
+      </div>
 
     </div>
 
+    <div class="window-body">
 
-    <div class="settings-row">
+      <div class="welcome">
 
-      <div>
-        <strong>Reset Local Data</strong>
-        <p class="info">Delete saved ROOT OS notes and settings.</p>
+        <div class="small">
+          ROOT OS
+        </div>
+
+        <h1>
+          Welcome.
+        </h1>
+
+        <p>
+          This is your browser-based operating environment.
+          Open applications from the desktop or launcher.
+        </p>
+
       </div>
 
-      <button class="secondary" onclick="resetOS()">
-        Reset
-      </button>
+      <div class="app-grid">
+
+        <button class="app-tile"
+                onclick="openWindow('filesWindow')">
+          <div class="big">📁</div>
+          <strong>File Manager</strong>
+          <small>Manage local files</small>
+        </button>
+
+        <button class="app-tile"
+                onclick="openWindow('editorWindow')">
+          <div class="big">📝</div>
+          <strong>Text Editor</strong>
+          <small>Write and save notes</small>
+        </button>
+
+        <button class="app-tile"
+                onclick="openWindow('calculatorWindow')">
+          <div class="big">🧮</div>
+          <strong>Calculator</strong>
+          <small>Quick calculations</small>
+        </button>
+
+        <button class="app-tile"
+                onclick="openWindow('computerWindow')">
+          <div class="big">💻</div>
+          <strong>System</strong>
+          <small>Device information</small>
+        </button>
+
+        <button class="app-tile"
+                onclick="openWindow('settingsWindow')">
+          <div class="big">⚙️</div>
+          <strong>Settings</strong>
+          <small>Configure ROOT OS</small>
+        </button>
+
+      </div>
 
     </div>
 
   </div>
 
 
-  <div class="panel">
+  <!-- FILE MANAGER -->
 
-    <h2>About ROOT OS</h2>
+  <div id="filesWindow" class="window">
 
-    <p>
-      ROOT OS is a mobile-first personal web operating environment.
-    </p>
+    <div class="window-header"
+         onmousedown="startDrag(event,this.parentElement)">
 
-    <div class="info">
-      Version 1.0<br>
-      Your Web. Your Workspace. Your OS.
+      <div class="window-title">
+        📁 File Manager
+      </div>
+
+      <div class="window-controls">
+
+        <button onclick="minimizeWindow('filesWindow')">
+          —
+        </button>
+
+        <button onclick="maximizeWindow('filesWindow')">
+          □
+        </button>
+
+        <button class="close"
+                onclick="closeWindow('filesWindow')">
+          ×
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="window-body">
+
+      <h2 style="margin-bottom:8px">
+        Local Files
+      </h2>
+
+      <p style="color:var(--muted);font-size:13px;margin-bottom:18px">
+        Selected files stay inside this browser session.
+      </p>
+
+      <div class="file-area">
+
+        <input
+          id="fileInput"
+          type="file"
+          multiple
+          onchange="displayFiles()">
+
+      </div>
+
+      <div id="fileList" class="file-list"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- TEXT EDITOR -->
+
+  <div id="editorWindow" class="window">
+
+    <div class="window-header"
+         onmousedown="startDrag(event,this.parentElement)">
+
+      <div class="window-title">
+        📝 Text Editor
+      </div>
+
+      <div class="window-controls">
+
+        <button onclick="minimizeWindow('editorWindow')">
+          —
+        </button>
+
+        <button onclick="maximizeWindow('editorWindow')">
+          □
+        </button>
+
+        <button class="close"
+                onclick="closeWindow('editorWindow')">
+          ×
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="window-body">
+
+      <textarea
+        id="editor"
+        class="editor"
+        placeholder="Start writing..."></textarea>
+
+      <br><br>
+
+      <button class="btn green-btn"
+              onclick="saveEditor()">
+        Save
+      </button>
+
+      <button class="btn"
+              onclick="clearEditor()">
+        Clear
+      </button>
+
+      <span id="editorStatus"
+            style="color:var(--muted);font-size:12px;margin-left:8px">
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- CALCULATOR -->
+
+  <div id="calculatorWindow" class="window">
+
+    <div class="window-header"
+         onmousedown="startDrag(event,this.parentElement)">
+
+      <div class="window-title">
+        🧮 Calculator
+      </div>
+
+      <div class="window-controls">
+
+        <button onclick="minimizeWindow('calculatorWindow')">
+          —
+        </button>
+
+        <button onclick="maximizeWindow('calculatorWindow')">
+          □
+        </button>
+
+        <button class="close"
+                onclick="closeWindow('calculatorWindow')">
+          ×
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="window-body">
+
+      <div class="calc">
+
+        <input
+          id="calcDisplay"
+          class="calc-display"
+          readonly
+          value="0">
+
+        <div class="calc-grid">
+
+          <button onclick="calcClear()">C</button>
+          <button onclick="calcInput('(')">(</button>
+          <button onclick="calcInput(')')">)</button>
+          <button onclick="calcInput('/')">÷</button>
+
+          <button onclick="calcInput('7')">7</button>
+          <button onclick="calcInput('8')">8</button>
+          <button onclick="calcInput('9')">9</button>
+          <button onclick="calcInput('*')">×</button>
+
+          <button onclick="calcInput('4')">4</button>
+          <button onclick="calcInput('5')">5</button>
+          <button onclick="calcInput('6')">6</button>
+          <button onclick="calcInput('-')">−</button>
+
+          <button onclick="calcInput('1')">1</button>
+          <button onclick="calcInput('2')">2</button>
+          <button onclick="calcInput('3')">3</button>
+          <button onclick="calcInput('+')">+</button>
+
+          <button onclick="calcInput('0')">0</button>
+          <button onclick="calcInput('.')">.</button>
+          <button onclick="calcBack()">⌫</button>
+          <button onclick="calcResult()">=</button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- SYSTEM WINDOW -->
+
+  <div id="computerWindow" class="window">
+
+    <div class="window-header"
+         onmousedown="startDrag(event,this.parentElement)">
+
+      <div class="window-title">
+        💻 My Computer
+      </div>
+
+      <div class="window-controls">
+
+        <button onclick="minimizeWindow('computerWindow')">
+          —
+        </button>
+
+        <button onclick="maximizeWindow('computerWindow')">
+          □
+        </button>
+
+        <button class="close"
+                onclick="closeWindow('computerWindow')">
+          ×
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="window-body">
+
+      <h2 style="margin-bottom:8px">
+        ROOT OS System
+      </h2>
+
+      <p style="color:var(--muted);font-size:13px;margin-bottom:20px">
+        Information exposed by your browser.
+      </p>
+
+      <div id="systemInfo"
+           style="color:var(--muted);font-size:13px;line-height:2">
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- SETTINGS -->
+
+  <div id="settingsWindow" class="window">
+
+    <div class="window-header"
+         onmousedown="startDrag(event,this.parentElement)">
+
+      <div class="window-title">
+        ⚙️ Settings
+      </div>
+
+      <div class="window-controls">
+
+        <button onclick="minimizeWindow('settingsWindow')">
+          —
+        </button>
+
+        <button onclick="maximizeWindow('settingsWindow')">
+          □
+        </button>
+
+        <button class="close"
+                onclick="closeWindow('settingsWindow')">
+          ×
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="window-body">
+
+      <h2 style="margin-bottom:15px">
+        System Settings
+      </h2>
+
+      <div class="setting">
+
+        <div>
+          <strong>Theme</strong>
+          <small>ROOT OS currently uses Dark Mode.</small>
+        </div>
+
+        <button class="btn"
+                onclick="toggleTheme()">
+          Toggle
+        </button>
+
+      </div>
+
+      <div class="setting">
+
+        <div>
+          <strong>System Information</strong>
+          <small>View browser information.</small>
+        </div>
+
+        <button class="btn"
+                onclick="openWindow('computerWindow')">
+          Open
+        </button>
+
+      </div>
+
+      <div class="setting">
+
+        <div>
+          <strong>Lock Screen</strong>
+          <small>Return to the ROOT OS lock screen.</small>
+        </div>
+
+        <button class="btn"
+                onclick="lockOS()">
+          Lock
+        </button>
+
+      </div>
+
     </div>
 
   </div>
 
 </section>
-
-</main>
-
-
-<!-- MOBILE NAV -->
-
-<nav class="bottom-nav">
-
-  <button class="active" onclick="showPage('home', this)">
-    <span>🏠</span>
-    Home
-  </button>
-
-  <button onclick="showPage('files', this)">
-    <span>📁</span>
-    Files
-  </button>
-
-  <button onclick="showPage('notes', this)">
-    <span>📝</span>
-    Notes
-  </button>
-
-  <button onclick="showPage('security', this)">
-    <span>🔐</span>
-    Security
-  </button>
-
-  <button onclick="showPage('settings', this)">
-    <span>⚙️</span>
-    Settings
-  </button>
-
-</nav>
 
 
 <script>
 
-/* PAGE SYSTEM */
+/* ================================
+   CLOCK
+================================ */
 
-function showPage(page, button) {
-
-  document.querySelectorAll(".page").forEach(function(section) {
-    section.classList.remove("active");
-  });
-
-  const selected = document.getElementById(page);
-
-  if (selected) {
-    selected.classList.add("active");
-  }
-
-  document.querySelectorAll(".bottom-nav button").forEach(function(btn) {
-    btn.classList.remove("active");
-  });
-
-  if (button) {
-    button.classList.add("active");
-  }
-
-  window.scrollTo(0, 0);
-}
-
-
-/* CLOCK */
-
-function updateClock() {
+function updateClock(){
 
   const now = new Date();
 
-  document.getElementById("clock").textContent =
-    now.toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit"
+  const time =
+    now.toLocaleTimeString([],{
+      hour:"2-digit",
+      minute:"2-digit"
     });
 
-  document.getElementById("date").textContent =
-    now.toLocaleDateString([], {
-      day: "2-digit",
-      month: "short"
+  const date =
+    now.toLocaleDateString([],{
+      weekday:"long",
+      day:"numeric",
+      month:"long"
     });
+
+  document.getElementById("lockTime").textContent = time;
+  document.getElementById("lockDate").textContent = date;
+  document.getElementById("topClock").textContent = time;
+
 }
 
 updateClock();
 
-setInterval(updateClock, 1000);
+setInterval(updateClock,1000);
 
 
-/* NETWORK */
+/* ================================
+   UNLOCK
+================================ */
 
-function updateNetwork() {
+function unlockOS(){
 
-  document.getElementById("network").textContent =
-    navigator.onLine ? "ONLINE" : "OFFLINE";
-}
+  document.getElementById("lockScreen").style.display="none";
+  document.getElementById("desktop").style.display="block";
 
-updateNetwork();
+  openWindow("launcherWindow");
 
-window.addEventListener("online", updateNetwork);
-window.addEventListener("offline", updateNetwork);
-
-function networkInfo() {
-
-  showPage("device");
-
-  deviceInfo();
-
-  notify(
-    navigator.onLine
-      ? "Your browser is currently online."
-      : "Your browser is currently offline."
-  );
 }
 
 
-/* NOTIFICATION */
+/* ================================
+   LOCK
+================================ */
 
-let notificationsEnabled = true;
+function lockOS(){
 
-function notify(message) {
+  document.querySelectorAll(".window")
+    .forEach(function(win){
+      win.classList.remove("open");
+      win.classList.remove("maximized");
+    });
 
-  if (!notificationsEnabled) {
+  document.getElementById("powerMenu").style.display="none";
+
+  document.getElementById("desktop").style.display="none";
+  document.getElementById("lockScreen").style.display="flex";
+
+}
+
+
+/* ================================
+   POWER
+================================ */
+
+function togglePower(){
+
+  const menu =
+    document.getElementById("powerMenu");
+
+  menu.style.display =
+    menu.style.display==="block"
+    ? "none"
+    : "block";
+
+}
+
+function closePower(){
+
+  document.getElementById("powerMenu")
+    .style.display="none";
+
+}
+
+function restartOS(){
+
+  document.querySelectorAll(".window")
+    .forEach(function(win){
+      win.classList.remove("open");
+      win.classList.remove("maximized");
+    });
+
+  closePower();
+
+  setTimeout(function(){
+    openWindow("launcherWindow");
+  },300);
+
+}
+
+
+/* ================================
+   WINDOWS
+================================ */
+
+let zIndex = 100;
+
+function openWindow(id){
+
+  const win =
+    document.getElementById(id);
+
+  if(!win) return;
+
+  win.classList.add("open");
+
+  zIndex++;
+
+  win.style.zIndex = zIndex;
+
+  loadSystemInfo();
+
+}
+
+function closeWindow(id){
+
+  const win =
+    document.getElementById(id);
+
+  if(win){
+    win.classList.remove("open");
+  }
+
+}
+
+function minimizeWindow(id){
+
+  closeWindow(id);
+
+}
+
+function maximizeWindow(id){
+
+  const win =
+    document.getElementById(id);
+
+  if(win){
+    win.classList.toggle("maximized");
+  }
+
+}
+
+
+/* ================================
+   WINDOW DRAGGING
+================================ */
+
+let dragData = null;
+
+function startDrag(event,win){
+
+  if(window.innerWidth <= 650) return;
+
+  if(
+    event.target.tagName==="BUTTON"
+  ){
     return;
   }
 
-  alert("ROOT OS\n\n" + message);
-}
+  dragData={
+    win:win,
+    startX:event.clientX,
+    startY:event.clientY,
+    startLeft:win.offsetLeft,
+    startTop:win.offsetTop
+  };
 
+  document.addEventListener(
+    "mousemove",
+    dragMove
+  );
 
-/* NOTES */
-
-function saveNote() {
-
-  const text =
-    document.getElementById("noteText").value;
-
-  localStorage.setItem("root_os_note", text);
-
-  document.getElementById("noteStatus").textContent =
-    "✓ Note saved locally.";
-
-}
-
-
-function loadNote() {
-
-  const saved =
-    localStorage.getItem("root_os_note");
-
-  if (saved !== null) {
-    document.getElementById("noteText").value = saved;
-  }
+  document.addEventListener(
+    "mouseup",
+    stopDrag
+  );
 
 }
 
+function dragMove(event){
 
-function clearNote() {
+  if(!dragData) return;
 
-  document.getElementById("noteText").value = "";
+  const dx =
+    event.clientX -
+    dragData.startX;
 
-  localStorage.removeItem("root_os_note");
+  const dy =
+    event.clientY -
+    dragData.startY;
 
-  document.getElementById("noteStatus").textContent =
-    "Note cleared.";
+  dragData.win.style.left =
+    (dragData.startLeft+dx)+"px";
+
+  dragData.win.style.top =
+    (dragData.startTop+dy)+"px";
+
+  dragData.win.style.transform="none";
+
+}
+
+function stopDrag(){
+
+  dragData=null;
+
+  document.removeEventListener(
+    "mousemove",
+    dragMove
+  );
+
+  document.removeEventListener(
+    "mouseup",
+    stopDrag
+  );
 
 }
 
 
-/* FILES */
+/* ================================
+   FILE MANAGER
+================================ */
 
-function showFiles() {
+function displayFiles(){
 
   const input =
     document.getElementById("fileInput");
@@ -822,314 +1409,268 @@ function showFiles() {
   const list =
     document.getElementById("fileList");
 
-  list.innerHTML = "";
+  list.innerHTML="";
 
-  Array.from(input.files).forEach(function(file) {
+  Array.from(input.files)
+    .forEach(function(file){
 
-    const item = document.createElement("div");
+      const item =
+        document.createElement("div");
 
-    item.className = "file";
+      item.className="file-item";
 
-    item.innerHTML =
-      "<strong>" +
-      escapeHTML(file.name) +
-      "</strong><br>" +
-      "<span class='info'>" +
-      formatBytes(file.size) +
-      " • " +
-      (file.type || "Unknown type") +
-      "</span>";
+      item.innerHTML =
+        "<span>📄 "+
+        escapeHTML(file.name)+
+        "</span>"+
+        "<small>"+
+        formatBytes(file.size)+
+        "</small>";
 
-    list.appendChild(item);
+      list.appendChild(item);
 
-  });
+    });
 
 }
 
+function formatBytes(bytes){
 
-function formatBytes(bytes) {
+  if(bytes===0) return "0 Bytes";
 
-  if (bytes === 0) {
-    return "0 Bytes";
-  }
-
-  const units = [
+  const units=[
     "Bytes",
     "KB",
     "MB",
     "GB"
   ];
 
-  const index =
+  const i =
     Math.floor(
-      Math.log(bytes) / Math.log(1024)
+      Math.log(bytes) /
+      Math.log(1024)
     );
 
   return (
     bytes /
-    Math.pow(1024, index)
-  ).toFixed(2) +
-  " " +
-  units[index];
+    Math.pow(1024,i)
+  ).toFixed(2)+
+  " "+
+  units[i];
 
 }
 
+function escapeHTML(value){
 
-function escapeHTML(text) {
+  const div =
+    document.createElement("div");
 
-  const div = document.createElement("div");
-
-  div.textContent = text;
+  div.textContent=value;
 
   return div.innerHTML;
 
 }
 
 
-/* PASSWORD GENERATOR */
+/* ================================
+   TEXT EDITOR
+================================ */
 
-function generatePassword() {
-
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-    "abcdefghijklmnopqrstuvwxyz" +
-    "0123456789" +
-    "!@#$%^&*";
-
-  const values =
-    new Uint32Array(20);
-
-  crypto.getRandomValues(values);
-
-  let password = "";
-
-  for (let i = 0; i < values.length; i++) {
-
-    password +=
-      characters[
-        values[i] % characters.length
-      ];
-
-  }
-
-  document.getElementById("password").value =
-    password;
-
-}
-
-
-function copyPassword() {
-
-  const value =
-    document.getElementById("password").value;
-
-  if (!value) {
-
-    notify("Generate a password first.");
-
-    return;
-
-  }
-
-  navigator.clipboard.writeText(value)
-    .then(function() {
-      notify("Password copied to clipboard.");
-    })
-    .catch(function() {
-      notify("Copy is not available in this browser.");
-    });
-
-}
-
-
-/* SHA-256 */
-
-async function makeHash() {
+function saveEditor(){
 
   const text =
-    document.getElementById("hashText").value;
+    document.getElementById(
+      "editor"
+    ).value;
 
-  if (!text) {
+  localStorage.setItem(
+    "rootOS_editor",
+    text
+  );
 
-    notify("Enter some text first.");
+  document.getElementById(
+    "editorStatus"
+  ).textContent =
+    "Saved locally.";
 
-    return;
+}
 
-  }
+function clearEditor(){
 
-  const data =
-    new TextEncoder().encode(text);
+  document.getElementById(
+    "editor"
+  ).value="";
 
-  const buffer =
-    await crypto.subtle.digest(
-      "SHA-256",
-      data
+  document.getElementById(
+    "editorStatus"
+  ).textContent =
+    "Cleared.";
+
+}
+
+function loadEditor(){
+
+  const saved =
+    localStorage.getItem(
+      "rootOS_editor"
     );
 
-  const bytes =
-    Array.from(new Uint8Array(buffer));
+  if(saved!==null){
 
-  const hash =
-    bytes.map(function(byte) {
+    document.getElementById(
+      "editor"
+    ).value=saved;
 
-      return byte
-        .toString(16)
-        .padStart(2, "0");
-
-    }).join("");
-
-  document.getElementById("hashResult").textContent =
-    hash;
+  }
 
 }
 
 
-/* DEVICE INFORMATION */
+/* ================================
+   CALCULATOR
+================================ */
 
-function deviceInfo() {
+function calcInput(value){
 
-  let result = "";
+  const display =
+    document.getElementById(
+      "calcDisplay"
+    );
 
-  result +=
-    "Browser: " +
-    navigator.userAgent +
-    "<br><br>";
+  if(display.value==="0"){
+    display.value="";
+  }
 
-  result +=
-    "Platform: " +
-    navigator.platform +
-    "<br><br>";
-
-  result +=
-    "Language: " +
-    navigator.language +
-    "<br><br>";
-
-  result +=
-    "Screen: " +
-    screen.width +
-    " × " +
-    screen.height +
-    "<br><br>";
-
-  result +=
-    "Connection: " +
-    (navigator.onLine ? "Online" : "Offline") +
-    "<br><br>";
-
-  result +=
-    "Timezone: " +
-    Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-  document.getElementById("deviceResult").innerHTML =
-    result;
+  display.value += value;
 
 }
 
+function calcClear(){
 
-/* LOCATION */
+  document.getElementById(
+    "calcDisplay"
+  ).value="0";
 
-function getLocation() {
+}
 
-  if (!navigator.geolocation) {
+function calcBack(){
 
-    notify(
-      "Geolocation is not supported by this browser."
+  const display =
+    document.getElementById(
+      "calcDisplay"
     );
 
-    return;
+  display.value =
+    display.value.length>1
+    ? display.value.slice(0,-1)
+    : "0";
 
+}
+
+function calcResult(){
+
+  const display =
+    document.getElementById(
+      "calcDisplay"
+    );
+
+  const expression =
+    display.value;
+
+  if(!/^[0-9+\-*/().\s]+$/.test(expression)){
+    display.value="Error";
+    return;
   }
 
-  navigator.geolocation.getCurrentPosition(
+  try{
 
-    function(position) {
+    const result =
+      Function(
+        "\"use strict\";return ("+
+        expression+
+        ")"
+      )();
 
-      const latitude =
-        position.coords.latitude;
-
-      const longitude =
-        position.coords.longitude;
-
-      notify(
-        "Location permission granted.\n\n" +
-        "Latitude: " +
-        latitude +
-        "\nLongitude: " +
-        longitude
-      );
-
-    },
-
-    function() {
-
-      notify(
-        "Location permission was not granted."
-      );
-
+    if(!Number.isFinite(result)){
+      display.value="Error";
+      return;
     }
 
-  );
+    display.value=String(result);
 
-}
+  }catch{
 
+    display.value="Error";
 
-/* THEME */
-
-function toggleTheme() {
-
-  notify(
-    "ROOT OS currently uses the futuristic dark theme."
-  );
-
-}
-
-
-/* NOTIFICATIONS */
-
-function toggleNotifications() {
-
-  const button =
-    document.getElementById(
-      "notificationButton"
-    );
-
-  notificationsEnabled =
-    !notificationsEnabled;
-
-  button.classList.toggle(
-    "on",
-    notificationsEnabled
-  );
-
-}
-
-
-/* RESET */
-
-function resetOS() {
-
-  const confirmed =
-    confirm(
-      "Delete ROOT OS local notes and settings?"
-    );
-
-  if (!confirmed) {
-    return;
   }
 
-  localStorage.clear();
+}
 
-  document.getElementById("noteText").value = "";
 
-  notify("ROOT OS local data has been reset.");
+/* ================================
+   SYSTEM INFORMATION
+================================ */
+
+function loadSystemInfo(){
+
+  const info =
+    document.getElementById(
+      "systemInfo"
+    );
+
+  if(!info) return;
+
+  info.innerHTML =
+    "Browser: "+
+    escapeHTML(navigator.userAgent)+
+    "<br>"+
+    "Platform: "+
+    escapeHTML(navigator.platform)+
+    "<br>"+
+    "Language: "+
+    escapeHTML(navigator.language)+
+    "<br>"+
+    "Screen: "+
+    screen.width+
+    " × "+
+    screen.height+
+    "<br>"+
+    "Online: "+
+    (navigator.onLine
+      ? "Yes"
+      : "No")+
+    "<br>"+
+    "Timezone: "+
+    escapeHTML(
+      Intl.DateTimeFormat()
+      .resolvedOptions()
+      .timeZone
+    );
 
 }
 
 
-/* START */
+/* ================================
+   THEME
+================================ */
 
-loadNote();
+function toggleTheme(){
+
+  document.body.classList.toggle(
+    "light-mode"
+  );
+
+  alert(
+    "ROOT OS theme controls will be expanded in a future version."
+  );
+
+}
+
+
+/* ================================
+   STARTUP
+================================ */
+
+loadEditor();
 
 </script>
 
