@@ -10,584 +10,746 @@
 *{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --bg:#05070d;
-  --panel:rgba(13,18,30,.92);
-  --panel2:#111827;
-  --border:#263246;
-  --text:#f5f7fb;
-  --muted:#8792a6;
-  --accent:#43e6b0;
-  --blue:#4db7ff;
-  --danger:#ff6474;
+--bg:#05070d;
+--panel:rgba(12,18,29,.96);
+--panel2:#101827;
+--border:#29384d;
+--text:#f4f7fb;
+--muted:#8995a8;
+--accent:#43e6b0;
+--blue:#55baff;
+--danger:#ff6474;
 }
 
 html,body{
-  width:100%;
-  height:100%;
-  overflow:hidden;
+width:100%;
+height:100%;
+overflow:hidden;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#05070d;
-  color:var(--text);
+font-family:Arial,Helvetica,sans-serif;
+background:var(--bg);
+color:var(--text);
 }
 
-/* ================= LOCK SCREEN ================= */
+button,input,textarea{
+font-family:inherit;
+}
+
+button{
+cursor:pointer;
+}
+
+/* LOCK SCREEN */
 
 #lockScreen{
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  background:
-    radial-gradient(circle at 20% 20%,rgba(67,230,176,.12),transparent 30%),
-    radial-gradient(circle at 80% 70%,rgba(77,183,255,.12),transparent 30%),
-    linear-gradient(135deg,#03050a,#0a1020);
+position:fixed;
+inset:0;
+z-index:99999;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+background:
+radial-gradient(circle at 20% 20%,rgba(67,230,176,.12),transparent 30%),
+radial-gradient(circle at 80% 70%,rgba(85,186,255,.12),transparent 30%),
+linear-gradient(135deg,#03050a,#0a1020);
 }
 
 .lock-content{
-  padding:30px;
+padding:30px;
 }
 
 .lock-logo{
-  font-size:26px;
-  font-weight:900;
-  letter-spacing:5px;
-  margin-bottom:35px;
+font-size:27px;
+font-weight:900;
+letter-spacing:5px;
+margin-bottom:35px;
 }
 
 .lock-logo span{
-  color:var(--accent);
+color:var(--accent);
 }
 
 .lock-time{
-  font-size:clamp(55px,16vw,110px);
-  font-weight:200;
-  letter-spacing:-4px;
+font-size:clamp(55px,16vw,110px);
+font-weight:200;
+letter-spacing:-4px;
 }
 
 .lock-date{
-  color:var(--muted);
-  margin-top:8px;
-  font-size:15px;
+color:var(--muted);
+margin-top:8px;
+font-size:15px;
 }
 
 .unlock-btn{
-  margin-top:40px;
-  padding:14px 25px;
-  border:1px solid #315d50;
-  border-radius:30px;
-  background:rgba(67,230,176,.08);
-  color:var(--accent);
-  font-weight:bold;
+margin-top:40px;
+padding:14px 25px;
+border:1px solid #315d50;
+border-radius:30px;
+background:rgba(67,230,176,.08);
+color:var(--accent);
+font-weight:bold;
 }
 
-/* ================= DESKTOP ================= */
+/* DESKTOP */
 
 #desktop{
-  position:fixed;
-  inset:0;
-  display:none;
-  background:
-    radial-gradient(circle at 15% 20%,rgba(67,230,176,.09),transparent 30%),
-    radial-gradient(circle at 85% 75%,rgba(77,183,255,.09),transparent 30%),
-    linear-gradient(135deg,#05070d,#090f1b);
+position:fixed;
+inset:0;
+display:none;
+background:
+radial-gradient(circle at 15% 20%,rgba(67,230,176,.09),transparent 30%),
+radial-gradient(circle at 85% 75%,rgba(85,186,255,.09),transparent 30%),
+linear-gradient(135deg,#05070d,#090f1b);
 }
 
-/* ================= TOP SYSTEM BAR ================= */
+/* TOP BAR */
 
 .topbar{
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  height:45px;
-  background:rgba(4,7,12,.78);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(255,255,255,.06);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 14px;
-  z-index:1000;
+position:absolute;
+top:0;
+left:0;
+right:0;
+height:45px;
+background:rgba(4,7,12,.8);
+backdrop-filter:blur(16px);
+border-bottom:1px solid rgba(255,255,255,.06);
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 12px;
+z-index:5000;
 }
 
 .top-left,
 .top-right{
-  display:flex;
-  align-items:center;
-  gap:13px;
+display:flex;
+align-items:center;
+gap:10px;
 }
 
 .system-name{
-  font-weight:bold;
-  letter-spacing:2px;
-  font-size:13px;
+font-weight:bold;
+letter-spacing:2px;
+font-size:13px;
 }
 
 .system-name span{
-  color:var(--accent);
+color:var(--accent);
 }
 
 .status-text{
-  color:var(--muted);
-  font-size:11px;
+color:var(--muted);
+font-size:10px;
 }
 
 .top-clock{
-  font-size:12px;
-  color:#dce4ee;
+font-size:12px;
 }
 
-/* ================= DESKTOP ICONS ================= */
+.notification-btn{
+position:relative;
+width:32px;
+height:30px;
+border:0;
+border-radius:8px;
+background:#111a28;
+color:white;
+}
+
+.notification-count{
+position:absolute;
+right:-4px;
+top:-5px;
+min-width:15px;
+height:15px;
+border-radius:10px;
+background:var(--danger);
+font-size:9px;
+display:grid;
+place-items:center;
+}
+
+/* DESKTOP ICONS */
 
 .desktop-icons{
-  position:absolute;
-  top:65px;
-  left:18px;
-  display:grid;
-  grid-template-columns:82px;
-  gap:12px;
-  z-index:5;
+position:absolute;
+top:63px;
+left:15px;
+display:grid;
+grid-template-columns:82px;
+gap:10px;
+z-index:5;
 }
 
 .desktop-icon{
-  width:76px;
-  min-height:78px;
-  border:1px solid transparent;
-  border-radius:12px;
-  background:transparent;
-  color:white;
-  padding:7px 3px;
-  text-align:center;
-  cursor:pointer;
+width:76px;
+min-height:76px;
+border:1px solid transparent;
+border-radius:12px;
+background:transparent;
+color:white;
+padding:6px 3px;
+text-align:center;
 }
 
-.desktop-icon:hover,
-.desktop-icon:focus{
-  background:rgba(255,255,255,.08);
-  border-color:rgba(255,255,255,.08);
+.desktop-icon:hover{
+background:rgba(255,255,255,.07);
+border-color:rgba(255,255,255,.08);
 }
 
 .desktop-icon .icon{
-  width:42px;
-  height:42px;
-  margin:0 auto 6px;
-  display:grid;
-  place-items:center;
-  border-radius:11px;
-  background:rgba(16,25,40,.95);
-  border:1px solid #26354a;
-  font-size:21px;
+width:42px;
+height:42px;
+margin:0 auto 6px;
+display:grid;
+place-items:center;
+border-radius:11px;
+background:#101928;
+border:1px solid #2a3a50;
+font-size:21px;
 }
 
 .desktop-icon span{
-  display:block;
-  font-size:10px;
-  color:#e3e9f1;
+font-size:10px;
+display:block;
 }
 
-/* ================= DOCK ================= */
+/* DOCK */
 
 .dock{
-  position:absolute;
-  left:50%;
-  bottom:16px;
-  transform:translateX(-50%);
-  display:flex;
-  align-items:center;
-  gap:7px;
-  padding:8px;
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:18px;
-  background:rgba(9,14,23,.85);
-  backdrop-filter:blur(20px);
-  box-shadow:0 15px 50px rgba(0,0,0,.4);
-  z-index:900;
+position:absolute;
+left:50%;
+bottom:15px;
+transform:translateX(-50%);
+display:flex;
+gap:7px;
+padding:8px;
+border:1px solid rgba(255,255,255,.1);
+border-radius:18px;
+background:rgba(8,13,22,.88);
+backdrop-filter:blur(20px);
+box-shadow:0 20px 60px rgba(0,0,0,.45);
+z-index:4500;
 }
 
 .dock button{
-  width:48px;
-  height:48px;
-  border:1px solid transparent;
-  border-radius:13px;
-  background:#111a29;
-  color:white;
-  font-size:21px;
-  cursor:pointer;
+width:47px;
+height:47px;
+border:1px solid transparent;
+border-radius:13px;
+background:#111a29;
+color:white;
+font-size:20px;
 }
 
 .dock button:hover{
-  border-color:#3a4d67;
-  transform:translateY(-2px);
+border-color:#40536c;
+transform:translateY(-2px);
 }
 
-/* ================= WINDOWS ================= */
+/* WINDOWS */
 
 .window{
-  position:absolute;
-  left:50%;
-  top:50%;
-  width:min(680px,calc(100vw - 30px));
-  height:min(480px,calc(100vh - 115px));
-  transform:translate(-50%,-50%);
-  display:none;
-  flex-direction:column;
-  overflow:hidden;
-  background:var(--panel);
-  border:1px solid #34445b;
-  border-radius:15px;
-  box-shadow:0 30px 90px rgba(0,0,0,.6);
-  backdrop-filter:blur(18px);
-  z-index:100;
+position:absolute;
+left:50%;
+top:50%;
+width:min(700px,calc(100vw - 25px));
+height:min(500px,calc(100vh - 110px));
+transform:translate(-50%,-50%);
+display:none;
+flex-direction:column;
+overflow:hidden;
+background:var(--panel);
+border:1px solid #35475f;
+border-radius:15px;
+box-shadow:0 30px 100px rgba(0,0,0,.65);
+backdrop-filter:blur(18px);
+z-index:100;
 }
 
 .window.open{
-  display:flex;
+display:flex;
 }
 
 .window.maximized{
-  left:10px;
-  top:55px;
-  width:calc(100vw - 20px);
-  height:calc(100vh - 110px);
-  transform:none;
+left:10px;
+top:55px;
+width:calc(100vw - 20px);
+height:calc(100vh - 110px);
+transform:none;
 }
 
 .window-header{
-  height:43px;
-  flex-shrink:0;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 9px 0 14px;
-  background:rgba(9,14,23,.94);
-  border-bottom:1px solid var(--border);
-  cursor:grab;
-  user-select:none;
+height:43px;
+flex-shrink:0;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 9px 0 14px;
+background:#09101a;
+border-bottom:1px solid var(--border);
+cursor:grab;
+user-select:none;
 }
 
 .window-title{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-size:12px;
-  font-weight:bold;
+font-size:12px;
+font-weight:bold;
+display:flex;
+align-items:center;
+gap:8px;
 }
 
 .window-controls{
-  display:flex;
-  gap:5px;
+display:flex;
+gap:5px;
 }
 
 .window-controls button{
-  width:29px;
-  height:27px;
-  border:0;
-  border-radius:7px;
-  background:#172131;
-  color:white;
-  cursor:pointer;
+width:29px;
+height:27px;
+border:0;
+border-radius:7px;
+background:#172131;
+color:white;
 }
 
 .window-controls button:hover{
-  background:#26364d;
+background:#26364d;
 }
 
 .window-controls .close:hover{
-  background:var(--danger);
+background:var(--danger);
 }
 
 .window-body{
-  flex:1;
-  overflow:auto;
-  padding:20px;
+flex:1;
+overflow:auto;
+padding:20px;
 }
 
-/* ================= APPS ================= */
+/* GENERAL */
 
-.welcome{
-  padding:25px;
-  border:1px solid var(--border);
-  border-radius:15px;
-  background:linear-gradient(135deg,rgba(67,230,176,.07),rgba(77,183,255,.05));
+.panel{
+background:#0a111c;
+border:1px solid var(--border);
+border-radius:13px;
+padding:17px;
+margin-bottom:12px;
 }
 
-.welcome .small{
-  color:var(--accent);
-  font-size:10px;
-  letter-spacing:3px;
-  margin-bottom:10px;
-}
-
-.welcome h1{
-  font-size:32px;
-  margin-bottom:10px;
-}
-
-.welcome p{
-  color:var(--muted);
-  line-height:1.7;
-}
-
-.app-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin-top:18px;
-}
-
-.app-tile{
-  padding:17px;
-  border-radius:13px;
-  border:1px solid var(--border);
-  background:#0b111c;
-  color:white;
-  text-align:left;
-  cursor:pointer;
-}
-
-.app-tile:hover{
-  border-color:#40536d;
-}
-
-.app-tile .big{
-  font-size:23px;
-  margin-bottom:10px;
-}
-
-.app-tile strong{
-  display:block;
-  font-size:13px;
-  margin-bottom:5px;
-}
-
-.app-tile small{
-  color:var(--muted);
-}
-
-/* ================= FILE MANAGER ================= */
-
-.file-area{
-  border:1px dashed #3a4b62;
-  border-radius:13px;
-  padding:25px;
-  text-align:center;
-  color:var(--muted);
-}
-
-.file-list{
-  margin-top:15px;
-}
-
-.file-item{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:12px;
-  margin-top:7px;
-  border:1px solid var(--border);
-  border-radius:9px;
-  background:#09101a;
-  font-size:12px;
-}
-
-.file-item small{
-  color:var(--muted);
-}
-
-/* ================= TEXT EDITOR ================= */
-
-.editor{
-  width:100%;
-  height:330px;
-  resize:none;
-  background:#05080e;
-  border:1px solid var(--border);
-  border-radius:10px;
-  color:#e9eef5;
-  padding:15px;
-  font-family:monospace;
-  font-size:13px;
-  outline:none;
-}
-
-/* ================= CALCULATOR ================= */
-
-.calc{
-  max-width:330px;
-  margin:auto;
-}
-
-.calc-display{
-  width:100%;
-  height:65px;
-  background:#05080e;
-  border:1px solid var(--border);
-  border-radius:10px;
-  color:white;
-  padding:12px;
-  text-align:right;
-  font-size:24px;
-  margin-bottom:9px;
-}
-
-.calc-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:7px;
-}
-
-.calc-grid button{
-  height:54px;
-  border:1px solid var(--border);
-  border-radius:9px;
-  background:#111a28;
-  color:white;
-  font-size:16px;
-}
-
-.calc-grid button:hover{
-  background:#1a273a;
-}
-
-/* ================= SETTINGS ================= */
-
-.setting{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  padding:15px 0;
-  border-bottom:1px solid var(--border);
-}
-
-.setting:last-child{
-  border-bottom:0;
-}
-
-.setting small{
-  display:block;
-  color:var(--muted);
-  margin-top:4px;
+.muted{
+color:var(--muted);
+font-size:13px;
+line-height:1.6;
 }
 
 .btn{
-  padding:10px 14px;
-  border-radius:9px;
-  border:1px solid var(--border);
-  background:#111a28;
-  color:white;
-  cursor:pointer;
+padding:10px 14px;
+border-radius:9px;
+border:1px solid var(--border);
+background:#111a28;
+color:white;
 }
 
 .green-btn{
-  background:var(--accent);
-  color:#04100b;
-  border:0;
+background:var(--accent);
+color:#04100b;
+border:0;
+font-weight:bold;
 }
 
-/* ================= POWER MENU ================= */
+/* LAUNCHER */
+
+.welcome{
+padding:23px;
+border:1px solid var(--border);
+border-radius:14px;
+background:linear-gradient(135deg,rgba(67,230,176,.07),rgba(85,186,255,.05));
+}
+
+.welcome .small{
+color:var(--accent);
+font-size:10px;
+letter-spacing:3px;
+margin-bottom:9px;
+}
+
+.welcome h1{
+font-size:31px;
+margin-bottom:8px;
+}
+
+.welcome p{
+color:var(--muted);
+line-height:1.6;
+}
+
+.search{
+width:100%;
+margin-top:15px;
+padding:12px;
+border:1px solid var(--border);
+border-radius:10px;
+background:#05080e;
+color:white;
+outline:none;
+}
+
+.app-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:9px;
+margin-top:15px;
+}
+
+.app-tile{
+padding:15px;
+border-radius:12px;
+border:1px solid var(--border);
+background:#0b121e;
+color:white;
+text-align:left;
+}
+
+.app-tile:hover{
+border-color:#40536d;
+}
+
+.app-tile .big{
+font-size:22px;
+margin-bottom:8px;
+}
+
+.app-tile strong{
+display:block;
+font-size:12px;
+margin-bottom:4px;
+}
+
+.app-tile small{
+color:var(--muted);
+font-size:10px;
+}
+
+/* NOTIFICATIONS */
+
+.notification{
+padding:13px;
+border:1px solid var(--border);
+border-radius:10px;
+background:#09111c;
+margin-bottom:8px;
+}
+
+.notification strong{
+font-size:12px;
+}
+
+.notification p{
+font-size:11px;
+color:var(--muted);
+margin-top:4px;
+}
+
+/* FILES */
+
+.file-area{
+border:1px dashed #3a4b62;
+border-radius:13px;
+padding:24px;
+text-align:center;
+color:var(--muted);
+}
+
+.file-list{
+margin-top:14px;
+}
+
+.file-item{
+display:flex;
+justify-content:space-between;
+padding:11px;
+margin-top:7px;
+border:1px solid var(--border);
+border-radius:9px;
+background:#09101a;
+font-size:12px;
+}
+
+.file-item small{
+color:var(--muted);
+}
+
+/* EDITOR */
+
+.editor{
+width:100%;
+height:330px;
+resize:none;
+background:#05080e;
+border:1px solid var(--border);
+border-radius:10px;
+color:#e9eef5;
+padding:15px;
+font-family:monospace;
+font-size:13px;
+outline:none;
+}
+
+/* CALCULATOR */
+
+.calc{
+max-width:330px;
+margin:auto;
+}
+
+.calc-display{
+width:100%;
+height:65px;
+background:#05080e;
+border:1px solid var(--border);
+border-radius:10px;
+color:white;
+padding:12px;
+text-align:right;
+font-size:24px;
+margin-bottom:9px;
+}
+
+.calc-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:7px;
+}
+
+.calc-grid button{
+height:54px;
+border:1px solid var(--border);
+border-radius:9px;
+background:#111a28;
+color:white;
+font-size:16px;
+}
+
+/* IMAGE VIEWER */
+
+.image-preview{
+width:100%;
+height:330px;
+display:grid;
+place-items:center;
+border:1px dashed #3a4b62;
+border-radius:12px;
+overflow:hidden;
+background:#05080e;
+}
+
+.image-preview img{
+max-width:100%;
+max-height:100%;
+object-fit:contain;
+display:none;
+}
+
+/* MEDIA */
+
+.media-box{
+text-align:center;
+padding:30px;
+}
+
+.media-icon{
+font-size:55px;
+margin-bottom:20px;
+}
+
+/* BROWSER */
+
+.browser-bar{
+display:flex;
+gap:7px;
+margin-bottom:10px;
+}
+
+.browser-bar input{
+flex:1;
+padding:11px;
+border:1px solid var(--border);
+border-radius:9px;
+background:#05080e;
+color:white;
+}
+
+.browser-frame{
+width:100%;
+height:350px;
+border:1px solid var(--border);
+border-radius:10px;
+background:white;
+}
+
+/* RECYCLE */
+
+.recycle-item{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+padding:12px;
+border:1px solid var(--border);
+border-radius:9px;
+margin-bottom:8px;
+background:#09101a;
+}
+
+/* SETTINGS */
+
+.setting{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px;
+padding:15px 0;
+border-bottom:1px solid var(--border);
+}
+
+.setting:last-child{
+border-bottom:0;
+}
+
+.setting small{
+display:block;
+color:var(--muted);
+margin-top:4px;
+}
+
+/* POWER */
 
 #powerMenu{
-  position:absolute;
-  right:15px;
-  top:55px;
-  width:190px;
-  display:none;
-  padding:8px;
-  border:1px solid var(--border);
-  border-radius:13px;
-  background:#0b111b;
-  box-shadow:0 20px 60px rgba(0,0,0,.5);
-  z-index:2000;
+position:absolute;
+right:12px;
+top:53px;
+width:190px;
+display:none;
+padding:8px;
+border:1px solid var(--border);
+border-radius:13px;
+background:#0b111b;
+box-shadow:0 20px 60px rgba(0,0,0,.5);
+z-index:9000;
 }
 
 #powerMenu button{
-  width:100%;
-  padding:11px;
-  border:0;
-  border-radius:8px;
-  background:transparent;
-  color:white;
-  text-align:left;
+width:100%;
+padding:11px;
+border:0;
+border-radius:8px;
+background:transparent;
+color:white;
+text-align:left;
 }
 
 #powerMenu button:hover{
-  background:#172235;
+background:#172235;
 }
 
-/* ================= MOBILE ================= */
-
-.mobile-nav{
-  display:none;
-}
+/* MOBILE */
 
 @media(max-width:650px){
 
-  .topbar{
-    height:42px;
-  }
-
-  .status-text{
-    display:none;
-  }
-
-  .desktop-icons{
-    top:58px;
-    left:10px;
-    grid-template-columns:repeat(4,70px);
-    gap:10px;
-  }
-
-  .desktop-icon{
-    width:65px;
-  }
-
-  .dock{
-    bottom:10px;
-    max-width:calc(100vw - 18px);
-    overflow:auto;
-  }
-
-  .dock button{
-    flex-shrink:0;
-    width:43px;
-    height:43px;
-  }
-
-  .window{
-    left:8px;
-    top:52px;
-    width:calc(100vw - 16px);
-    height:calc(100vh - 105px);
-    transform:none;
-    border-radius:12px;
-  }
-
-  .window.maximized{
-    left:4px;
-    top:48px;
-    width:calc(100vw - 8px);
-    height:calc(100vh - 95px);
-  }
-
-  .window-body{
-    padding:14px;
-  }
-
-  .app-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .welcome h1{
-    font-size:26px;
-  }
+.status-text{
+display:none;
 }
+
+.desktop-icons{
+top:57px;
+left:7px;
+grid-template-columns:repeat(4,70px);
+gap:8px;
+}
+
+.desktop-icon{
+width:65px;
+}
+
+.dock{
+bottom:8px;
+max-width:calc(100vw - 12px);
+overflow:auto;
+}
+
+.dock button{
+width:43px;
+height:43px;
+flex-shrink:0;
+}
+
+.window{
+left:8px;
+top:51px;
+width:calc(100vw - 16px);
+height:calc(100vh - 104px);
+transform:none;
+border-radius:12px;
+}
+
+.window.maximized{
+left:4px;
+top:48px;
+width:calc(100vw - 8px);
+height:calc(100vh - 94px);
+}
+
+.window-body{
+padding:14px;
+}
+
+.app-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.welcome h1{
+font-size:26px;
+}
+
+.browser-frame{
+height:300px;
+}
+
+}
+
+/* LIGHT THEME */
+
+body.light{
+--bg:#e9edf3;
+--panel:rgba(248,250,253,.97);
+--panel2:#ffffff;
+--border:#cbd4e1;
+--text:#101827;
+--muted:#5d697b;
+}
+
+body.light #desktop{
+background:linear-gradient(135deg,#e9edf3,#dce5ef);
+}
+
+body.light .topbar,
+body.light .window-header{
+background:rgba(245,248,252,.9);
+}
+
+body.light .window,
+body.light .panel,
+body.light .app-tile,
+body.light .file-item{
+color:var(--text);
+}
+
 </style>
 </head>
 
@@ -597,25 +759,21 @@ body{
 
 <section id="lockScreen">
 
-  <div class="lock-content">
+<div class="lock-content">
 
-    <div class="lock-logo">
-      ROOT <span>OS</span>
-    </div>
+<div class="lock-logo">
+ROOT <span>OS</span>
+</div>
 
-    <div id="lockTime" class="lock-time">
-      --:--
-    </div>
+<div id="lockTime" class="lock-time">--:--</div>
 
-    <div id="lockDate" class="lock-date">
-      --
-    </div>
+<div id="lockDate" class="lock-date">--</div>
 
-    <button class="unlock-btn" onclick="unlockOS()">
-      🔓 Enter ROOT OS
-    </button>
+<button class="unlock-btn" onclick="unlockOS()">
+🔓 Enter ROOT OS
+</button>
 
-  </div>
+</div>
 
 </section>
 
@@ -624,1053 +782,1246 @@ body{
 
 <section id="desktop">
 
-  <!-- TOP BAR -->
+<header class="topbar">
 
-  <header class="topbar">
+<div class="top-left">
 
-    <div class="top-left">
+<div class="system-name">
+ROOT <span>OS</span>
+</div>
 
-      <div class="system-name">
-        ROOT <span>OS</span>
-      </div>
+<div class="status-text">
+SYSTEM READY
+</div>
 
-      <div class="status-text">
-        SYSTEM READY
-      </div>
+</div>
 
-    </div>
+<div class="top-right">
 
-    <div class="top-right">
+<button class="notification-btn"
+onclick="openWindow('notificationsWindow')">
 
-      <div id="topClock" class="top-clock">
-        --:--
-      </div>
+🔔
 
-      <button
-        class="btn"
-        onclick="togglePower()">
-        ⚡
-      </button>
+<span id="notificationCount"
+class="notification-count">3</span>
 
-    </div>
+</button>
 
-  </header>
+<div id="topClock"
+class="top-clock">--:--</div>
 
+<button class="btn"
+onclick="togglePower()">⚡</button>
 
-  <!-- DESKTOP ICONS -->
+</div>
 
-  <div class="desktop-icons">
+</header>
 
-    <button class="desktop-icon"
-            onclick="openWindow('computerWindow')">
-      <div class="icon">💻</div>
-      <span>My Computer</span>
-    </button>
 
-    <button class="desktop-icon"
-            onclick="openWindow('filesWindow')">
-      <div class="icon">📁</div>
-      <span>Files</span>
-    </button>
+<!-- DESKTOP ICONS -->
 
-    <button class="desktop-icon"
-            onclick="openWindow('editorWindow')">
-      <div class="icon">📝</div>
-      <span>Editor</span>
-    </button>
+<div class="desktop-icons">
 
-    <button class="desktop-icon"
-            onclick="openWindow('calculatorWindow')">
-      <div class="icon">🧮</div>
-      <span>Calculator</span>
-    </button>
+<button class="desktop-icon"
+onclick="openWindow('launcherWindow')">
+<div class="icon">⬢</div>
+<span>Launcher</span>
+</button>
 
-    <button class="desktop-icon"
-            onclick="openWindow('settingsWindow')">
-      <div class="icon">⚙️</div>
-      <span>Settings</span>
-    </button>
+<button class="desktop-icon"
+onclick="openWindow('filesWindow')">
+<div class="icon">📁</div>
+<span>Files</span>
+</button>
 
-  </div>
+<button class="desktop-icon"
+onclick="openWindow('editorWindow')">
+<div class="icon">📝</div>
+<span>Editor</span>
+</button>
 
+<button class="desktop-icon"
+onclick="openWindow('calculatorWindow')">
+<div class="icon">🧮</div>
+<span>Calculator</span>
+</button>
 
-  <!-- DOCK -->
+<button class="desktop-icon"
+onclick="openWindow('imagesWindow')">
+<div class="icon">🖼️</div>
+<span>Images</span>
+</button>
 
-  <nav class="dock">
+<button class="desktop-icon"
+onclick="openWindow('recycleWindow')">
+<div class="icon">🗑️</div>
+<span>Recycle Bin</span>
+</button>
 
-    <button onclick="openWindow('launcherWindow')">
-      ⬢
-    </button>
+</div>
 
-    <button onclick="openWindow('filesWindow')">
-      📁
-    </button>
 
-    <button onclick="openWindow('editorWindow')">
-      📝
-    </button>
+<!-- DOCK -->
 
-    <button onclick="openWindow('calculatorWindow')">
-      🧮
-    </button>
+<nav class="dock">
 
-    <button onclick="openWindow('computerWindow')">
-      💻
-    </button>
+<button onclick="openWindow('launcherWindow')">⬢</button>
 
-    <button onclick="openWindow('settingsWindow')">
-      ⚙️
-    </button>
+<button onclick="openWindow('filesWindow')">📁</button>
 
-  </nav>
+<button onclick="openWindow('editorWindow')">📝</button>
 
+<button onclick="openWindow('calculatorWindow')">🧮</button>
 
-  <!-- POWER MENU -->
+<button onclick="openWindow('browserWindow')">🌐</button>
 
-  <div id="powerMenu">
+<button onclick="openWindow('mediaWindow')">🎵</button>
 
-    <button onclick="lockOS()">
-      🔒 Lock ROOT OS
-    </button>
+<button onclick="openWindow('settingsWindow')">⚙️</button>
 
-    <button onclick="restartOS()">
-      🔄 Restart Interface
-    </button>
+</nav>
 
-    <button onclick="closePower()">
-      ✕ Close
-    </button>
 
-  </div>
+<!-- POWER MENU -->
 
+<div id="powerMenu">
 
-  <!-- LAUNCHER WINDOW -->
+<button onclick="lockOS()">🔒 Lock ROOT OS</button>
 
-  <div id="launcherWindow" class="window">
+<button onclick="restartOS()">🔄 Restart Interface</button>
 
-    <div class="window-header"
-         onmousedown="startDrag(event,this.parentElement)">
+<button onclick="closePower()">✕ Close</button>
 
-      <div class="window-title">
-        ⬢ ROOT Launcher
-      </div>
+</div>
 
-      <div class="window-controls">
 
-        <button onclick="minimizeWindow('launcherWindow')">
-          —
-        </button>
+<!-- LAUNCHER -->
 
-        <button onclick="maximizeWindow('launcherWindow')">
-          □
-        </button>
+<div id="launcherWindow" class="window">
 
-        <button class="close"
-                onclick="closeWindow('launcherWindow')">
-          ×
-        </button>
+<div class="window-header"
+onmousedown="startDrag(event,this.parentElement)">
 
-      </div>
+<div class="window-title">⬢ ROOT Launcher</div>
 
-    </div>
+<div class="window-controls">
 
-    <div class="window-body">
+<button onclick="minimizeWindow('launcherWindow')">—</button>
 
-      <div class="welcome">
+<button onclick="maximizeWindow('launcherWindow')">□</button>
 
-        <div class="small">
-          ROOT OS
-        </div>
+<button class="close"
+onclick="closeWindow('launcherWindow')">×</button>
 
-        <h1>
-          Welcome.
-        </h1>
+</div>
+</div>
 
-        <p>
-          This is your browser-based operating environment.
-          Open applications from the desktop or launcher.
-        </p>
+<div class="window-body">
 
-      </div>
+<div class="welcome">
 
-      <div class="app-grid">
+<div class="small">ROOT OS v1.1</div>
 
-        <button class="app-tile"
-                onclick="openWindow('filesWindow')">
-          <div class="big">📁</div>
-          <strong>File Manager</strong>
-          <small>Manage local files</small>
-        </button>
+<h1>Welcome back.</h1>
 
-        <button class="app-tile"
-                onclick="openWindow('editorWindow')">
-          <div class="big">📝</div>
-          <strong>Text Editor</strong>
-          <small>Write and save notes</small>
-        </button>
+<p>
+Search and launch applications from your ROOT OS desktop.
+</p>
 
-        <button class="app-tile"
-                onclick="openWindow('calculatorWindow')">
-          <div class="big">🧮</div>
-          <strong>Calculator</strong>
-          <small>Quick calculations</small>
-        </button>
+<input id="appSearch"
+class="search"
+placeholder="🔍 Search apps..."
+oninput="searchApps()">
 
-        <button class="app-tile"
-                onclick="openWindow('computerWindow')">
-          <div class="big">💻</div>
-          <strong>System</strong>
-          <small>Device information</small>
-        </button>
+</div>
 
-        <button class="app-tile"
-                onclick="openWindow('settingsWindow')">
-          <div class="big">⚙️</div>
-          <strong>Settings</strong>
-          <small>Configure ROOT OS</small>
-        </button>
+<div id="appGrid" class="app-grid">
 
-      </div>
+<button class="app-tile"
+data-name="file manager files"
+onclick="openWindow('filesWindow')">
+<div class="big">📁</div>
+<strong>File Manager</strong>
+<small>Manage local files</small>
+</button>
 
-    </div>
+<button class="app-tile"
+data-name="text editor editor notes"
+onclick="openWindow('editorWindow')">
+<div class="big">📝</div>
+<strong>Text Editor</strong>
+<small>Write notes</small>
+</button>
 
-  </div>
+<button class="app-tile"
+data-name="calculator math"
+onclick="openWindow('calculatorWindow')">
+<div class="big">🧮</div>
+<strong>Calculator</strong>
+<small>Calculate</small>
+</button>
 
+<button class="app-tile"
+data-name="image viewer images photos"
+onclick="openWindow('imagesWindow')">
+<div class="big">🖼️</div>
+<strong>Image Viewer</strong>
+<small>View local images</small>
+</button>
 
-  <!-- FILE MANAGER -->
+<button class="app-tile"
+data-name="media music player"
+onclick="openWindow('mediaWindow')">
+<div class="big">🎵</div>
+<strong>Media Player</strong>
+<small>Play local audio</small>
+</button>
 
-  <div id="filesWindow" class="window">
+<button class="app-tile"
+data-name="browser web internet"
+onclick="openWindow('browserWindow')">
+<div class="big">🌐</div>
+<strong>Browser</strong>
+<small>Open web pages</small>
+</button>
 
-    <div class="window-header"
-         onmousedown="startDrag(event,this.parentElement)">
+<button class="app-tile"
+data-name="recycle bin trash deleted"
+onclick="openWindow('recycleWindow')">
+<div class="big">🗑️</div>
+<strong>Recycle Bin</strong>
+<small>Deleted items</small>
+</button>
 
-      <div class="window-title">
-        📁 File Manager
-      </div>
+<button class="app-tile"
+data-name="notifications alerts"
+onclick="openWindow('notificationsWindow')">
+<div class="big">🔔</div>
+<strong>Notifications</strong>
+<small>System alerts</small>
+</button>
 
-      <div class="window-controls">
+<button class="app-tile"
+data-name="settings configuration"
+onclick="openWindow('settingsWindow')">
+<div class="big">⚙️</div>
+<strong>Settings</strong>
+<small>System controls</small>
+</button>
 
-        <button onclick="minimizeWindow('filesWindow')">
-          —
-        </button>
+</div>
 
-        <button onclick="maximizeWindow('filesWindow')">
-          □
-        </button>
+</div>
 
-        <button class="close"
-                onclick="closeWindow('filesWindow')">
-          ×
-        </button>
+</div>
 
-      </div>
 
-    </div>
+<!-- NOTIFICATIONS -->
 
-    <div class="window-body">
+<div id="notificationsWindow" class="window">
 
-      <h2 style="margin-bottom:8px">
-        Local Files
-      </h2>
+<div class="window-header"
+onmousedown="startDrag(event,this.parentElement)">
 
-      <p style="color:var(--muted);font-size:13px;margin-bottom:18px">
-        Selected files stay inside this browser session.
-      </p>
+<div class="window-title">🔔 Notifications</div>
 
-      <div class="file-area">
+<div class="window-controls">
 
-        <input
-          id="fileInput"
-          type="file"
-          multiple
-          onchange="displayFiles()">
+<button onclick="minimizeWindow('notificationsWindow')">—</button>
 
-      </div>
+<button onclick="maximizeWindow('notificationsWindow')">□</button>
 
-      <div id="fileList" class="file-list"></div>
+<button class="close"
+onclick="closeWindow('notificationsWindow')">×</button>
 
-    </div>
+</div>
+</div>
 
-  </div>
+<div class="window-body">
 
+<div class="panel">
 
-  <!-- TEXT EDITOR -->
+<h2 style="margin-bottom:8px">
+Notification Center
+</h2>
 
-  <div id="editorWindow" class="window">
+<p class="muted">
+System notifications from ROOT OS appear here.
+</p>
 
-    <div class="window-header"
-         onmousedown="startDrag(event,this.parentElement)">
+</div>
 
-      <div class="window-title">
-        📝 Text Editor
-      </div>
+<div id="notificationList">
 
-      <div class="window-controls">
+<div class="notification">
+<strong>🚀 ROOT OS v1.1</strong>
+<p>New applications are now available.</p>
+</div>
 
-        <button onclick="minimizeWindow('editorWindow')">
-          —
-        </button>
+<div class="notification">
+<strong>🖥️ System Ready</strong>
+<p>ROOT OS desktop is running normally.</p>
+</div>
 
-        <button onclick="maximizeWindow('editorWindow')">
-          □
-        </button>
+<div class="notification">
+<strong>🔐 Security</strong>
+<p>Your local workspace is running in the browser.</p>
+</div>
 
-        <button class="close"
-                onclick="closeWindow('editorWindow')">
-          ×
-        </button>
+</div>
 
-      </div>
+<button class="btn"
+onclick="clearNotifications()">
+Clear notifications
+</button>
 
-    </div>
+</div>
 
-    <div class="window-body">
+</div>
 
-      <textarea
-        id="editor"
-        class="editor"
-        placeholder="Start writing..."></textarea>
 
-      <br><br>
+<!-- FILE MANAGER -->
 
-      <button class="btn green-btn"
-              onclick="saveEditor()">
-        Save
-      </button>
+<div id="filesWindow" class="window">
 
-      <button class="btn"
-              onclick="clearEditor()">
-        Clear
-      </button>
+<div class="window-header"
+onmousedown="startDrag(event,this.parentElement)">
 
-      <span id="editorStatus"
-            style="color:var(--muted);font-size:12px;margin-left:8px">
-      </span>
+<div class="window-title">📁 File Manager</div>
 
-    </div>
+<div class="window-controls">
 
-  </div>
+<button onclick="minimizeWindow('filesWindow')">—</button>
 
+<button onclick="maximizeWindow('filesWindow')">□</button>
 
-  <!-- CALCULATOR -->
+<button class="close"
+onclick="closeWindow('filesWindow')">×</button>
 
-  <div id="calculatorWindow" class="window">
+</div>
+</div>
 
-    <div class="window-header"
-         onmousedown="startDrag(event,this.parentElement)">
+<div class="window-body">
 
-      <div class="window-title">
-        🧮 Calculator
-      </div>
+<h2 style="margin-bottom:8px">
+Local Files
+</h2>
 
-      <div class="window-controls">
+<p class="muted" style="margin-bottom:18px">
+Choose files from your device. Files are not uploaded by this interface.
+</p>
 
-        <button onclick="minimizeWindow('calculatorWindow')">
-          —
-        </button>
+<div class="file-area">
 
-        <button onclick="maximizeWindow('calculatorWindow')">
-          □
-        </button>
+<input
+id="fileInput"
+type="file"
+multiple
+onchange="displayFiles()">
 
-        <button class="close"
-                onclick="closeWindow('calculatorWindow')">
-          ×
-        </button>
+</div>
 
-      </div>
+<div id="fileList" class="file-list"></div>
 
-    </div>
+</div>
 
-    <div class="window-body">
+</div>
 
-      <div class="calc">
 
-        <input
-          id="calcDisplay"
-          class="calc-display"
-          readonly
-          value="0">
+<!-- EDITOR -->
 
-        <div class="calc-grid">
+<div id="editorWindow" class="window">
 
-          <button onclick="calcClear()">C</button>
-          <button onclick="calcInput('(')">(</button>
-          <button onclick="calcInput(')')">)</button>
-          <button onclick="calcInput('/')">÷</button>
+<div class="window-header"
+onmousedown="startDrag(event,this.parentElement)">
 
-          <button onclick="calcInput('7')">7</button>
-          <button onclick="calcInput('8')">8</button>
-          <button onclick="calcInput('9')">9</button>
-          <button onclick="calcInput('*')">×</button>
+<div class="window-title">📝 Text Editor</div>
 
-          <button onclick="calcInput('4')">4</button>
-          <button onclick="calcInput('5')">5</button>
-          <button onclick="calcInput('6')">6</button>
-          <button onclick="calcInput('-')">−</button>
+<div class="window-controls">
 
-          <button onclick="calcInput('1')">1</button>
-          <button onclick="calcInput('2')">2</button>
-          <button onclick="calcInput('3')">3</button>
-          <button onclick="calcInput('+')">+</button>
+<button onclick="minimizeWindow('editorWindow')">—</button>
 
-          <button onclick="calcInput('0')">0</button>
-          <button onclick="calcInput('.')">.</button>
-          <button onclick="calcBack()">⌫</button>
-          <button onclick="calcResult()">=</button>
+<button onclick="maximizeWindow('editorWindow')">□</button>
 
-        </div>
+<button class="close"
+onclick="closeWindow('editorWindow')">×</button>
 
-      </div>
+</div>
+</div>
 
-    </div>
+<div class="window-body">
 
-  </div>
+<textarea id="editor"
+class="editor"
+placeholder="Start writing..."></textarea>
 
+<br><br>
 
-  <!-- SYSTEM WINDOW -->
+<button class="btn green-btn"
+onclick="saveEditor()">Save</button>
 
-  <div id="computerWindow" class="window">
+<button class="btn"
+onclick="clearEditor()">Clear</button>
 
-    <div class="window-header"
-         onmousedown="startDrag(event,this.parentElement)">
+<span id="editorStatus"
+class="muted"></span>
 
-      <div class="window-title">
-        💻 My Computer
-      </div>
+</div>
 
-      <div class="window-controls">
+</div>
 
-        <button onclick="minimizeWindow('computerWindow')">
-          —
-        </button>
 
-        <button onclick="maximizeWindow('computerWindow')">
-          □
-        </button>
+<!-- CALCULATOR -->
 
-        <button class="close"
-                onclick="closeWindow('computerWindow')">
-          ×
-        </button>
+<div id="calculatorWindow" class="window">
 
-      </div>
+<div class="window-header"
+onmousedown="startDrag(event,this.parentElement)">
 
-    </div>
+<div class="window-title">🧮 Calculator</div>
 
-    <div class="window-body">
+<div class="window-controls">
 
-      <h2 style="margin-bottom:8px">
-        ROOT OS System
-      </h2>
+<button onclick="minimizeWindow('calculatorWindow')">—</button>
 
-      <p style="color:var(--muted);font-size:13px;margin-bottom:20px">
-        Information exposed by your browser.
-      </p>
+<button onclick="maximizeWindow('calculatorWindow')">□</button>
 
-      <div id="systemInfo"
-           style="color:var(--muted);font-size:13px;line-height:2">
-      </div>
+<button class="close"
+onclick="closeWindow('calculatorWindow')">×</button>
 
-    </div>
+</div>
+</div>
 
-  </div>
+<div class="window-body">
 
+<div class="calc">
 
-  <!-- SETTINGS -->
+<input id="calcDisplay"
+class="calc-display"
+readonly
+value="0">
 
-  <div id="settingsWindow" class="window">
+<div class="calc-grid">
 
-    <div class="window-header"
-         onmousedown="startDrag(event,this.parentElement)">
+<button onclick="calcClear()">C</button>
+<button onclick="calcInput('(')">(</button>
+<button onclick="calcInput(')')">)</button>
+<button onclick="calcInput('/')">÷</button>
 
-      <div class="window-title">
-        ⚙️ Settings
-      </div>
+<button onclick="calcInput('7')">7</button>
+<button onclick="calcInput('8')">8</button>
+<button onclick="calcInput('9')">9</button>
+<button onclick="calcInput('*')">×</button>
 
-      <div class="window-controls">
+<button onclick="calcInput('4')">4</button>
+<button onclick="calcInput('5')">5</button>
+<button onclick="calcInput('6')">6</button>
+<button onclick="calcInput('-')">−</button>
 
-        <button onclick="minimizeWindow('settingsWindow')">
-          —
-        </button>
+<button onclick="calcInput('1')">1</button>
+<button onclick="calcInput('2')">2</button>
+<button onclick="calcInput('3')">3</button>
+<button onclick="calcInput('+')">+</button>
 
-        <button onclick="maximizeWindow('settingsWindow')">
-          □
-        </button>
+<button onclick="calcInput('0')">0</button>
+<button onclick="calcInput('.')">.</button>
+<button onclick="calcBack()">⌫</button>
+<button onclick="calcResult()">=</button>
 
-        <button class="close"
-                onclick="closeWindow('settingsWindow')">
-          ×
-        </button>
+</div>
+</div>
 
-      </div>
+</div>
 
-    </div>
+</div>
 
-    <div class="window-body">
 
-      <h2 style="margin-bottom:15px">
-        System Settings
-      </h2>
+<!-- IMAGE VIEWER -->
 
-      <div class="setting">
+<div id="imagesWindow" class="window">
 
-        <div>
-          <strong>Theme</strong>
-          <small>ROOT OS currently uses Dark Mode.</small>
-        </div>
+<div class="window-header"
+onmousedown="startDrag(event,this.parentElement)">
 
-        <button class="btn"
-                onclick="toggleTheme()">
-          Toggle
-        </button>
+<div class="window-title">🖼️ Image Viewer</div>
 
-      </div>
+<div class="window-controls">
 
-      <div class="setting">
+<button onclick="minimizeWindow('imagesWindow')">—</button>
 
-        <div>
-          <strong>System Information</strong>
-          <small>View browser information.</small>
-        </div>
+<button onclick="maximizeWindow('imagesWindow')">□</button>
 
-        <button class="btn"
-                onclick="openWindow('computerWindow')">
-          Open
-        </button>
+<button class="close"
+onclick="closeWindow('imagesWindow')">×</button>
 
-      </div>
+</div>
+</div>
 
-      <div class="setting">
+<div class="window-body">
 
-        <div>
-          <strong>Lock Screen</strong>
-          <small>Return to the ROOT OS lock screen.</small>
-        </div>
+<h2 style="margin-bottom:8px">
+Image Viewer
+</h2>
 
-        <button class="btn"
-                onclick="lockOS()">
-          Lock
-        </button>
+<p class="muted" style="margin-bottom:15px">
+Select an image from your device.
+</p>
 
-      </div>
+<input
+type="file"
+accept="image/*"
+onchange="loadImage(event)">
 
-    </div>
+<br><br>
 
-  </div>
+<div class="image-preview">
+
+<img id="previewImage">
+
+<span id="imagePlaceholder"
+class="muted">
+No image selected
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- MEDIA PLAYER -->
+
+<div id="mediaWindow" class="window">
+
+<div class="window-header"
+onmousedown="startDrag(event,this.parentElement)">
+
+<div class="window-title">🎵 Media Player</div>
+
+<div class="window-controls">
+
+<button onclick="minimizeWindow('mediaWindow')">—</button>
+
+<button onclick="maximizeWindow('mediaWindow')">□</button>
+
+<button class="close"
+onclick="closeWindow('mediaWindow')">×</button>
+
+</div>
+</div>
+
+<div class="window-body">
+
+<div class="media-box">
+
+<div class="media-icon">🎵</div>
+
+<h2>ROOT Player</h2>
+
+<p class="muted" style="margin:10px 0 20px">
+Select an audio file from your device.
+</p>
+
+<input
+type="file"
+accept="audio/*"
+onchange="loadAudio(event)">
+
+<br><br>
+
+<audio
+id="audioPlayer"
+controls
+style="width:100%">
+</audio>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- BROWSER -->
+
+<div id="browserWindow" class="window">
+
+<div class="window-header"
+onmousedown="startDrag(event,this.parentElement)">
+
+<div class="window-title">🌐 ROOT Browser</div>
+
+<div class="window-controls">
+
+<button onclick="minimizeWindow('browserWindow')">—</button>
+
+<button onclick="maximizeWindow('browserWindow')">□</button>
+
+<button class="close"
+onclick="closeWindow('browserWindow')">×</button>
+
+</div>
+</div>
+
+<div class="window-body">
+
+<div class="browser-bar">
+
+<input
+id="browserURL"
+placeholder="https://example.com"
+value="https://example.com">
+
+<button class="btn green-btn"
+onclick="openBrowser()">
+Go
+</button>
+
+</div>
+
+<iframe
+id="browserFrame"
+class="browser-frame"
+title="ROOT Browser">
+</iframe>
+
+<p class="muted" style="margin-top:8px">
+Some websites may block being displayed inside an embedded browser for security reasons.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- RECYCLE BIN -->
+
+<div id="recycleWindow" class="window">
+
+<div class="window-header"
+onmousedown="startDrag(event,this.parentElement)">
+
+<div class="window-title">🗑️ Recycle Bin</div>
+
+<div class="window-controls">
+
+<button onclick="minimizeWindow('recycleWindow')">—</button>
+
+<button onclick="maximizeWindow('recycleWindow')">□</button>
+
+<button class="close"
+onclick="closeWindow('recycleWindow')">×</button>
+
+</div>
+</div>
+
+<div class="window-body">
+
+<div class="panel">
+
+<h2>Recycle Bin</h2>
+
+<p class="muted" style="margin-top:6px">
+Items deleted inside ROOT OS can appear here.
+</p>
+
+</div>
+
+<div id="recycleList">
+
+<div class="recycle-item">
+
+<span>🗑️ No deleted items</span>
+
+</div>
+
+</div>
+
+<button class="btn"
+onclick="emptyRecycle()">
+Empty Recycle Bin
+</button>
+
+</div>
+
+</div>
+
+
+<!-- SETTINGS -->
+
+<div id="settingsWindow" class="window">
+
+<div class="window-header"
+onmousedown="startDrag(event,this.parentElement)">
+
+<div class="window-title">⚙️ Settings</div>
+
+<div class="window-controls">
+
+<button onclick="minimizeWindow('settingsWindow')">—</button>
+
+<button onclick="maximizeWindow('settingsWindow')">□</button>
+
+<button class="close"
+onclick="closeWindow('settingsWindow')">×</button>
+
+</div>
+</div>
+
+<div class="window-body">
+
+<h2 style="margin-bottom:15px">
+System Settings
+</h2>
+
+<div class="setting">
+
+<div>
+<strong>Appearance</strong>
+<small>Switch ROOT OS between dark and light mode.</small>
+</div>
+
+<button class="btn"
+onclick="toggleTheme()">
+Toggle
+</button>
+
+</div>
+
+<div class="setting">
+
+<div>
+<strong>Notifications</strong>
+<small>Open the notification center.</small>
+</div>
+
+<button class="btn"
+onclick="openWindow('notificationsWindow')">
+Open
+</button>
+
+</div>
+
+<div class="setting">
+
+<div>
+<strong>Lock Screen</strong>
+<small>Lock the current ROOT OS session.</small>
+</div>
+
+<button class="btn"
+onclick="lockOS()">
+Lock
+</button>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
 
 <script>
 
-/* ================================
-   CLOCK
-================================ */
+/* CLOCK */
 
 function updateClock(){
 
-  const now = new Date();
+const now=new Date();
 
-  const time =
-    now.toLocaleTimeString([],{
-      hour:"2-digit",
-      minute:"2-digit"
-    });
+const time=now.toLocaleTimeString([],{
+hour:"2-digit",
+minute:"2-digit"
+});
 
-  const date =
-    now.toLocaleDateString([],{
-      weekday:"long",
-      day:"numeric",
-      month:"long"
-    });
+const date=now.toLocaleDateString([],{
+weekday:"long",
+day:"numeric",
+month:"long"
+});
 
-  document.getElementById("lockTime").textContent = time;
-  document.getElementById("lockDate").textContent = date;
-  document.getElementById("topClock").textContent = time;
+document.getElementById("lockTime").textContent=time;
+document.getElementById("lockDate").textContent=date;
+document.getElementById("topClock").textContent=time;
 
 }
 
 updateClock();
-
 setInterval(updateClock,1000);
 
 
-/* ================================
-   UNLOCK
-================================ */
+/* UNLOCK */
 
 function unlockOS(){
 
-  document.getElementById("lockScreen").style.display="none";
-  document.getElementById("desktop").style.display="block";
+document.getElementById("lockScreen").style.display="none";
+document.getElementById("desktop").style.display="block";
 
-  openWindow("launcherWindow");
+openWindow("launcherWindow");
 
 }
 
 
-/* ================================
-   LOCK
-================================ */
+/* LOCK */
 
 function lockOS(){
 
-  document.querySelectorAll(".window")
-    .forEach(function(win){
-      win.classList.remove("open");
-      win.classList.remove("maximized");
-    });
+document.querySelectorAll(".window")
+.forEach(function(w){
+w.classList.remove("open");
+w.classList.remove("maximized");
+});
 
-  document.getElementById("powerMenu").style.display="none";
-
-  document.getElementById("desktop").style.display="none";
-  document.getElementById("lockScreen").style.display="flex";
+document.getElementById("desktop").style.display="none";
+document.getElementById("lockScreen").style.display="flex";
 
 }
 
 
-/* ================================
-   POWER
-================================ */
+/* POWER */
 
 function togglePower(){
 
-  const menu =
-    document.getElementById("powerMenu");
+const menu=document.getElementById("powerMenu");
 
-  menu.style.display =
-    menu.style.display==="block"
-    ? "none"
-    : "block";
+menu.style.display=
+menu.style.display==="block"
+?"none"
+:"block";
 
 }
 
 function closePower(){
 
-  document.getElementById("powerMenu")
-    .style.display="none";
+document.getElementById("powerMenu")
+.style.display="none";
 
 }
 
 function restartOS(){
 
-  document.querySelectorAll(".window")
-    .forEach(function(win){
-      win.classList.remove("open");
-      win.classList.remove("maximized");
-    });
+closePower();
 
-  closePower();
+document.querySelectorAll(".window")
+.forEach(function(w){
+w.classList.remove("open");
+});
 
-  setTimeout(function(){
-    openWindow("launcherWindow");
-  },300);
+setTimeout(function(){
+openWindow("launcherWindow");
+},300);
 
 }
 
 
-/* ================================
-   WINDOWS
-================================ */
+/* WINDOWS */
 
-let zIndex = 100;
+let zIndex=100;
 
 function openWindow(id){
 
-  const win =
-    document.getElementById(id);
+const win=document.getElementById(id);
 
-  if(!win) return;
+if(!win)return;
 
-  win.classList.add("open");
+win.classList.add("open");
 
-  zIndex++;
-
-  win.style.zIndex = zIndex;
-
-  loadSystemInfo();
+zIndex++;
+win.style.zIndex=zIndex;
 
 }
 
 function closeWindow(id){
 
-  const win =
-    document.getElementById(id);
+const win=document.getElementById(id);
 
-  if(win){
-    win.classList.remove("open");
-  }
+if(win){
+win.classList.remove("open");
+}
 
 }
 
 function minimizeWindow(id){
 
-  closeWindow(id);
+closeWindow(id);
 
 }
 
 function maximizeWindow(id){
 
-  const win =
-    document.getElementById(id);
+const win=document.getElementById(id);
 
-  if(win){
-    win.classList.toggle("maximized");
-  }
+if(win){
+win.classList.toggle("maximized");
+}
 
 }
 
 
-/* ================================
-   WINDOW DRAGGING
-================================ */
+/* DRAG WINDOWS */
 
-let dragData = null;
+let dragData=null;
 
 function startDrag(event,win){
 
-  if(window.innerWidth <= 650) return;
+if(window.innerWidth<=650)return;
 
-  if(
-    event.target.tagName==="BUTTON"
-  ){
-    return;
-  }
+if(event.target.tagName==="BUTTON")return;
 
-  dragData={
-    win:win,
-    startX:event.clientX,
-    startY:event.clientY,
-    startLeft:win.offsetLeft,
-    startTop:win.offsetTop
-  };
+dragData={
+win:win,
+startX:event.clientX,
+startY:event.clientY,
+startLeft:win.offsetLeft,
+startTop:win.offsetTop
+};
 
-  document.addEventListener(
-    "mousemove",
-    dragMove
-  );
-
-  document.addEventListener(
-    "mouseup",
-    stopDrag
-  );
+document.addEventListener("mousemove",dragMove);
+document.addEventListener("mouseup",stopDrag);
 
 }
 
 function dragMove(event){
 
-  if(!dragData) return;
+if(!dragData)return;
 
-  const dx =
-    event.clientX -
-    dragData.startX;
+const dx=event.clientX-dragData.startX;
+const dy=event.clientY-dragData.startY;
 
-  const dy =
-    event.clientY -
-    dragData.startY;
+dragData.win.style.left=
+(dragData.startLeft+dx)+"px";
 
-  dragData.win.style.left =
-    (dragData.startLeft+dx)+"px";
+dragData.win.style.top=
+(dragData.startTop+dy)+"px";
 
-  dragData.win.style.top =
-    (dragData.startTop+dy)+"px";
-
-  dragData.win.style.transform="none";
+dragData.win.style.transform="none";
 
 }
 
 function stopDrag(){
 
-  dragData=null;
+dragData=null;
 
-  document.removeEventListener(
-    "mousemove",
-    dragMove
-  );
-
-  document.removeEventListener(
-    "mouseup",
-    stopDrag
-  );
+document.removeEventListener("mousemove",dragMove);
+document.removeEventListener("mouseup",stopDrag);
 
 }
 
 
-/* ================================
-   FILE MANAGER
-================================ */
+/* APP SEARCH */
+
+function searchApps(){
+
+const query=
+document.getElementById("appSearch")
+.value
+.toLowerCase()
+.trim();
+
+document.querySelectorAll(".app-tile")
+.forEach(function(app){
+
+const name=
+app.dataset.name.toLowerCase();
+
+app.style.display=
+name.includes(query)
+?"block"
+:"none";
+
+});
+
+}
+
+
+/* NOTIFICATIONS */
+
+function clearNotifications(){
+
+document.getElementById("notificationList").innerHTML=
+'<div class="notification">'+
+'<strong>✓ All clear</strong>'+
+'<p>No new notifications.</p>'+
+'</div>';
+
+document.getElementById("notificationCount").style.display="none";
+
+}
+
+
+/* FILES */
 
 function displayFiles(){
 
-  const input =
-    document.getElementById("fileInput");
+const input=document.getElementById("fileInput");
+const list=document.getElementById("fileList");
 
-  const list =
-    document.getElementById("fileList");
+list.innerHTML="";
 
-  list.innerHTML="";
+Array.from(input.files).forEach(function(file){
 
-  Array.from(input.files)
-    .forEach(function(file){
+const item=document.createElement("div");
 
-      const item =
-        document.createElement("div");
+item.className="file-item";
 
-      item.className="file-item";
+item.innerHTML=
+"<span>📄 "+
+escapeHTML(file.name)+
+"</span>"+
+"<small>"+
+formatBytes(file.size)+
+"</small>";
 
-      item.innerHTML =
-        "<span>📄 "+
-        escapeHTML(file.name)+
-        "</span>"+
-        "<small>"+
-        formatBytes(file.size)+
-        "</small>";
+list.appendChild(item);
 
-      list.appendChild(item);
-
-    });
+});
 
 }
 
 function formatBytes(bytes){
 
-  if(bytes===0) return "0 Bytes";
+if(bytes===0)return"0 Bytes";
 
-  const units=[
-    "Bytes",
-    "KB",
-    "MB",
-    "GB"
-  ];
+const units=["Bytes","KB","MB","GB"];
 
-  const i =
-    Math.floor(
-      Math.log(bytes) /
-      Math.log(1024)
-    );
+const i=Math.floor(
+Math.log(bytes)/Math.log(1024)
+);
 
-  return (
-    bytes /
-    Math.pow(1024,i)
-  ).toFixed(2)+
-  " "+
-  units[i];
+return(
+bytes/Math.pow(1024,i)
+).toFixed(2)+" "+units[i];
 
 }
 
 function escapeHTML(value){
 
-  const div =
-    document.createElement("div");
+const div=document.createElement("div");
 
-  div.textContent=value;
+div.textContent=value;
 
-  return div.innerHTML;
+return div.innerHTML;
 
 }
 
 
-/* ================================
-   TEXT EDITOR
-================================ */
+/* EDITOR */
 
 function saveEditor(){
 
-  const text =
-    document.getElementById(
-      "editor"
-    ).value;
+const text=
+document.getElementById("editor").value;
 
-  localStorage.setItem(
-    "rootOS_editor",
-    text
-  );
+localStorage.setItem(
+"rootOS_editor",
+text
+);
 
-  document.getElementById(
-    "editorStatus"
-  ).textContent =
-    "Saved locally.";
+document.getElementById("editorStatus")
+.textContent=" Saved locally.";
 
 }
 
 function clearEditor(){
 
-  document.getElementById(
-    "editor"
-  ).value="";
+document.getElementById("editor").value="";
 
-  document.getElementById(
-    "editorStatus"
-  ).textContent =
-    "Cleared.";
+document.getElementById("editorStatus")
+.textContent=" Cleared.";
 
 }
 
 function loadEditor(){
 
-  const saved =
-    localStorage.getItem(
-      "rootOS_editor"
-    );
+const saved=
+localStorage.getItem("rootOS_editor");
 
-  if(saved!==null){
+if(saved!==null){
 
-    document.getElementById(
-      "editor"
-    ).value=saved;
-
-  }
+document.getElementById("editor").value=saved;
 
 }
 
+}
 
-/* ================================
-   CALCULATOR
-================================ */
+loadEditor();
+
+
+/* CALCULATOR */
 
 function calcInput(value){
 
-  const display =
-    document.getElementById(
-      "calcDisplay"
-    );
+const display=
+document.getElementById("calcDisplay");
 
-  if(display.value==="0"){
-    display.value="";
-  }
+if(display.value==="0"){
+display.value="";
+}
 
-  display.value += value;
+display.value+=value;
 
 }
 
 function calcClear(){
 
-  document.getElementById(
-    "calcDisplay"
-  ).value="0";
+document.getElementById("calcDisplay")
+.value="0";
 
 }
 
 function calcBack(){
 
-  const display =
-    document.getElementById(
-      "calcDisplay"
-    );
+const display=
+document.getElementById("calcDisplay");
 
-  display.value =
-    display.value.length>1
-    ? display.value.slice(0,-1)
-    : "0";
+display.value=
+display.value.length>1
+?display.value.slice(0,-1)
+:"0";
 
 }
 
 function calcResult(){
 
-  const display =
-    document.getElementById(
-      "calcDisplay"
-    );
+const display=
+document.getElementById("calcDisplay");
 
-  const expression =
-    display.value;
+const expression=display.value;
 
-  if(!/^[0-9+\-*/().\s]+$/.test(expression)){
-    display.value="Error";
-    return;
-  }
+if(!/^[0-9+\-*/().\s]+$/.test(expression)){
 
-  try{
+display.value="Error";
+return;
 
-    const result =
-      Function(
-        "\"use strict\";return ("+
-        expression+
-        ")"
-      )();
+}
 
-    if(!Number.isFinite(result)){
-      display.value="Error";
-      return;
-    }
+try{
 
-    display.value=String(result);
+const result=Function(
+'"use strict";return ('+
+expression+
+')'
+)();
 
-  }catch{
+display.value=
+Number.isFinite(result)
+?String(result)
+:"Error";
 
-    display.value="Error";
+}catch{
 
-  }
+display.value="Error";
+
+}
 
 }
 
 
-/* ================================
-   SYSTEM INFORMATION
-================================ */
+/* IMAGE VIEWER */
 
-function loadSystemInfo(){
+function loadImage(event){
 
-  const info =
-    document.getElementById(
-      "systemInfo"
-    );
+const file=event.target.files[0];
 
-  if(!info) return;
+if(!file)return;
 
-  info.innerHTML =
-    "Browser: "+
-    escapeHTML(navigator.userAgent)+
-    "<br>"+
-    "Platform: "+
-    escapeHTML(navigator.platform)+
-    "<br>"+
-    "Language: "+
-    escapeHTML(navigator.language)+
-    "<br>"+
-    "Screen: "+
-    screen.width+
-    " × "+
-    screen.height+
-    "<br>"+
-    "Online: "+
-    (navigator.onLine
-      ? "Yes"
-      : "No")+
-    "<br>"+
-    "Timezone: "+
-    escapeHTML(
-      Intl.DateTimeFormat()
-      .resolvedOptions()
-      .timeZone
-    );
+const image=
+document.getElementById("previewImage");
+
+const placeholder=
+document.getElementById("imagePlaceholder");
+
+image.src=URL.createObjectURL(file);
+
+image.style.display="block";
+placeholder.style.display="none";
 
 }
 
 
-/* ================================
-   THEME
-================================ */
+/* MEDIA */
+
+function loadAudio(event){
+
+const file=event.target.files[0];
+
+if(!file)return;
+
+const audio=
+document.getElementById("audioPlayer");
+
+audio.src=URL.createObjectURL(file);
+
+audio.load();
+
+}
+
+
+/* BROWSER */
+
+function openBrowser(){
+
+let url=
+document.getElementById("browserURL")
+.value
+.trim();
+
+if(!url)return;
+
+if(!/^https?:\/\//i.test(url)){
+
+url="https://"+url;
+
+}
+
+document.getElementById("browserFrame")
+.src=url;
+
+}
+
+
+/* RECYCLE BIN */
+
+function emptyRecycle(){
+
+document.getElementById("recycleList").innerHTML=
+'<div class="recycle-item">'+
+'<span>🗑️ No deleted items</span>'+
+'</div>';
+
+}
+
+
+/* THEME */
 
 function toggleTheme(){
 
-  document.body.classList.toggle(
-    "light-mode"
-  );
+document.body.classList.toggle("light");
 
-  alert(
-    "ROOT OS theme controls will be expanded in a future version."
-  );
+const light=
+document.body.classList.contains("light");
+
+localStorage.setItem(
+"rootOS_light",
+light
+?"1"
+:"0"
+);
 
 }
 
 
-/* ================================
-   STARTUP
-================================ */
+/* LOAD THEME */
 
-loadEditor();
+if(localStorage.getItem("rootOS_light")==="1"){
+
+document.body.classList.add("light");
+
+}
 
 </script>
 
