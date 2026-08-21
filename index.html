@@ -4,15 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <meta name="theme-color" content="#05070d">
-<title>ROOT OS</title>
+<title>ROOT OS v1.2</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
 
 :root{
 --bg:#05070d;
---panel:rgba(12,18,29,.96);
---panel2:#101827;
+--panel:rgba(12,18,29,.97);
 --border:#29384d;
 --text:#f4f7fb;
 --muted:#8995a8;
@@ -249,6 +252,143 @@ font-size:20px;
 .dock button:hover{
 border-color:#40536c;
 transform:translateY(-2px);
+}
+
+/* START MENU */
+
+#startMenu{
+position:absolute;
+left:50%;
+bottom:76px;
+transform:translateX(-50%) translateY(15px);
+width:min(440px,calc(100vw - 20px));
+max-height:72vh;
+overflow:auto;
+padding:14px;
+display:none;
+opacity:0;
+background:rgba(7,12,20,.98);
+border:1px solid #31445c;
+border-radius:18px;
+box-shadow:0 25px 80px rgba(0,0,0,.65);
+backdrop-filter:blur(20px);
+z-index:8000;
+transition:.2s ease;
+}
+
+#startMenu.show{
+display:block;
+opacity:1;
+transform:translateX(-50%) translateY(0);
+}
+
+.start-header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:5px 4px 12px;
+}
+
+.start-brand{
+font-weight:800;
+letter-spacing:2px;
+}
+
+.start-brand span{
+color:var(--accent);
+}
+
+.start-user{
+font-size:10px;
+color:var(--muted);
+}
+
+.start-search{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:1px solid var(--border);
+background:#05080e;
+color:white;
+outline:none;
+margin-bottom:13px;
+}
+
+.start-section{
+font-size:10px;
+color:var(--muted);
+letter-spacing:1.5px;
+margin:12px 3px 7px;
+}
+
+.start-apps{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:7px;
+}
+
+.start-app{
+border:1px solid transparent;
+border-radius:11px;
+background:#0d1623;
+color:white;
+padding:10px 5px;
+text-align:center;
+}
+
+.start-app:hover{
+border-color:#3c526d;
+background:#142033;
+}
+
+.start-app .start-icon{
+font-size:21px;
+margin-bottom:5px;
+}
+
+.start-app span{
+font-size:9px;
+display:block;
+}
+
+.start-recent{
+display:flex;
+gap:7px;
+overflow:auto;
+padding-bottom:3px;
+}
+
+.start-recent button{
+flex:0 0 auto;
+padding:9px 11px;
+border:1px solid var(--border);
+border-radius:9px;
+background:#0d1623;
+color:white;
+font-size:10px;
+}
+
+.start-bottom{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:7px;
+margin-top:14px;
+padding-top:12px;
+border-top:1px solid var(--border);
+}
+
+.start-bottom button{
+padding:10px 5px;
+border:1px solid var(--border);
+border-radius:9px;
+background:#0d1623;
+color:white;
+font-size:10px;
+}
+
+.start-bottom button:hover,
+.start-recent button:hover{
+background:#172438;
 }
 
 /* WINDOWS */
@@ -658,6 +798,25 @@ text-align:left;
 background:#172235;
 }
 
+/* LIGHT THEME */
+
+body.light{
+--bg:#e9edf3;
+--panel:rgba(248,250,253,.97);
+--border:#cbd4e1;
+--text:#101827;
+--muted:#5d697b;
+}
+
+body.light #desktop{
+background:linear-gradient(135deg,#e9edf3,#dce5ef);
+}
+
+body.light .topbar,
+body.light .window-header{
+background:rgba(245,248,252,.9);
+}
+
 /* MOBILE */
 
 @media(max-width:650px){
@@ -687,6 +846,16 @@ overflow:auto;
 width:43px;
 height:43px;
 flex-shrink:0;
+}
+
+#startMenu{
+bottom:62px;
+width:calc(100vw - 12px);
+max-height:72vh;
+}
+
+.start-apps{
+grid-template-columns:repeat(4,1fr);
 }
 
 .window{
@@ -722,34 +891,6 @@ height:300px;
 }
 
 }
-
-/* LIGHT THEME */
-
-body.light{
---bg:#e9edf3;
---panel:rgba(248,250,253,.97);
---panel2:#ffffff;
---border:#cbd4e1;
---text:#101827;
---muted:#5d697b;
-}
-
-body.light #desktop{
-background:linear-gradient(135deg,#e9edf3,#dce5ef);
-}
-
-body.light .topbar,
-body.light .window-header{
-background:rgba(245,248,252,.9);
-}
-
-body.light .window,
-body.light .panel,
-body.light .app-tile,
-body.light .file-item{
-color:var(--text);
-}
-
 </style>
 </head>
 
@@ -862,23 +1003,163 @@ onclick="openWindow('recycleWindow')">
 </div>
 
 
+<!-- START MENU -->
+
+<div id="startMenu">
+
+<div class="start-header">
+
+<div class="start-brand">
+ROOT <span>OS</span>
+</div>
+
+<div class="start-user">
+WEB OS
+</div>
+
+</div>
+
+<input
+id="startSearch"
+class="start-search"
+placeholder="🔍 Search apps..."
+oninput="searchStartApps()"
+>
+
+<div class="start-section">
+PINNED APPS
+</div>
+
+<div id="startApps" class="start-apps">
+
+<button class="start-app"
+data-app="files file manager"
+onclick="startOpen('filesWindow')">
+<div class="start-icon">📁</div>
+<span>Files</span>
+</button>
+
+<button class="start-app"
+data-app="editor text editor notes"
+onclick="startOpen('editorWindow')">
+<div class="start-icon">📝</div>
+<span>Editor</span>
+</button>
+
+<button class="start-app"
+data-app="calculator math"
+onclick="startOpen('calculatorWindow')">
+<div class="start-icon">🧮</div>
+<span>Calculator</span>
+</button>
+
+<button class="start-app"
+data-app="browser internet web"
+onclick="startOpen('browserWindow')">
+<div class="start-icon">🌐</div>
+<span>Browser</span>
+</button>
+
+<button class="start-app"
+data-app="media music player"
+onclick="startOpen('mediaWindow')">
+<div class="start-icon">🎵</div>
+<span>Media</span>
+</button>
+
+<button class="start-app"
+data-app="images image viewer gallery"
+onclick="startOpen('imagesWindow')">
+<div class="start-icon">🖼️</div>
+<span>Images</span>
+</button>
+
+<button class="start-app"
+data-app="notifications alerts"
+onclick="startOpen('notificationsWindow')">
+<div class="start-icon">🔔</div>
+<span>Notifications</span>
+</button>
+
+<button class="start-app"
+data-app="settings configuration"
+onclick="startOpen('settingsWindow')">
+<div class="start-icon">⚙️</div>
+<span>Settings</span>
+</button>
+
+</div>
+
+<div class="start-section">
+RECENT
+</div>
+
+<div id="startRecent" class="start-recent">
+
+<button onclick="startOpen('filesWindow')">
+📁 Files
+</button>
+
+<button onclick="startOpen('browserWindow')">
+🌐 Browser
+</button>
+
+<button onclick="startOpen('settingsWindow')">
+⚙️ Settings
+</button>
+
+</div>
+
+<div class="start-bottom">
+
+<button onclick="startOpen('settingsWindow')">
+⚙️ Settings
+</button>
+
+<button onclick="lockOS();closeStartMenu()">
+🔒 Lock
+</button>
+
+<button onclick="restartOS();closeStartMenu()">
+🔄 Restart
+</button>
+
+</div>
+
+</div>
+
+
 <!-- DOCK -->
 
 <nav class="dock">
 
-<button onclick="openWindow('launcherWindow')">⬢</button>
+<button onclick="toggleStartMenu()" title="Start">
+⬢
+</button>
 
-<button onclick="openWindow('filesWindow')">📁</button>
+<button onclick="openWindow('filesWindow')">
+📁
+</button>
 
-<button onclick="openWindow('editorWindow')">📝</button>
+<button onclick="openWindow('editorWindow')">
+📝
+</button>
 
-<button onclick="openWindow('calculatorWindow')">🧮</button>
+<button onclick="openWindow('calculatorWindow')">
+🧮
+</button>
 
-<button onclick="openWindow('browserWindow')">🌐</button>
+<button onclick="openWindow('browserWindow')">
+🌐
+</button>
 
-<button onclick="openWindow('mediaWindow')">🎵</button>
+<button onclick="openWindow('mediaWindow')">
+🎵
+</button>
 
-<button onclick="openWindow('settingsWindow')">⚙️</button>
+<button onclick="openWindow('settingsWindow')">
+⚙️
+</button>
 
 </nav>
 
@@ -908,11 +1189,8 @@ onmousedown="startDrag(event,this.parentElement)">
 <div class="window-controls">
 
 <button onclick="minimizeWindow('launcherWindow')">—</button>
-
 <button onclick="maximizeWindow('launcherWindow')">□</button>
-
-<button class="close"
-onclick="closeWindow('launcherWindow')">×</button>
+<button class="close" onclick="closeWindow('launcherWindow')">×</button>
 
 </div>
 </div>
@@ -921,7 +1199,7 @@ onclick="closeWindow('launcherWindow')">×</button>
 
 <div class="welcome">
 
-<div class="small">ROOT OS v1.1</div>
+<div class="small">ROOT OS v1.2</div>
 
 <h1>Welcome back.</h1>
 
@@ -929,14 +1207,15 @@ onclick="closeWindow('launcherWindow')">×</button>
 Search and launch applications from your ROOT OS desktop.
 </p>
 
-<input id="appSearch"
+<input
+id="appSearch"
 class="search"
 placeholder="🔍 Search apps..."
 oninput="searchApps()">
 
 </div>
 
-<div id="appGrid" class="app-grid">
+<div class="app-grid">
 
 <button class="app-tile"
 data-name="file manager files"
@@ -1027,24 +1306,18 @@ onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">🔔 Notifications</div>
 
 <div class="window-controls">
-
 <button onclick="minimizeWindow('notificationsWindow')">—</button>
-
 <button onclick="maximizeWindow('notificationsWindow')">□</button>
-
-<button class="close"
-onclick="closeWindow('notificationsWindow')">×</button>
-
+<button class="close" onclick="closeWindow('notificationsWindow')">×</button>
 </div>
+
 </div>
 
 <div class="window-body">
 
 <div class="panel">
 
-<h2 style="margin-bottom:8px">
-Notification Center
-</h2>
+<h2>Notification Center</h2>
 
 <p class="muted">
 System notifications from ROOT OS appear here.
@@ -1055,8 +1328,8 @@ System notifications from ROOT OS appear here.
 <div id="notificationList">
 
 <div class="notification">
-<strong>🚀 ROOT OS v1.1</strong>
-<p>New applications are now available.</p>
+<strong>🚀 ROOT OS v1.2</strong>
+<p>Start Menu is now available.</p>
 </div>
 
 <div class="notification">
@@ -1071,8 +1344,7 @@ System notifications from ROOT OS appear here.
 
 </div>
 
-<button class="btn"
-onclick="clearNotifications()">
+<button class="btn" onclick="clearNotifications()">
 Clear notifications
 </button>
 
@@ -1091,31 +1363,24 @@ onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">📁 File Manager</div>
 
 <div class="window-controls">
-
 <button onclick="minimizeWindow('filesWindow')">—</button>
-
 <button onclick="maximizeWindow('filesWindow')">□</button>
-
-<button class="close"
-onclick="closeWindow('filesWindow')">×</button>
-
+<button class="close" onclick="closeWindow('filesWindow')">×</button>
 </div>
+
 </div>
 
 <div class="window-body">
 
-<h2 style="margin-bottom:8px">
-Local Files
-</h2>
+<h2>Local Files</h2>
 
-<p class="muted" style="margin-bottom:18px">
+<p class="muted" style="margin:8px 0 18px">
 Choose files from your device. Files are not uploaded by this interface.
 </p>
 
 <div class="file-area">
 
-<input
-id="fileInput"
+<input id="fileInput"
 type="file"
 multiple
 onchange="displayFiles()">
@@ -1139,15 +1404,11 @@ onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">📝 Text Editor</div>
 
 <div class="window-controls">
-
 <button onclick="minimizeWindow('editorWindow')">—</button>
-
 <button onclick="maximizeWindow('editorWindow')">□</button>
-
-<button class="close"
-onclick="closeWindow('editorWindow')">×</button>
-
+<button class="close" onclick="closeWindow('editorWindow')">×</button>
 </div>
+
 </div>
 
 <div class="window-body">
@@ -1158,14 +1419,15 @@ placeholder="Start writing..."></textarea>
 
 <br><br>
 
-<button class="btn green-btn"
-onclick="saveEditor()">Save</button>
+<button class="btn green-btn" onclick="saveEditor()">
+Save
+</button>
 
-<button class="btn"
-onclick="clearEditor()">Clear</button>
+<button class="btn" onclick="clearEditor()">
+Clear
+</button>
 
-<span id="editorStatus"
-class="muted"></span>
+<span id="editorStatus" class="muted"></span>
 
 </div>
 
@@ -1182,15 +1444,11 @@ onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">🧮 Calculator</div>
 
 <div class="window-controls">
-
 <button onclick="minimizeWindow('calculatorWindow')">—</button>
-
 <button onclick="maximizeWindow('calculatorWindow')">□</button>
-
-<button class="close"
-onclick="closeWindow('calculatorWindow')">×</button>
-
+<button class="close" onclick="closeWindow('calculatorWindow')">×</button>
 </div>
+
 </div>
 
 <div class="window-body">
@@ -1247,29 +1505,22 @@ onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">🖼️ Image Viewer</div>
 
 <div class="window-controls">
-
 <button onclick="minimizeWindow('imagesWindow')">—</button>
-
 <button onclick="maximizeWindow('imagesWindow')">□</button>
-
-<button class="close"
-onclick="closeWindow('imagesWindow')">×</button>
-
+<button class="close" onclick="closeWindow('imagesWindow')">×</button>
 </div>
+
 </div>
 
 <div class="window-body">
 
-<h2 style="margin-bottom:8px">
-Image Viewer
-</h2>
+<h2>Image Viewer</h2>
 
-<p class="muted" style="margin-bottom:15px">
+<p class="muted" style="margin:8px 0 15px">
 Select an image from your device.
 </p>
 
-<input
-type="file"
+<input type="file"
 accept="image/*"
 onchange="loadImage(event)">
 
@@ -1279,8 +1530,7 @@ onchange="loadImage(event)">
 
 <img id="previewImage">
 
-<span id="imagePlaceholder"
-class="muted">
+<span id="imagePlaceholder" class="muted">
 No image selected
 </span>
 
@@ -1301,15 +1551,11 @@ onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">🎵 Media Player</div>
 
 <div class="window-controls">
-
 <button onclick="minimizeWindow('mediaWindow')">—</button>
-
 <button onclick="maximizeWindow('mediaWindow')">□</button>
-
-<button class="close"
-onclick="closeWindow('mediaWindow')">×</button>
-
+<button class="close" onclick="closeWindow('mediaWindow')">×</button>
 </div>
+
 </div>
 
 <div class="window-body">
@@ -1324,15 +1570,13 @@ onclick="closeWindow('mediaWindow')">×</button>
 Select an audio file from your device.
 </p>
 
-<input
-type="file"
+<input type="file"
 accept="audio/*"
 onchange="loadAudio(event)">
 
 <br><br>
 
-<audio
-id="audioPlayer"
+<audio id="audioPlayer"
 controls
 style="width:100%">
 </audio>
@@ -1354,23 +1598,18 @@ onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">🌐 ROOT Browser</div>
 
 <div class="window-controls">
-
 <button onclick="minimizeWindow('browserWindow')">—</button>
-
 <button onclick="maximizeWindow('browserWindow')">□</button>
-
-<button class="close"
-onclick="closeWindow('browserWindow')">×</button>
-
+<button class="close" onclick="closeWindow('browserWindow')">×</button>
 </div>
+
 </div>
 
 <div class="window-body">
 
 <div class="browser-bar">
 
-<input
-id="browserURL"
+<input id="browserURL"
 placeholder="https://example.com"
 value="https://example.com">
 
@@ -1381,14 +1620,13 @@ Go
 
 </div>
 
-<iframe
-id="browserFrame"
+<iframe id="browserFrame"
 class="browser-frame"
 title="ROOT Browser">
 </iframe>
 
 <p class="muted" style="margin-top:8px">
-Some websites may block being displayed inside an embedded browser for security reasons.
+Some websites may block embedded browsing for security reasons.
 </p>
 
 </div>
@@ -1406,15 +1644,11 @@ onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">🗑️ Recycle Bin</div>
 
 <div class="window-controls">
-
 <button onclick="minimizeWindow('recycleWindow')">—</button>
-
 <button onclick="maximizeWindow('recycleWindow')">□</button>
-
-<button class="close"
-onclick="closeWindow('recycleWindow')">×</button>
-
+<button class="close" onclick="closeWindow('recycleWindow')">×</button>
 </div>
+
 </div>
 
 <div class="window-body">
@@ -1423,7 +1657,7 @@ onclick="closeWindow('recycleWindow')">×</button>
 
 <h2>Recycle Bin</h2>
 
-<p class="muted" style="margin-top:6px">
+<p class="muted">
 Items deleted inside ROOT OS can appear here.
 </p>
 
@@ -1432,15 +1666,12 @@ Items deleted inside ROOT OS can appear here.
 <div id="recycleList">
 
 <div class="recycle-item">
-
 <span>🗑️ No deleted items</span>
-
 </div>
 
 </div>
 
-<button class="btn"
-onclick="emptyRecycle()">
+<button class="btn" onclick="emptyRecycle()">
 Empty Recycle Bin
 </button>
 
@@ -1459,22 +1690,16 @@ onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">⚙️ Settings</div>
 
 <div class="window-controls">
-
 <button onclick="minimizeWindow('settingsWindow')">—</button>
-
 <button onclick="maximizeWindow('settingsWindow')">□</button>
-
-<button class="close"
-onclick="closeWindow('settingsWindow')">×</button>
-
+<button class="close" onclick="closeWindow('settingsWindow')">×</button>
 </div>
+
 </div>
 
 <div class="window-body">
 
-<h2 style="margin-bottom:15px">
-System Settings
-</h2>
+<h2>System Settings</h2>
 
 <div class="setting">
 
@@ -1483,8 +1708,7 @@ System Settings
 <small>Switch ROOT OS between dark and light mode.</small>
 </div>
 
-<button class="btn"
-onclick="toggleTheme()">
+<button class="btn" onclick="toggleTheme()">
 Toggle
 </button>
 
@@ -1494,7 +1718,7 @@ Toggle
 
 <div>
 <strong>Notifications</strong>
-<small>Open the notification center.</small>
+<small>Open notification center.</small>
 </div>
 
 <button class="btn"
@@ -1521,6 +1745,7 @@ Lock
 </div>
 
 </div>
+
 
 </section>
 
@@ -1570,10 +1795,14 @@ openWindow("launcherWindow");
 
 function lockOS(){
 
+closeStartMenu();
+
 document.querySelectorAll(".window")
 .forEach(function(w){
+
 w.classList.remove("open");
 w.classList.remove("maximized");
+
 });
 
 document.getElementById("desktop").style.display="none";
@@ -1605,6 +1834,7 @@ document.getElementById("powerMenu")
 function restartOS(){
 
 closePower();
+closeStartMenu();
 
 document.querySelectorAll(".window")
 .forEach(function(w){
@@ -1618,6 +1848,79 @@ openWindow("launcherWindow");
 }
 
 
+/* START MENU */
+
+function toggleStartMenu(){
+
+const menu=document.getElementById("startMenu");
+
+if(!menu)return;
+
+menu.classList.toggle("show");
+
+if(menu.classList.contains("show")){
+
+const search=
+document.getElementById("startSearch");
+
+if(search){
+search.value="";
+searchStartApps();
+setTimeout(function(){
+search.focus();
+},100);
+}
+
+}
+
+}
+
+function closeStartMenu(){
+
+const menu=document.getElementById("startMenu");
+
+if(menu){
+menu.classList.remove("show");
+}
+
+}
+
+function startOpen(windowId){
+
+closeStartMenu();
+openWindow(windowId);
+
+}
+
+function searchStartApps(){
+
+const input=
+document.getElementById("startSearch");
+
+if(!input)return;
+
+const query=
+input.value
+.toLowerCase()
+.trim();
+
+document.querySelectorAll("#startApps .start-app")
+.forEach(function(app){
+
+const name=
+(app.dataset.app || "")
+.toLowerCase();
+
+app.style.display=
+name.includes(query)
+?"block"
+:"none";
+
+});
+
+}
+
+
 /* WINDOWS */
 
 let zIndex=100;
@@ -1627,6 +1930,8 @@ function openWindow(id){
 const win=document.getElementById(id);
 
 if(!win)return;
+
+closeStartMenu();
 
 win.classList.add("open");
 
@@ -1689,8 +1994,11 @@ function dragMove(event){
 
 if(!dragData)return;
 
-const dx=event.clientX-dragData.startX;
-const dy=event.clientY-dragData.startY;
+const dx=
+event.clientX-dragData.startX;
+
+const dy=
+event.clientY-dragData.startY;
 
 dragData.win.style.left=
 (dragData.startLeft+dx)+"px";
@@ -1748,7 +2056,8 @@ document.getElementById("notificationList").innerHTML=
 '<p>No new notifications.</p>'+
 '</div>';
 
-document.getElementById("notificationCount").style.display="none";
+document.getElementById("notificationCount")
+.style.display="none";
 
 }
 
@@ -1757,14 +2066,19 @@ document.getElementById("notificationCount").style.display="none";
 
 function displayFiles(){
 
-const input=document.getElementById("fileInput");
-const list=document.getElementById("fileList");
+const input=
+document.getElementById("fileInput");
+
+const list=
+document.getElementById("fileList");
 
 list.innerHTML="";
 
-Array.from(input.files).forEach(function(file){
+Array.from(input.files)
+.forEach(function(file){
 
-const item=document.createElement("div");
+const item=
+document.createElement("div");
 
 item.className="file-item";
 
@@ -1786,7 +2100,12 @@ function formatBytes(bytes){
 
 if(bytes===0)return"0 Bytes";
 
-const units=["Bytes","KB","MB","GB"];
+const units=[
+"Bytes",
+"KB",
+"MB",
+"GB"
+];
 
 const i=Math.floor(
 Math.log(bytes)/Math.log(1024)
@@ -1800,7 +2119,8 @@ bytes/Math.pow(1024,i)
 
 function escapeHTML(value){
 
-const div=document.createElement("div");
+const div=
+document.createElement("div");
 
 div.textContent=value;
 
@@ -1842,7 +2162,8 @@ localStorage.getItem("rootOS_editor");
 
 if(saved!==null){
 
-document.getElementById("editor").value=saved;
+document.getElementById("editor")
+.value=saved;
 
 }
 
@@ -1890,7 +2211,8 @@ function calcResult(){
 const display=
 document.getElementById("calcDisplay");
 
-const expression=display.value;
+const expression=
+display.value;
 
 if(!/^[0-9+\-*/().\s]+$/.test(expression)){
 
@@ -1925,7 +2247,8 @@ display.value="Error";
 
 function loadImage(event){
 
-const file=event.target.files[0];
+const file=
+event.target.files[0];
 
 if(!file)return;
 
@@ -1935,7 +2258,8 @@ document.getElementById("previewImage");
 const placeholder=
 document.getElementById("imagePlaceholder");
 
-image.src=URL.createObjectURL(file);
+image.src=
+URL.createObjectURL(file);
 
 image.style.display="block";
 placeholder.style.display="none";
@@ -1947,14 +2271,16 @@ placeholder.style.display="none";
 
 function loadAudio(event){
 
-const file=event.target.files[0];
+const file=
+event.target.files[0];
 
 if(!file)return;
 
 const audio=
 document.getElementById("audioPlayer");
 
-audio.src=URL.createObjectURL(file);
+audio.src=
+URL.createObjectURL(file);
 
 audio.load();
 
@@ -1988,7 +2314,8 @@ document.getElementById("browserFrame")
 
 function emptyRecycle(){
 
-document.getElementById("recycleList").innerHTML=
+document.getElementById("recycleList")
+.innerHTML=
 '<div class="recycle-item">'+
 '<span>🗑️ No deleted items</span>'+
 '</div>';
@@ -2007,9 +2334,7 @@ document.body.classList.contains("light");
 
 localStorage.setItem(
 "rootOS_light",
-light
-?"1"
-:"0"
+light?"1":"0"
 );
 
 }
@@ -2022,6 +2347,44 @@ if(localStorage.getItem("rootOS_light")==="1"){
 document.body.classList.add("light");
 
 }
+
+
+/* KEYBOARD SHORTCUT */
+
+document.addEventListener("keydown",function(event){
+
+if(event.key==="Escape"){
+
+closeStartMenu();
+closePower();
+
+}
+
+});
+
+
+/* CLOSE START MENU WHEN CLICKING OUTSIDE */
+
+document.addEventListener("click",function(event){
+
+const menu=
+document.getElementById("startMenu");
+
+if(!menu)return;
+
+const inside=
+menu.contains(event.target);
+
+const dock=
+event.target.closest(".dock");
+
+if(!inside && !dock){
+
+closeStartMenu();
+
+}
+
+});
 
 </script>
 
