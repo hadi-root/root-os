@@ -4,14 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <meta name="theme-color" content="#05070d">
-<title>ROOT OS v1.2</title>
+<title>ROOT OS v1.3</title>
 
 <style>
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 :root{
 --bg:#05070d;
@@ -36,13 +32,8 @@ background:var(--bg);
 color:var(--text);
 }
 
-button,input,textarea{
-font-family:inherit;
-}
-
-button{
-cursor:pointer;
-}
+button,input,textarea{font-family:inherit}
+button{cursor:pointer}
 
 /* LOCK SCREEN */
 
@@ -60,9 +51,7 @@ radial-gradient(circle at 80% 70%,rgba(85,186,255,.12),transparent 30%),
 linear-gradient(135deg,#03050a,#0a1020);
 }
 
-.lock-content{
-padding:30px;
-}
+.lock-content{padding:30px}
 
 .lock-logo{
 font-size:27px;
@@ -71,9 +60,7 @@ letter-spacing:5px;
 margin-bottom:35px;
 }
 
-.lock-logo span{
-color:var(--accent);
-}
+.lock-logo span{color:var(--accent)}
 
 .lock-time{
 font-size:clamp(55px,16vw,110px);
@@ -127,8 +114,7 @@ padding:0 12px;
 z-index:5000;
 }
 
-.top-left,
-.top-right{
+.top-left,.top-right{
 display:flex;
 align-items:center;
 gap:10px;
@@ -140,18 +126,14 @@ letter-spacing:2px;
 font-size:13px;
 }
 
-.system-name span{
-color:var(--accent);
-}
+.system-name span{color:var(--accent)}
 
 .status-text{
 color:var(--muted);
 font-size:10px;
 }
 
-.top-clock{
-font-size:12px;
-}
+.top-clock{font-size:12px}
 
 .notification-btn{
 position:relative;
@@ -294,9 +276,7 @@ font-weight:800;
 letter-spacing:2px;
 }
 
-.start-brand span{
-color:var(--accent);
-}
+.start-brand span{color:var(--accent)}
 
 .start-user{
 font-size:10px;
@@ -386,11 +366,6 @@ color:white;
 font-size:10px;
 }
 
-.start-bottom button:hover,
-.start-recent button:hover{
-background:#172438;
-}
-
 /* WINDOWS */
 
 .window{
@@ -411,9 +386,7 @@ backdrop-filter:blur(18px);
 z-index:100;
 }
 
-.window.open{
-display:flex;
-}
+.window.open{display:flex}
 
 .window.maximized{
 left:10px;
@@ -456,10 +429,6 @@ border:0;
 border-radius:7px;
 background:#172131;
 color:white;
-}
-
-.window-controls button:hover{
-background:#26364d;
 }
 
 .window-controls .close:hover{
@@ -556,9 +525,7 @@ color:white;
 text-align:left;
 }
 
-.app-tile:hover{
-border-color:#40536d;
-}
+.app-tile:hover{border-color:#40536d}
 
 .app-tile .big{
 font-size:22px;
@@ -576,6 +543,86 @@ color:var(--muted);
 font-size:10px;
 }
 
+/* SYSTEM DASHBOARD */
+
+.dashboard{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+.stat-card{
+padding:16px;
+border:1px solid var(--border);
+border-radius:13px;
+background:linear-gradient(145deg,#0a121e,#080e18);
+}
+
+.stat-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:12px;
+}
+
+.stat-icon{
+font-size:22px;
+}
+
+.stat-label{
+font-size:10px;
+color:var(--muted);
+letter-spacing:1px;
+}
+
+.stat-value{
+font-size:22px;
+font-weight:bold;
+}
+
+.stat-sub{
+font-size:10px;
+color:var(--muted);
+margin-top:5px;
+}
+
+.progress{
+height:7px;
+background:#182333;
+border-radius:10px;
+overflow:hidden;
+margin-top:12px;
+}
+
+.progress-bar{
+height:100%;
+width:0%;
+background:linear-gradient(90deg,var(--accent),var(--blue));
+border-radius:10px;
+transition:width .5s;
+}
+
+.system-table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+}
+
+.system-table td{
+padding:9px 4px;
+border-bottom:1px solid var(--border);
+font-size:11px;
+}
+
+.system-table td:first-child{
+color:var(--muted);
+}
+
+.system-table td:last-child{
+text-align:right;
+font-weight:bold;
+}
+
 /* NOTIFICATIONS */
 
 .notification{
@@ -586,9 +633,7 @@ background:#09111c;
 margin-bottom:8px;
 }
 
-.notification strong{
-font-size:12px;
-}
+.notification strong{font-size:12px}
 
 .notification p{
 font-size:11px;
@@ -606,9 +651,7 @@ text-align:center;
 color:var(--muted);
 }
 
-.file-list{
-margin-top:14px;
-}
+.file-list{margin-top:14px}
 
 .file-item{
 display:flex;
@@ -621,9 +664,7 @@ background:#09101a;
 font-size:12px;
 }
 
-.file-item small{
-color:var(--muted);
-}
+.file-item small{color:var(--muted)}
 
 /* EDITOR */
 
@@ -676,7 +717,7 @@ color:white;
 font-size:16px;
 }
 
-/* IMAGE VIEWER */
+/* IMAGE */
 
 .image-preview{
 width:100%;
@@ -758,9 +799,7 @@ padding:15px 0;
 border-bottom:1px solid var(--border);
 }
 
-.setting:last-child{
-border-bottom:0;
-}
+.setting:last-child{border-bottom:0}
 
 .setting small{
 display:block;
@@ -794,9 +833,7 @@ color:white;
 text-align:left;
 }
 
-#powerMenu button:hover{
-background:#172235;
-}
+#powerMenu button:hover{background:#172235}
 
 /* LIGHT THEME */
 
@@ -821,9 +858,7 @@ background:rgba(245,248,252,.9);
 
 @media(max-width:650px){
 
-.status-text{
-display:none;
-}
+.status-text{display:none}
 
 .desktop-icons{
 top:57px;
@@ -832,9 +867,7 @@ grid-template-columns:repeat(4,70px);
 gap:8px;
 }
 
-.desktop-icon{
-width:65px;
-}
+.desktop-icon{width:65px}
 
 .dock{
 bottom:8px;
@@ -874,21 +907,19 @@ width:calc(100vw - 8px);
 height:calc(100vh - 94px);
 }
 
-.window-body{
-padding:14px;
-}
+.window-body{padding:14px}
 
 .app-grid{
 grid-template-columns:1fr 1fr;
 }
 
-.welcome h1{
-font-size:26px;
+.dashboard{
+grid-template-columns:1fr;
 }
 
-.browser-frame{
-height:300px;
-}
+.welcome h1{font-size:26px}
+
+.browser-frame{height:300px}
 
 }
 </style>
@@ -949,11 +980,9 @@ class="notification-count">3</span>
 
 </button>
 
-<div id="topClock"
-class="top-clock">--:--</div>
+<div id="topClock" class="top-clock">--:--</div>
 
-<button class="btn"
-onclick="togglePower()">⚡</button>
+<button class="btn" onclick="togglePower()">⚡</button>
 
 </div>
 
@@ -968,6 +997,12 @@ onclick="togglePower()">⚡</button>
 onclick="openWindow('launcherWindow')">
 <div class="icon">⬢</div>
 <span>Launcher</span>
+</button>
+
+<button class="desktop-icon"
+onclick="openWindow('dashboardWindow')">
+<div class="icon">📊</div>
+<span>System Info</span>
 </button>
 
 <button class="desktop-icon"
@@ -1023,14 +1058,18 @@ WEB OS
 id="startSearch"
 class="start-search"
 placeholder="🔍 Search apps..."
-oninput="searchStartApps()"
->
+oninput="searchStartApps()">
 
-<div class="start-section">
-PINNED APPS
-</div>
+<div class="start-section">PINNED APPS</div>
 
 <div id="startApps" class="start-apps">
+
+<button class="start-app"
+data-app="system dashboard information status cpu memory battery network"
+onclick="startOpen('dashboardWindow')">
+<div class="start-icon">📊</div>
+<span>System Info</span>
+</button>
 
 <button class="start-app"
 data-app="files file manager"
@@ -1090,18 +1129,16 @@ onclick="startOpen('settingsWindow')">
 
 </div>
 
-<div class="start-section">
-RECENT
-</div>
+<div class="start-section">RECENT</div>
 
-<div id="startRecent" class="start-recent">
+<div class="start-recent">
+
+<button onclick="startOpen('dashboardWindow')">
+📊 System Info
+</button>
 
 <button onclick="startOpen('filesWindow')">
 📁 Files
-</button>
-
-<button onclick="startOpen('browserWindow')">
-🌐 Browser
 </button>
 
 <button onclick="startOpen('settingsWindow')">
@@ -1133,38 +1170,24 @@ RECENT
 
 <nav class="dock">
 
-<button onclick="toggleStartMenu()" title="Start">
-⬢
-</button>
+<button onclick="toggleStartMenu()" title="Start">⬢</button>
 
-<button onclick="openWindow('filesWindow')">
-📁
-</button>
+<button onclick="openWindow('dashboardWindow')">📊</button>
 
-<button onclick="openWindow('editorWindow')">
-📝
-</button>
+<button onclick="openWindow('filesWindow')">📁</button>
 
-<button onclick="openWindow('calculatorWindow')">
-🧮
-</button>
+<button onclick="openWindow('editorWindow')">📝</button>
 
-<button onclick="openWindow('browserWindow')">
-🌐
-</button>
+<button onclick="openWindow('calculatorWindow')">🧮</button>
 
-<button onclick="openWindow('mediaWindow')">
-🎵
-</button>
+<button onclick="openWindow('browserWindow')">🌐</button>
 
-<button onclick="openWindow('settingsWindow')">
-⚙️
-</button>
+<button onclick="openWindow('settingsWindow')">⚙️</button>
 
 </nav>
 
 
-<!-- POWER MENU -->
+<!-- POWER -->
 
 <div id="powerMenu">
 
@@ -1187,24 +1210,23 @@ onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">⬢ ROOT Launcher</div>
 
 <div class="window-controls">
-
 <button onclick="minimizeWindow('launcherWindow')">—</button>
 <button onclick="maximizeWindow('launcherWindow')">□</button>
 <button class="close" onclick="closeWindow('launcherWindow')">×</button>
-
 </div>
+
 </div>
 
 <div class="window-body">
 
 <div class="welcome">
 
-<div class="small">ROOT OS v1.2</div>
+<div class="small">ROOT OS v1.3</div>
 
 <h1>Welcome back.</h1>
 
 <p>
-Search and launch applications from your ROOT OS desktop.
+A web-based operating system built by ROOT HUB.
 </p>
 
 <input
@@ -1216,6 +1238,14 @@ oninput="searchApps()">
 </div>
 
 <div class="app-grid">
+
+<button class="app-tile"
+data-name="system dashboard information cpu memory battery network"
+onclick="openWindow('dashboardWindow')">
+<div class="big">📊</div>
+<strong>System Info</strong>
+<small>System dashboard</small>
+</button>
 
 <button class="app-tile"
 data-name="file manager files"
@@ -1292,6 +1322,192 @@ onclick="openWindow('settingsWindow')">
 </div>
 
 </div>
+</div>
+
+
+<!-- SYSTEM DASHBOARD -->
+
+<div id="dashboardWindow" class="window">
+
+<div class="window-header"
+onmousedown="startDrag(event,this.parentElement)">
+
+<div class="window-title">📊 ROOT System Information</div>
+
+<div class="window-controls">
+<button onclick="minimizeWindow('dashboardWindow')">—</button>
+<button onclick="maximizeWindow('dashboardWindow')">□</button>
+<button class="close" onclick="closeWindow('dashboardWindow')">×</button>
+</div>
+
+</div>
+
+<div class="window-body">
+
+<div class="welcome">
+
+<div class="small">SYSTEM DASHBOARD</div>
+
+<h1>ROOT OS Monitor</h1>
+
+<p>
+Live information available to this web-based operating system.
+</p>
+
+</div>
+
+<br>
+
+<div class="dashboard">
+
+<div class="stat-card">
+
+<div class="stat-top">
+<div>
+<div class="stat-label">MEMORY</div>
+<div id="memoryValue" class="stat-value">Checking...</div>
+</div>
+<div class="stat-icon">🧠</div>
+</div>
+
+<div class="stat-sub" id="memorySub">
+Browser memory information
+</div>
+
+<div class="progress">
+<div id="memoryBar" class="progress-bar"></div>
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-top">
+<div>
+<div class="stat-label">BATTERY</div>
+<div id="batteryValue" class="stat-value">Checking...</div>
+</div>
+<div class="stat-icon">🔋</div>
+</div>
+
+<div class="stat-sub" id="batterySub">
+Checking device battery
+</div>
+
+<div class="progress">
+<div id="batteryBar" class="progress-bar"></div>
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-top">
+<div>
+<div class="stat-label">NETWORK</div>
+<div id="networkValue" class="stat-value">Checking...</div>
+</div>
+<div class="stat-icon">🌐</div>
+</div>
+
+<div class="stat-sub" id="networkSub">
+Connection status
+</div>
+
+<div class="progress">
+<div id="networkBar" class="progress-bar"></div>
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-top">
+<div>
+<div class="stat-label">UPTIME</div>
+<div id="uptimeValue" class="stat-value">00:00:00</div>
+</div>
+<div class="stat-icon">⏱️</div>
+</div>
+
+<div class="stat-sub">
+ROOT OS session uptime
+</div>
+
+<div class="progress">
+<div id="uptimeBar" class="progress-bar"></div>
+</div>
+
+</div>
+
+</div>
+
+
+<br>
+
+<div class="panel">
+
+<h3>System Details</h3>
+
+<table class="system-table">
+
+<tr>
+<td>ROOT OS Version</td>
+<td>v1.3</td>
+</tr>
+
+<tr>
+<td>Platform</td>
+<td id="platformValue">Detecting...</td>
+</tr>
+
+<tr>
+<td>Browser</td>
+<td id="browserValue">Detecting...</td>
+</tr>
+
+<tr>
+<td>Screen</td>
+<td id="screenValue">Detecting...</td>
+</tr>
+
+<tr>
+<td>Language</td>
+<td id="languageValue">Detecting...</td>
+</tr>
+
+<tr>
+<td>Online</td>
+<td id="onlineValue">Checking...</td>
+</tr>
+
+<tr>
+<td>CPU Cores</td>
+<td id="coresValue">Detecting...</td>
+</tr>
+
+<tr>
+<td>Device Memory</td>
+<td id="deviceMemoryValue">Not available</td>
+</tr>
+
+</table>
+
+</div>
+
+<button class="btn green-btn"
+onclick="refreshSystemInfo()">
+↻ Refresh System Info
+</button>
+
+<p class="muted" style="margin-top:12px">
+Note: ROOT OS is web-based. Browser security limits direct access to some hardware information.
+</p>
+
+</div>
 
 </div>
 
@@ -1328,8 +1544,8 @@ System notifications from ROOT OS appear here.
 <div id="notificationList">
 
 <div class="notification">
-<strong>🚀 ROOT OS v1.2</strong>
-<p>Start Menu is now available.</p>
+<strong>🚀 ROOT OS v1.3</strong>
+<p>System Dashboard is now available.</p>
 </div>
 
 <div class="notification">
@@ -1338,8 +1554,8 @@ System notifications from ROOT OS appear here.
 </div>
 
 <div class="notification">
-<strong>🔐 Security</strong>
-<p>Your local workspace is running in the browser.</p>
+<strong>🌐 Web OS</strong>
+<p>Hardware information is limited by browser security.</p>
 </div>
 
 </div>
@@ -1491,7 +1707,6 @@ value="0">
 </div>
 
 </div>
-
 </div>
 
 
@@ -1537,11 +1752,10 @@ No image selected
 </div>
 
 </div>
-
 </div>
 
 
-<!-- MEDIA PLAYER -->
+<!-- MEDIA -->
 
 <div id="mediaWindow" class="window">
 
@@ -1584,7 +1798,6 @@ style="width:100%">
 </div>
 
 </div>
-
 </div>
 
 
@@ -1630,7 +1843,6 @@ Some websites may block embedded browsing for security reasons.
 </p>
 
 </div>
-
 </div>
 
 
@@ -1676,7 +1888,6 @@ Empty Recycle Bin
 </button>
 
 </div>
-
 </div>
 
 
@@ -1708,8 +1919,20 @@ onmousedown="startDrag(event,this.parentElement)">
 <small>Switch ROOT OS between dark and light mode.</small>
 </div>
 
-<button class="btn" onclick="toggleTheme()">
-Toggle
+<button class="btn" onclick="toggleTheme()">Toggle</button>
+
+</div>
+
+<div class="setting">
+
+<div>
+<strong>System Information</strong>
+<small>Open the ROOT OS system dashboard.</small>
+</div>
+
+<button class="btn"
+onclick="openWindow('dashboardWindow')">
+Open
 </button>
 
 </div>
@@ -1743,7 +1966,6 @@ Lock
 </div>
 
 </div>
-
 </div>
 
 
@@ -1779,7 +2001,10 @@ updateClock();
 setInterval(updateClock,1000);
 
 
-/* UNLOCK */
+/* SESSION */
+
+let sessionStart=Date.now();
+
 
 function unlockOS(){
 
@@ -1788,10 +2013,10 @@ document.getElementById("desktop").style.display="block";
 
 openWindow("launcherWindow");
 
+sessionStart=Date.now();
+
 }
 
-
-/* LOCK */
 
 function lockOS(){
 
@@ -1799,14 +2024,31 @@ closeStartMenu();
 
 document.querySelectorAll(".window")
 .forEach(function(w){
-
 w.classList.remove("open");
 w.classList.remove("maximized");
-
 });
 
 document.getElementById("desktop").style.display="none";
 document.getElementById("lockScreen").style.display="flex";
+
+}
+
+
+function restartOS(){
+
+closePower();
+closeStartMenu();
+
+document.querySelectorAll(".window")
+.forEach(function(w){
+w.classList.remove("open");
+});
+
+sessionStart=Date.now();
+
+setTimeout(function(){
+openWindow("launcherWindow");
+},300);
 
 }
 
@@ -1831,22 +2073,6 @@ document.getElementById("powerMenu")
 
 }
 
-function restartOS(){
-
-closePower();
-closeStartMenu();
-
-document.querySelectorAll(".window")
-.forEach(function(w){
-w.classList.remove("open");
-});
-
-setTimeout(function(){
-openWindow("launcherWindow");
-},300);
-
-}
-
 
 /* START MENU */
 
@@ -1860,20 +2086,23 @@ menu.classList.toggle("show");
 
 if(menu.classList.contains("show")){
 
-const search=
-document.getElementById("startSearch");
+const search=document.getElementById("startSearch");
 
 if(search){
+
 search.value="";
 searchStartApps();
+
 setTimeout(function(){
 search.focus();
 },100);
-}
 
 }
 
 }
+
+}
+
 
 function closeStartMenu(){
 
@@ -1885,31 +2114,30 @@ menu.classList.remove("show");
 
 }
 
-function startOpen(windowId){
+
+function startOpen(id){
 
 closeStartMenu();
-openWindow(windowId);
+openWindow(id);
 
 }
 
+
 function searchStartApps(){
 
-const input=
-document.getElementById("startSearch");
+const input=document.getElementById("startSearch");
 
 if(!input)return;
 
 const query=
-input.value
-.toLowerCase()
-.trim();
+input.value.toLowerCase().trim();
 
-document.querySelectorAll("#startApps .start-app")
-.forEach(function(app){
+document.querySelectorAll(
+"#startApps .start-app"
+).forEach(function(app){
 
 const name=
-(app.dataset.app || "")
-.toLowerCase();
+(app.dataset.app || "").toLowerCase();
 
 app.style.display=
 name.includes(query)
@@ -1925,6 +2153,7 @@ name.includes(query)
 
 let zIndex=100;
 
+
 function openWindow(id){
 
 const win=document.getElementById(id);
@@ -1938,7 +2167,12 @@ win.classList.add("open");
 zIndex++;
 win.style.zIndex=zIndex;
 
+if(id==="dashboardWindow"){
+refreshSystemInfo();
 }
+
+}
+
 
 function closeWindow(id){
 
@@ -1950,11 +2184,13 @@ win.classList.remove("open");
 
 }
 
+
 function minimizeWindow(id){
 
 closeWindow(id);
 
 }
+
 
 function maximizeWindow(id){
 
@@ -1967,9 +2203,10 @@ win.classList.toggle("maximized");
 }
 
 
-/* DRAG WINDOWS */
+/* DRAG */
 
 let dragData=null;
+
 
 function startDrag(event,win){
 
@@ -1989,6 +2226,7 @@ document.addEventListener("mousemove",dragMove);
 document.addEventListener("mouseup",stopDrag);
 
 }
+
 
 function dragMove(event){
 
@@ -2010,6 +2248,7 @@ dragData.win.style.transform="none";
 
 }
 
+
 function stopDrag(){
 
 dragData=null;
@@ -2026,9 +2265,7 @@ function searchApps(){
 
 const query=
 document.getElementById("appSearch")
-.value
-.toLowerCase()
-.trim();
+.value.toLowerCase().trim();
 
 document.querySelectorAll(".app-tile")
 .forEach(function(app){
@@ -2044,6 +2281,244 @@ name.includes(query)
 });
 
 }
+
+
+/* SYSTEM DASHBOARD */
+
+function refreshSystemInfo(){
+
+updateMemory();
+updateBattery();
+updateNetwork();
+updateSystemDetails();
+updateUptime();
+
+}
+
+
+function updateMemory(){
+
+const value=
+document.getElementById("memoryValue");
+
+const sub=
+document.getElementById("memorySub");
+
+const bar=
+document.getElementById("memoryBar");
+
+if(navigator.deviceMemory){
+
+const gb=navigator.deviceMemory;
+
+value.textContent=gb+" GB";
+
+sub.textContent=
+"Approximate device memory";
+
+bar.style.width=
+Math.min((gb/16)*100,100)+"%";
+
+}else{
+
+value.textContent="N/A";
+
+sub.textContent=
+"Browser does not expose memory size";
+
+bar.style.width="0%";
+
+}
+
+}
+
+
+async function updateBattery(){
+
+const value=
+document.getElementById("batteryValue");
+
+const sub=
+document.getElementById("batterySub");
+
+const bar=
+document.getElementById("batteryBar");
+
+if(!navigator.getBattery){
+
+value.textContent="N/A";
+
+sub.textContent=
+"Battery API unavailable";
+
+bar.style.width="0%";
+
+return;
+
+}
+
+try{
+
+const battery=
+await navigator.getBattery();
+
+const level=
+Math.round(battery.level*100);
+
+value.textContent=level+"%";
+
+sub.textContent=
+battery.charging
+?"Charging"
+:"On battery";
+
+bar.style.width=level+"%";
+
+}catch{
+
+value.textContent="N/A";
+
+sub.textContent=
+"Battery information unavailable";
+
+}
+
+}
+
+
+function updateNetwork(){
+
+const value=
+document.getElementById("networkValue");
+
+const sub=
+document.getElementById("networkSub");
+
+const bar=
+document.getElementById("networkBar");
+
+if(navigator.onLine){
+
+value.textContent="ONLINE";
+
+sub.textContent=
+"Internet connection detected";
+
+bar.style.width="100%";
+
+}else{
+
+value.textContent="OFFLINE";
+
+sub.textContent=
+"No internet connection detected";
+
+bar.style.width="15%";
+
+}
+
+}
+
+
+function updateSystemDetails(){
+
+document.getElementById("platformValue")
+.textContent=navigator.platform || "Unknown";
+
+document.getElementById("browserValue")
+.textContent=getBrowserName();
+
+document.getElementById("screenValue")
+.textContent=
+window.innerWidth+
+" × "+
+window.innerHeight;
+
+document.getElementById("languageValue")
+.textContent=navigator.language || "Unknown";
+
+document.getElementById("onlineValue")
+.textContent=
+navigator.onLine
+?"Online"
+:"Offline";
+
+document.getElementById("coresValue")
+.textContent=
+navigator.hardwareConcurrency
+?navigator.hardwareConcurrency
+:"N/A";
+
+document.getElementById("deviceMemoryValue")
+.textContent=
+navigator.deviceMemory
+?navigator.deviceMemory+" GB"
+:"Not available";
+
+}
+
+
+function getBrowserName(){
+
+const ua=navigator.userAgent;
+
+if(ua.includes("Edg/"))return"Microsoft Edge";
+
+if(ua.includes("OPR/"))return"Opera";
+
+if(ua.includes("Chrome/"))return"Google Chrome";
+
+if(ua.includes("Firefox/"))return"Firefox";
+
+if(ua.includes("Safari/") &&
+!ua.includes("Chrome/"))
+return"Safari";
+
+return"Unknown Browser";
+
+}
+
+
+function updateUptime(){
+
+const value=
+document.getElementById("uptimeValue");
+
+const bar=
+document.getElementById("uptimeBar");
+
+const seconds=
+Math.floor(
+(Date.now()-sessionStart)/1000
+);
+
+const h=
+String(Math.floor(seconds/3600))
+.padStart(2,"0");
+
+const m=
+String(Math.floor((seconds%3600)/60))
+.padStart(2,"0");
+
+const s=
+String(seconds%60)
+.padStart(2,"0");
+
+value.textContent=
+h+":"+m+":"+s;
+
+bar.style.width=
+(Math.min((seconds/3600)*100,100))+"%";
+
+}
+
+setInterval(updateUptime,1000);
+
+
+/* NETWORK EVENTS */
+
+window.addEventListener("online",refreshSystemInfo);
+window.addEventListener("offline",refreshSystemInfo);
 
 
 /* NOTIFICATIONS */
@@ -2096,15 +2571,13 @@ list.appendChild(item);
 
 }
 
+
 function formatBytes(bytes){
 
 if(bytes===0)return"0 Bytes";
 
 const units=[
-"Bytes",
-"KB",
-"MB",
-"GB"
+"Bytes","KB","MB","GB"
 ];
 
 const i=Math.floor(
@@ -2117,10 +2590,10 @@ bytes/Math.pow(1024,i)
 
 }
 
+
 function escapeHTML(value){
 
-const div=
-document.createElement("div");
+const div=document.createElement("div");
 
 div.textContent=value;
 
@@ -2146,6 +2619,7 @@ document.getElementById("editorStatus")
 
 }
 
+
 function clearEditor(){
 
 document.getElementById("editor").value="";
@@ -2154,6 +2628,7 @@ document.getElementById("editorStatus")
 .textContent=" Cleared.";
 
 }
+
 
 function loadEditor(){
 
@@ -2187,12 +2662,14 @@ display.value+=value;
 
 }
 
+
 function calcClear(){
 
 document.getElementById("calcDisplay")
 .value="0";
 
 }
+
 
 function calcBack(){
 
@@ -2206,13 +2683,13 @@ display.value.length>1
 
 }
 
+
 function calcResult(){
 
 const display=
 document.getElementById("calcDisplay");
 
-const expression=
-display.value;
+const expression=display.value;
 
 if(!/^[0-9+\-*/().\s]+$/.test(expression)){
 
@@ -2243,7 +2720,7 @@ display.value="Error";
 }
 
 
-/* IMAGE VIEWER */
+/* IMAGE */
 
 function loadImage(event){
 
@@ -2267,7 +2744,7 @@ placeholder.style.display="none";
 }
 
 
-/* MEDIA */
+/* AUDIO */
 
 function loadAudio(event){
 
@@ -2293,15 +2770,12 @@ function openBrowser(){
 
 let url=
 document.getElementById("browserURL")
-.value
-.trim();
+.value.trim();
 
 if(!url)return;
 
 if(!/^https?:\/\//i.test(url)){
-
 url="https://"+url;
-
 }
 
 document.getElementById("browserFrame")
@@ -2310,7 +2784,7 @@ document.getElementById("browserFrame")
 }
 
 
-/* RECYCLE BIN */
+/* RECYCLE */
 
 function emptyRecycle(){
 
@@ -2340,16 +2814,12 @@ light?"1":"0"
 }
 
 
-/* LOAD THEME */
-
 if(localStorage.getItem("rootOS_light")==="1"){
-
 document.body.classList.add("light");
-
 }
 
 
-/* KEYBOARD SHORTCUT */
+/* KEYBOARD */
 
 document.addEventListener("keydown",function(event){
 
@@ -2363,7 +2833,7 @@ closePower();
 });
 
 
-/* CLOSE START MENU WHEN CLICKING OUTSIDE */
+/* OUTSIDE CLICK */
 
 document.addEventListener("click",function(event){
 
@@ -2372,19 +2842,25 @@ document.getElementById("startMenu");
 
 if(!menu)return;
 
-const inside=
-menu.contains(event.target);
-
-const dock=
-event.target.closest(".dock");
+const inside=menu.contains(event.target);
+const dock=event.target.closest(".dock");
 
 if(!inside && !dock){
-
 closeStartMenu();
-
 }
 
 });
+
+
+/* INITIAL SYSTEM DATA */
+
+setTimeout(function(){
+
+if(document.getElementById("desktop").style.display==="block"){
+refreshSystemInfo();
+}
+
+},500);
 
 </script>
 
