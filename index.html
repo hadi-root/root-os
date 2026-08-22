@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#061525">
-<title>ROOT OS v1.8</title>
+<title>ROOT OS v1.9</title>
 
 <style>
 :root{
@@ -24,8 +24,7 @@
     box-sizing:border-box;
 }
 
-html,
-body{
+html,body{
     width:100%;
     height:100%;
     overflow:hidden;
@@ -95,9 +94,7 @@ body{
 }
 
 @keyframes load{
-    to{
-        width:100%;
-    }
+    to{width:100%;}
 }
 
 /* =========================
@@ -192,7 +189,7 @@ body{
     width:7px;
     height:7px;
     border-radius:50%;
-    background:#d9e2eb;
+    background:#35d07f;
 }
 
 #clock{
@@ -213,7 +210,7 @@ body{
 }
 
 /* =========================
-   LEFT APP AREA
+   APPS
 ========================= */
 
 .app-area{
@@ -275,7 +272,7 @@ body{
 }
 
 /* =========================
-   CENTER WELCOME
+   HERO
 ========================= */
 
 .hero{
@@ -325,10 +322,6 @@ body{
 
     box-shadow:0 0 20px rgba(8,124,255,.35);
 }
-
-/* =========================
-   DESKTOP FOOTER
-========================= */
 
 .desktop-footer{
     position:absolute;
@@ -769,29 +762,297 @@ body{
    SETTINGS
 ========================= */
 
-.settings{
-    padding:22px;
+.settings-layout{
+    display:flex;
+    height:100%;
 }
 
-.setting{
-    padding:17px;
-    margin-bottom:10px;
+/* settings sidebar */
 
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:13px;
+.settings-sidebar{
+    width:190px;
+    flex-shrink:0;
+
+    padding:14px 10px;
+
+    background:rgba(255,255,255,.018);
+
+    border-right:1px solid rgba(255,255,255,.08);
+}
+
+.settings-sidebar-title{
+    padding:9px 10px 13px;
+
+    color:#6f879f;
+
+    font-size:10px;
+    font-weight:800;
+
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+.settings-nav{
+    width:100%;
+
+    padding:11px 12px;
+
+    margin-bottom:5px;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    border:0;
+    border-radius:9px;
+
+    background:transparent;
+
+    color:#a9bdd0;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    font-size:12px;
+}
+
+.settings-nav:hover{
+    background:rgba(8,124,255,.08);
+    color:white;
+}
+
+.settings-nav.active{
+    background:rgba(8,124,255,.16);
+    color:white;
+}
+
+.settings-nav-icon{
+    width:20px;
+    text-align:center;
+    font-size:15px;
+}
+
+/* settings main */
+
+.settings-main{
+    flex:1;
+    overflow:auto;
+    padding:26px;
+}
+
+.settings-page{
+    display:none;
+}
+
+.settings-page.active{
+    display:block;
+}
+
+.settings-page h2{
+    font-size:22px;
+    margin-bottom:6px;
+}
+
+.settings-description{
+    color:#7189a1;
+    font-size:12px;
+    line-height:1.5;
+    margin-bottom:22px;
+}
+
+.setting-card{
+    padding:17px;
+    margin-bottom:11px;
 
     background:rgba(255,255,255,.035);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:13px;
 }
 
-.setting h3{
-    font-size:15px;
+.setting-card-title{
+    font-size:14px;
+    font-weight:700;
+    margin-bottom:6px;
+}
+
+.setting-card-text{
+    color:#8198b0;
+    font-size:12px;
+    line-height:1.55;
+}
+
+/* toggles */
+
+.toggle-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.toggle-info{
+    flex:1;
+}
+
+.toggle{
+    position:relative;
+
+    width:45px;
+    height:24px;
+
+    flex-shrink:0;
+}
+
+.toggle input{
+    display:none;
+}
+
+.slider{
+    position:absolute;
+    inset:0;
+
+    background:#243547;
+
+    border-radius:30px;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.slider:before{
+    content:"";
+
+    position:absolute;
+
+    width:18px;
+    height:18px;
+
+    left:3px;
+    top:3px;
+
+    background:#a8b8c8;
+
+    border-radius:50%;
+
+    transition:.2s;
+}
+
+.toggle input:checked + .slider{
+    background:var(--blue);
+}
+
+.toggle input:checked + .slider:before{
+    transform:translateX(21px);
+    background:white;
+}
+
+/* theme choices */
+
+.theme-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:9px;
+    margin-top:14px;
+}
+
+.theme-choice{
+    min-height:68px;
+
+    padding:10px;
+
+    border:1px solid rgba(255,255,255,.09);
+
+    border-radius:11px;
+
+    background:rgba(255,255,255,.025);
+
+    color:white;
+
+    cursor:pointer;
+}
+
+.theme-choice:hover{
+    border-color:var(--blue);
+}
+
+.theme-choice.active{
+    border:2px solid var(--blue);
+    background:rgba(8,124,255,.10);
+}
+
+.theme-preview{
+    height:27px;
+
+    border-radius:7px;
+
     margin-bottom:7px;
 }
 
-.setting p{
-    color:#8198b0;
-    font-size:13px;
-    line-height:1.55;
+.theme-blue{
+    background:linear-gradient(90deg,#020914,#087cff);
+}
+
+.theme-dark{
+    background:linear-gradient(90deg,#000,#222);
+}
+
+.theme-midnight{
+    background:linear-gradient(90deg,#07031c,#4c20b8);
+}
+
+.theme-name{
+    font-size:10px;
+    color:#9bb0c4;
+}
+
+/* select */
+
+.setting-select{
+    margin-top:12px;
+
+    width:100%;
+    height:40px;
+
+    padding:0 11px;
+
+    border:1px solid rgba(255,255,255,.10);
+
+    border-radius:9px;
+
+    background:#071522;
+
+    color:white;
+
+    outline:none;
+}
+
+/* reset */
+
+.reset-button{
+    margin-top:13px;
+
+    height:39px;
+
+    padding:0 15px;
+
+    border:1px solid rgba(255,255,255,.10);
+
+    border-radius:9px;
+
+    background:rgba(255,255,255,.05);
+
+    color:#dce6ef;
+
+    cursor:pointer;
+}
+
+.reset-button:hover{
+    background:rgba(255,60,60,.12);
+    border-color:rgba(255,100,100,.3);
 }
 
 /* =========================
@@ -917,13 +1178,38 @@ body{
         width:calc(100vw - 20px);
         height:calc(100vh - 100px);
     }
+
+    .settings-sidebar{
+        width:55px;
+        padding:10px 6px;
+    }
+
+    .settings-sidebar-title{
+        display:none;
+    }
+
+    .settings-nav{
+        justify-content:center;
+        padding:12px 5px;
+    }
+
+    .settings-nav span:not(.settings-nav-icon){
+        display:none;
+    }
+
+    .settings-main{
+        padding:18px;
+    }
+
+    .theme-grid{
+        grid-template-columns:1fr;
+    }
 }
 
 @media(max-width:430px){
 
     .app-area{
         grid-template-columns:repeat(3,70px);
-        justify-content:start;
     }
 
     .hero{
@@ -942,8 +1228,8 @@ body{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .system .battery{
-        display:none;
+    .settings-main{
+        padding:14px;
     }
 }
 </style>
@@ -952,7 +1238,7 @@ body{
 <body>
 
 <!-- =========================
-     BOOT SCREEN
+     BOOT
 ========================= -->
 
 <div id="boot">
@@ -964,7 +1250,7 @@ body{
     </div>
 
     <div class="boot-version">
-        Version 1.8
+        Version 1.9
     </div>
 
     <div class="boot-bar">
@@ -975,7 +1261,7 @@ body{
 
 
 <!-- =========================
-     ROOT OS
+     OS
 ========================= -->
 
 <div id="os">
@@ -986,9 +1272,7 @@ body{
 
         <div class="brand">
 
-            <div class="brand-logo">
-                R
-            </div>
+            <div class="brand-logo">R</div>
 
             <div class="brand-name">
                 ROOT <span>OS</span>
@@ -1020,16 +1304,14 @@ body{
 
     <div class="desktop">
 
-        <!-- LEFT APPLICATIONS -->
+        <!-- DESKTOP APPS -->
 
         <div class="app-area">
 
             <div class="desktop-app"
                  onclick="openWindow('filesWindow')">
 
-                <div class="desktop-app-icon">
-                    📁
-                </div>
+                <div class="desktop-app-icon">📁</div>
 
                 <div class="desktop-app-name">
                     Files
@@ -1041,9 +1323,7 @@ body{
             <div class="desktop-app"
                  onclick="openWindow('terminalWindow')">
 
-                <div class="desktop-app-icon">
-                    ⌨️
-                </div>
+                <div class="desktop-app-icon">⌨️</div>
 
                 <div class="desktop-app-name">
                     Terminal
@@ -1055,9 +1335,7 @@ body{
             <div class="desktop-app"
                  onclick="openWindow('notesWindow')">
 
-                <div class="desktop-app-icon">
-                    📝
-                </div>
+                <div class="desktop-app-icon">📝</div>
 
                 <div class="desktop-app-name">
                     Notes
@@ -1069,9 +1347,7 @@ body{
             <div class="desktop-app"
                  onclick="openWindow('calculatorWindow')">
 
-                <div class="desktop-app-icon">
-                    🧮
-                </div>
+                <div class="desktop-app-icon">🧮</div>
 
                 <div class="desktop-app-name">
                     Calculator
@@ -1083,9 +1359,7 @@ body{
             <div class="desktop-app"
                  onclick="openWindow('settingsWindow')">
 
-                <div class="desktop-app-icon">
-                    ⚙️
-                </div>
+                <div class="desktop-app-icon">⚙️</div>
 
                 <div class="desktop-app-name">
                     Settings
@@ -1097,9 +1371,7 @@ body{
             <div class="desktop-app"
                  onclick="openWindow('aboutWindow')">
 
-                <div class="desktop-app-icon">
-                    ℹ️
-                </div>
+                <div class="desktop-app-icon">ℹ️</div>
 
                 <div class="desktop-app-name">
                     About ROOT
@@ -1110,7 +1382,7 @@ body{
         </div>
 
 
-        <!-- CENTER HERO -->
+        <!-- HERO -->
 
         <div class="hero">
 
@@ -1156,13 +1428,8 @@ body{
                         data-name="files"
                         onclick="openFromMenu('filesWindow')">
 
-                    <span class="menu-icon">
-                        📁
-                    </span>
-
-                    <span class="menu-name">
-                        Files
-                    </span>
+                    <span class="menu-icon">📁</span>
+                    <span class="menu-name">Files</span>
 
                 </button>
 
@@ -1171,13 +1438,8 @@ body{
                         data-name="terminal"
                         onclick="openFromMenu('terminalWindow')">
 
-                    <span class="menu-icon">
-                        ⌨️
-                    </span>
-
-                    <span class="menu-name">
-                        Terminal
-                    </span>
+                    <span class="menu-icon">⌨️</span>
+                    <span class="menu-name">Terminal</span>
 
                 </button>
 
@@ -1186,13 +1448,8 @@ body{
                         data-name="notes"
                         onclick="openFromMenu('notesWindow')">
 
-                    <span class="menu-icon">
-                        📝
-                    </span>
-
-                    <span class="menu-name">
-                        Notes
-                    </span>
+                    <span class="menu-icon">📝</span>
+                    <span class="menu-name">Notes</span>
 
                 </button>
 
@@ -1201,13 +1458,8 @@ body{
                         data-name="calculator"
                         onclick="openFromMenu('calculatorWindow')">
 
-                    <span class="menu-icon">
-                        🧮
-                    </span>
-
-                    <span class="menu-name">
-                        Calculator
-                    </span>
+                    <span class="menu-icon">🧮</span>
+                    <span class="menu-name">Calculator</span>
 
                 </button>
 
@@ -1216,13 +1468,8 @@ body{
                         data-name="settings"
                         onclick="openFromMenu('settingsWindow')">
 
-                    <span class="menu-icon">
-                        ⚙️
-                    </span>
-
-                    <span class="menu-name">
-                        Settings
-                    </span>
+                    <span class="menu-icon">⚙️</span>
+                    <span class="menu-name">Settings</span>
 
                 </button>
 
@@ -1231,13 +1478,8 @@ body{
                         data-name="about root"
                         onclick="openFromMenu('aboutWindow')">
 
-                    <span class="menu-icon">
-                        ℹ️
-                    </span>
-
-                    <span class="menu-name">
-                        About ROOT
-                    </span>
+                    <span class="menu-icon">ℹ️</span>
+                    <span class="menu-name">About ROOT</span>
 
                 </button>
 
@@ -1247,7 +1489,7 @@ body{
 
 
         <!-- =========================
-             FILES
+             FILES WINDOW
         ========================= -->
 
         <div id="filesWindow" class="window">
@@ -1326,16 +1568,14 @@ body{
                     </div>
 
                     <div class="term-line">
-                        Version 1.8
+                        Version 1.9
                     </div>
 
                     <div class="term-line">
                         Type "help" to see available commands.
                     </div>
 
-                    <div class="term-line">
-                        &nbsp;
-                    </div>
+                    <div class="term-line">&nbsp;</div>
 
                     <div class="term-row">
 
@@ -1412,10 +1652,7 @@ body{
 
                 <div class="calculator">
 
-                    <input
-                        id="calc"
-                        readonly
-                    >
+                    <input id="calc" readonly>
 
                     <div class="calc-grid">
 
@@ -1439,7 +1676,6 @@ body{
                             ÷
                         </button>
 
-
                         <button class="calc-button"
                                 onclick="addCalc('7')">
                             7
@@ -1459,7 +1695,6 @@ body{
                                 onclick="addCalc('*')">
                             ×
                         </button>
-
 
                         <button class="calc-button"
                                 onclick="addCalc('4')">
@@ -1481,7 +1716,6 @@ body{
                             −
                         </button>
 
-
                         <button class="calc-button"
                                 onclick="addCalc('1')">
                             1
@@ -1501,7 +1735,6 @@ body{
                                 onclick="addCalc('+')">
                             +
                         </button>
-
 
                         <button class="calc-button"
                                 onclick="addCalc('0')">
@@ -1529,7 +1762,7 @@ body{
 
 
         <!-- =========================
-             SETTINGS
+             IMPROVED SETTINGS
         ========================= -->
 
         <div id="settingsWindow" class="window">
@@ -1549,62 +1782,475 @@ body{
 
             <div class="window-content">
 
-                <div class="settings">
+                <div class="settings-layout">
 
-                    <div class="setting">
+                    <!-- SETTINGS SIDEBAR -->
 
-                        <h3>
-                            🌐 System
-                        </h3>
+                    <aside class="settings-sidebar">
 
-                        <p>
-                            ROOT OS is a web-based operating
-                            system experience.
-                        </p>
+                        <div class="settings-sidebar-title">
+                            Settings
+                        </div>
 
-                    </div>
+                        <button class="settings-nav active"
+                                onclick="showSettingsPage('systemPage',this)">
 
+                            <span class="settings-nav-icon">
+                                🖥️
+                            </span>
 
-                    <div class="setting">
+                            <span>
+                                System
+                            </span>
 
-                        <h3>
-                            🎨 Theme
-                        </h3>
-
-                        <p>
-                            ROOT Blue — the primary ROOT HUB
-                            interface theme.
-                        </p>
-
-                    </div>
+                        </button>
 
 
-                    <div class="setting">
+                        <button class="settings-nav"
+                                onclick="showSettingsPage('appearancePage',this)">
 
-                        <h3>
-                            ⚡ Performance
-                        </h3>
+                            <span class="settings-nav-icon">
+                                🎨
+                            </span>
 
-                        <p>
-                            Lightweight interface designed
-                            for modern browsers.
-                        </p>
+                            <span>
+                                Appearance
+                            </span>
 
-                    </div>
+                        </button>
 
 
-                    <div class="setting">
+                        <button class="settings-nav"
+                                onclick="showSettingsPage('displayPage',this)">
 
-                        <h3>
-                            🔒 Privacy
-                        </h3>
+                            <span class="settings-nav-icon">
+                                🖥
+                            </span>
 
-                        <p>
-                            Notes are stored locally in your
-                            browser using local storage.
-                        </p>
+                            <span>
+                                Display
+                            </span>
 
-                    </div>
+                        </button>
+
+
+                        <button class="settings-nav"
+                                onclick="showSettingsPage('notificationPage',this)">
+
+                            <span class="settings-nav-icon">
+                                🔔
+                            </span>
+
+                            <span>
+                                Notifications
+                            </span>
+
+                        </button>
+
+
+                        <button class="settings-nav"
+                                onclick="showSettingsPage('privacyPage',this)">
+
+                            <span class="settings-nav-icon">
+                                🔒
+                            </span>
+
+                            <span>
+                                Privacy
+                            </span>
+
+                        </button>
+
+                    </aside>
+
+
+                    <!-- SETTINGS CONTENT -->
+
+                    <main class="settings-main">
+
+                        <!-- SYSTEM -->
+
+                        <section id="systemPage"
+                                 class="settings-page active">
+
+                            <h2>
+                                System
+                            </h2>
+
+                            <p class="settings-description">
+                                View the current ROOT OS system information.
+                            </p>
+
+
+                            <div class="setting-card">
+
+                                <div class="setting-card-title">
+                                    ROOT OS
+                                </div>
+
+                                <div class="setting-card-text">
+                                    Version 1.9<br>
+                                    Web-based operating system<br>
+                                    Status: Operational
+                                </div>
+
+                            </div>
+
+
+                            <div class="setting-card">
+
+                                <div class="toggle-row">
+
+                                    <div class="toggle-info">
+
+                                        <div class="setting-card-title">
+                                            Startup animation
+                                        </div>
+
+                                        <div class="setting-card-text">
+                                            Show the ROOT OS boot screen
+                                            when the page loads.
+                                        </div>
+
+                                    </div>
+
+                                    <label class="toggle">
+
+                                        <input
+                                            id="bootToggle"
+                                            type="checkbox"
+                                            checked
+                                            onchange="saveSetting('bootAnimation',this.checked)"
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="setting-card">
+
+                                <div class="setting-card-title">
+                                    System status
+                                </div>
+
+                                <div class="setting-card-text">
+                                    ● Online<br>
+                                    Browser: <span id="browserInfo">
+                                    Detecting...
+                                    </span>
+                                </div>
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- APPEARANCE -->
+
+                        <section id="appearancePage"
+                                 class="settings-page">
+
+                            <h2>
+                                Appearance
+                            </h2>
+
+                            <p class="settings-description">
+                                Customize the visual style of ROOT OS.
+                            </p>
+
+
+                            <div class="setting-card">
+
+                                <div class="setting-card-title">
+                                    Theme
+                                </div>
+
+                                <div class="setting-card-text">
+                                    Select the interface theme.
+                                </div>
+
+
+                                <div class="theme-grid">
+
+                                    <button
+                                        id="blueTheme"
+                                        class="theme-choice active"
+                                        onclick="setTheme('blue')">
+
+                                        <div class="theme-preview theme-blue"></div>
+
+                                        <div class="theme-name">
+                                            ROOT Blue
+                                        </div>
+
+                                    </button>
+
+
+                                    <button
+                                        id="darkTheme"
+                                        class="theme-choice"
+                                        onclick="setTheme('dark')">
+
+                                        <div class="theme-preview theme-dark"></div>
+
+                                        <div class="theme-name">
+                                            Dark
+                                        </div>
+
+                                    </button>
+
+
+                                    <button
+                                        id="midnightTheme"
+                                        class="theme-choice"
+                                        onclick="setTheme('midnight')">
+
+                                        <div class="theme-preview theme-midnight"></div>
+
+                                        <div class="theme-name">
+                                            Midnight
+                                        </div>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- DISPLAY -->
+
+                        <section id="displayPage"
+                                 class="settings-page">
+
+                            <h2>
+                                Display
+                            </h2>
+
+                            <p class="settings-description">
+                                Control how ROOT OS displays its interface.
+                            </p>
+
+
+                            <div class="setting-card">
+
+                                <div class="setting-card-title">
+                                    Interface scale
+                                </div>
+
+                                <div class="setting-card-text">
+                                    Choose the interface size.
+                                </div>
+
+                                <select
+                                    id="scaleSelect"
+                                    class="setting-select"
+                                    onchange="changeScale(this.value)"
+                                >
+
+                                    <option value="1">
+                                        100% — Normal
+                                    </option>
+
+                                    <option value="1.05">
+                                        105% — Large
+                                    </option>
+
+                                    <option value="1.1">
+                                        110% — Larger
+                                    </option>
+
+                                    <option value="0.95">
+                                        95% — Compact
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="setting-card">
+
+                                <div class="toggle-row">
+
+                                    <div class="toggle-info">
+
+                                        <div class="setting-card-title">
+                                            Desktop glow
+                                        </div>
+
+                                        <div class="setting-card-text">
+                                            Enable the blue ambient glow
+                                            on the ROOT OS desktop.
+                                        </div>
+
+                                    </div>
+
+                                    <label class="toggle">
+
+                                        <input
+                                            id="glowToggle"
+                                            type="checkbox"
+                                            checked
+                                            onchange="toggleGlow(this.checked)"
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- NOTIFICATIONS -->
+
+                        <section id="notificationPage"
+                                 class="settings-page">
+
+                            <h2>
+                                Notifications
+                            </h2>
+
+                            <p class="settings-description">
+                                Manage interface notifications.
+                            </p>
+
+
+                            <div class="setting-card">
+
+                                <div class="toggle-row">
+
+                                    <div class="toggle-info">
+
+                                        <div class="setting-card-title">
+                                            System notifications
+                                        </div>
+
+                                        <div class="setting-card-text">
+                                            Allow ROOT OS interface
+                                            notifications.
+                                        </div>
+
+                                    </div>
+
+                                    <label class="toggle">
+
+                                        <input
+                                            id="notificationToggle"
+                                            type="checkbox"
+                                            checked
+                                            onchange="saveSetting('notifications',this.checked)"
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="setting-card">
+
+                                <div class="toggle-row">
+
+                                    <div class="toggle-info">
+
+                                        <div class="setting-card-title">
+                                            Sound
+                                        </div>
+
+                                        <div class="setting-card-text">
+                                            Enable interface sounds.
+                                        </div>
+
+                                    </div>
+
+                                    <label class="toggle">
+
+                                        <input
+                                            id="soundToggle"
+                                            type="checkbox"
+                                            onchange="saveSetting('sound',this.checked)"
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- PRIVACY -->
+
+                        <section id="privacyPage"
+                                 class="settings-page">
+
+                            <h2>
+                                Privacy
+                            </h2>
+
+                            <p class="settings-description">
+                                Manage information stored by ROOT OS
+                                in your browser.
+                            </p>
+
+
+                            <div class="setting-card">
+
+                                <div class="setting-card-title">
+                                    Local storage
+                                </div>
+
+                                <div class="setting-card-text">
+                                    ROOT OS uses browser local storage
+                                    for Notes and interface preferences.
+                                    No server connection is required
+                                    for these features.
+                                </div>
+
+                            </div>
+
+
+                            <div class="setting-card">
+
+                                <div class="setting-card-title">
+                                    Clear saved data
+                                </div>
+
+                                <div class="setting-card-text">
+                                    Remove saved ROOT OS preferences
+                                    and notes from this browser.
+                                </div>
+
+                                <button
+                                    class="reset-button"
+                                    onclick="resetROOTOS()"
+                                >
+                                    Reset ROOT OS data
+                                </button>
+
+                            </div>
+
+                        </section>
+
+                    </main>
 
                 </div>
 
@@ -1645,13 +2291,13 @@ body{
                     </h1>
 
                     <div class="version">
-                        Version 1.8
+                        Version 1.9
                     </div>
 
                     <p>
-                        ROOT OS is a web-based operating
-                        system concept developed as part
-                        of the ROOT HUB project.
+                        ROOT OS is a web-based operating system
+                        concept developed as part of the ROOT HUB
+                        project.
                     </p>
 
                     <p>
@@ -1724,13 +2370,23 @@ body{
    BOOT
 ========================= */
 
-setTimeout(function(){
+const bootAnimationEnabled =
+    localStorage.getItem("ROOT_BOOT") !== "false";
+
+if(bootAnimationEnabled){
+
+    setTimeout(function(){
+
+        document.getElementById("boot").style.display="none";
+        document.getElementById("os").style.display="block";
+
+    },2200);
+
+}else{
 
     document.getElementById("boot").style.display="none";
-
     document.getElementById("os").style.display="block";
-
-},2200);
+}
 
 
 /* =========================
@@ -1790,10 +2446,13 @@ function openWindow(id){
 
         setTimeout(function(){
 
-            document.getElementById("termInput")
-                .focus();
+            document.getElementById("termInput").focus();
 
         },100);
+    }
+
+    if(id==="settingsWindow"){
+        loadSettings();
     }
 }
 
@@ -1817,14 +2476,12 @@ function toggleStart(){
     menu.classList.toggle("show");
 
     if(menu.classList.contains("show")){
-
         document.getElementById("search").focus();
     }
 }
 
 
 function openFromMenu(id){
-
     openWindow(id);
 }
 
@@ -1851,6 +2508,316 @@ function searchApps(){
                 ? "block"
                 : "none";
         });
+}
+
+
+/* =========================
+   SETTINGS NAVIGATION
+========================= */
+
+function showSettingsPage(pageId,button){
+
+    document.querySelectorAll(".settings-page")
+        .forEach(function(page){
+            page.classList.remove("active");
+        });
+
+    document.getElementById(pageId)
+        .classList.add("active");
+
+    document.querySelectorAll(".settings-nav")
+        .forEach(function(nav){
+            nav.classList.remove("active");
+        });
+
+    button.classList.add("active");
+}
+
+
+/* =========================
+   SETTINGS STORAGE
+========================= */
+
+function saveSetting(name,value){
+
+    localStorage.setItem(
+        "ROOT_SETTING_"+name,
+        value
+    );
+}
+
+
+function getSetting(name,defaultValue){
+
+    const value=
+        localStorage.getItem(
+            "ROOT_SETTING_"+name
+        );
+
+    if(value===null){
+        return defaultValue;
+    }
+
+    return value==="true";
+}
+
+
+/* =========================
+   LOAD SETTINGS
+========================= */
+
+function loadSettings(){
+
+    const boot=
+        localStorage.getItem("ROOT_BOOT");
+
+    const bootToggle=
+        document.getElementById("bootToggle");
+
+    if(bootToggle){
+        bootToggle.checked=
+            boot !== "false";
+    }
+
+
+    const notificationToggle=
+        document.getElementById("notificationToggle");
+
+    if(notificationToggle){
+
+        notificationToggle.checked=
+            getSetting("notifications",true);
+    }
+
+
+    const soundToggle=
+        document.getElementById("soundToggle");
+
+    if(soundToggle){
+
+        soundToggle.checked=
+            getSetting("sound",false);
+    }
+
+
+    const glowToggle=
+        document.getElementById("glowToggle");
+
+    if(glowToggle){
+
+        glowToggle.checked=
+            getSetting("glow",true);
+    }
+
+
+    const scale=
+        localStorage.getItem("ROOT_SCALE");
+
+    if(scale){
+
+        document.getElementById("scaleSelect").value=
+            scale;
+    }
+}
+
+
+/* =========================
+   BOOT SETTING
+========================= */
+
+function saveBootSetting(value){
+
+    localStorage.setItem(
+        "ROOT_BOOT",
+        value
+    );
+}
+
+
+/* replace boot toggle save behaviour */
+
+document.addEventListener("change",function(event){
+
+    if(event.target.id==="bootToggle"){
+
+        saveBootSetting(
+            event.target.checked
+        );
+    }
+});
+
+
+/* =========================
+   THEMES
+========================= */
+
+function setTheme(theme){
+
+    const root=
+        document.documentElement;
+
+    const blue=
+        document.getElementById("blueTheme");
+
+    const dark=
+        document.getElementById("darkTheme");
+
+    const midnight=
+        document.getElementById("midnightTheme");
+
+    [blue,dark,midnight].forEach(function(btn){
+
+        if(btn){
+            btn.classList.remove("active");
+        }
+    });
+
+
+    if(theme==="blue"){
+
+        root.style.setProperty(
+            "--blue",
+            "#087cff"
+        );
+
+        root.style.setProperty(
+            "--blue2",
+            "#1490ff"
+        );
+
+        blue.classList.add("active");
+    }
+
+
+    if(theme==="dark"){
+
+        root.style.setProperty(
+            "--blue",
+            "#777777"
+        );
+
+        root.style.setProperty(
+            "--blue2",
+            "#999999"
+        );
+
+        dark.classList.add("active");
+    }
+
+
+    if(theme==="midnight"){
+
+        root.style.setProperty(
+            "--blue",
+            "#7047ff"
+        );
+
+        root.style.setProperty(
+            "--blue2",
+            "#8b68ff"
+        );
+
+        midnight.classList.add("active");
+    }
+
+    localStorage.setItem(
+        "ROOT_THEME",
+        theme
+    );
+}
+
+
+/* =========================
+   DISPLAY SCALE
+========================= */
+
+function changeScale(value){
+
+    document.getElementById("os")
+        .style.zoom=value;
+
+    localStorage.setItem(
+        "ROOT_SCALE",
+        value
+    );
+}
+
+
+/* =========================
+   GLOW
+========================= */
+
+function toggleGlow(enabled){
+
+    const os=
+        document.getElementById("os");
+
+    if(enabled){
+
+        os.style.background=
+            `
+            radial-gradient(
+                circle at 50% 42%,
+                rgba(8,124,255,.075),
+                transparent 32%
+            ),
+            linear-gradient(
+                135deg,
+                #020914 0%,
+                #03111f 55%,
+                #020a14 100%
+            )
+            `;
+
+    }else{
+
+        os.style.background=
+            "#020914";
+    }
+
+    saveSetting("glow",enabled);
+}
+
+
+/* =========================
+   RESTORE THEME
+========================= */
+
+const savedTheme=
+    localStorage.getItem("ROOT_THEME");
+
+if(savedTheme){
+    setTheme(savedTheme);
+}
+
+
+/* =========================
+   RESTORE SCALE
+========================= */
+
+const savedScale=
+    localStorage.getItem("ROOT_SCALE");
+
+if(savedScale){
+
+    document.getElementById("os")
+        .style.zoom=savedScale;
+}
+
+
+/* =========================
+   BROWSER INFO
+========================= */
+
+const browserInfo=
+    document.getElementById("browserInfo");
+
+if(browserInfo){
+
+    browserInfo.textContent=
+        navigator.userAgent
+        .split(" ")
+        .slice(-1)[0];
 }
 
 
@@ -1914,7 +2881,6 @@ hello      ROOT greeting`;
             });
 
         input.value="";
-
         return;
     }
 
@@ -1927,7 +2893,7 @@ hello      ROOT greeting`;
 
     else if(command==="version"){
 
-        result="ROOT OS v1.8";
+        result="ROOT OS v1.9";
 
     }
 
@@ -2031,7 +2997,14 @@ notes.addEventListener("input",function(){
 
 function addCalc(value){
 
-    document.getElementById("calc").value+=value;
+    const display=
+        document.getElementById("calc");
+
+    if(display.value==="Error"){
+        display.value="";
+    }
+
+    display.value+=value;
 }
 
 
@@ -2087,8 +3060,7 @@ function calculate(){
 
         display.value=answer;
 
-    }
-    catch{
+    }catch{
 
         display.value="Error";
     }
@@ -2142,7 +3114,43 @@ document.addEventListener("keydown",function(event){
 
 
 /* =========================
-   CLOSE MENU WHEN CLICKING OUTSIDE
+   RESET ROOT OS
+========================= */
+
+function resetROOTOS(){
+
+    const confirmed=
+        confirm(
+            "Reset ROOT OS saved data?"
+        );
+
+    if(!confirmed){
+        return;
+    }
+
+    localStorage.removeItem("ROOT_OS_NOTES");
+    localStorage.removeItem("ROOT_BOOT");
+    localStorage.removeItem("ROOT_THEME");
+    localStorage.removeItem("ROOT_SCALE");
+
+    localStorage.removeItem(
+        "ROOT_SETTING_notifications"
+    );
+
+    localStorage.removeItem(
+        "ROOT_SETTING_sound"
+    );
+
+    localStorage.removeItem(
+        "ROOT_SETTING_glow"
+    );
+
+    location.reload();
+}
+
+
+/* =========================
+   CLOSE MENU OUTSIDE
 ========================= */
 
 document.addEventListener("click",function(event){
@@ -2164,7 +3172,7 @@ document.addEventListener("click",function(event){
 });
 
 
-console.log("ROOT OS v1.8 ready.");
+console.log("ROOT OS v1.9 ready.");
 
 </script>
 
