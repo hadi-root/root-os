@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#05070d">
-<title>ROOT OS v1.5</title>
+<title>ROOT OS v1.6</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -231,7 +231,7 @@ position:absolute;
 left:50%;
 bottom:76px;
 transform:translateX(-50%) translateY(15px);
-width:min(470px,calc(100vw - 20px));
+width:min(500px,calc(100vw - 20px));
 max-height:75vh;
 overflow:auto;
 padding:14px;
@@ -341,8 +341,8 @@ font-size:10px;
 position:absolute;
 left:50%;
 top:50%;
-width:min(760px,calc(100vw - 25px));
-height:min(540px,calc(100vh - 110px));
+width:min(780px,calc(100vw - 25px));
+height:min(550px,calc(100vh - 110px));
 transform:translate(-50%,-50%);
 display:none;
 flex-direction:column;
@@ -423,6 +423,12 @@ background:var(--accent);
 color:#04100b;
 border:0;
 font-weight:bold;
+}
+
+.danger-btn{
+background:rgba(255,100,116,.12);
+border-color:#7d3945;
+color:#ff9ca7;
 }
 
 .panel{
@@ -748,10 +754,119 @@ width:100%;
 accent-color:var(--accent);
 }
 
-.control-row{
+.profile-card{
 display:flex;
-gap:8px;
+align-items:center;
+gap:16px;
+padding:18px;
+border:1px solid var(--border);
+border-radius:14px;
+background:linear-gradient(135deg,rgba(67,230,176,.08),rgba(85,186,255,.06));
+margin-bottom:14px;
+}
+
+.avatar{
+width:66px;
+height:66px;
+border-radius:50%;
+display:grid;
+place-items:center;
+background:#101d2d;
+border:2px solid var(--accent);
+font-size:28px;
+flex-shrink:0;
+}
+
+.profile-name{
+font-size:20px;
+font-weight:bold;
+}
+
+.profile-status{
+font-size:11px;
+color:var(--accent);
+margin-top:5px;
+}
+
+.profile-actions{
+margin-left:auto;
+display:flex;
+gap:7px;
 flex-wrap:wrap;
+justify-content:flex-end;
+}
+
+.manager-list{
+display:grid;
+gap:8px;
+}
+
+.manager-item{
+display:flex;
+align-items:center;
+gap:12px;
+padding:13px;
+border:1px solid var(--border);
+border-radius:11px;
+background:#09111c;
+}
+
+.manager-icon{
+width:42px;
+height:42px;
+border-radius:10px;
+display:grid;
+place-items:center;
+background:#111d2c;
+border:1px solid #30435a;
+font-size:20px;
+flex-shrink:0;
+}
+
+.manager-info{
+flex:1;
+min-width:0;
+}
+
+.manager-info strong{
+font-size:12px;
+display:block;
+}
+
+.manager-info small{
+font-size:10px;
+color:var(--muted);
+display:block;
+margin-top:4px;
+}
+
+.storage-box{
+padding:17px;
+border:1px solid var(--border);
+border-radius:13px;
+background:#0a111c;
+margin-bottom:12px;
+}
+
+.storage-head{
+display:flex;
+justify-content:space-between;
+margin-bottom:10px;
+font-size:12px;
+}
+
+.storage-bar{
+height:10px;
+background:#182333;
+border-radius:20px;
+overflow:hidden;
+}
+
+.storage-used{
+height:100%;
+width:0;
+background:linear-gradient(90deg,var(--accent),var(--blue));
+border-radius:20px;
 }
 
 .notification{
@@ -891,18 +1006,6 @@ border-radius:10px;
 background:white;
 }
 
-.recycle-item{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px;
-padding:12px;
-border:1px solid var(--border);
-border-radius:9px;
-margin-bottom:8px;
-background:#09101a;
-}
-
 .setting{
 display:flex;
 align-items:center;
@@ -918,6 +1021,14 @@ border-bottom:1px solid var(--border);
 display:block;
 color:var(--muted);
 margin-top:4px;
+}
+
+.empty{
+text-align:center;
+padding:30px;
+color:var(--muted);
+border:1px dashed #35475f;
+border-radius:12px;
 }
 
 #powerMenu{
@@ -1045,6 +1156,17 @@ grid-template-columns:repeat(2,1fr);
 
 .browser-frame{height:300px}
 
+.profile-card{
+align-items:flex-start;
+flex-wrap:wrap;
+}
+
+.profile-actions{
+width:100%;
+margin-left:0;
+justify-content:flex-start;
+}
+
 }
 </style>
 </head>
@@ -1076,9 +1198,7 @@ grid-template-columns:repeat(2,1fr);
 <span id="notificationCount" class="notification-count">3</span>
 </button>
 
-<button class="notification-btn" onclick="openWindow('controlWindow')">
-⚡
-</button>
+<button class="notification-btn" onclick="openWindow('controlWindow')">⚡</button>
 
 <div id="topClock" class="top-clock">--:--</div>
 
@@ -1110,19 +1230,19 @@ grid-template-columns:repeat(2,1fr);
 <span>System Info</span>
 </button>
 
+<button class="desktop-icon" onclick="openWindow('userWindow')">
+<div class="icon">👤</div>
+<span>User</span>
+</button>
+
+<button class="desktop-icon" onclick="openWindow('appManagerWindow')">
+<div class="icon">📦</div>
+<span>Apps</span>
+</button>
+
 <button class="desktop-icon" onclick="openWindow('filesWindow')">
 <div class="icon">📁</div>
 <span>Files</span>
-</button>
-
-<button class="desktop-icon" onclick="openWindow('editorWindow')">
-<div class="icon">📝</div>
-<span>Editor</span>
-</button>
-
-<button class="desktop-icon" onclick="openWindow('calculatorWindow')">
-<div class="icon">🧮</div>
-<span>Calculator</span>
 </button>
 
 <button class="desktop-icon" onclick="openWindow('settingsWindow')">
@@ -1137,10 +1257,11 @@ grid-template-columns:repeat(2,1fr);
 
 <div class="start-header">
 <div class="start-brand">ROOT <span>OS</span></div>
-<div class="start-user">WEB OS</div>
+<div id="startUserLabel" class="start-user">LOCAL USER</div>
 </div>
 
-<input id="startSearch" class="start-search"
+<input id="startSearch"
+class="start-search"
 placeholder="🔍 Search apps..."
 oninput="searchStartApps()">
 
@@ -1154,7 +1275,7 @@ onclick="startOpen('storeWindow')">
 <span>ROOT Store</span>
 </button>
 
-<button class="start-app" data-app="control center quick settings network volume brightness battery"
+<button class="start-app" data-app="control center quick settings"
 onclick="startOpen('controlWindow')">
 <div class="start-icon">⚡</div>
 <span>Control</span>
@@ -1164,6 +1285,18 @@ onclick="startOpen('controlWindow')">
 onclick="startOpen('dashboardWindow')">
 <div class="start-icon">📊</div>
 <span>System Info</span>
+</button>
+
+<button class="start-app" data-app="user profile account"
+onclick="startOpen('userWindow')">
+<div class="start-icon">👤</div>
+<span>User</span>
+</button>
+
+<button class="start-app" data-app="app manager installed applications"
+onclick="startOpen('appManagerWindow')">
+<div class="start-icon">📦</div>
+<span>App Manager</span>
 </button>
 
 <button class="start-app" data-app="files file manager"
@@ -1220,7 +1353,7 @@ onclick="startOpen('settingsWindow')">
 
 <div class="start-bottom">
 
-<button onclick="startOpen('controlWindow')">⚡ Control</button>
+<button onclick="startOpen('userWindow')">👤 Profile</button>
 <button onclick="lockOS();closeStartMenu()">🔒 Lock</button>
 <button onclick="restartOS();closeStartMenu()">🔄 Restart</button>
 
@@ -1229,18 +1362,18 @@ onclick="startOpen('settingsWindow')">
 </div>
 
 
-<nav class="dock">
+<div class="dock">
 
 <button onclick="toggleStartMenu()">⬢</button>
 <button onclick="openWindow('storeWindow')">🛍️</button>
 <button onclick="openWindow('controlWindow')">⚡</button>
 <button onclick="openWindow('dashboardWindow')">📊</button>
+<button onclick="openWindow('userWindow')">👤</button>
+<button onclick="openWindow('appManagerWindow')">📦</button>
 <button onclick="openWindow('filesWindow')">📁</button>
-<button onclick="openWindow('editorWindow')">📝</button>
-<button onclick="openWindow('calculatorWindow')">🧮</button>
 <button onclick="openWindow('settingsWindow')">⚙️</button>
 
-</nav>
+</div>
 
 
 <div id="powerMenu">
@@ -1268,11 +1401,12 @@ onclick="startOpen('settingsWindow')">
 <div class="window-body">
 
 <div class="welcome">
-<div class="small">ROOT OS v1.5</div>
+<div class="small">ROOT OS v1.6</div>
 <h1>Welcome back.</h1>
-<p>Control your web-based ROOT OS from one place.</p>
+<p>Manage your ROOT OS environment from one place.</p>
 
-<input id="appSearch" class="search"
+<input id="appSearch"
+class="search"
 placeholder="🔍 Search apps..."
 oninput="searchApps()">
 </div>
@@ -1286,7 +1420,7 @@ onclick="openWindow('storeWindow')">
 <small>Discover apps</small>
 </button>
 
-<button class="app-tile" data-name="control center quick settings network volume brightness"
+<button class="app-tile" data-name="control center"
 onclick="openWindow('controlWindow')">
 <div class="big">⚡</div>
 <strong>Control Center</strong>
@@ -1298,6 +1432,20 @@ onclick="openWindow('dashboardWindow')">
 <div class="big">📊</div>
 <strong>System Info</strong>
 <small>System dashboard</small>
+</button>
+
+<button class="app-tile" data-name="user profile account"
+onclick="openWindow('userWindow')">
+<div class="big">👤</div>
+<strong>User Profile</strong>
+<small>Local account</small>
+</button>
+
+<button class="app-tile" data-name="app manager applications installed"
+onclick="openWindow('appManagerWindow')">
+<div class="big">📦</div>
+<strong>App Manager</strong>
+<small>Installed apps</small>
 </button>
 
 <button class="app-tile" data-name="files file manager"
@@ -1341,6 +1489,162 @@ onclick="openWindow('settingsWindow')">
 </div>
 
 
+<!-- USER PROFILE -->
+
+<div id="userWindow" class="window">
+
+<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
+<div class="window-title">👤 ROOT User Profile</div>
+
+<div class="window-controls">
+<button onclick="minimizeWindow('userWindow')">—</button>
+<button onclick="maximizeWindow('userWindow')">□</button>
+<button class="close" onclick="closeWindow('userWindow')">×</button>
+</div>
+</div>
+
+<div class="window-body">
+
+<div class="profile-card">
+
+<div id="userAvatar" class="avatar">👤</div>
+
+<div>
+<div id="profileName" class="profile-name">ROOT User</div>
+<div class="profile-status">● Local session active</div>
+</div>
+
+<div class="profile-actions">
+
+<button class="btn" onclick="changeUserName()">
+✏️ Edit Name
+</button>
+
+<button class="btn" onclick="changeAvatar()">
+🎨 Change Avatar
+</button>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h3>Account</h3>
+
+<table class="system-table">
+
+<tr>
+<td>Account type</td>
+<td>Local</td>
+</tr>
+
+<tr>
+<td>Session</td>
+<td>Active</td>
+</tr>
+
+<tr>
+<td>ROOT OS version</td>
+<td>v1.6</td>
+</tr>
+
+<tr>
+<td>Authentication</td>
+<td>Not required</td>
+</tr>
+
+<tr>
+<td>Storage mode</td>
+<td>Browser local storage</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="panel">
+
+<h3>Session</h3>
+
+<p class="muted">
+This ROOT OS version uses a local browser session. No server-side login is required.
+</p>
+
+<br>
+
+<button class="btn green-btn" onclick="lockOS()">
+🔒 Lock Session
+</button>
+
+<button class="btn" onclick="restartOS()">
+🔄 Restart
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- APP MANAGER -->
+
+<div id="appManagerWindow" class="window">
+
+<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
+<div class="window-title">📦 ROOT App Manager</div>
+
+<div class="window-controls">
+<button onclick="minimizeWindow('appManagerWindow')">—</button>
+<button onclick="maximizeWindow('appManagerWindow')">□</button>
+<button class="close" onclick="closeWindow('appManagerWindow')">×</button>
+</div>
+</div>
+
+<div class="window-body">
+
+<div class="welcome">
+
+<div class="small">APPLICATION MANAGEMENT</div>
+
+<h1>Installed Apps</h1>
+
+<p>
+Manage applications installed from ROOT Store.
+</p>
+
+</div>
+
+<br>
+
+<div class="storage-box">
+
+<div class="storage-head">
+
+<strong>ROOT Store Apps</strong>
+
+<span id="appStorageText">0 installed</span>
+
+</div>
+
+<div class="storage-bar">
+<div id="appStorageBar" class="storage-used"></div>
+</div>
+
+</div>
+
+<div id="appManagerList" class="manager-list"></div>
+
+<br>
+
+<button class="btn danger-btn" onclick="removeAllApps()">
+🗑️ Remove All Installed Apps
+</button>
+
+</div>
+</div>
+
+
 <!-- CONTROL CENTER -->
 
 <div id="controlWindow" class="window">
@@ -1359,13 +1663,11 @@ onclick="openWindow('settingsWindow')">
 
 <div class="welcome">
 
-<div class="small">ROOT OS v1.5</div>
+<div class="small">ROOT OS v1.6</div>
 
 <h1>Control Center</h1>
 
-<p>
-Quick controls for the ROOT OS interface.
-</p>
+<p>Quick controls for your ROOT OS environment.</p>
 
 </div>
 
@@ -1375,78 +1677,57 @@ Quick controls for the ROOT OS interface.
 
 <button id="wifiToggle" class="quick-toggle active"
 onclick="toggleControl('wifi')">
-
 <div class="qicon">📶</div>
 <strong>Network</strong>
 <small id="wifiStatus">Online</small>
-
 </button>
 
 <button id="soundToggle" class="quick-toggle active"
 onclick="toggleControl('sound')">
-
 <div class="qicon">🔊</div>
 <strong>Sound</strong>
 <small id="soundStatus">On</small>
-
 </button>
 
 <button id="themeToggle" class="quick-toggle"
 onclick="toggleTheme()">
-
 <div class="qicon">🌙</div>
 <strong>Theme</strong>
 <small id="themeStatus">Dark</small>
-
 </button>
 
-<button id="batteryToggle" class="quick-toggle active"
+<button class="quick-toggle active"
 onclick="openWindow('dashboardWindow')">
-
 <div class="qicon">🔋</div>
 <strong>Battery</strong>
 <small id="controlBattery">Checking</small>
-
 </button>
 
-<button class="quick-toggle"
-onclick="lockOS()">
-
+<button class="quick-toggle" onclick="lockOS()">
 <div class="qicon">🔒</div>
 <strong>Lock</strong>
 <small>Lock OS</small>
-
 </button>
 
-<button class="quick-toggle"
-onclick="openWindow('settingsWindow')">
-
+<button class="quick-toggle" onclick="openWindow('settingsWindow')">
 <div class="qicon">⚙️</div>
 <strong>Settings</strong>
 <small>Open settings</small>
-
 </button>
 
-<button class="quick-toggle"
-onclick="refreshSystemInfo()">
-
+<button class="quick-toggle" onclick="refreshSystemInfo()">
 <div class="qicon">↻</div>
 <strong>Refresh</strong>
 <small>System info</small>
-
 </button>
 
-<button class="quick-toggle"
-onclick="restartOS()">
-
+<button class="quick-toggle" onclick="restartOS()">
 <div class="qicon">🔄</div>
 <strong>Restart</strong>
 <small>Interface</small>
-
 </button>
 
 </div>
-
 
 <div class="slider-box">
 
@@ -1464,7 +1745,6 @@ oninput="changeBrightness(this.value)">
 
 </div>
 
-
 <div class="slider-box">
 
 <div class="slider-head">
@@ -1480,7 +1760,6 @@ value="70"
 oninput="changeVolume(this.value)">
 
 </div>
-
 
 <div class="panel">
 
@@ -1625,7 +1904,7 @@ onclick="setCategory('Tools')">Tools</button>
 
 <table class="system-table">
 
-<tr><td>ROOT OS Version</td><td>v1.5</td></tr>
+<tr><td>ROOT OS Version</td><td>v1.6</td></tr>
 <tr><td>Platform</td><td id="platformValue">Detecting...</td></tr>
 <tr><td>Browser</td><td id="browserValue">Detecting...</td></tr>
 <tr><td>Screen</td><td id="screenValue">Detecting...</td></tr>
@@ -1633,6 +1912,7 @@ onclick="setCategory('Tools')">Tools</button>
 <tr><td>Online</td><td id="onlineValue">Checking...</td></tr>
 <tr><td>CPU Cores</td><td id="coresValue">Detecting...</td></tr>
 <tr><td>Device Memory</td><td id="deviceMemoryValue">Not available</td></tr>
+<tr><td>Installed Apps</td><td id="installedCountValue">0</td></tr>
 
 </table>
 
@@ -1674,8 +1954,8 @@ ROOT OS is web-based, so browser security limits direct hardware access.
 <div id="notificationList">
 
 <div class="notification">
-<strong>🚀 ROOT OS v1.5</strong>
-<p>Control Center is now available.</p>
+<strong>🚀 ROOT OS v1.6</strong>
+<p>User and App Management is now available.</p>
 </div>
 
 <div class="notification">
@@ -1956,13 +2236,22 @@ Some websites block iframe embedding for security reasons.
 <div class="setting">
 
 <div>
-<strong>Control Center</strong>
-<small>Quickly manage ROOT OS settings.</small>
+<strong>User Profile</strong>
+<small>Change the local ROOT OS user name and avatar.</small>
 </div>
 
-<button class="btn" onclick="openWindow('controlWindow')">
-Open
-</button>
+<button class="btn" onclick="openWindow('userWindow')">Open</button>
+
+</div>
+
+<div class="setting">
+
+<div>
+<strong>App Manager</strong>
+<small>View and remove installed ROOT Store apps.</small>
+</div>
+
+<button class="btn" onclick="openWindow('appManagerWindow')">Open</button>
 
 </div>
 
@@ -1973,9 +2262,18 @@ Open
 <small>Switch between dark and light interface.</small>
 </div>
 
-<button class="btn" onclick="toggleTheme()">
-Toggle
-</button>
+<button class="btn" onclick="toggleTheme()">Toggle</button>
+
+</div>
+
+<div class="setting">
+
+<div>
+<strong>Control Center</strong>
+<small>Manage quick settings.</small>
+</div>
+
+<button class="btn" onclick="openWindow('controlWindow')">Open</button>
 
 </div>
 
@@ -1983,12 +2281,10 @@ Toggle
 
 <div>
 <strong>ROOT Store</strong>
-<small>Manage ROOT OS applications.</small>
+<small>Install or remove ROOT OS applications.</small>
 </div>
 
-<button class="btn" onclick="openWindow('storeWindow')">
-Open
-</button>
+<button class="btn" onclick="openWindow('storeWindow')">Open</button>
 
 </div>
 
@@ -1996,12 +2292,10 @@ Open
 
 <div>
 <strong>System Information</strong>
-<small>View ROOT OS system information.</small>
+<small>View ROOT OS hardware and browser information.</small>
 </div>
 
-<button class="btn" onclick="openWindow('dashboardWindow')">
-Open
-</button>
+<button class="btn" onclick="openWindow('dashboardWindow')">Open</button>
 
 </div>
 
@@ -2012,9 +2306,7 @@ Open
 <small>Lock the current ROOT OS session.</small>
 </div>
 
-<button class="btn" onclick="lockOS()">
-Lock
-</button>
+<button class="btn" onclick="lockOS()">Lock</button>
 
 </div>
 
@@ -2070,6 +2362,8 @@ document.getElementById("desktop").style.display="block";
 sessionStart=Date.now();
 
 openWindow("launcherWindow");
+
+updateUserUI();
 
 }
 
@@ -2135,14 +2429,13 @@ menu.classList.toggle("show");
 
 if(menu.classList.contains("show")){
 
-const input=document.getElementById("startSearch");
-
-input.value="";
+document.getElementById("startSearch").value="";
 
 searchStartApps();
+updateUserUI();
 
 setTimeout(function(){
-input.focus();
+document.getElementById("startSearch").focus();
 },100);
 
 }
@@ -2172,8 +2465,7 @@ document.getElementById("startSearch")
 document.querySelectorAll("#startApps .start-app")
 .forEach(function(app){
 
-const name=
-(app.dataset.app||"").toLowerCase();
+const name=(app.dataset.app||"").toLowerCase();
 
 app.style.display=
 name.includes(query)
@@ -2210,6 +2502,12 @@ renderStore();
 
 if(id==="controlWindow")
 updateControlCenter();
+
+if(id==="appManagerWindow")
+renderAppManager();
+
+if(id==="userWindow")
+updateUserUI();
 
 }
 
@@ -2309,6 +2607,95 @@ name.includes(query)
 }
 
 
+/* USER PROFILE */
+
+const avatars=[
+"👤",
+"🧑‍💻",
+"🤖",
+"🦊",
+"🐺",
+"⚡",
+"🌐",
+"🛠️"
+];
+
+function getUserName(){
+
+return localStorage.getItem("rootOS_user_name")
+||"ROOT User";
+
+}
+
+function getAvatar(){
+
+return localStorage.getItem("rootOS_avatar")
+||"👤";
+
+}
+
+function updateUserUI(){
+
+const name=getUserName();
+const avatar=getAvatar();
+
+document.getElementById("profileName").textContent=name;
+document.getElementById("userAvatar").textContent=avatar;
+document.getElementById("startUserLabel").textContent=name;
+
+}
+
+function changeUserName(){
+
+const current=getUserName();
+
+const newName=prompt(
+"Enter your ROOT OS user name:",
+current
+);
+
+if(newName===null)return;
+
+const cleanName=newName.trim();
+
+if(!cleanName)return;
+
+localStorage.setItem(
+"rootOS_user_name",
+cleanName
+);
+
+updateUserUI();
+
+addNotification(
+"👤 Profile Updated",
+"Your ROOT OS user name was changed."
+);
+
+}
+
+function changeAvatar(){
+
+const current=getAvatar();
+
+const nextIndex=
+(avatars.indexOf(current)+1)%avatars.length;
+
+localStorage.setItem(
+"rootOS_avatar",
+avatars[nextIndex]
+);
+
+updateUserUI();
+
+addNotification(
+"🎨 Avatar Updated",
+"Your ROOT OS avatar was changed."
+);
+
+}
+
+
 /* CONTROL CENTER */
 
 let controls={
@@ -2362,18 +2749,12 @@ controls.wifi
 document.getElementById("soundStatus").textContent=
 controls.sound?"On":"Muted";
 
-const connection=
-document.getElementById("controlConnection");
-
-connection.textContent=
+document.getElementById("controlConnection").textContent=
 navigator.onLine
 ?"🟢 Connected to the internet."
 :"🔴 No internet connection.";
 
-const themeStatus=
-document.getElementById("themeStatus");
-
-themeStatus.textContent=
+document.getElementById("themeStatus").textContent=
 document.body.classList.contains("light")
 ?"Light"
 :"Dark";
@@ -2539,16 +2920,13 @@ btn.classList.remove("active");
 });
 
 if(category==="All")
-document.getElementById("catAll")
-.classList.add("active");
+document.getElementById("catAll").classList.add("active");
 
 if(category==="System")
-document.getElementById("catSystem")
-.classList.add("active");
+document.getElementById("catSystem").classList.add("active");
 
 if(category==="Tools")
-document.getElementById("catTools")
-.classList.add("active");
+document.getElementById("catTools").classList.add("active");
 
 renderStore();
 
@@ -2584,7 +2962,7 @@ grid.innerHTML="";
 if(apps.length===0){
 
 grid.innerHTML=
-'<div class="panel">🔎 No applications found.</div>';
+'<div class="empty">🔎 No applications found.</div>';
 
 return;
 
@@ -2592,8 +2970,7 @@ return;
 
 apps.forEach(function(app){
 
-const isInstalled=
-installed.includes(app.id);
+const isInstalled=installed.includes(app.id);
 
 const card=document.createElement("div");
 
@@ -2641,8 +3018,7 @@ let installed=getInstalledApps();
 
 if(installed.includes(id)){
 
-installed=
-installed.filter(function(item){
+installed=installed.filter(function(item){
 return item!==id;
 });
 
@@ -2667,6 +3043,130 @@ app.name+" was installed."
 }
 
 renderStore();
+renderAppManager();
+refreshSystemInfo();
+
+}
+
+function renderAppManager(){
+
+const list=document.getElementById("appManagerList");
+
+const installed=getInstalledApps();
+
+document.getElementById("appStorageText").textContent=
+installed.length+" installed";
+
+document.getElementById("appStorageBar").style.width=
+Math.min((installed.length/rootApps.length)*100,100)+"%";
+
+list.innerHTML="";
+
+if(installed.length===0){
+
+list.innerHTML=
+'<div class="empty">📦 No ROOT Store apps are installed.</div>';
+
+return;
+
+}
+
+installed.forEach(function(id){
+
+const app=rootApps.find(function(item){
+return item.id===id;
+});
+
+if(!app)return;
+
+const item=document.createElement("div");
+
+item.className="manager-item";
+
+item.innerHTML=`
+
+<div class="manager-icon">${app.icon}</div>
+
+<div class="manager-info">
+
+<strong>${escapeHTML(app.name)}</strong>
+
+<small>
+${escapeHTML(app.category)} · Version ${escapeHTML(app.version)}
+</small>
+
+</div>
+
+<button class="btn danger-btn"
+onclick="uninstallFromManager('${app.id}')">
+Uninstall
+</button>
+
+`;
+
+list.appendChild(item);
+
+});
+
+}
+
+function uninstallFromManager(id){
+
+const app=rootApps.find(function(item){
+return item.id===id;
+});
+
+if(!app)return;
+
+const installed=
+getInstalledApps().filter(function(item){
+return item!==id;
+});
+
+saveInstalledApps(installed);
+
+addNotification(
+"🗑️ App Uninstalled",
+app.name+" was uninstalled."
+);
+
+renderAppManager();
+renderStore();
+refreshSystemInfo();
+
+}
+
+function removeAllApps(){
+
+const installed=getInstalledApps();
+
+if(installed.length===0){
+
+addNotification(
+"📦 App Manager",
+"No installed apps to remove."
+);
+
+return;
+
+}
+
+const confirmed=confirm(
+"Remove all installed ROOT Store apps?"
+);
+
+if(!confirmed)return;
+
+localStorage.removeItem("rootOS_installed_apps");
+
+renderAppManager();
+renderStore();
+refreshSystemInfo();
+
+addNotification(
+"🗑️ Apps Removed",
+"All installed ROOT Store apps were removed."
+);
 
 }
 
@@ -2732,8 +3232,7 @@ const level=Math.round(battery.level*100);
 
 value.textContent=level+"%";
 
-sub.textContent=
-battery.charging
+sub.textContent=battery.charging
 ?"Charging"
 :"On battery";
 
@@ -2793,6 +3292,9 @@ document.getElementById("deviceMemoryValue").textContent=
 navigator.deviceMemory
 ?navigator.deviceMemory+" GB"
 :"Not available";
+
+document.getElementById("installedCountValue").textContent=
+getInstalledApps().length;
 
 }
 
@@ -2860,8 +3362,7 @@ escapeHTML(message)+
 
 list.prepend(item);
 
-const count=
-document.getElementById("notificationCount");
+const count=document.getElementById("notificationCount");
 
 count.style.display="grid";
 
@@ -2959,8 +3460,6 @@ document.getElementById("editor").value=saved;
 
 }
 
-loadEditor();
-
 
 /* CALCULATOR */
 
@@ -3034,9 +3533,7 @@ const file=event.target.files[0];
 if(!file)return;
 
 const image=document.getElementById("previewImage");
-
-const placeholder=
-document.getElementById("imagePlaceholder");
+const placeholder=document.getElementById("imagePlaceholder");
 
 image.src=URL.createObjectURL(file);
 
@@ -3129,6 +3626,9 @@ document.getElementById("volumeValue")
 
 }
 
+loadEditor();
+updateUserUI();
+
 
 /* KEYBOARD */
 
@@ -3167,7 +3667,9 @@ setTimeout(function(){
 
 refreshSystemInfo();
 renderStore();
+renderAppManager();
 updateControlCenter();
+updateUserUI();
 
 },500);
 
