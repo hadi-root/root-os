@@ -4,17 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <meta name="theme-color" content="#05070d">
-<title>ROOT OS v1.3</title>
+<title>ROOT OS v1.4</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 
 :root{
 --bg:#05070d;
---panel:rgba(12,18,29,.97);
---border:#29384d;
+--panel:rgba(10,16,27,.97);
+--panel2:#0b1421;
+--border:#293b52;
 --text:#f4f7fb;
---muted:#8995a8;
+--muted:#8997aa;
 --accent:#43e6b0;
 --blue:#55baff;
 --danger:#ff6474;
@@ -35,7 +36,7 @@ color:var(--text);
 button,input,textarea{font-family:inherit}
 button{cursor:pointer}
 
-/* LOCK SCREEN */
+/* LOCK */
 
 #lockScreen{
 position:fixed;
@@ -96,7 +97,7 @@ radial-gradient(circle at 85% 75%,rgba(85,186,255,.09),transparent 30%),
 linear-gradient(135deg,#05070d,#090f1b);
 }
 
-/* TOP BAR */
+/* TOPBAR */
 
 .topbar{
 position:absolute;
@@ -104,7 +105,7 @@ top:0;
 left:0;
 right:0;
 height:45px;
-background:rgba(4,7,12,.8);
+background:rgba(4,7,12,.82);
 backdrop-filter:blur(16px);
 border-bottom:1px solid rgba(255,255,255,.06);
 display:flex;
@@ -243,8 +244,8 @@ position:absolute;
 left:50%;
 bottom:76px;
 transform:translateX(-50%) translateY(15px);
-width:min(440px,calc(100vw - 20px));
-max-height:72vh;
+width:min(470px,calc(100vw - 20px));
+max-height:75vh;
 overflow:auto;
 padding:14px;
 display:none;
@@ -372,8 +373,8 @@ font-size:10px;
 position:absolute;
 left:50%;
 top:50%;
-width:min(700px,calc(100vw - 25px));
-height:min(500px,calc(100vh - 110px));
+width:min(720px,calc(100vw - 25px));
+height:min(510px,calc(100vh - 110px));
 transform:translate(-50%,-50%);
 display:none;
 flex-direction:column;
@@ -441,7 +442,7 @@ overflow:auto;
 padding:20px;
 }
 
-/* GENERAL */
+/* COMMON */
 
 .panel{
 background:#0a111c;
@@ -472,7 +473,7 @@ border:0;
 font-weight:bold;
 }
 
-/* LAUNCHER */
+/* WELCOME */
 
 .welcome{
 padding:23px;
@@ -509,6 +510,8 @@ color:white;
 outline:none;
 }
 
+/* APP GRID */
+
 .app-grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -543,7 +546,7 @@ color:var(--muted);
 font-size:10px;
 }
 
-/* SYSTEM DASHBOARD */
+/* DASHBOARD */
 
 .dashboard{
 display:grid;
@@ -565,9 +568,7 @@ align-items:center;
 margin-bottom:12px;
 }
 
-.stat-icon{
-font-size:22px;
-}
+.stat-icon{font-size:22px}
 
 .stat-label{
 font-size:10px;
@@ -614,13 +615,143 @@ border-bottom:1px solid var(--border);
 font-size:11px;
 }
 
-.system-table td:first-child{
+.system-table td:first-child{color:var(--muted)}
+.system-table td:last-child{text-align:right;font-weight:bold}
+
+/* STORE */
+
+.store-hero{
+padding:20px;
+border:1px solid var(--border);
+border-radius:14px;
+background:
+linear-gradient(135deg,rgba(67,230,176,.09),rgba(85,186,255,.08));
+margin-bottom:15px;
+}
+
+.store-hero h1{
+font-size:27px;
+margin-bottom:6px;
+}
+
+.store-hero p{
+color:var(--muted);
+font-size:12px;
+line-height:1.6;
+}
+
+.store-tools{
+display:flex;
+gap:8px;
+margin-bottom:14px;
+}
+
+.store-search{
+flex:1;
+padding:12px;
+border:1px solid var(--border);
+border-radius:10px;
+background:#05080e;
+color:white;
+outline:none;
+}
+
+.category-btn{
+padding:10px 12px;
+border:1px solid var(--border);
+border-radius:9px;
+background:#111a28;
+color:white;
+}
+
+.category-btn.active{
+background:var(--accent);
+color:#04100b;
+border-color:var(--accent);
+font-weight:bold;
+}
+
+.store-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+.store-card{
+padding:15px;
+border:1px solid var(--border);
+border-radius:13px;
+background:#0a121e;
+transition:.15s;
+}
+
+.store-card:hover{
+border-color:#48617d;
+transform:translateY(-1px);
+}
+
+.store-icon{
+width:48px;
+height:48px;
+display:grid;
+place-items:center;
+border-radius:13px;
+background:#111d2c;
+border:1px solid #30435a;
+font-size:24px;
+margin-bottom:11px;
+}
+
+.store-card h3{
+font-size:14px;
+margin-bottom:5px;
+}
+
+.store-card p{
+font-size:10px;
+color:var(--muted);
+line-height:1.5;
+min-height:30px;
+}
+
+.store-meta{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:12px;
+font-size:9px;
 color:var(--muted);
 }
 
-.system-table td:last-child{
-text-align:right;
+.store-btn{
+padding:8px 11px;
+border:0;
+border-radius:8px;
+background:var(--accent);
+color:#04100b;
+font-size:10px;
 font-weight:bold;
+}
+
+.store-btn.installed{
+background:#182637;
+color:#aab8ca;
+border:1px solid #33485f;
+}
+
+.store-btn.uninstall{
+background:transparent;
+color:var(--danger);
+border:1px solid #5b3540;
+}
+
+.store-empty{
+padding:30px;
+text-align:center;
+border:1px dashed #3b4c62;
+border-radius:12px;
+color:var(--muted);
+grid-column:1/-1;
 }
 
 /* NOTIFICATIONS */
@@ -835,7 +966,7 @@ text-align:left;
 
 #powerMenu button:hover{background:#172235}
 
-/* LIGHT THEME */
+/* LIGHT */
 
 body.light{
 --bg:#e9edf3;
@@ -911,6 +1042,18 @@ height:calc(100vh - 94px);
 
 .app-grid{
 grid-template-columns:1fr 1fr;
+}
+
+.store-tools{
+flex-wrap:wrap;
+}
+
+.store-search{
+min-width:100%;
+}
+
+.store-grid{
+grid-template-columns:1fr;
 }
 
 .dashboard{
@@ -1000,6 +1143,12 @@ onclick="openWindow('launcherWindow')">
 </button>
 
 <button class="desktop-icon"
+onclick="openWindow('storeWindow')">
+<div class="icon">🛍️</div>
+<span>ROOT Store</span>
+</button>
+
+<button class="desktop-icon"
 onclick="openWindow('dashboardWindow')">
 <div class="icon">📊</div>
 <span>System Info</span>
@@ -1058,11 +1207,18 @@ WEB OS
 id="startSearch"
 class="start-search"
 placeholder="🔍 Search apps..."
-oninput="searchStartApps()">
+oninput="searchStartApps">
 
 <div class="start-section">PINNED APPS</div>
 
 <div id="startApps" class="start-apps">
+
+<button class="start-app"
+data-app="root store app store applications install uninstall"
+onclick="startOpen('storeWindow')">
+<div class="start-icon">🛍️</div>
+<span>ROOT Store</span>
+</button>
 
 <button class="start-app"
 data-app="system dashboard information status cpu memory battery network"
@@ -1133,16 +1289,16 @@ onclick="startOpen('settingsWindow')">
 
 <div class="start-recent">
 
+<button onclick="startOpen('storeWindow')">
+🛍️ ROOT Store
+</button>
+
 <button onclick="startOpen('dashboardWindow')">
 📊 System Info
 </button>
 
 <button onclick="startOpen('filesWindow')">
 📁 Files
-</button>
-
-<button onclick="startOpen('settingsWindow')">
-⚙️ Settings
 </button>
 
 </div>
@@ -1171,6 +1327,8 @@ onclick="startOpen('settingsWindow')">
 <nav class="dock">
 
 <button onclick="toggleStartMenu()" title="Start">⬢</button>
+
+<button onclick="openWindow('storeWindow')" title="ROOT Store">🛍️</button>
 
 <button onclick="openWindow('dashboardWindow')">📊</button>
 
@@ -1221,7 +1379,7 @@ onmousedown="startDrag(event,this.parentElement)">
 
 <div class="welcome">
 
-<div class="small">ROOT OS v1.3</div>
+<div class="small">ROOT OS v1.4</div>
 
 <h1>Welcome back.</h1>
 
@@ -1238,6 +1396,14 @@ oninput="searchApps()">
 </div>
 
 <div class="app-grid">
+
+<button class="app-tile"
+data-name="root store app store applications install uninstall"
+onclick="openWindow('storeWindow')">
+<div class="big">🛍️</div>
+<strong>ROOT Store</strong>
+<small>Discover apps</small>
+</button>
 
 <button class="app-tile"
 data-name="system dashboard information cpu memory battery network"
@@ -1325,6 +1491,74 @@ onclick="openWindow('settingsWindow')">
 </div>
 
 
+<!-- ROOT STORE -->
+
+<div id="storeWindow" class="window">
+
+<div class="window-header"
+onmousedown="startDrag(event,this.parentElement)">
+
+<div class="window-title">🛍️ ROOT Store</div>
+
+<div class="window-controls">
+<button onclick="minimizeWindow('storeWindow')">—</button>
+<button onclick="maximizeWindow('storeWindow')">□</button>
+<button class="close" onclick="closeWindow('storeWindow')">×</button>
+</div>
+
+</div>
+
+<div class="window-body">
+
+<div class="store-hero">
+
+<h1>ROOT Store</h1>
+
+<p>
+Discover applications designed for the ROOT OS ecosystem.
+Installations in v1.4 are stored locally in this browser.
+</p>
+
+</div>
+
+<div class="store-tools">
+
+<input
+id="storeSearch"
+class="store-search"
+placeholder="🔍 Search applications..."
+oninput="renderStore()">
+
+<button
+id="catAll"
+class="category-btn active"
+onclick="setCategory('All')">
+All
+</button>
+
+<button
+id="catSystem"
+class="category-btn"
+onclick="setCategory('System')">
+System
+</button>
+
+<button
+id="catTools"
+class="category-btn"
+onclick="setCategory('Tools')">
+Tools
+</button>
+
+</div>
+
+<div id="storeGrid" class="store-grid"></div>
+
+</div>
+
+</div>
+
+
 <!-- SYSTEM DASHBOARD -->
 
 <div id="dashboardWindow" class="window">
@@ -1380,7 +1614,6 @@ Browser memory information
 
 </div>
 
-
 <div class="stat-card">
 
 <div class="stat-top">
@@ -1401,7 +1634,6 @@ Checking device battery
 
 </div>
 
-
 <div class="stat-card">
 
 <div class="stat-top">
@@ -1421,7 +1653,6 @@ Connection status
 </div>
 
 </div>
-
 
 <div class="stat-card">
 
@@ -1445,7 +1676,6 @@ ROOT OS session uptime
 
 </div>
 
-
 <br>
 
 <div class="panel">
@@ -1456,7 +1686,7 @@ ROOT OS session uptime
 
 <tr>
 <td>ROOT OS Version</td>
-<td>v1.3</td>
+<td>v1.4</td>
 </tr>
 
 <tr>
@@ -1544,8 +1774,8 @@ System notifications from ROOT OS appear here.
 <div id="notificationList">
 
 <div class="notification">
-<strong>🚀 ROOT OS v1.3</strong>
-<p>System Dashboard is now available.</p>
+<strong>🚀 ROOT OS v1.4</strong>
+<p>ROOT Store is now available.</p>
 </div>
 
 <div class="notification">
@@ -1554,8 +1784,8 @@ System notifications from ROOT OS appear here.
 </div>
 
 <div class="notification">
-<strong>🌐 Web OS</strong>
-<p>Hardware information is limited by browser security.</p>
+<strong>🛍️ ROOT Store</strong>
+<p>Discover and manage ROOT OS applications.</p>
 </div>
 
 </div>
@@ -1846,7 +2076,7 @@ Some websites may block embedded browsing for security reasons.
 </div>
 
 
-<!-- RECYCLE BIN -->
+<!-- RECYCLE -->
 
 <div id="recycleWindow" class="window">
 
@@ -1920,6 +2150,20 @@ onmousedown="startDrag(event,this.parentElement)">
 </div>
 
 <button class="btn" onclick="toggleTheme()">Toggle</button>
+
+</div>
+
+<div class="setting">
+
+<div>
+<strong>ROOT Store</strong>
+<small>Discover and manage installed applications.</small>
+</div>
+
+<button class="btn"
+onclick="openWindow('storeWindow')">
+Open
+</button>
 
 </div>
 
@@ -2066,6 +2310,7 @@ menu.style.display==="block"
 
 }
 
+
 function closePower(){
 
 document.getElementById("powerMenu")
@@ -2074,7 +2319,7 @@ document.getElementById("powerMenu")
 }
 
 
-/* START MENU */
+/* START */
 
 function toggleStartMenu(){
 
@@ -2129,8 +2374,7 @@ const input=document.getElementById("startSearch");
 
 if(!input)return;
 
-const query=
-input.value.toLowerCase().trim();
+const query=input.value.toLowerCase().trim();
 
 document.querySelectorAll(
 "#startApps .start-app"
@@ -2169,6 +2413,10 @@ win.style.zIndex=zIndex;
 
 if(id==="dashboardWindow"){
 refreshSystemInfo();
+}
+
+if(id==="storeWindow"){
+renderStore();
 }
 
 }
@@ -2283,7 +2531,287 @@ name.includes(query)
 }
 
 
-/* SYSTEM DASHBOARD */
+/* ROOT STORE */
+
+const rootApps=[
+
+{
+id:"terminal",
+icon:"⌨️",
+name:"ROOT Terminal",
+category:"System",
+version:"1.0",
+description:"A command-style interface for the ROOT OS ecosystem."
+},
+
+{
+id:"monitor",
+icon:"📊",
+name:"System Monitor",
+category:"System",
+version:"1.0",
+description:"Monitor browser-accessible ROOT OS system information."
+},
+
+{
+id:"notes",
+icon:"📝",
+name:"ROOT Notes",
+category:"Tools",
+version:"1.0",
+description:"A lightweight local notes application for ROOT OS."
+},
+
+{
+id:"calculator",
+icon:"🧮",
+name:"ROOT Calculator",
+category:"Tools",
+version:"1.0",
+description:"Fast calculations inside the ROOT OS environment."
+},
+
+{
+id:"filetools",
+icon:"📁",
+name:"ROOT File Tools",
+category:"Tools",
+version:"1.0",
+description:"Tools for working with files selected from your device."
+},
+
+{
+id:"browser",
+icon:"🌐",
+name:"ROOT Browser",
+category:"System",
+version:"1.0",
+description:"A simple browser interface for ROOT OS."
+}
+
+];
+
+
+let selectedCategory="All";
+
+
+function getInstalledApps(){
+
+try{
+
+return JSON.parse(
+localStorage.getItem("rootOS_installed_apps") || "[]"
+);
+
+}catch{
+
+return[];
+
+}
+
+}
+
+
+function saveInstalledApps(apps){
+
+localStorage.setItem(
+"rootOS_installed_apps",
+JSON.stringify(apps)
+);
+
+}
+
+
+function setCategory(category){
+
+selectedCategory=category;
+
+document.querySelectorAll(".category-btn")
+.forEach(function(btn){
+btn.classList.remove("active");
+});
+
+if(category==="All")
+document.getElementById("catAll")
+.classList.add("active");
+
+if(category==="System")
+document.getElementById("catSystem")
+.classList.add("active");
+
+if(category==="Tools")
+document.getElementById("catTools")
+.classList.add("active");
+
+renderStore();
+
+}
+
+
+function renderStore(){
+
+const grid=
+document.getElementById("storeGrid");
+
+if(!grid)return;
+
+const query=
+(document.getElementById("storeSearch")?.value || "")
+.toLowerCase()
+.trim();
+
+const installed=getInstalledApps();
+
+const apps=rootApps.filter(function(app){
+
+const categoryMatch=
+selectedCategory==="All" ||
+app.category===selectedCategory;
+
+const searchMatch=
+app.name.toLowerCase().includes(query) ||
+app.description.toLowerCase().includes(query) ||
+app.category.toLowerCase().includes(query);
+
+return categoryMatch && searchMatch;
+
+});
+
+grid.innerHTML="";
+
+if(apps.length===0){
+
+grid.innerHTML=
+'<div class="store-empty">'+
+'🔎 No applications found.'+
+'</div>';
+
+return;
+
+}
+
+apps.forEach(function(app){
+
+const isInstalled=
+installed.includes(app.id);
+
+const card=document.createElement("div");
+
+card.className="store-card";
+
+const buttonClass=
+isInstalled
+?"store-btn installed"
+:"store-btn";
+
+const buttonText=
+isInstalled
+?"✓ Installed"
+:"Install";
+
+card.innerHTML=`
+
+<div class="store-icon">${app.icon}</div>
+
+<h3>${escapeHTML(app.name)}</h3>
+
+<p>${escapeHTML(app.description)}</p>
+
+<div class="store-meta">
+
+<span>${escapeHTML(app.category)} · v${escapeHTML(app.version)}</span>
+
+<button
+class="${buttonClass}"
+onclick="toggleApp('${app.id}')">
+${buttonText}
+</button>
+
+</div>
+
+`;
+
+grid.appendChild(card);
+
+});
+
+}
+
+
+function toggleApp(id){
+
+const app=rootApps.find(function(item){
+return item.id===id;
+});
+
+if(!app)return;
+
+let installed=getInstalledApps();
+
+if(installed.includes(id)){
+
+installed=
+installed.filter(function(item){
+return item!==id;
+});
+
+saveInstalledApps(installed);
+
+addNotification(
+"🗑️ App Removed",
+app.name+" was removed from your installed apps."
+);
+
+}else{
+
+installed.push(id);
+
+saveInstalledApps(installed);
+
+addNotification(
+"⬇️ App Installed",
+app.name+" was added to your ROOT OS apps."
+);
+
+}
+
+renderStore();
+
+}
+
+
+function addNotification(title,message){
+
+const list=
+document.getElementById("notificationList");
+
+const item=document.createElement("div");
+
+item.className="notification";
+
+item.innerHTML=
+"<strong>"+
+escapeHTML(title)+
+"</strong><p>"+
+escapeHTML(message)+
+"</p>";
+
+list.prepend(item);
+
+const count=
+document.getElementById("notificationCount");
+
+count.style.display="grid";
+
+const current=
+parseInt(count.textContent || "0",10);
+
+count.textContent=current+1;
+
+}
+
+
+/* DASHBOARD */
 
 function refreshSystemInfo(){
 
@@ -2463,9 +2991,7 @@ function getBrowserName(){
 const ua=navigator.userAgent;
 
 if(ua.includes("Edg/"))return"Microsoft Edge";
-
 if(ua.includes("OPR/"))return"Opera";
-
 if(ua.includes("Chrome/"))return"Google Chrome";
 
 if(ua.includes("Firefox/"))return"Firefox";
@@ -2513,9 +3039,6 @@ bar.style.width=
 }
 
 setInterval(updateUptime,1000);
-
-
-/* NETWORK EVENTS */
 
 window.addEventListener("online",refreshSystemInfo);
 window.addEventListener("offline",refreshSystemInfo);
@@ -2852,13 +3375,12 @@ closeStartMenu();
 });
 
 
-/* INITIAL SYSTEM DATA */
+/* INITIAL */
 
 setTimeout(function(){
 
-if(document.getElementById("desktop").style.display==="block"){
 refreshSystemInfo();
-}
+renderStore();
 
 },500);
 
