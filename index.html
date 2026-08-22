@@ -1,42 +1,39 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#05070d">
-<title>ROOT OS v1.4</title>
+<title>ROOT OS v1.5</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 
 :root{
 --bg:#05070d;
---panel:rgba(10,16,27,.97);
---panel2:#0b1421;
+--panel:#0a111c;
+--panel2:#0d1623;
 --border:#293b52;
 --text:#f4f7fb;
 --muted:#8997aa;
 --accent:#43e6b0;
 --blue:#55baff;
 --danger:#ff6474;
-}
-
-html,body{
-width:100%;
-height:100%;
-overflow:hidden;
+--warning:#ffd166;
 }
 
 body{
 font-family:Arial,Helvetica,sans-serif;
 background:var(--bg);
 color:var(--text);
+width:100%;
+height:100vh;
+overflow:hidden;
 }
 
 button,input,textarea{font-family:inherit}
 button{cursor:pointer}
-
-/* LOCK */
 
 #lockScreen{
 position:fixed;
@@ -85,8 +82,6 @@ color:var(--accent);
 font-weight:bold;
 }
 
-/* DESKTOP */
-
 #desktop{
 position:fixed;
 inset:0;
@@ -96,8 +91,6 @@ radial-gradient(circle at 15% 20%,rgba(67,230,176,.09),transparent 30%),
 radial-gradient(circle at 85% 75%,rgba(85,186,255,.09),transparent 30%),
 linear-gradient(135deg,#05070d,#090f1b);
 }
-
-/* TOPBAR */
 
 .topbar{
 position:absolute;
@@ -159,8 +152,6 @@ display:grid;
 place-items:center;
 }
 
-/* DESKTOP ICONS */
-
 .desktop-icons{
 position:absolute;
 top:63px;
@@ -204,8 +195,6 @@ font-size:10px;
 display:block;
 }
 
-/* DOCK */
-
 .dock{
 position:absolute;
 left:50%;
@@ -236,8 +225,6 @@ font-size:20px;
 border-color:#40536c;
 transform:translateY(-2px);
 }
-
-/* START MENU */
 
 #startMenu{
 position:absolute;
@@ -332,23 +319,6 @@ font-size:9px;
 display:block;
 }
 
-.start-recent{
-display:flex;
-gap:7px;
-overflow:auto;
-padding-bottom:3px;
-}
-
-.start-recent button{
-flex:0 0 auto;
-padding:9px 11px;
-border:1px solid var(--border);
-border-radius:9px;
-background:#0d1623;
-color:white;
-font-size:10px;
-}
-
 .start-bottom{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -367,14 +337,12 @@ color:white;
 font-size:10px;
 }
 
-/* WINDOWS */
-
 .window{
 position:absolute;
 left:50%;
 top:50%;
-width:min(720px,calc(100vw - 25px));
-height:min(510px,calc(100vh - 110px));
+width:min(760px,calc(100vw - 25px));
+height:min(540px,calc(100vh - 110px));
 transform:translate(-50%,-50%);
 display:none;
 flex-direction:column;
@@ -442,22 +410,6 @@ overflow:auto;
 padding:20px;
 }
 
-/* COMMON */
-
-.panel{
-background:#0a111c;
-border:1px solid var(--border);
-border-radius:13px;
-padding:17px;
-margin-bottom:12px;
-}
-
-.muted{
-color:var(--muted);
-font-size:13px;
-line-height:1.6;
-}
-
 .btn{
 padding:10px 14px;
 border-radius:9px;
@@ -473,7 +425,19 @@ border:0;
 font-weight:bold;
 }
 
-/* WELCOME */
+.panel{
+background:#0a111c;
+border:1px solid var(--border);
+border-radius:13px;
+padding:17px;
+margin-bottom:12px;
+}
+
+.muted{
+color:var(--muted);
+font-size:13px;
+line-height:1.6;
+}
 
 .welcome{
 padding:23px;
@@ -510,8 +474,6 @@ color:white;
 outline:none;
 }
 
-/* APP GRID */
-
 .app-grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -545,8 +507,6 @@ margin-bottom:4px;
 color:var(--muted);
 font-size:10px;
 }
-
-/* DASHBOARD */
 
 .dashboard{
 display:grid;
@@ -618,14 +578,11 @@ font-size:11px;
 .system-table td:first-child{color:var(--muted)}
 .system-table td:last-child{text-align:right;font-weight:bold}
 
-/* STORE */
-
 .store-hero{
 padding:20px;
 border:1px solid var(--border);
 border-radius:14px;
-background:
-linear-gradient(135deg,rgba(67,230,176,.09),rgba(85,186,255,.08));
+background:linear-gradient(135deg,rgba(67,230,176,.09),rgba(85,186,255,.08));
 margin-bottom:15px;
 }
 
@@ -682,12 +639,6 @@ padding:15px;
 border:1px solid var(--border);
 border-radius:13px;
 background:#0a121e;
-transition:.15s;
-}
-
-.store-card:hover{
-border-color:#48617d;
-transform:translateY(-1px);
 }
 
 .store-icon{
@@ -739,22 +690,69 @@ color:#aab8ca;
 border:1px solid #33485f;
 }
 
-.store-btn.uninstall{
-background:transparent;
-color:var(--danger);
-border:1px solid #5b3540;
+.quick-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:9px;
+margin-bottom:15px;
 }
 
-.store-empty{
-padding:30px;
-text-align:center;
-border:1px dashed #3b4c62;
+.quick-toggle{
+min-height:80px;
+padding:12px 7px;
+border:1px solid var(--border);
 border-radius:12px;
-color:var(--muted);
-grid-column:1/-1;
+background:#0b1421;
+color:white;
 }
 
-/* NOTIFICATIONS */
+.quick-toggle.active{
+background:rgba(67,230,176,.12);
+border-color:#397a66;
+}
+
+.quick-toggle .qicon{
+font-size:22px;
+margin-bottom:7px;
+}
+
+.quick-toggle strong{
+display:block;
+font-size:10px;
+}
+
+.quick-toggle small{
+display:block;
+color:var(--muted);
+font-size:9px;
+margin-top:3px;
+}
+
+.slider-box{
+padding:16px;
+border:1px solid var(--border);
+border-radius:12px;
+background:#0b121e;
+margin-bottom:10px;
+}
+
+.slider-head{
+display:flex;
+justify-content:space-between;
+font-size:11px;
+margin-bottom:12px;
+}
+
+input[type=range]{
+width:100%;
+accent-color:var(--accent);
+}
+
+.control-row{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+}
 
 .notification{
 padding:13px;
@@ -771,8 +769,6 @@ font-size:11px;
 color:var(--muted);
 margin-top:4px;
 }
-
-/* FILES */
 
 .file-area{
 border:1px dashed #3a4b62;
@@ -797,8 +793,6 @@ font-size:12px;
 
 .file-item small{color:var(--muted)}
 
-/* EDITOR */
-
 .editor{
 width:100%;
 height:330px;
@@ -812,8 +806,6 @@ font-family:monospace;
 font-size:13px;
 outline:none;
 }
-
-/* CALCULATOR */
 
 .calc{
 max-width:330px;
@@ -848,8 +840,6 @@ color:white;
 font-size:16px;
 }
 
-/* IMAGE */
-
 .image-preview{
 width:100%;
 height:330px;
@@ -868,8 +858,6 @@ object-fit:contain;
 display:none;
 }
 
-/* MEDIA */
-
 .media-box{
 text-align:center;
 padding:30px;
@@ -879,8 +867,6 @@ padding:30px;
 font-size:55px;
 margin-bottom:20px;
 }
-
-/* BROWSER */
 
 .browser-bar{
 display:flex;
@@ -905,8 +891,6 @@ border-radius:10px;
 background:white;
 }
 
-/* RECYCLE */
-
 .recycle-item{
 display:flex;
 align-items:center;
@@ -918,8 +902,6 @@ border-radius:9px;
 margin-bottom:8px;
 background:#09101a;
 }
-
-/* SETTINGS */
 
 .setting{
 display:flex;
@@ -938,13 +920,11 @@ color:var(--muted);
 margin-top:4px;
 }
 
-/* POWER */
-
 #powerMenu{
 position:absolute;
 right:12px;
 top:53px;
-width:190px;
+width:210px;
 display:none;
 padding:8px;
 border:1px solid var(--border);
@@ -966,11 +946,10 @@ text-align:left;
 
 #powerMenu button:hover{background:#172235}
 
-/* LIGHT */
-
 body.light{
 --bg:#e9edf3;
---panel:rgba(248,250,253,.97);
+--panel:#f8fafd;
+--panel2:#eef2f7;
 --border:#cbd4e1;
 --text:#101827;
 --muted:#5d697b;
@@ -984,8 +963,6 @@ body.light .topbar,
 body.light .window-header{
 background:rgba(245,248,252,.9);
 }
-
-/* MOBILE */
 
 @media(max-width:650px){
 
@@ -1060,6 +1037,10 @@ grid-template-columns:1fr;
 grid-template-columns:1fr;
 }
 
+.quick-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
 .welcome h1{font-size:26px}
 
 .browser-frame{height:300px}
@@ -1070,214 +1051,164 @@ grid-template-columns:1fr;
 
 <body>
 
-<!-- LOCK SCREEN -->
-
 <section id="lockScreen">
-
 <div class="lock-content">
-
-<div class="lock-logo">
-ROOT <span>OS</span>
-</div>
-
+<div class="lock-logo">ROOT <span>OS</span></div>
 <div id="lockTime" class="lock-time">--:--</div>
-
 <div id="lockDate" class="lock-date">--</div>
-
-<button class="unlock-btn" onclick="unlockOS()">
-🔓 Enter ROOT OS
-</button>
-
+<button class="unlock-btn" onclick="unlockOS()">🔓 Enter ROOT OS</button>
 </div>
-
 </section>
-
-
-<!-- DESKTOP -->
 
 <section id="desktop">
 
 <header class="topbar">
 
 <div class="top-left">
-
-<div class="system-name">
-ROOT <span>OS</span>
-</div>
-
-<div class="status-text">
-SYSTEM READY
-</div>
-
+<div class="system-name">ROOT <span>OS</span></div>
+<div class="status-text">SYSTEM READY</div>
 </div>
 
 <div class="top-right">
 
-<button class="notification-btn"
-onclick="openWindow('notificationsWindow')">
-
+<button class="notification-btn" onclick="openWindow('notificationsWindow')">
 🔔
+<span id="notificationCount" class="notification-count">3</span>
+</button>
 
-<span id="notificationCount"
-class="notification-count">3</span>
-
+<button class="notification-btn" onclick="openWindow('controlWindow')">
+⚡
 </button>
 
 <div id="topClock" class="top-clock">--:--</div>
 
-<button class="btn" onclick="togglePower()">⚡</button>
+<button class="btn" onclick="togglePower()">⋮</button>
 
 </div>
-
 </header>
 
 
-<!-- DESKTOP ICONS -->
-
 <div class="desktop-icons">
 
-<button class="desktop-icon"
-onclick="openWindow('launcherWindow')">
+<button class="desktop-icon" onclick="openWindow('launcherWindow')">
 <div class="icon">⬢</div>
 <span>Launcher</span>
 </button>
 
-<button class="desktop-icon"
-onclick="openWindow('storeWindow')">
+<button class="desktop-icon" onclick="openWindow('storeWindow')">
 <div class="icon">🛍️</div>
 <span>ROOT Store</span>
 </button>
 
-<button class="desktop-icon"
-onclick="openWindow('dashboardWindow')">
+<button class="desktop-icon" onclick="openWindow('controlWindow')">
+<div class="icon">⚡</div>
+<span>Control</span>
+</button>
+
+<button class="desktop-icon" onclick="openWindow('dashboardWindow')">
 <div class="icon">📊</div>
 <span>System Info</span>
 </button>
 
-<button class="desktop-icon"
-onclick="openWindow('filesWindow')">
+<button class="desktop-icon" onclick="openWindow('filesWindow')">
 <div class="icon">📁</div>
 <span>Files</span>
 </button>
 
-<button class="desktop-icon"
-onclick="openWindow('editorWindow')">
+<button class="desktop-icon" onclick="openWindow('editorWindow')">
 <div class="icon">📝</div>
 <span>Editor</span>
 </button>
 
-<button class="desktop-icon"
-onclick="openWindow('calculatorWindow')">
+<button class="desktop-icon" onclick="openWindow('calculatorWindow')">
 <div class="icon">🧮</div>
 <span>Calculator</span>
 </button>
 
-<button class="desktop-icon"
-onclick="openWindow('imagesWindow')">
-<div class="icon">🖼️</div>
-<span>Images</span>
-</button>
-
-<button class="desktop-icon"
-onclick="openWindow('recycleWindow')">
-<div class="icon">🗑️</div>
-<span>Recycle Bin</span>
+<button class="desktop-icon" onclick="openWindow('settingsWindow')">
+<div class="icon">⚙️</div>
+<span>Settings</span>
 </button>
 
 </div>
 
-
-<!-- START MENU -->
 
 <div id="startMenu">
 
 <div class="start-header">
-
-<div class="start-brand">
-ROOT <span>OS</span>
+<div class="start-brand">ROOT <span>OS</span></div>
+<div class="start-user">WEB OS</div>
 </div>
 
-<div class="start-user">
-WEB OS
-</div>
-
-</div>
-
-<input
-id="startSearch"
-class="start-search"
+<input id="startSearch" class="start-search"
 placeholder="🔍 Search apps..."
-oninput="searchStartApps">
+oninput="searchStartApps()">
 
 <div class="start-section">PINNED APPS</div>
 
 <div id="startApps" class="start-apps">
 
-<button class="start-app"
-data-app="root store app store applications install uninstall"
+<button class="start-app" data-app="root store app store"
 onclick="startOpen('storeWindow')">
 <div class="start-icon">🛍️</div>
 <span>ROOT Store</span>
 </button>
 
-<button class="start-app"
-data-app="system dashboard information status cpu memory battery network"
+<button class="start-app" data-app="control center quick settings network volume brightness battery"
+onclick="startOpen('controlWindow')">
+<div class="start-icon">⚡</div>
+<span>Control</span>
+</button>
+
+<button class="start-app" data-app="system dashboard information"
 onclick="startOpen('dashboardWindow')">
 <div class="start-icon">📊</div>
 <span>System Info</span>
 </button>
 
-<button class="start-app"
-data-app="files file manager"
+<button class="start-app" data-app="files file manager"
 onclick="startOpen('filesWindow')">
 <div class="start-icon">📁</div>
 <span>Files</span>
 </button>
 
-<button class="start-app"
-data-app="editor text editor notes"
+<button class="start-app" data-app="editor notes"
 onclick="startOpen('editorWindow')">
 <div class="start-icon">📝</div>
 <span>Editor</span>
 </button>
 
-<button class="start-app"
-data-app="calculator math"
+<button class="start-app" data-app="calculator math"
 onclick="startOpen('calculatorWindow')">
 <div class="start-icon">🧮</div>
 <span>Calculator</span>
 </button>
 
-<button class="start-app"
-data-app="browser internet web"
+<button class="start-app" data-app="browser internet web"
 onclick="startOpen('browserWindow')">
 <div class="start-icon">🌐</div>
 <span>Browser</span>
 </button>
 
-<button class="start-app"
-data-app="media music player"
+<button class="start-app" data-app="media music"
 onclick="startOpen('mediaWindow')">
 <div class="start-icon">🎵</div>
 <span>Media</span>
 </button>
 
-<button class="start-app"
-data-app="images image viewer gallery"
+<button class="start-app" data-app="images gallery"
 onclick="startOpen('imagesWindow')">
 <div class="start-icon">🖼️</div>
 <span>Images</span>
 </button>
 
-<button class="start-app"
-data-app="notifications alerts"
+<button class="start-app" data-app="notifications alerts"
 onclick="startOpen('notificationsWindow')">
 <div class="start-icon">🔔</div>
 <span>Notifications</span>
 </button>
 
-<button class="start-app"
-data-app="settings configuration"
+<button class="start-app" data-app="settings configuration"
 onclick="startOpen('settingsWindow')">
 <div class="start-icon">⚙️</div>
 <span>Settings</span>
@@ -1285,74 +1216,37 @@ onclick="startOpen('settingsWindow')">
 
 </div>
 
-<div class="start-section">RECENT</div>
-
-<div class="start-recent">
-
-<button onclick="startOpen('storeWindow')">
-🛍️ ROOT Store
-</button>
-
-<button onclick="startOpen('dashboardWindow')">
-📊 System Info
-</button>
-
-<button onclick="startOpen('filesWindow')">
-📁 Files
-</button>
-
-</div>
+<div class="start-section">SYSTEM</div>
 
 <div class="start-bottom">
 
-<button onclick="startOpen('settingsWindow')">
-⚙️ Settings
-</button>
-
-<button onclick="lockOS();closeStartMenu()">
-🔒 Lock
-</button>
-
-<button onclick="restartOS();closeStartMenu()">
-🔄 Restart
-</button>
+<button onclick="startOpen('controlWindow')">⚡ Control</button>
+<button onclick="lockOS();closeStartMenu()">🔒 Lock</button>
+<button onclick="restartOS();closeStartMenu()">🔄 Restart</button>
 
 </div>
 
 </div>
 
-
-<!-- DOCK -->
 
 <nav class="dock">
 
-<button onclick="toggleStartMenu()" title="Start">⬢</button>
-
-<button onclick="openWindow('storeWindow')" title="ROOT Store">🛍️</button>
-
+<button onclick="toggleStartMenu()">⬢</button>
+<button onclick="openWindow('storeWindow')">🛍️</button>
+<button onclick="openWindow('controlWindow')">⚡</button>
 <button onclick="openWindow('dashboardWindow')">📊</button>
-
 <button onclick="openWindow('filesWindow')">📁</button>
-
 <button onclick="openWindow('editorWindow')">📝</button>
-
 <button onclick="openWindow('calculatorWindow')">🧮</button>
-
-<button onclick="openWindow('browserWindow')">🌐</button>
-
 <button onclick="openWindow('settingsWindow')">⚙️</button>
 
 </nav>
 
 
-<!-- POWER -->
-
 <div id="powerMenu">
 
 <button onclick="lockOS()">🔒 Lock ROOT OS</button>
-
 <button onclick="restartOS()">🔄 Restart Interface</button>
-
 <button onclick="closePower()">✕ Close</button>
 
 </div>
@@ -1362,127 +1256,83 @@ onclick="startOpen('settingsWindow')">
 
 <div id="launcherWindow" class="window">
 
-<div class="window-header"
-onmousedown="startDrag(event,this.parentElement)">
-
+<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">⬢ ROOT Launcher</div>
-
 <div class="window-controls">
 <button onclick="minimizeWindow('launcherWindow')">—</button>
 <button onclick="maximizeWindow('launcherWindow')">□</button>
 <button class="close" onclick="closeWindow('launcherWindow')">×</button>
 </div>
-
 </div>
 
 <div class="window-body">
 
 <div class="welcome">
-
-<div class="small">ROOT OS v1.4</div>
-
+<div class="small">ROOT OS v1.5</div>
 <h1>Welcome back.</h1>
+<p>Control your web-based ROOT OS from one place.</p>
 
-<p>
-A web-based operating system built by ROOT HUB.
-</p>
-
-<input
-id="appSearch"
-class="search"
+<input id="appSearch" class="search"
 placeholder="🔍 Search apps..."
 oninput="searchApps()">
-
 </div>
 
 <div class="app-grid">
 
-<button class="app-tile"
-data-name="root store app store applications install uninstall"
+<button class="app-tile" data-name="root store app store"
 onclick="openWindow('storeWindow')">
 <div class="big">🛍️</div>
 <strong>ROOT Store</strong>
 <small>Discover apps</small>
 </button>
 
-<button class="app-tile"
-data-name="system dashboard information cpu memory battery network"
+<button class="app-tile" data-name="control center quick settings network volume brightness"
+onclick="openWindow('controlWindow')">
+<div class="big">⚡</div>
+<strong>Control Center</strong>
+<small>Quick settings</small>
+</button>
+
+<button class="app-tile" data-name="system dashboard information"
 onclick="openWindow('dashboardWindow')">
 <div class="big">📊</div>
 <strong>System Info</strong>
 <small>System dashboard</small>
 </button>
 
-<button class="app-tile"
-data-name="file manager files"
+<button class="app-tile" data-name="files file manager"
 onclick="openWindow('filesWindow')">
 <div class="big">📁</div>
 <strong>File Manager</strong>
-<small>Manage local files</small>
+<small>Local files</small>
 </button>
 
-<button class="app-tile"
-data-name="text editor editor notes"
+<button class="app-tile" data-name="editor notes"
 onclick="openWindow('editorWindow')">
 <div class="big">📝</div>
 <strong>Text Editor</strong>
 <small>Write notes</small>
 </button>
 
-<button class="app-tile"
-data-name="calculator math"
+<button class="app-tile" data-name="calculator math"
 onclick="openWindow('calculatorWindow')">
 <div class="big">🧮</div>
 <strong>Calculator</strong>
 <small>Calculate</small>
 </button>
 
-<button class="app-tile"
-data-name="image viewer images photos"
-onclick="openWindow('imagesWindow')">
-<div class="big">🖼️</div>
-<strong>Image Viewer</strong>
-<small>View local images</small>
-</button>
-
-<button class="app-tile"
-data-name="media music player"
-onclick="openWindow('mediaWindow')">
-<div class="big">🎵</div>
-<strong>Media Player</strong>
-<small>Play local audio</small>
-</button>
-
-<button class="app-tile"
-data-name="browser web internet"
+<button class="app-tile" data-name="browser web internet"
 onclick="openWindow('browserWindow')">
 <div class="big">🌐</div>
 <strong>Browser</strong>
-<small>Open web pages</small>
+<small>Open websites</small>
 </button>
 
-<button class="app-tile"
-data-name="recycle bin trash deleted"
-onclick="openWindow('recycleWindow')">
-<div class="big">🗑️</div>
-<strong>Recycle Bin</strong>
-<small>Deleted items</small>
-</button>
-
-<button class="app-tile"
-data-name="notifications alerts"
-onclick="openWindow('notificationsWindow')">
-<div class="big">🔔</div>
-<strong>Notifications</strong>
-<small>System alerts</small>
-</button>
-
-<button class="app-tile"
-data-name="settings configuration"
+<button class="app-tile" data-name="settings"
 onclick="openWindow('settingsWindow')">
 <div class="big">⚙️</div>
 <strong>Settings</strong>
-<small>System controls</small>
+<small>System settings</small>
 </button>
 
 </div>
@@ -1491,13 +1341,166 @@ onclick="openWindow('settingsWindow')">
 </div>
 
 
-<!-- ROOT STORE -->
+<!-- CONTROL CENTER -->
+
+<div id="controlWindow" class="window">
+
+<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
+<div class="window-title">⚡ ROOT Control Center</div>
+
+<div class="window-controls">
+<button onclick="minimizeWindow('controlWindow')">—</button>
+<button onclick="maximizeWindow('controlWindow')">□</button>
+<button class="close" onclick="closeWindow('controlWindow')">×</button>
+</div>
+</div>
+
+<div class="window-body">
+
+<div class="welcome">
+
+<div class="small">ROOT OS v1.5</div>
+
+<h1>Control Center</h1>
+
+<p>
+Quick controls for the ROOT OS interface.
+</p>
+
+</div>
+
+<br>
+
+<div class="quick-grid">
+
+<button id="wifiToggle" class="quick-toggle active"
+onclick="toggleControl('wifi')">
+
+<div class="qicon">📶</div>
+<strong>Network</strong>
+<small id="wifiStatus">Online</small>
+
+</button>
+
+<button id="soundToggle" class="quick-toggle active"
+onclick="toggleControl('sound')">
+
+<div class="qicon">🔊</div>
+<strong>Sound</strong>
+<small id="soundStatus">On</small>
+
+</button>
+
+<button id="themeToggle" class="quick-toggle"
+onclick="toggleTheme()">
+
+<div class="qicon">🌙</div>
+<strong>Theme</strong>
+<small id="themeStatus">Dark</small>
+
+</button>
+
+<button id="batteryToggle" class="quick-toggle active"
+onclick="openWindow('dashboardWindow')">
+
+<div class="qicon">🔋</div>
+<strong>Battery</strong>
+<small id="controlBattery">Checking</small>
+
+</button>
+
+<button class="quick-toggle"
+onclick="lockOS()">
+
+<div class="qicon">🔒</div>
+<strong>Lock</strong>
+<small>Lock OS</small>
+
+</button>
+
+<button class="quick-toggle"
+onclick="openWindow('settingsWindow')">
+
+<div class="qicon">⚙️</div>
+<strong>Settings</strong>
+<small>Open settings</small>
+
+</button>
+
+<button class="quick-toggle"
+onclick="refreshSystemInfo()">
+
+<div class="qicon">↻</div>
+<strong>Refresh</strong>
+<small>System info</small>
+
+</button>
+
+<button class="quick-toggle"
+onclick="restartOS()">
+
+<div class="qicon">🔄</div>
+<strong>Restart</strong>
+<small>Interface</small>
+
+</button>
+
+</div>
+
+
+<div class="slider-box">
+
+<div class="slider-head">
+<strong>☀️ Brightness</strong>
+<span id="brightnessValue">100%</span>
+</div>
+
+<input id="brightnessSlider"
+type="range"
+min="30"
+max="100"
+value="100"
+oninput="changeBrightness(this.value)">
+
+</div>
+
+
+<div class="slider-box">
+
+<div class="slider-head">
+<strong>🔊 Volume</strong>
+<span id="volumeValue">70%</span>
+</div>
+
+<input id="volumeSlider"
+type="range"
+min="0"
+max="100"
+value="70"
+oninput="changeVolume(this.value)">
+
+</div>
+
+
+<div class="panel">
+
+<h3>Connection</h3>
+
+<p id="controlConnection" class="muted">
+Checking network connection...
+</p>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- STORE -->
 
 <div id="storeWindow" class="window">
 
-<div class="window-header"
-onmousedown="startDrag(event,this.parentElement)">
-
+<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">🛍️ ROOT Store</div>
 
 <div class="window-controls">
@@ -1505,67 +1508,44 @@ onmousedown="startDrag(event,this.parentElement)">
 <button onclick="maximizeWindow('storeWindow')">□</button>
 <button class="close" onclick="closeWindow('storeWindow')">×</button>
 </div>
-
 </div>
 
 <div class="window-body">
 
 <div class="store-hero">
-
 <h1>ROOT Store</h1>
-
-<p>
-Discover applications designed for the ROOT OS ecosystem.
-Installations in v1.4 are stored locally in this browser.
-</p>
-
+<p>Discover applications designed for the ROOT OS ecosystem.</p>
 </div>
 
 <div class="store-tools">
 
-<input
-id="storeSearch"
+<input id="storeSearch"
 class="store-search"
 placeholder="🔍 Search applications..."
 oninput="renderStore()">
 
-<button
-id="catAll"
-class="category-btn active"
-onclick="setCategory('All')">
-All
-</button>
+<button id="catAll" class="category-btn active"
+onclick="setCategory('All')">All</button>
 
-<button
-id="catSystem"
-class="category-btn"
-onclick="setCategory('System')">
-System
-</button>
+<button id="catSystem" class="category-btn"
+onclick="setCategory('System')">System</button>
 
-<button
-id="catTools"
-class="category-btn"
-onclick="setCategory('Tools')">
-Tools
-</button>
+<button id="catTools" class="category-btn"
+onclick="setCategory('Tools')">Tools</button>
 
 </div>
 
 <div id="storeGrid" class="store-grid"></div>
 
 </div>
-
 </div>
 
 
-<!-- SYSTEM DASHBOARD -->
+<!-- DASHBOARD -->
 
 <div id="dashboardWindow" class="window">
 
-<div class="window-header"
-onmousedown="startDrag(event,this.parentElement)">
-
+<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">📊 ROOT System Information</div>
 
 <div class="window-controls">
@@ -1573,21 +1553,14 @@ onmousedown="startDrag(event,this.parentElement)">
 <button onclick="maximizeWindow('dashboardWindow')">□</button>
 <button class="close" onclick="closeWindow('dashboardWindow')">×</button>
 </div>
-
 </div>
 
 <div class="window-body">
 
 <div class="welcome">
-
 <div class="small">SYSTEM DASHBOARD</div>
-
 <h1>ROOT OS Monitor</h1>
-
-<p>
-Live information available to this web-based operating system.
-</p>
-
+<p>Live information available to this web-based operating system.</p>
 </div>
 
 <br>
@@ -1595,7 +1568,6 @@ Live information available to this web-based operating system.
 <div class="dashboard">
 
 <div class="stat-card">
-
 <div class="stat-top">
 <div>
 <div class="stat-label">MEMORY</div>
@@ -1603,19 +1575,11 @@ Live information available to this web-based operating system.
 </div>
 <div class="stat-icon">🧠</div>
 </div>
-
-<div class="stat-sub" id="memorySub">
-Browser memory information
-</div>
-
-<div class="progress">
-<div id="memoryBar" class="progress-bar"></div>
-</div>
-
+<div id="memorySub" class="stat-sub">Browser memory information</div>
+<div class="progress"><div id="memoryBar" class="progress-bar"></div></div>
 </div>
 
 <div class="stat-card">
-
 <div class="stat-top">
 <div>
 <div class="stat-label">BATTERY</div>
@@ -1623,19 +1587,11 @@ Browser memory information
 </div>
 <div class="stat-icon">🔋</div>
 </div>
-
-<div class="stat-sub" id="batterySub">
-Checking device battery
-</div>
-
-<div class="progress">
-<div id="batteryBar" class="progress-bar"></div>
-</div>
-
+<div id="batterySub" class="stat-sub">Checking device battery</div>
+<div class="progress"><div id="batteryBar" class="progress-bar"></div></div>
 </div>
 
 <div class="stat-card">
-
 <div class="stat-top">
 <div>
 <div class="stat-label">NETWORK</div>
@@ -1643,19 +1599,11 @@ Checking device battery
 </div>
 <div class="stat-icon">🌐</div>
 </div>
-
-<div class="stat-sub" id="networkSub">
-Connection status
-</div>
-
-<div class="progress">
-<div id="networkBar" class="progress-bar"></div>
-</div>
-
+<div id="networkSub" class="stat-sub">Connection status</div>
+<div class="progress"><div id="networkBar" class="progress-bar"></div></div>
 </div>
 
 <div class="stat-card">
-
 <div class="stat-top">
 <div>
 <div class="stat-label">UPTIME</div>
@@ -1663,15 +1611,8 @@ Connection status
 </div>
 <div class="stat-icon">⏱️</div>
 </div>
-
-<div class="stat-sub">
-ROOT OS session uptime
-</div>
-
-<div class="progress">
-<div id="uptimeBar" class="progress-bar"></div>
-</div>
-
+<div class="stat-sub">ROOT OS session uptime</div>
+<div class="progress"><div id="uptimeBar" class="progress-bar"></div></div>
 </div>
 
 </div>
@@ -1684,61 +1625,28 @@ ROOT OS session uptime
 
 <table class="system-table">
 
-<tr>
-<td>ROOT OS Version</td>
-<td>v1.4</td>
-</tr>
-
-<tr>
-<td>Platform</td>
-<td id="platformValue">Detecting...</td>
-</tr>
-
-<tr>
-<td>Browser</td>
-<td id="browserValue">Detecting...</td>
-</tr>
-
-<tr>
-<td>Screen</td>
-<td id="screenValue">Detecting...</td>
-</tr>
-
-<tr>
-<td>Language</td>
-<td id="languageValue">Detecting...</td>
-</tr>
-
-<tr>
-<td>Online</td>
-<td id="onlineValue">Checking...</td>
-</tr>
-
-<tr>
-<td>CPU Cores</td>
-<td id="coresValue">Detecting...</td>
-</tr>
-
-<tr>
-<td>Device Memory</td>
-<td id="deviceMemoryValue">Not available</td>
-</tr>
+<tr><td>ROOT OS Version</td><td>v1.5</td></tr>
+<tr><td>Platform</td><td id="platformValue">Detecting...</td></tr>
+<tr><td>Browser</td><td id="browserValue">Detecting...</td></tr>
+<tr><td>Screen</td><td id="screenValue">Detecting...</td></tr>
+<tr><td>Language</td><td id="languageValue">Detecting...</td></tr>
+<tr><td>Online</td><td id="onlineValue">Checking...</td></tr>
+<tr><td>CPU Cores</td><td id="coresValue">Detecting...</td></tr>
+<tr><td>Device Memory</td><td id="deviceMemoryValue">Not available</td></tr>
 
 </table>
 
 </div>
 
-<button class="btn green-btn"
-onclick="refreshSystemInfo()">
+<button class="btn green-btn" onclick="refreshSystemInfo()">
 ↻ Refresh System Info
 </button>
 
 <p class="muted" style="margin-top:12px">
-Note: ROOT OS is web-based. Browser security limits direct access to some hardware information.
+ROOT OS is web-based, so browser security limits direct hardware access.
 </p>
 
 </div>
-
 </div>
 
 
@@ -1746,9 +1654,7 @@ Note: ROOT OS is web-based. Browser security limits direct access to some hardwa
 
 <div id="notificationsWindow" class="window">
 
-<div class="window-header"
-onmousedown="startDrag(event,this.parentElement)">
-
+<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">🔔 Notifications</div>
 
 <div class="window-controls">
@@ -1756,26 +1662,20 @@ onmousedown="startDrag(event,this.parentElement)">
 <button onclick="maximizeWindow('notificationsWindow')">□</button>
 <button class="close" onclick="closeWindow('notificationsWindow')">×</button>
 </div>
-
 </div>
 
 <div class="window-body">
 
 <div class="panel">
-
 <h2>Notification Center</h2>
-
-<p class="muted">
-System notifications from ROOT OS appear here.
-</p>
-
+<p class="muted">ROOT OS system notifications.</p>
 </div>
 
 <div id="notificationList">
 
 <div class="notification">
-<strong>🚀 ROOT OS v1.4</strong>
-<p>ROOT Store is now available.</p>
+<strong>🚀 ROOT OS v1.5</strong>
+<p>Control Center is now available.</p>
 </div>
 
 <div class="notification">
@@ -1785,7 +1685,7 @@ System notifications from ROOT OS appear here.
 
 <div class="notification">
 <strong>🛍️ ROOT Store</strong>
-<p>Discover and manage ROOT OS applications.</p>
+<p>ROOT Store is available.</p>
 </div>
 
 </div>
@@ -1795,17 +1695,14 @@ Clear notifications
 </button>
 
 </div>
-
 </div>
 
 
-<!-- FILE MANAGER -->
+<!-- FILES -->
 
 <div id="filesWindow" class="window">
 
-<div class="window-header"
-onmousedown="startDrag(event,this.parentElement)">
-
+<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">📁 File Manager</div>
 
 <div class="window-controls">
@@ -1813,7 +1710,6 @@ onmousedown="startDrag(event,this.parentElement)">
 <button onclick="maximizeWindow('filesWindow')">□</button>
 <button class="close" onclick="closeWindow('filesWindow')">×</button>
 </div>
-
 </div>
 
 <div class="window-body">
@@ -1836,7 +1732,6 @@ onchange="displayFiles()">
 <div id="fileList" class="file-list"></div>
 
 </div>
-
 </div>
 
 
@@ -1844,9 +1739,7 @@ onchange="displayFiles()">
 
 <div id="editorWindow" class="window">
 
-<div class="window-header"
-onmousedown="startDrag(event,this.parentElement)">
-
+<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">📝 Text Editor</div>
 
 <div class="window-controls">
@@ -1854,29 +1747,21 @@ onmousedown="startDrag(event,this.parentElement)">
 <button onclick="maximizeWindow('editorWindow')">□</button>
 <button class="close" onclick="closeWindow('editorWindow')">×</button>
 </div>
-
 </div>
 
 <div class="window-body">
 
-<textarea id="editor"
-class="editor"
+<textarea id="editor" class="editor"
 placeholder="Start writing..."></textarea>
 
 <br><br>
 
-<button class="btn green-btn" onclick="saveEditor()">
-Save
-</button>
-
-<button class="btn" onclick="clearEditor()">
-Clear
-</button>
+<button class="btn green-btn" onclick="saveEditor()">Save</button>
+<button class="btn" onclick="clearEditor()">Clear</button>
 
 <span id="editorStatus" class="muted"></span>
 
 </div>
-
 </div>
 
 
@@ -1884,9 +1769,7 @@ Clear
 
 <div id="calculatorWindow" class="window">
 
-<div class="window-header"
-onmousedown="startDrag(event,this.parentElement)">
-
+<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">🧮 Calculator</div>
 
 <div class="window-controls">
@@ -1894,17 +1777,14 @@ onmousedown="startDrag(event,this.parentElement)">
 <button onclick="maximizeWindow('calculatorWindow')">□</button>
 <button class="close" onclick="closeWindow('calculatorWindow')">×</button>
 </div>
-
 </div>
 
 <div class="window-body">
 
 <div class="calc">
 
-<input id="calcDisplay"
-class="calc-display"
-readonly
-value="0">
+<input id="calcDisplay" class="calc-display"
+readonly value="0">
 
 <div class="calc-grid">
 
@@ -1935,7 +1815,6 @@ value="0">
 
 </div>
 </div>
-
 </div>
 </div>
 
@@ -1944,9 +1823,7 @@ value="0">
 
 <div id="imagesWindow" class="window">
 
-<div class="window-header"
-onmousedown="startDrag(event,this.parentElement)">
-
+<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">🖼️ Image Viewer</div>
 
 <div class="window-controls">
@@ -1954,7 +1831,6 @@ onmousedown="startDrag(event,this.parentElement)">
 <button onclick="maximizeWindow('imagesWindow')">□</button>
 <button class="close" onclick="closeWindow('imagesWindow')">×</button>
 </div>
-
 </div>
 
 <div class="window-body">
@@ -1965,9 +1841,7 @@ onmousedown="startDrag(event,this.parentElement)">
 Select an image from your device.
 </p>
 
-<input type="file"
-accept="image/*"
-onchange="loadImage(event)">
+<input type="file" accept="image/*" onchange="loadImage(event)">
 
 <br><br>
 
@@ -1989,9 +1863,7 @@ No image selected
 
 <div id="mediaWindow" class="window">
 
-<div class="window-header"
-onmousedown="startDrag(event,this.parentElement)">
-
+<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">🎵 Media Player</div>
 
 <div class="window-controls">
@@ -1999,7 +1871,6 @@ onmousedown="startDrag(event,this.parentElement)">
 <button onclick="maximizeWindow('mediaWindow')">□</button>
 <button class="close" onclick="closeWindow('mediaWindow')">×</button>
 </div>
-
 </div>
 
 <div class="window-body">
@@ -2014,19 +1885,13 @@ onmousedown="startDrag(event,this.parentElement)">
 Select an audio file from your device.
 </p>
 
-<input type="file"
-accept="audio/*"
-onchange="loadAudio(event)">
+<input type="file" accept="audio/*" onchange="loadAudio(event)">
 
 <br><br>
 
-<audio id="audioPlayer"
-controls
-style="width:100%">
-</audio>
+<audio id="audioPlayer" controls style="width:100%"></audio>
 
 </div>
-
 </div>
 </div>
 
@@ -2035,9 +1900,7 @@ style="width:100%">
 
 <div id="browserWindow" class="window">
 
-<div class="window-header"
-onmousedown="startDrag(event,this.parentElement)">
-
+<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">🌐 ROOT Browser</div>
 
 <div class="window-controls">
@@ -2045,7 +1908,6 @@ onmousedown="startDrag(event,this.parentElement)">
 <button onclick="maximizeWindow('browserWindow')">□</button>
 <button class="close" onclick="closeWindow('browserWindow')">×</button>
 </div>
-
 </div>
 
 <div class="window-body">
@@ -2056,10 +1918,7 @@ onmousedown="startDrag(event,this.parentElement)">
 placeholder="https://example.com"
 value="https://example.com">
 
-<button class="btn green-btn"
-onclick="openBrowser()">
-Go
-</button>
+<button class="btn green-btn" onclick="openBrowser()">Go</button>
 
 </div>
 
@@ -2069,53 +1928,8 @@ title="ROOT Browser">
 </iframe>
 
 <p class="muted" style="margin-top:8px">
-Some websites may block embedded browsing for security reasons.
+Some websites block iframe embedding for security reasons.
 </p>
-
-</div>
-</div>
-
-
-<!-- RECYCLE -->
-
-<div id="recycleWindow" class="window">
-
-<div class="window-header"
-onmousedown="startDrag(event,this.parentElement)">
-
-<div class="window-title">🗑️ Recycle Bin</div>
-
-<div class="window-controls">
-<button onclick="minimizeWindow('recycleWindow')">—</button>
-<button onclick="maximizeWindow('recycleWindow')">□</button>
-<button class="close" onclick="closeWindow('recycleWindow')">×</button>
-</div>
-
-</div>
-
-<div class="window-body">
-
-<div class="panel">
-
-<h2>Recycle Bin</h2>
-
-<p class="muted">
-Items deleted inside ROOT OS can appear here.
-</p>
-
-</div>
-
-<div id="recycleList">
-
-<div class="recycle-item">
-<span>🗑️ No deleted items</span>
-</div>
-
-</div>
-
-<button class="btn" onclick="emptyRecycle()">
-Empty Recycle Bin
-</button>
 
 </div>
 </div>
@@ -2125,9 +1939,7 @@ Empty Recycle Bin
 
 <div id="settingsWindow" class="window">
 
-<div class="window-header"
-onmousedown="startDrag(event,this.parentElement)">
-
+<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
 <div class="window-title">⚙️ Settings</div>
 
 <div class="window-controls">
@@ -2135,7 +1947,6 @@ onmousedown="startDrag(event,this.parentElement)">
 <button onclick="maximizeWindow('settingsWindow')">□</button>
 <button class="close" onclick="closeWindow('settingsWindow')">×</button>
 </div>
-
 </div>
 
 <div class="window-body">
@@ -2145,11 +1956,26 @@ onmousedown="startDrag(event,this.parentElement)">
 <div class="setting">
 
 <div>
-<strong>Appearance</strong>
-<small>Switch ROOT OS between dark and light mode.</small>
+<strong>Control Center</strong>
+<small>Quickly manage ROOT OS settings.</small>
 </div>
 
-<button class="btn" onclick="toggleTheme()">Toggle</button>
+<button class="btn" onclick="openWindow('controlWindow')">
+Open
+</button>
+
+</div>
+
+<div class="setting">
+
+<div>
+<strong>Appearance</strong>
+<small>Switch between dark and light interface.</small>
+</div>
+
+<button class="btn" onclick="toggleTheme()">
+Toggle
+</button>
 
 </div>
 
@@ -2157,11 +1983,10 @@ onmousedown="startDrag(event,this.parentElement)">
 
 <div>
 <strong>ROOT Store</strong>
-<small>Discover and manage installed applications.</small>
+<small>Manage ROOT OS applications.</small>
 </div>
 
-<button class="btn"
-onclick="openWindow('storeWindow')">
+<button class="btn" onclick="openWindow('storeWindow')">
 Open
 </button>
 
@@ -2171,25 +1996,10 @@ Open
 
 <div>
 <strong>System Information</strong>
-<small>Open the ROOT OS system dashboard.</small>
+<small>View ROOT OS system information.</small>
 </div>
 
-<button class="btn"
-onclick="openWindow('dashboardWindow')">
-Open
-</button>
-
-</div>
-
-<div class="setting">
-
-<div>
-<strong>Notifications</strong>
-<small>Open notification center.</small>
-</div>
-
-<button class="btn"
-onclick="openWindow('notificationsWindow')">
+<button class="btn" onclick="openWindow('dashboardWindow')">
 Open
 </button>
 
@@ -2202,8 +2012,7 @@ Open
 <small>Lock the current ROOT OS session.</small>
 </div>
 
-<button class="btn"
-onclick="lockOS()">
+<button class="btn" onclick="lockOS()">
 Lock
 </button>
 
@@ -2224,20 +2033,24 @@ function updateClock(){
 
 const now=new Date();
 
-const time=now.toLocaleTimeString([],{
+document.getElementById("lockTime").textContent=
+now.toLocaleTimeString([],{
 hour:"2-digit",
 minute:"2-digit"
 });
 
-const date=now.toLocaleDateString([],{
+document.getElementById("lockDate").textContent=
+now.toLocaleDateString([],{
 weekday:"long",
 day:"numeric",
 month:"long"
 });
 
-document.getElementById("lockTime").textContent=time;
-document.getElementById("lockDate").textContent=date;
-document.getElementById("topClock").textContent=time;
+document.getElementById("topClock").textContent=
+now.toLocaleTimeString([],{
+hour:"2-digit",
+minute:"2-digit"
+});
 
 }
 
@@ -2249,27 +2062,23 @@ setInterval(updateClock,1000);
 
 let sessionStart=Date.now();
 
-
 function unlockOS(){
 
 document.getElementById("lockScreen").style.display="none";
 document.getElementById("desktop").style.display="block";
 
-openWindow("launcherWindow");
-
 sessionStart=Date.now();
 
-}
+openWindow("launcherWindow");
 
+}
 
 function lockOS(){
 
 closeStartMenu();
 
-document.querySelectorAll(".window")
-.forEach(function(w){
+document.querySelectorAll(".window").forEach(function(w){
 w.classList.remove("open");
-w.classList.remove("maximized");
 });
 
 document.getElementById("desktop").style.display="none";
@@ -2277,14 +2086,12 @@ document.getElementById("lockScreen").style.display="flex";
 
 }
 
-
 function restartOS(){
 
 closePower();
 closeStartMenu();
 
-document.querySelectorAll(".window")
-.forEach(function(w){
+document.querySelectorAll(".window").forEach(function(w){
 w.classList.remove("open");
 });
 
@@ -2310,7 +2117,6 @@ menu.style.display==="block"
 
 }
 
-
 function closePower(){
 
 document.getElementById("powerMenu")
@@ -2319,46 +2125,36 @@ document.getElementById("powerMenu")
 }
 
 
-/* START */
+/* START MENU */
 
 function toggleStartMenu(){
 
 const menu=document.getElementById("startMenu");
 
-if(!menu)return;
-
 menu.classList.toggle("show");
 
 if(menu.classList.contains("show")){
 
-const search=document.getElementById("startSearch");
+const input=document.getElementById("startSearch");
 
-if(search){
+input.value="";
 
-search.value="";
 searchStartApps();
 
 setTimeout(function(){
-search.focus();
+input.focus();
 },100);
 
 }
 
 }
 
-}
-
-
 function closeStartMenu(){
 
-const menu=document.getElementById("startMenu");
-
-if(menu){
-menu.classList.remove("show");
-}
+document.getElementById("startMenu")
+.classList.remove("show");
 
 }
-
 
 function startOpen(id){
 
@@ -2367,21 +2163,17 @@ openWindow(id);
 
 }
 
-
 function searchStartApps(){
 
-const input=document.getElementById("startSearch");
+const query=
+document.getElementById("startSearch")
+.value.toLowerCase();
 
-if(!input)return;
-
-const query=input.value.toLowerCase().trim();
-
-document.querySelectorAll(
-"#startApps .start-app"
-).forEach(function(app){
+document.querySelectorAll("#startApps .start-app")
+.forEach(function(app){
 
 const name=
-(app.dataset.app || "").toLowerCase();
+(app.dataset.app||"").toLowerCase();
 
 app.style.display=
 name.includes(query)
@@ -2397,7 +2189,6 @@ name.includes(query)
 
 let zIndex=100;
 
-
 function openWindow(id){
 
 const win=document.getElementById(id);
@@ -2411,42 +2202,35 @@ win.classList.add("open");
 zIndex++;
 win.style.zIndex=zIndex;
 
-if(id==="dashboardWindow"){
+if(id==="dashboardWindow")
 refreshSystemInfo();
-}
 
-if(id==="storeWindow"){
+if(id==="storeWindow")
 renderStore();
-}
+
+if(id==="controlWindow")
+updateControlCenter();
 
 }
-
 
 function closeWindow(id){
 
 const win=document.getElementById(id);
 
-if(win){
-win.classList.remove("open");
-}
+if(win)win.classList.remove("open");
 
 }
-
 
 function minimizeWindow(id){
-
 closeWindow(id);
-
 }
-
 
 function maximizeWindow(id){
 
 const win=document.getElementById(id);
 
-if(win){
+if(win)
 win.classList.toggle("maximized");
-}
 
 }
 
@@ -2454,7 +2238,6 @@ win.classList.toggle("maximized");
 /* DRAG */
 
 let dragData=null;
-
 
 function startDrag(event,win){
 
@@ -2475,16 +2258,12 @@ document.addEventListener("mouseup",stopDrag);
 
 }
 
-
 function dragMove(event){
 
 if(!dragData)return;
 
-const dx=
-event.clientX-dragData.startX;
-
-const dy=
-event.clientY-dragData.startY;
+const dx=event.clientX-dragData.startX;
+const dy=event.clientY-dragData.startY;
 
 dragData.win.style.left=
 (dragData.startLeft+dx)+"px";
@@ -2495,7 +2274,6 @@ dragData.win.style.top=
 dragData.win.style.transform="none";
 
 }
-
 
 function stopDrag(){
 
@@ -2513,7 +2291,7 @@ function searchApps(){
 
 const query=
 document.getElementById("appSearch")
-.value.toLowerCase().trim();
+.value.toLowerCase();
 
 document.querySelectorAll(".app-tile")
 .forEach(function(app){
@@ -2527,6 +2305,143 @@ name.includes(query)
 :"none";
 
 });
+
+}
+
+
+/* CONTROL CENTER */
+
+let controls={
+wifi:true,
+sound:true
+};
+
+function toggleControl(type){
+
+controls[type]=!controls[type];
+
+updateControlCenter();
+
+if(type==="wifi"){
+
+addNotification(
+controls.wifi?"📶 Network Enabled":"📴 Network Disabled",
+controls.wifi
+?"ROOT OS network indicator enabled."
+:"ROOT OS network indicator disabled."
+);
+
+}
+
+if(type==="sound"){
+
+addNotification(
+controls.sound?"🔊 Sound Enabled":"🔇 Sound Muted",
+controls.sound
+?"ROOT OS sound control enabled."
+:"ROOT OS sound control muted."
+);
+
+}
+
+}
+
+function updateControlCenter(){
+
+const wifi=document.getElementById("wifiToggle");
+const sound=document.getElementById("soundToggle");
+
+wifi.classList.toggle("active",controls.wifi);
+sound.classList.toggle("active",controls.sound);
+
+document.getElementById("wifiStatus").textContent=
+controls.wifi
+?(navigator.onLine?"Online":"Offline")
+:"Off";
+
+document.getElementById("soundStatus").textContent=
+controls.sound?"On":"Muted";
+
+const connection=
+document.getElementById("controlConnection");
+
+connection.textContent=
+navigator.onLine
+?"🟢 Connected to the internet."
+:"🔴 No internet connection.";
+
+const themeStatus=
+document.getElementById("themeStatus");
+
+themeStatus.textContent=
+document.body.classList.contains("light")
+?"Light"
+:"Dark";
+
+if(navigator.getBattery){
+
+navigator.getBattery().then(function(battery){
+
+document.getElementById("controlBattery")
+.textContent=
+Math.round(battery.level*100)+"%";
+
+});
+
+}
+
+}
+
+
+/* BRIGHTNESS */
+
+function changeBrightness(value){
+
+document.getElementById("brightnessValue")
+.textContent=value+"%";
+
+document.getElementById("desktop")
+.style.filter=
+"brightness("+value+"%)";
+
+localStorage.setItem(
+"rootOS_brightness",
+value
+);
+
+}
+
+
+/* VOLUME */
+
+function changeVolume(value){
+
+document.getElementById("volumeValue")
+.textContent=value+"%";
+
+localStorage.setItem(
+"rootOS_volume",
+value
+);
+
+}
+
+
+/* THEME */
+
+function toggleTheme(){
+
+document.body.classList.toggle("light");
+
+const light=
+document.body.classList.contains("light");
+
+localStorage.setItem(
+"rootOS_light",
+light?"1":"0"
+);
+
+updateControlCenter();
 
 }
 
@@ -2550,7 +2465,7 @@ icon:"📊",
 name:"System Monitor",
 category:"System",
 version:"1.0",
-description:"Monitor browser-accessible ROOT OS system information."
+description:"Monitor browser-accessible ROOT OS information."
 },
 
 {
@@ -2559,7 +2474,7 @@ icon:"📝",
 name:"ROOT Notes",
 category:"Tools",
 version:"1.0",
-description:"A lightweight local notes application for ROOT OS."
+description:"A lightweight local notes application."
 },
 
 {
@@ -2568,7 +2483,7 @@ icon:"🧮",
 name:"ROOT Calculator",
 category:"Tools",
 version:"1.0",
-description:"Fast calculations inside the ROOT OS environment."
+description:"Fast calculations inside ROOT OS."
 },
 
 {
@@ -2577,7 +2492,7 @@ icon:"📁",
 name:"ROOT File Tools",
 category:"Tools",
 version:"1.0",
-description:"Tools for working with files selected from your device."
+description:"Tools for working with local files."
 },
 
 {
@@ -2591,26 +2506,19 @@ description:"A simple browser interface for ROOT OS."
 
 ];
 
-
 let selectedCategory="All";
-
 
 function getInstalledApps(){
 
 try{
-
 return JSON.parse(
-localStorage.getItem("rootOS_installed_apps") || "[]"
+localStorage.getItem("rootOS_installed_apps")||"[]"
 );
-
 }catch{
-
 return[];
-
 }
 
 }
-
 
 function saveInstalledApps(apps){
 
@@ -2620,7 +2528,6 @@ JSON.stringify(apps)
 );
 
 }
-
 
 function setCategory(category){
 
@@ -2647,16 +2554,12 @@ renderStore();
 
 }
 
-
 function renderStore(){
 
-const grid=
-document.getElementById("storeGrid");
-
-if(!grid)return;
+const grid=document.getElementById("storeGrid");
 
 const query=
-(document.getElementById("storeSearch")?.value || "")
+(document.getElementById("storeSearch")?.value||"")
 .toLowerCase()
 .trim();
 
@@ -2664,16 +2567,15 @@ const installed=getInstalledApps();
 
 const apps=rootApps.filter(function(app){
 
-const categoryMatch=
-selectedCategory==="All" ||
-app.category===selectedCategory;
-
-const searchMatch=
-app.name.toLowerCase().includes(query) ||
-app.description.toLowerCase().includes(query) ||
-app.category.toLowerCase().includes(query);
-
-return categoryMatch && searchMatch;
+return(
+(selectedCategory==="All"||
+app.category===selectedCategory)&&
+(
+app.name.toLowerCase().includes(query)||
+app.description.toLowerCase().includes(query)||
+app.category.toLowerCase().includes(query)
+)
+);
 
 });
 
@@ -2682,9 +2584,7 @@ grid.innerHTML="";
 if(apps.length===0){
 
 grid.innerHTML=
-'<div class="store-empty">'+
-'🔎 No applications found.'+
-'</div>';
+'<div class="panel">🔎 No applications found.</div>';
 
 return;
 
@@ -2699,16 +2599,6 @@ const card=document.createElement("div");
 
 card.className="store-card";
 
-const buttonClass=
-isInstalled
-?"store-btn installed"
-:"store-btn";
-
-const buttonText=
-isInstalled
-?"✓ Installed"
-:"Install";
-
 card.innerHTML=`
 
 <div class="store-icon">${app.icon}</div>
@@ -2719,12 +2609,14 @@ card.innerHTML=`
 
 <div class="store-meta">
 
-<span>${escapeHTML(app.category)} · v${escapeHTML(app.version)}</span>
+<span>${app.category} · v${app.version}</span>
 
 <button
-class="${buttonClass}"
+class="${isInstalled?"store-btn installed":"store-btn"}"
 onclick="toggleApp('${app.id}')">
-${buttonText}
+
+${isInstalled?"✓ Installed":"Install"}
+
 </button>
 
 </div>
@@ -2736,7 +2628,6 @@ grid.appendChild(card);
 });
 
 }
-
 
 function toggleApp(id){
 
@@ -2759,7 +2650,7 @@ saveInstalledApps(installed);
 
 addNotification(
 "🗑️ App Removed",
-app.name+" was removed from your installed apps."
+app.name+" was removed."
 );
 
 }else{
@@ -2770,43 +2661,12 @@ saveInstalledApps(installed);
 
 addNotification(
 "⬇️ App Installed",
-app.name+" was added to your ROOT OS apps."
+app.name+" was installed."
 );
 
 }
 
 renderStore();
-
-}
-
-
-function addNotification(title,message){
-
-const list=
-document.getElementById("notificationList");
-
-const item=document.createElement("div");
-
-item.className="notification";
-
-item.innerHTML=
-"<strong>"+
-escapeHTML(title)+
-"</strong><p>"+
-escapeHTML(message)+
-"</p>";
-
-list.prepend(item);
-
-const count=
-document.getElementById("notificationCount");
-
-count.style.display="grid";
-
-const current=
-parseInt(count.textContent || "0",10);
-
-count.textContent=current+1;
 
 }
 
@@ -2820,78 +2680,55 @@ updateBattery();
 updateNetwork();
 updateSystemDetails();
 updateUptime();
+updateControlCenter();
 
 }
 
-
 function updateMemory(){
 
-const value=
-document.getElementById("memoryValue");
-
-const sub=
-document.getElementById("memorySub");
-
-const bar=
-document.getElementById("memoryBar");
+const value=document.getElementById("memoryValue");
+const sub=document.getElementById("memorySub");
+const bar=document.getElementById("memoryBar");
 
 if(navigator.deviceMemory){
 
 const gb=navigator.deviceMemory;
 
 value.textContent=gb+" GB";
-
-sub.textContent=
-"Approximate device memory";
-
+sub.textContent="Approximate device memory";
 bar.style.width=
 Math.min((gb/16)*100,100)+"%";
 
 }else{
 
 value.textContent="N/A";
-
-sub.textContent=
-"Browser does not expose memory size";
-
+sub.textContent="Browser memory API unavailable";
 bar.style.width="0%";
 
 }
 
 }
 
-
 async function updateBattery(){
 
-const value=
-document.getElementById("batteryValue");
-
-const sub=
-document.getElementById("batterySub");
-
-const bar=
-document.getElementById("batteryBar");
+const value=document.getElementById("batteryValue");
+const sub=document.getElementById("batterySub");
+const bar=document.getElementById("batteryBar");
 
 if(!navigator.getBattery){
 
 value.textContent="N/A";
-
-sub.textContent=
-"Battery API unavailable";
-
+sub.textContent="Battery API unavailable";
 bar.style.width="0%";
-
 return;
 
 }
 
 try{
 
-const battery=
-await navigator.getBattery();
+const battery=await navigator.getBattery();
 
-const level=
-Math.round(battery.level*100);
+const level=Math.round(battery.level*100);
 
 value.textContent=level+"%";
 
@@ -2906,85 +2743,58 @@ bar.style.width=level+"%";
 
 value.textContent="N/A";
 
-sub.textContent=
-"Battery information unavailable";
-
 }
 
 }
-
 
 function updateNetwork(){
 
-const value=
-document.getElementById("networkValue");
-
-const sub=
-document.getElementById("networkSub");
-
-const bar=
-document.getElementById("networkBar");
+const value=document.getElementById("networkValue");
+const sub=document.getElementById("networkSub");
+const bar=document.getElementById("networkBar");
 
 if(navigator.onLine){
 
 value.textContent="ONLINE";
-
-sub.textContent=
-"Internet connection detected";
-
+sub.textContent="Internet connection detected";
 bar.style.width="100%";
 
 }else{
 
 value.textContent="OFFLINE";
-
-sub.textContent=
-"No internet connection detected";
-
+sub.textContent="No internet connection";
 bar.style.width="15%";
 
 }
 
 }
 
-
 function updateSystemDetails(){
 
-document.getElementById("platformValue")
-.textContent=navigator.platform || "Unknown";
+document.getElementById("platformValue").textContent=
+navigator.platform||"Unknown";
 
-document.getElementById("browserValue")
-.textContent=getBrowserName();
+document.getElementById("browserValue").textContent=
+getBrowserName();
 
-document.getElementById("screenValue")
-.textContent=
-window.innerWidth+
-" × "+
-window.innerHeight;
+document.getElementById("screenValue").textContent=
+window.innerWidth+" × "+window.innerHeight;
 
-document.getElementById("languageValue")
-.textContent=navigator.language || "Unknown";
+document.getElementById("languageValue").textContent=
+navigator.language||"Unknown";
 
-document.getElementById("onlineValue")
-.textContent=
-navigator.onLine
-?"Online"
-:"Offline";
+document.getElementById("onlineValue").textContent=
+navigator.onLine?"Online":"Offline";
 
-document.getElementById("coresValue")
-.textContent=
-navigator.hardwareConcurrency
-?navigator.hardwareConcurrency
-:"N/A";
+document.getElementById("coresValue").textContent=
+navigator.hardwareConcurrency||"N/A";
 
-document.getElementById("deviceMemoryValue")
-.textContent=
+document.getElementById("deviceMemoryValue").textContent=
 navigator.deviceMemory
 ?navigator.deviceMemory+" GB"
 :"Not available";
 
 }
-
 
 function getBrowserName(){
 
@@ -2993,58 +2803,72 @@ const ua=navigator.userAgent;
 if(ua.includes("Edg/"))return"Microsoft Edge";
 if(ua.includes("OPR/"))return"Opera";
 if(ua.includes("Chrome/"))return"Google Chrome";
-
 if(ua.includes("Firefox/"))return"Firefox";
-
-if(ua.includes("Safari/") &&
-!ua.includes("Chrome/"))
+if(ua.includes("Safari/")&&!ua.includes("Chrome/"))
 return"Safari";
 
 return"Unknown Browser";
 
 }
 
-
 function updateUptime(){
 
-const value=
-document.getElementById("uptimeValue");
+const value=document.getElementById("uptimeValue");
+const bar=document.getElementById("uptimeBar");
 
-const bar=
-document.getElementById("uptimeBar");
-
-const seconds=
-Math.floor(
+const seconds=Math.floor(
 (Date.now()-sessionStart)/1000
 );
 
-const h=
-String(Math.floor(seconds/3600))
-.padStart(2,"0");
+const h=String(Math.floor(seconds/3600)).padStart(2,"0");
+const m=String(Math.floor((seconds%3600)/60)).padStart(2,"0");
+const s=String(seconds%60).padStart(2,"0");
 
-const m=
-String(Math.floor((seconds%3600)/60))
-.padStart(2,"0");
-
-const s=
-String(seconds%60)
-.padStart(2,"0");
-
-value.textContent=
-h+":"+m+":"+s;
+value.textContent=h+":"+m+":"+s;
 
 bar.style.width=
-(Math.min((seconds/3600)*100,100))+"%";
+Math.min((seconds/3600)*100,100)+"%";
 
 }
 
 setInterval(updateUptime,1000);
 
-window.addEventListener("online",refreshSystemInfo);
-window.addEventListener("offline",refreshSystemInfo);
+window.addEventListener("online",function(){
+refreshSystemInfo();
+});
+
+window.addEventListener("offline",function(){
+refreshSystemInfo();
+});
 
 
 /* NOTIFICATIONS */
+
+function addNotification(title,message){
+
+const list=document.getElementById("notificationList");
+
+const item=document.createElement("div");
+
+item.className="notification";
+
+item.innerHTML=
+"<strong>"+escapeHTML(title)+
+"</strong><p>"+
+escapeHTML(message)+
+"</p>";
+
+list.prepend(item);
+
+const count=
+document.getElementById("notificationCount");
+
+count.style.display="grid";
+
+count.textContent=
+parseInt(count.textContent||"0",10)+1;
+
+}
 
 function clearNotifications(){
 
@@ -3064,27 +2888,20 @@ document.getElementById("notificationCount")
 
 function displayFiles(){
 
-const input=
-document.getElementById("fileInput");
-
-const list=
-document.getElementById("fileList");
+const input=document.getElementById("fileInput");
+const list=document.getElementById("fileList");
 
 list.innerHTML="";
 
-Array.from(input.files)
-.forEach(function(file){
+Array.from(input.files).forEach(function(file){
 
-const item=
-document.createElement("div");
+const item=document.createElement("div");
 
 item.className="file-item";
 
 item.innerHTML=
-"<span>📄 "+
-escapeHTML(file.name)+
-"</span>"+
-"<small>"+
+"<span>📄 "+escapeHTML(file.name)+
+"</span><small>"+
 formatBytes(file.size)+
 "</small>";
 
@@ -3094,14 +2911,11 @@ list.appendChild(item);
 
 }
 
-
 function formatBytes(bytes){
 
 if(bytes===0)return"0 Bytes";
 
-const units=[
-"Bytes","KB","MB","GB"
-];
+const units=["Bytes","KB","MB","GB"];
 
 const i=Math.floor(
 Math.log(bytes)/Math.log(1024)
@@ -3114,34 +2928,18 @@ bytes/Math.pow(1024,i)
 }
 
 
-function escapeHTML(value){
-
-const div=document.createElement("div");
-
-div.textContent=value;
-
-return div.innerHTML;
-
-}
-
-
 /* EDITOR */
 
 function saveEditor(){
 
-const text=
-document.getElementById("editor").value;
+const text=document.getElementById("editor").value;
 
-localStorage.setItem(
-"rootOS_editor",
-text
-);
+localStorage.setItem("rootOS_editor",text);
 
 document.getElementById("editorStatus")
 .textContent=" Saved locally.";
 
 }
-
 
 function clearEditor(){
 
@@ -3152,18 +2950,12 @@ document.getElementById("editorStatus")
 
 }
 
-
 function loadEditor(){
 
-const saved=
-localStorage.getItem("rootOS_editor");
+const saved=localStorage.getItem("rootOS_editor");
 
-if(saved!==null){
-
-document.getElementById("editor")
-.value=saved;
-
-}
+if(saved!==null)
+document.getElementById("editor").value=saved;
 
 }
 
@@ -3174,30 +2966,24 @@ loadEditor();
 
 function calcInput(value){
 
-const display=
-document.getElementById("calcDisplay");
+const display=document.getElementById("calcDisplay");
 
-if(display.value==="0"){
+if(display.value==="0")
 display.value="";
-}
 
 display.value+=value;
 
 }
 
-
 function calcClear(){
 
-document.getElementById("calcDisplay")
-.value="0";
+document.getElementById("calcDisplay").value="0";
 
 }
 
-
 function calcBack(){
 
-const display=
-document.getElementById("calcDisplay");
+const display=document.getElementById("calcDisplay");
 
 display.value=
 display.value.length>1
@@ -3206,11 +2992,9 @@ display.value.length>1
 
 }
 
-
 function calcResult(){
 
-const display=
-document.getElementById("calcDisplay");
+const display=document.getElementById("calcDisplay");
 
 const expression=display.value;
 
@@ -3224,9 +3008,7 @@ return;
 try{
 
 const result=Function(
-'"use strict";return ('+
-expression+
-')'
+'"use strict";return ('+expression+')'
 )();
 
 display.value=
@@ -3247,19 +3029,16 @@ display.value="Error";
 
 function loadImage(event){
 
-const file=
-event.target.files[0];
+const file=event.target.files[0];
 
 if(!file)return;
 
-const image=
-document.getElementById("previewImage");
+const image=document.getElementById("previewImage");
 
 const placeholder=
 document.getElementById("imagePlaceholder");
 
-image.src=
-URL.createObjectURL(file);
+image.src=URL.createObjectURL(file);
 
 image.style.display="block";
 placeholder.style.display="none";
@@ -3271,17 +3050,13 @@ placeholder.style.display="none";
 
 function loadAudio(event){
 
-const file=
-event.target.files[0];
+const file=event.target.files[0];
 
 if(!file)return;
 
-const audio=
-document.getElementById("audioPlayer");
+const audio=document.getElementById("audioPlayer");
 
-audio.src=
-URL.createObjectURL(file);
-
+audio.src=URL.createObjectURL(file);
 audio.load();
 
 }
@@ -3297,9 +3072,8 @@ document.getElementById("browserURL")
 
 if(!url)return;
 
-if(!/^https?:\/\//i.test(url)){
+if(!/^https?:\/\//i.test(url))
 url="https://"+url;
-}
 
 document.getElementById("browserFrame")
 .src=url;
@@ -3307,38 +3081,52 @@ document.getElementById("browserFrame")
 }
 
 
-/* RECYCLE */
+/* UTILITY */
 
-function emptyRecycle(){
+function escapeHTML(value){
 
-document.getElementById("recycleList")
-.innerHTML=
-'<div class="recycle-item">'+
-'<span>🗑️ No deleted items</span>'+
-'</div>';
+const div=document.createElement("div");
 
-}
+div.textContent=value;
 
-
-/* THEME */
-
-function toggleTheme(){
-
-document.body.classList.toggle("light");
-
-const light=
-document.body.classList.contains("light");
-
-localStorage.setItem(
-"rootOS_light",
-light?"1":"0"
-);
+return div.innerHTML;
 
 }
 
 
-if(localStorage.getItem("rootOS_light")==="1"){
+/* SAVED SETTINGS */
+
+if(localStorage.getItem("rootOS_light")==="1")
 document.body.classList.add("light");
+
+const savedBrightness=
+localStorage.getItem("rootOS_brightness");
+
+if(savedBrightness){
+
+document.getElementById("brightnessSlider").value=
+savedBrightness;
+
+document.getElementById("brightnessValue")
+.textContent=savedBrightness+"%";
+
+document.getElementById("desktop")
+.style.filter=
+"brightness("+savedBrightness+"%)";
+
+}
+
+const savedVolume=
+localStorage.getItem("rootOS_volume");
+
+if(savedVolume){
+
+document.getElementById("volumeSlider").value=
+savedVolume;
+
+document.getElementById("volumeValue")
+.textContent=savedVolume+"%";
+
 }
 
 
@@ -3360,17 +3148,15 @@ closePower();
 
 document.addEventListener("click",function(event){
 
-const menu=
-document.getElementById("startMenu");
+const menu=document.getElementById("startMenu");
 
 if(!menu)return;
 
 const inside=menu.contains(event.target);
 const dock=event.target.closest(".dock");
 
-if(!inside && !dock){
+if(!inside&&!dock)
 closeStartMenu();
-}
 
 });
 
@@ -3381,6 +3167,7 @@ setTimeout(function(){
 
 refreshSystemInfo();
 renderStore();
+updateControlCenter();
 
 },500);
 
@@ -3388,3 +3175,4 @@ renderStore();
 
 </body>
 </html>
+```
