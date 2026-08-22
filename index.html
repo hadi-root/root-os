@@ -1,3680 +1,1550 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#05070d">
-<title>ROOT OS v1.6</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#087cff">
+<title>ROOT OS v1.7</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-
-:root{
---bg:#05070d;
---panel:#0a111c;
---panel2:#0d1623;
---border:#293b52;
---text:#f4f7fb;
---muted:#8997aa;
---accent:#43e6b0;
---blue:#55baff;
---danger:#ff6474;
---warning:#ffd166;
-}
-
-body{
-font-family:Arial,Helvetica,sans-serif;
-background:var(--bg);
-color:var(--text);
-width:100%;
-height:100vh;
-overflow:hidden;
-}
-
-button,input,textarea{font-family:inherit}
-button{cursor:pointer}
-
-#lockScreen{
-position:fixed;
-inset:0;
-z-index:99999;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-background:
-radial-gradient(circle at 20% 20%,rgba(67,230,176,.12),transparent 30%),
-radial-gradient(circle at 80% 70%,rgba(85,186,255,.12),transparent 30%),
-linear-gradient(135deg,#03050a,#0a1020);
-}
-
-.lock-content{padding:30px}
-
-.lock-logo{
-font-size:27px;
-font-weight:900;
-letter-spacing:5px;
-margin-bottom:35px;
-}
-
-.lock-logo span{color:var(--accent)}
-
-.lock-time{
-font-size:clamp(55px,16vw,110px);
-font-weight:200;
-letter-spacing:-4px;
-}
-
-.lock-date{
-color:var(--muted);
-margin-top:8px;
-font-size:15px;
-}
-
-.unlock-btn{
-margin-top:40px;
-padding:14px 25px;
-border:1px solid #315d50;
-border-radius:30px;
-background:rgba(67,230,176,.08);
-color:var(--accent);
-font-weight:bold;
-}
-
-#desktop{
-position:fixed;
-inset:0;
-display:none;
-background:
-radial-gradient(circle at 15% 20%,rgba(67,230,176,.09),transparent 30%),
-radial-gradient(circle at 85% 75%,rgba(85,186,255,.09),transparent 30%),
-linear-gradient(135deg,#05070d,#090f1b);
-}
-
-.topbar{
-position:absolute;
-top:0;
-left:0;
-right:0;
-height:45px;
-background:rgba(4,7,12,.82);
-backdrop-filter:blur(16px);
-border-bottom:1px solid rgba(255,255,255,.06);
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 12px;
-z-index:5000;
-}
-
-.top-left,.top-right{
-display:flex;
-align-items:center;
-gap:10px;
-}
-
-.system-name{
-font-weight:bold;
-letter-spacing:2px;
-font-size:13px;
-}
-
-.system-name span{color:var(--accent)}
-
-.status-text{
-color:var(--muted);
-font-size:10px;
-}
-
-.top-clock{font-size:12px}
-
-.notification-btn{
-position:relative;
-width:32px;
-height:30px;
-border:0;
-border-radius:8px;
-background:#111a28;
-color:white;
-}
-
-.notification-count{
-position:absolute;
-right:-4px;
-top:-5px;
-min-width:15px;
-height:15px;
-border-radius:10px;
-background:var(--danger);
-font-size:9px;
-display:grid;
-place-items:center;
-}
-
-.desktop-icons{
-position:absolute;
-top:63px;
-left:15px;
-display:grid;
-grid-template-columns:82px;
-gap:10px;
-z-index:5;
-}
-
-.desktop-icon{
-width:76px;
-min-height:76px;
-border:1px solid transparent;
-border-radius:12px;
-background:transparent;
-color:white;
-padding:6px 3px;
-text-align:center;
-}
-
-.desktop-icon:hover{
-background:rgba(255,255,255,.07);
-border-color:rgba(255,255,255,.08);
-}
-
-.desktop-icon .icon{
-width:42px;
-height:42px;
-margin:0 auto 6px;
-display:grid;
-place-items:center;
-border-radius:11px;
-background:#101928;
-border:1px solid #2a3a50;
-font-size:21px;
-}
-
-.desktop-icon span{
-font-size:10px;
-display:block;
-}
-
-.dock{
-position:absolute;
-left:50%;
-bottom:15px;
-transform:translateX(-50%);
-display:flex;
-gap:7px;
-padding:8px;
-border:1px solid rgba(255,255,255,.1);
-border-radius:18px;
-background:rgba(8,13,22,.88);
-backdrop-filter:blur(20px);
-box-shadow:0 20px 60px rgba(0,0,0,.45);
-z-index:4500;
-}
-
-.dock button{
-width:47px;
-height:47px;
-border:1px solid transparent;
-border-radius:13px;
-background:#111a29;
-color:white;
-font-size:20px;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+    --blue: #087cff;
+    --blue2: #0057c7;
+    --dark: #06111f;
+    --dark2: #0a192b;
+    --glass: rgba(8, 20, 36, 0.82);
+    --border: rgba(255,255,255,0.12);
+    --text: #ffffff;
+    --muted: #9db0c7;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: #020812;
+    color: var(--text);
+}
+
+/* BOOT SCREEN */
+#bootScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #020812;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bootLogo {
+    width: 90px;
+    height: 90px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #087cff, #004db4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    font-weight: 900;
+    box-shadow: 0 0 50px rgba(8,124,255,.45);
+    margin-bottom: 25px;
+}
+
+.bootTitle {
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.bootVersion {
+    color: var(--muted);
+    margin-top: 8px;
+}
+
+.loader {
+    width: 180px;
+    height: 4px;
+    background: #172638;
+    border-radius: 10px;
+    margin-top: 28px;
+    overflow: hidden;
+}
+
+.loaderBar {
+    width: 0;
+    height: 100%;
+    background: var(--blue);
+    animation: load 2.2s forwards;
 }
-
-.dock button:hover{
-border-color:#40536c;
-transform:translateY(-2px);
-}
-
-#startMenu{
-position:absolute;
-left:50%;
-bottom:76px;
-transform:translateX(-50%) translateY(15px);
-width:min(500px,calc(100vw - 20px));
-max-height:75vh;
-overflow:auto;
-padding:14px;
-display:none;
-opacity:0;
-background:rgba(7,12,20,.98);
-border:1px solid #31445c;
-border-radius:18px;
-box-shadow:0 25px 80px rgba(0,0,0,.65);
-backdrop-filter:blur(20px);
-z-index:8000;
-transition:.2s ease;
-}
-
-#startMenu.show{
-display:block;
-opacity:1;
-transform:translateX(-50%) translateY(0);
-}
-
-.start-header{
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:5px 4px 12px;
-}
-
-.start-brand{
-font-weight:800;
-letter-spacing:2px;
-}
-
-.start-brand span{color:var(--accent)}
-
-.start-user{
-font-size:10px;
-color:var(--muted);
-}
-
-.start-search{
-width:100%;
-padding:12px;
-border-radius:10px;
-border:1px solid var(--border);
-background:#05080e;
-color:white;
-outline:none;
-margin-bottom:13px;
-}
-
-.start-section{
-font-size:10px;
-color:var(--muted);
-letter-spacing:1.5px;
-margin:12px 3px 7px;
-}
-
-.start-apps{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:7px;
-}
-
-.start-app{
-border:1px solid transparent;
-border-radius:11px;
-background:#0d1623;
-color:white;
-padding:10px 5px;
-text-align:center;
-}
-
-.start-app:hover{
-border-color:#3c526d;
-background:#142033;
-}
-
-.start-app .start-icon{
-font-size:21px;
-margin-bottom:5px;
-}
-
-.start-app span{
-font-size:9px;
-display:block;
-}
-
-.start-bottom{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:7px;
-margin-top:14px;
-padding-top:12px;
-border-top:1px solid var(--border);
-}
-
-.start-bottom button{
-padding:10px 5px;
-border:1px solid var(--border);
-border-radius:9px;
-background:#0d1623;
-color:white;
-font-size:10px;
-}
-
-.window{
-position:absolute;
-left:50%;
-top:50%;
-width:min(780px,calc(100vw - 25px));
-height:min(550px,calc(100vh - 110px));
-transform:translate(-50%,-50%);
-display:none;
-flex-direction:column;
-overflow:hidden;
-background:var(--panel);
-border:1px solid #35475f;
-border-radius:15px;
-box-shadow:0 30px 100px rgba(0,0,0,.65);
-backdrop-filter:blur(18px);
-z-index:100;
-}
-
-.window.open{display:flex}
-
-.window.maximized{
-left:10px;
-top:55px;
-width:calc(100vw - 20px);
-height:calc(100vh - 110px);
-transform:none;
-}
-
-.window-header{
-height:43px;
-flex-shrink:0;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 9px 0 14px;
-background:#09101a;
-border-bottom:1px solid var(--border);
-cursor:grab;
-user-select:none;
-}
-
-.window-title{
-font-size:12px;
-font-weight:bold;
-display:flex;
-align-items:center;
-gap:8px;
-}
-
-.window-controls{
-display:flex;
-gap:5px;
-}
-
-.window-controls button{
-width:29px;
-height:27px;
-border:0;
-border-radius:7px;
-background:#172131;
-color:white;
-}
-
-.window-controls .close:hover{
-background:var(--danger);
-}
-
-.window-body{
-flex:1;
-overflow:auto;
-padding:20px;
-}
-
-.btn{
-padding:10px 14px;
-border-radius:9px;
-border:1px solid var(--border);
-background:#111a28;
-color:white;
-}
-
-.green-btn{
-background:var(--accent);
-color:#04100b;
-border:0;
-font-weight:bold;
-}
-
-.danger-btn{
-background:rgba(255,100,116,.12);
-border-color:#7d3945;
-color:#ff9ca7;
-}
-
-.panel{
-background:#0a111c;
-border:1px solid var(--border);
-border-radius:13px;
-padding:17px;
-margin-bottom:12px;
-}
-
-.muted{
-color:var(--muted);
-font-size:13px;
-line-height:1.6;
-}
-
-.welcome{
-padding:23px;
-border:1px solid var(--border);
-border-radius:14px;
-background:linear-gradient(135deg,rgba(67,230,176,.07),rgba(85,186,255,.05));
-}
-
-.welcome .small{
-color:var(--accent);
-font-size:10px;
-letter-spacing:3px;
-margin-bottom:9px;
-}
-
-.welcome h1{
-font-size:31px;
-margin-bottom:8px;
-}
-
-.welcome p{
-color:var(--muted);
-line-height:1.6;
-}
-
-.search{
-width:100%;
-margin-top:15px;
-padding:12px;
-border:1px solid var(--border);
-border-radius:10px;
-background:#05080e;
-color:white;
-outline:none;
-}
-
-.app-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:9px;
-margin-top:15px;
-}
-
-.app-tile{
-padding:15px;
-border-radius:12px;
-border:1px solid var(--border);
-background:#0b121e;
-color:white;
-text-align:left;
-}
-
-.app-tile:hover{border-color:#40536d}
-
-.app-tile .big{
-font-size:22px;
-margin-bottom:8px;
-}
-
-.app-tile strong{
-display:block;
-font-size:12px;
-margin-bottom:4px;
-}
-
-.app-tile small{
-color:var(--muted);
-font-size:10px;
-}
-
-.dashboard{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:10px;
-}
-
-.stat-card{
-padding:16px;
-border:1px solid var(--border);
-border-radius:13px;
-background:linear-gradient(145deg,#0a121e,#080e18);
-}
-
-.stat-top{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:12px;
-}
-
-.stat-icon{font-size:22px}
-
-.stat-label{
-font-size:10px;
-color:var(--muted);
-letter-spacing:1px;
-}
-
-.stat-value{
-font-size:22px;
-font-weight:bold;
-}
-
-.stat-sub{
-font-size:10px;
-color:var(--muted);
-margin-top:5px;
-}
-
-.progress{
-height:7px;
-background:#182333;
-border-radius:10px;
-overflow:hidden;
-margin-top:12px;
-}
-
-.progress-bar{
-height:100%;
-width:0%;
-background:linear-gradient(90deg,var(--accent),var(--blue));
-border-radius:10px;
-transition:width .5s;
-}
-
-.system-table{
-width:100%;
-border-collapse:collapse;
-margin-top:10px;
-}
-
-.system-table td{
-padding:9px 4px;
-border-bottom:1px solid var(--border);
-font-size:11px;
-}
-
-.system-table td:first-child{color:var(--muted)}
-.system-table td:last-child{text-align:right;font-weight:bold}
-
-.store-hero{
-padding:20px;
-border:1px solid var(--border);
-border-radius:14px;
-background:linear-gradient(135deg,rgba(67,230,176,.09),rgba(85,186,255,.08));
-margin-bottom:15px;
-}
-
-.store-hero h1{
-font-size:27px;
-margin-bottom:6px;
-}
-
-.store-hero p{
-color:var(--muted);
-font-size:12px;
-line-height:1.6;
-}
-
-.store-tools{
-display:flex;
-gap:8px;
-margin-bottom:14px;
-}
-
-.store-search{
-flex:1;
-padding:12px;
-border:1px solid var(--border);
-border-radius:10px;
-background:#05080e;
-color:white;
-outline:none;
-}
-
-.category-btn{
-padding:10px 12px;
-border:1px solid var(--border);
-border-radius:9px;
-background:#111a28;
-color:white;
-}
-
-.category-btn.active{
-background:var(--accent);
-color:#04100b;
-border-color:var(--accent);
-font-weight:bold;
+
+@keyframes load {
+    to { width: 100%; }
 }
 
-.store-grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:10px;
+/* DESKTOP */
+#desktop {
+    position: fixed;
+    inset: 0;
+    display: none;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(8,124,255,.18), transparent 35%),
+        radial-gradient(circle at 80% 80%, rgba(0,90,210,.12), transparent 35%),
+        linear-gradient(135deg, #020812, #071729);
 }
 
-.store-card{
-padding:15px;
-border:1px solid var(--border);
-border-radius:13px;
-background:#0a121e;
+/* TOP BAR */
+.topbar {
+    height: 58px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+    background: rgba(3,12,24,.75);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 100;
 }
 
-.store-icon{
-width:48px;
-height:48px;
-display:grid;
-place-items:center;
-border-radius:13px;
-background:#111d2c;
-border:1px solid #30435a;
-font-size:24px;
-margin-bottom:11px;
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
 }
 
-.store-card h3{
-font-size:14px;
-margin-bottom:5px;
+.brandLogo {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    background: linear-gradient(135deg,#087cff,#0055bd);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
 }
 
-.store-card p{
-font-size:10px;
-color:var(--muted);
-line-height:1.5;
-min-height:30px;
+.brandText span {
+    color: var(--blue);
 }
-
-.store-meta{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-top:12px;
-font-size:9px;
-color:var(--muted);
-}
-
-.store-btn{
-padding:8px 11px;
-border:0;
-border-radius:8px;
-background:var(--accent);
-color:#04100b;
-font-size:10px;
-font-weight:bold;
-}
-
-.store-btn.installed{
-background:#182637;
-color:#aab8ca;
-border:1px solid #33485f;
-}
-
-.quick-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:9px;
-margin-bottom:15px;
-}
-
-.quick-toggle{
-min-height:80px;
-padding:12px 7px;
-border:1px solid var(--border);
-border-radius:12px;
-background:#0b1421;
-color:white;
+
+.statusArea {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: #cbd8e8;
+    font-size: 14px;
 }
-
-.quick-toggle.active{
-background:rgba(67,230,176,.12);
-border-color:#397a66;
-}
-
-.quick-toggle .qicon{
-font-size:22px;
-margin-bottom:7px;
+
+.statusItem {
+    cursor: pointer;
+}
+
+/* DESKTOP CONTENT */
+.desktopContent {
+    position: absolute;
+    top: 58px;
+    bottom: 74px;
+    left: 0;
+    right: 0;
+    padding: 35px;
+    overflow: hidden;
 }
 
-.quick-toggle strong{
-display:block;
-font-size:10px;
+.welcome {
+    max-width: 700px;
 }
 
-.quick-toggle small{
-display:block;
-color:var(--muted);
-font-size:9px;
-margin-top:3px;
+.welcome h1 {
+    font-size: clamp(34px, 5vw, 62px);
+    line-height: 1.05;
+    margin-bottom: 12px;
 }
 
-.slider-box{
-padding:16px;
-border:1px solid var(--border);
-border-radius:12px;
-background:#0b121e;
-margin-bottom:10px;
+.welcome h1 span {
+    color: var(--blue);
 }
 
-.slider-head{
-display:flex;
-justify-content:space-between;
-font-size:11px;
-margin-bottom:12px;
+.welcome p {
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+/* DESKTOP ICONS */
+.desktopApps {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 90px);
+    gap: 25px;
+    margin-top: 40px;
 }
 
-input[type=range]{
-width:100%;
-accent-color:var(--accent);
+.desktopIcon {
+    width: 90px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.desktopIconBox {
+    width: 58px;
+    height: 58px;
+    margin: auto;
+    border-radius: 17px;
+    background: rgba(8,124,255,.13);
+    border: 1px solid rgba(8,124,255,.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 27px;
+    transition: .2s;
 }
 
-.profile-card{
-display:flex;
-align-items:center;
-gap:16px;
-padding:18px;
-border:1px solid var(--border);
-border-radius:14px;
-background:linear-gradient(135deg,rgba(67,230,176,.08),rgba(85,186,255,.06));
-margin-bottom:14px;
+.desktopIcon:hover .desktopIconBox {
+    transform: translateY(-4px);
+    background: rgba(8,124,255,.25);
+    box-shadow: 0 8px 25px rgba(8,124,255,.2);
 }
 
-.avatar{
-width:66px;
-height:66px;
-border-radius:50%;
-display:grid;
-place-items:center;
-background:#101d2d;
-border:2px solid var(--accent);
-font-size:28px;
-flex-shrink:0;
+.desktopIcon span {
+    display: block;
+    margin-top: 8px;
+    color: #d7e3f2;
+    font-size: 12px;
 }
 
-.profile-name{
-font-size:20px;
-font-weight:bold;
+/* DOCK */
+.dock {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 60px;
+    padding: 7px 12px;
+    border-radius: 20px;
+    background: rgba(5,16,30,.85);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    z-index: 500;
 }
 
-.profile-status{
-font-size:11px;
-color:var(--accent);
-margin-top:5px;
+.dockButton {
+    width: 45px;
+    height: 45px;
+    border: 0;
+    border-radius: 13px;
+    color: white;
+    background: transparent;
+    cursor: pointer;
+    font-size: 21px;
+    transition: .2s;
 }
 
-.profile-actions{
-margin-left:auto;
-display:flex;
-gap:7px;
-flex-wrap:wrap;
-justify-content:flex-end;
+.dockButton:hover {
+    background: rgba(8,124,255,.22);
+    transform: translateY(-3px);
 }
-
-.manager-list{
-display:grid;
-gap:8px;
+
+.startButton {
+    background: var(--blue);
 }
 
-.manager-item{
-display:flex;
-align-items:center;
-gap:12px;
-padding:13px;
-border:1px solid var(--border);
-border-radius:11px;
-background:#09111c;
+.startButton:hover {
+    background: #1687ff;
 }
 
-.manager-icon{
-width:42px;
-height:42px;
-border-radius:10px;
-display:grid;
-place-items:center;
-background:#111d2c;
-border:1px solid #30435a;
-font-size:20px;
-flex-shrink:0;
+/* WINDOWS */
+.window {
+    position: absolute;
+    width: min(760px, calc(100vw - 30px));
+    height: min(540px, calc(100vh - 110px));
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(7,17,30,.95);
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: 18px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.55);
+    overflow: hidden;
+    display: none;
+    z-index: 300;
+    backdrop-filter: blur(25px);
 }
 
-.manager-info{
-flex:1;
-min-width:0;
+.window.active {
+    display: block;
 }
 
-.manager-info strong{
-font-size:12px;
-display:block;
+.windowHeader {
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px 0 18px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,.025);
 }
 
-.manager-info small{
-font-size:10px;
-color:var(--muted);
-display:block;
-margin-top:4px;
+.windowTitle {
+    font-weight: 700;
 }
 
-.storage-box{
-padding:17px;
-border:1px solid var(--border);
-border-radius:13px;
-background:#0a111c;
-margin-bottom:12px;
+.windowControls {
+    display: flex;
+    gap: 7px;
 }
 
-.storage-head{
-display:flex;
-justify-content:space-between;
-margin-bottom:10px;
-font-size:12px;
+.windowControl {
+    width: 31px;
+    height: 31px;
+    border: 0;
+    border-radius: 9px;
+    background: rgba(255,255,255,.07);
+    color: white;
+    cursor: pointer;
 }
 
-.storage-bar{
-height:10px;
-background:#182333;
-border-radius:20px;
-overflow:hidden;
+.windowControl:hover {
+    background: var(--blue);
 }
 
-.storage-used{
-height:100%;
-width:0;
-background:linear-gradient(90deg,var(--accent),var(--blue));
-border-radius:20px;
+.windowBody {
+    height: calc(100% - 52px);
+    overflow: auto;
 }
 
-.notification{
-padding:13px;
-border:1px solid var(--border);
-border-radius:10px;
-background:#09111c;
-margin-bottom:8px;
+/* START MENU */
+#startMenu {
+    position: absolute;
+    bottom: 86px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(500px, calc(100vw - 24px));
+    max-height: 620px;
+    background: rgba(5,15,28,.96);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 20px;
+    display: none;
+    z-index: 900;
+    backdrop-filter: blur(25px);
+    box-shadow: 0 25px 80px rgba(0,0,0,.55);
 }
 
-.notification strong{font-size:12px}
-
-.notification p{
-font-size:11px;
-color:var(--muted);
-margin-top:4px;
+#startMenu.active {
+    display: block;
 }
 
-.file-area{
-border:1px dashed #3a4b62;
-border-radius:13px;
-padding:24px;
-text-align:center;
-color:var(--muted);
+.searchBox {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 13px;
+    border: 1px solid var(--border);
+    outline: none;
+    background: rgba(255,255,255,.06);
+    color: white;
+    font-size: 15px;
 }
 
-.file-list{margin-top:14px}
-
-.file-item{
-display:flex;
-justify-content:space-between;
-padding:11px;
-margin-top:7px;
-border:1px solid var(--border);
-border-radius:9px;
-background:#09101a;
-font-size:12px;
+.searchBox::placeholder {
+    color: #7890aa;
 }
-
-.file-item small{color:var(--muted)}
 
-.editor{
-width:100%;
-height:330px;
-resize:none;
-background:#05080e;
-border:1px solid var(--border);
-border-radius:10px;
-color:#e9eef5;
-padding:15px;
-font-family:monospace;
-font-size:13px;
-outline:none;
+.startHeading {
+    margin: 22px 0 13px;
+    color: #9db0c7;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.calc{
-max-width:330px;
-margin:auto;
+.appGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
 }
 
-.calc-display{
-width:100%;
-height:65px;
-background:#05080e;
-border:1px solid var(--border);
-border-radius:10px;
-color:white;
-padding:12px;
-text-align:right;
-font-size:24px;
-margin-bottom:9px;
+.appButton {
+    min-height: 82px;
+    border: 0;
+    border-radius: 14px;
+    color: white;
+    background: rgba(255,255,255,.045);
+    cursor: pointer;
+    transition: .2s;
 }
 
-.calc-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:7px;
+.appButton:hover {
+    background: rgba(8,124,255,.18);
+    transform: translateY(-2px);
 }
 
-.calc-grid button{
-height:54px;
-border:1px solid var(--border);
-border-radius:9px;
-background:#111a28;
-color:white;
-font-size:16px;
+.appEmoji {
+    font-size: 25px;
+    display: block;
+    margin-bottom: 7px;
 }
 
-.image-preview{
-width:100%;
-height:330px;
-display:grid;
-place-items:center;
-border:1px dashed #3a4b62;
-border-radius:12px;
-overflow:hidden;
-background:#05080e;
+.appName {
+    font-size: 12px;
 }
 
-.image-preview img{
-max-width:100%;
-max-height:100%;
-object-fit:contain;
-display:none;
+/* TERMINAL */
+.terminal {
+    height: 100%;
+    background: #02070d;
+    padding: 18px;
+    font-family: Consolas, monospace;
+    color: #cde8ff;
+    overflow: auto;
 }
 
-.media-box{
-text-align:center;
-padding:30px;
+.terminalLine {
+    margin-bottom: 8px;
+    line-height: 1.5;
 }
 
-.media-icon{
-font-size:55px;
-margin-bottom:20px;
+.terminalBlue {
+    color: #3d9cff;
 }
 
-.browser-bar{
-display:flex;
-gap:7px;
-margin-bottom:10px;
+.terminalInputRow {
+    display: flex;
+    align-items: center;
 }
 
-.browser-bar input{
-flex:1;
-padding:11px;
-border:1px solid var(--border);
-border-radius:9px;
-background:#05080e;
-color:white;
+.terminalPrompt {
+    color: #3d9cff;
+    margin-right: 7px;
 }
 
-.browser-frame{
-width:100%;
-height:350px;
-border:1px solid var(--border);
-border-radius:10px;
-background:white;
+#terminalInput {
+    flex: 1;
+    background: transparent;
+    border: 0;
+    outline: none;
+    color: white;
+    font-family: Consolas, monospace;
+    font-size: 14px;
 }
 
-.setting{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:15px;
-padding:15px 0;
-border-bottom:1px solid var(--border);
+/* NOTES */
+.notesArea {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background: transparent;
+    color: white;
+    border: 0;
+    outline: none;
+    resize: none;
+    font-size: 16px;
+    line-height: 1.6;
 }
 
-.setting:last-child{border-bottom:0}
-
-.setting small{
-display:block;
-color:var(--muted);
-margin-top:4px;
+/* CALCULATOR */
+.calculator {
+    max-width: 340px;
+    margin: auto;
+    padding: 20px;
 }
 
-.empty{
-text-align:center;
-padding:30px;
-color:var(--muted);
-border:1px dashed #35475f;
-border-radius:12px;
+.calcDisplay {
+    width: 100%;
+    height: 70px;
+    border-radius: 13px;
+    background: #02070d;
+    border: 1px solid var(--border);
+    color: white;
+    font-size: 27px;
+    text-align: right;
+    padding: 15px;
+    margin-bottom: 13px;
 }
 
-#powerMenu{
-position:absolute;
-right:12px;
-top:53px;
-width:210px;
-display:none;
-padding:8px;
-border:1px solid var(--border);
-border-radius:13px;
-background:#0b111b;
-box-shadow:0 20px 60px rgba(0,0,0,.5);
-z-index:9000;
+.calcGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
 }
 
-#powerMenu button{
-width:100%;
-padding:11px;
-border:0;
-border-radius:8px;
-background:transparent;
-color:white;
-text-align:left;
+.calcButton {
+    height: 60px;
+    border: 0;
+    border-radius: 12px;
+    color: white;
+    background: rgba(255,255,255,.07);
+    cursor: pointer;
+    font-size: 17px;
 }
-
-#powerMenu button:hover{background:#172235}
 
-body.light{
---bg:#e9edf3;
---panel:#f8fafd;
---panel2:#eef2f7;
---border:#cbd4e1;
---text:#101827;
---muted:#5d697b;
+.calcButton:hover {
+    background: rgba(8,124,255,.35);
 }
 
-body.light #desktop{
-background:linear-gradient(135deg,#e9edf3,#dce5ef);
+.calcOperator {
+    background: rgba(8,124,255,.22);
 }
 
-body.light .topbar,
-body.light .window-header{
-background:rgba(245,248,252,.9);
+/* FILES */
+.filesPage {
+    padding: 22px;
 }
-
-@media(max-width:650px){
-
-.status-text{display:none}
 
-.desktop-icons{
-top:57px;
-left:7px;
-grid-template-columns:repeat(4,70px);
-gap:8px;
+.fileCard {
+    padding: 18px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    background: rgba(255,255,255,.04);
 }
 
-.desktop-icon{width:65px}
-
-.dock{
-bottom:8px;
-max-width:calc(100vw - 12px);
-overflow:auto;
+.fileIcon {
+    font-size: 25px;
+    margin-right: 10px;
 }
 
-.dock button{
-width:43px;
-height:43px;
-flex-shrink:0;
+/* SETTINGS */
+.settingsPage {
+    padding: 25px;
 }
 
-#startMenu{
-bottom:62px;
-width:calc(100vw - 12px);
-max-height:72vh;
+.settingCard {
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 18px;
+    margin-bottom: 12px;
+    background: rgba(255,255,255,.035);
 }
 
-.start-apps{
-grid-template-columns:repeat(4,1fr);
+.settingCard h3 {
+    margin-bottom: 7px;
 }
 
-.window{
-left:8px;
-top:51px;
-width:calc(100vw - 16px);
-height:calc(100vh - 104px);
-transform:none;
-border-radius:12px;
+.settingCard p {
+    color: var(--muted);
+    font-size: 14px;
 }
 
-.window.maximized{
-left:4px;
-top:48px;
-width:calc(100vw - 8px);
-height:calc(100vh - 94px);
+/* ABOUT */
+.aboutPage {
+    padding: 30px;
+    text-align: center;
 }
 
-.window-body{padding:14px}
-
-.app-grid{
-grid-template-columns:1fr 1fr;
+.aboutLogo {
+    width: 90px;
+    height: 90px;
+    margin: 15px auto 20px;
+    border-radius: 24px;
+    background: linear-gradient(135deg,#087cff,#0057c7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 42px;
+    font-weight: 900;
 }
 
-.store-tools{
-flex-wrap:wrap;
+.aboutPage h1 {
+    margin-bottom: 8px;
 }
 
-.store-search{
-min-width:100%;
+.aboutPage p {
+    color: var(--muted);
+    line-height: 1.7;
 }
 
-.store-grid{
-grid-template-columns:1fr;
-}
+/* MOBILE */
+@media (max-width: 600px) {
+    .statusItem:nth-child(1),
+    .statusItem:nth-child(2) {
+        display: none;
+    }
 
-.dashboard{
-grid-template-columns:1fr;
-}
+    .desktopContent {
+        padding: 25px 18px;
+    }
 
-.quick-grid{
-grid-template-columns:repeat(2,1fr);
-}
+    .desktopApps {
+        grid-template-columns: repeat(4, 75px);
+        gap: 18px;
+    }
 
-.welcome h1{font-size:26px}
+    .desktopIcon {
+        width: 75px;
+    }
 
-.browser-frame{height:300px}
+    .desktopIconBox {
+        width: 52px;
+        height: 52px;
+    }
 
-.profile-card{
-align-items:flex-start;
-flex-wrap:wrap;
-}
+    .dock {
+        max-width: calc(100vw - 20px);
+        overflow-x: auto;
+    }
 
-.profile-actions{
-width:100%;
-margin-left:0;
-justify-content:flex-start;
-}
+    .dockButton {
+        flex-shrink: 0;
+    }
 
+    .appGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 </style>
 </head>
 
 <body>
 
-<section id="lockScreen">
-<div class="lock-content">
-<div class="lock-logo">ROOT <span>OS</span></div>
-<div id="lockTime" class="lock-time">--:--</div>
-<div id="lockDate" class="lock-date">--</div>
-<button class="unlock-btn" onclick="unlockOS()">🔓 Enter ROOT OS</button>
-</div>
-</section>
-
-<section id="desktop">
-
-<header class="topbar">
-
-<div class="top-left">
-<div class="system-name">ROOT <span>OS</span></div>
-<div class="status-text">SYSTEM READY</div>
-</div>
-
-<div class="top-right">
-
-<button class="notification-btn" onclick="openWindow('notificationsWindow')">
-🔔
-<span id="notificationCount" class="notification-count">3</span>
-</button>
-
-<button class="notification-btn" onclick="openWindow('controlWindow')">⚡</button>
-
-<div id="topClock" class="top-clock">--:--</div>
-
-<button class="btn" onclick="togglePower()">⋮</button>
-
-</div>
-</header>
-
-
-<div class="desktop-icons">
-
-<button class="desktop-icon" onclick="openWindow('launcherWindow')">
-<div class="icon">⬢</div>
-<span>Launcher</span>
-</button>
-
-<button class="desktop-icon" onclick="openWindow('storeWindow')">
-<div class="icon">🛍️</div>
-<span>ROOT Store</span>
-</button>
-
-<button class="desktop-icon" onclick="openWindow('controlWindow')">
-<div class="icon">⚡</div>
-<span>Control</span>
-</button>
-
-<button class="desktop-icon" onclick="openWindow('dashboardWindow')">
-<div class="icon">📊</div>
-<span>System Info</span>
-</button>
-
-<button class="desktop-icon" onclick="openWindow('userWindow')">
-<div class="icon">👤</div>
-<span>User</span>
-</button>
-
-<button class="desktop-icon" onclick="openWindow('appManagerWindow')">
-<div class="icon">📦</div>
-<span>Apps</span>
-</button>
-
-<button class="desktop-icon" onclick="openWindow('filesWindow')">
-<div class="icon">📁</div>
-<span>Files</span>
-</button>
-
-<button class="desktop-icon" onclick="openWindow('settingsWindow')">
-<div class="icon">⚙️</div>
-<span>Settings</span>
-</button>
-
-</div>
-
-
-<div id="startMenu">
-
-<div class="start-header">
-<div class="start-brand">ROOT <span>OS</span></div>
-<div id="startUserLabel" class="start-user">LOCAL USER</div>
-</div>
-
-<input id="startSearch"
-class="start-search"
-placeholder="🔍 Search apps..."
-oninput="searchStartApps()">
-
-<div class="start-section">PINNED APPS</div>
-
-<div id="startApps" class="start-apps">
-
-<button class="start-app" data-app="root store app store"
-onclick="startOpen('storeWindow')">
-<div class="start-icon">🛍️</div>
-<span>ROOT Store</span>
-</button>
-
-<button class="start-app" data-app="control center quick settings"
-onclick="startOpen('controlWindow')">
-<div class="start-icon">⚡</div>
-<span>Control</span>
-</button>
-
-<button class="start-app" data-app="system dashboard information"
-onclick="startOpen('dashboardWindow')">
-<div class="start-icon">📊</div>
-<span>System Info</span>
-</button>
-
-<button class="start-app" data-app="user profile account"
-onclick="startOpen('userWindow')">
-<div class="start-icon">👤</div>
-<span>User</span>
-</button>
-
-<button class="start-app" data-app="app manager installed applications"
-onclick="startOpen('appManagerWindow')">
-<div class="start-icon">📦</div>
-<span>App Manager</span>
-</button>
-
-<button class="start-app" data-app="files file manager"
-onclick="startOpen('filesWindow')">
-<div class="start-icon">📁</div>
-<span>Files</span>
-</button>
-
-<button class="start-app" data-app="editor notes"
-onclick="startOpen('editorWindow')">
-<div class="start-icon">📝</div>
-<span>Editor</span>
-</button>
-
-<button class="start-app" data-app="calculator math"
-onclick="startOpen('calculatorWindow')">
-<div class="start-icon">🧮</div>
-<span>Calculator</span>
-</button>
-
-<button class="start-app" data-app="browser internet web"
-onclick="startOpen('browserWindow')">
-<div class="start-icon">🌐</div>
-<span>Browser</span>
-</button>
-
-<button class="start-app" data-app="media music"
-onclick="startOpen('mediaWindow')">
-<div class="start-icon">🎵</div>
-<span>Media</span>
-</button>
-
-<button class="start-app" data-app="images gallery"
-onclick="startOpen('imagesWindow')">
-<div class="start-icon">🖼️</div>
-<span>Images</span>
-</button>
-
-<button class="start-app" data-app="notifications alerts"
-onclick="startOpen('notificationsWindow')">
-<div class="start-icon">🔔</div>
-<span>Notifications</span>
-</button>
-
-<button class="start-app" data-app="settings configuration"
-onclick="startOpen('settingsWindow')">
-<div class="start-icon">⚙️</div>
-<span>Settings</span>
-</button>
-
-</div>
-
-<div class="start-section">SYSTEM</div>
-
-<div class="start-bottom">
-
-<button onclick="startOpen('userWindow')">👤 Profile</button>
-<button onclick="lockOS();closeStartMenu()">🔒 Lock</button>
-<button onclick="restartOS();closeStartMenu()">🔄 Restart</button>
-
-</div>
-
-</div>
-
-
-<div class="dock">
-
-<button onclick="toggleStartMenu()">⬢</button>
-<button onclick="openWindow('storeWindow')">🛍️</button>
-<button onclick="openWindow('controlWindow')">⚡</button>
-<button onclick="openWindow('dashboardWindow')">📊</button>
-<button onclick="openWindow('userWindow')">👤</button>
-<button onclick="openWindow('appManagerWindow')">📦</button>
-<button onclick="openWindow('filesWindow')">📁</button>
-<button onclick="openWindow('settingsWindow')">⚙️</button>
-
-</div>
-
-
-<div id="powerMenu">
-
-<button onclick="lockOS()">🔒 Lock ROOT OS</button>
-<button onclick="restartOS()">🔄 Restart Interface</button>
-<button onclick="closePower()">✕ Close</button>
-
-</div>
-
-
-<!-- LAUNCHER -->
-
-<div id="launcherWindow" class="window">
-
-<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
-<div class="window-title">⬢ ROOT Launcher</div>
-<div class="window-controls">
-<button onclick="minimizeWindow('launcherWindow')">—</button>
-<button onclick="maximizeWindow('launcherWindow')">□</button>
-<button class="close" onclick="closeWindow('launcherWindow')">×</button>
-</div>
-</div>
-
-<div class="window-body">
-
-<div class="welcome">
-<div class="small">ROOT OS v1.6</div>
-<h1>Welcome back.</h1>
-<p>Manage your ROOT OS environment from one place.</p>
-
-<input id="appSearch"
-class="search"
-placeholder="🔍 Search apps..."
-oninput="searchApps()">
-</div>
-
-<div class="app-grid">
-
-<button class="app-tile" data-name="root store app store"
-onclick="openWindow('storeWindow')">
-<div class="big">🛍️</div>
-<strong>ROOT Store</strong>
-<small>Discover apps</small>
-</button>
-
-<button class="app-tile" data-name="control center"
-onclick="openWindow('controlWindow')">
-<div class="big">⚡</div>
-<strong>Control Center</strong>
-<small>Quick settings</small>
-</button>
-
-<button class="app-tile" data-name="system dashboard information"
-onclick="openWindow('dashboardWindow')">
-<div class="big">📊</div>
-<strong>System Info</strong>
-<small>System dashboard</small>
-</button>
-
-<button class="app-tile" data-name="user profile account"
-onclick="openWindow('userWindow')">
-<div class="big">👤</div>
-<strong>User Profile</strong>
-<small>Local account</small>
-</button>
-
-<button class="app-tile" data-name="app manager applications installed"
-onclick="openWindow('appManagerWindow')">
-<div class="big">📦</div>
-<strong>App Manager</strong>
-<small>Installed apps</small>
-</button>
-
-<button class="app-tile" data-name="files file manager"
-onclick="openWindow('filesWindow')">
-<div class="big">📁</div>
-<strong>File Manager</strong>
-<small>Local files</small>
-</button>
-
-<button class="app-tile" data-name="editor notes"
-onclick="openWindow('editorWindow')">
-<div class="big">📝</div>
-<strong>Text Editor</strong>
-<small>Write notes</small>
-</button>
-
-<button class="app-tile" data-name="calculator math"
-onclick="openWindow('calculatorWindow')">
-<div class="big">🧮</div>
-<strong>Calculator</strong>
-<small>Calculate</small>
-</button>
-
-<button class="app-tile" data-name="browser web internet"
-onclick="openWindow('browserWindow')">
-<div class="big">🌐</div>
-<strong>Browser</strong>
-<small>Open websites</small>
-</button>
-
-<button class="app-tile" data-name="settings"
-onclick="openWindow('settingsWindow')">
-<div class="big">⚙️</div>
-<strong>Settings</strong>
-<small>System settings</small>
-</button>
-
-</div>
-
-</div>
-</div>
-
-
-<!-- USER PROFILE -->
-
-<div id="userWindow" class="window">
-
-<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
-<div class="window-title">👤 ROOT User Profile</div>
-
-<div class="window-controls">
-<button onclick="minimizeWindow('userWindow')">—</button>
-<button onclick="maximizeWindow('userWindow')">□</button>
-<button class="close" onclick="closeWindow('userWindow')">×</button>
-</div>
-</div>
-
-<div class="window-body">
-
-<div class="profile-card">
-
-<div id="userAvatar" class="avatar">👤</div>
-
-<div>
-<div id="profileName" class="profile-name">ROOT User</div>
-<div class="profile-status">● Local session active</div>
-</div>
-
-<div class="profile-actions">
-
-<button class="btn" onclick="changeUserName()">
-✏️ Edit Name
-</button>
-
-<button class="btn" onclick="changeAvatar()">
-🎨 Change Avatar
-</button>
-
-</div>
-
-</div>
-
-<div class="panel">
-
-<h3>Account</h3>
-
-<table class="system-table">
-
-<tr>
-<td>Account type</td>
-<td>Local</td>
-</tr>
-
-<tr>
-<td>Session</td>
-<td>Active</td>
-</tr>
-
-<tr>
-<td>ROOT OS version</td>
-<td>v1.6</td>
-</tr>
-
-<tr>
-<td>Authentication</td>
-<td>Not required</td>
-</tr>
-
-<tr>
-<td>Storage mode</td>
-<td>Browser local storage</td>
-</tr>
-
-</table>
-
-</div>
-
-<div class="panel">
-
-<h3>Session</h3>
-
-<p class="muted">
-This ROOT OS version uses a local browser session. No server-side login is required.
-</p>
-
-<br>
-
-<button class="btn green-btn" onclick="lockOS()">
-🔒 Lock Session
-</button>
-
-<button class="btn" onclick="restartOS()">
-🔄 Restart
-</button>
-
-</div>
-
-</div>
-</div>
-
-
-<!-- APP MANAGER -->
-
-<div id="appManagerWindow" class="window">
-
-<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
-<div class="window-title">📦 ROOT App Manager</div>
-
-<div class="window-controls">
-<button onclick="minimizeWindow('appManagerWindow')">—</button>
-<button onclick="maximizeWindow('appManagerWindow')">□</button>
-<button class="close" onclick="closeWindow('appManagerWindow')">×</button>
-</div>
-</div>
-
-<div class="window-body">
-
-<div class="welcome">
-
-<div class="small">APPLICATION MANAGEMENT</div>
-
-<h1>Installed Apps</h1>
-
-<p>
-Manage applications installed from ROOT Store.
-</p>
-
-</div>
-
-<br>
-
-<div class="storage-box">
-
-<div class="storage-head">
-
-<strong>ROOT Store Apps</strong>
-
-<span id="appStorageText">0 installed</span>
-
-</div>
-
-<div class="storage-bar">
-<div id="appStorageBar" class="storage-used"></div>
-</div>
-
-</div>
-
-<div id="appManagerList" class="manager-list"></div>
-
-<br>
-
-<button class="btn danger-btn" onclick="removeAllApps()">
-🗑️ Remove All Installed Apps
-</button>
-
-</div>
-</div>
-
-
-<!-- CONTROL CENTER -->
-
-<div id="controlWindow" class="window">
-
-<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
-<div class="window-title">⚡ ROOT Control Center</div>
-
-<div class="window-controls">
-<button onclick="minimizeWindow('controlWindow')">—</button>
-<button onclick="maximizeWindow('controlWindow')">□</button>
-<button class="close" onclick="closeWindow('controlWindow')">×</button>
-</div>
-</div>
-
-<div class="window-body">
-
-<div class="welcome">
-
-<div class="small">ROOT OS v1.6</div>
-
-<h1>Control Center</h1>
-
-<p>Quick controls for your ROOT OS environment.</p>
-
-</div>
-
-<br>
-
-<div class="quick-grid">
-
-<button id="wifiToggle" class="quick-toggle active"
-onclick="toggleControl('wifi')">
-<div class="qicon">📶</div>
-<strong>Network</strong>
-<small id="wifiStatus">Online</small>
-</button>
-
-<button id="soundToggle" class="quick-toggle active"
-onclick="toggleControl('sound')">
-<div class="qicon">🔊</div>
-<strong>Sound</strong>
-<small id="soundStatus">On</small>
-</button>
-
-<button id="themeToggle" class="quick-toggle"
-onclick="toggleTheme()">
-<div class="qicon">🌙</div>
-<strong>Theme</strong>
-<small id="themeStatus">Dark</small>
-</button>
-
-<button class="quick-toggle active"
-onclick="openWindow('dashboardWindow')">
-<div class="qicon">🔋</div>
-<strong>Battery</strong>
-<small id="controlBattery">Checking</small>
-</button>
-
-<button class="quick-toggle" onclick="lockOS()">
-<div class="qicon">🔒</div>
-<strong>Lock</strong>
-<small>Lock OS</small>
-</button>
-
-<button class="quick-toggle" onclick="openWindow('settingsWindow')">
-<div class="qicon">⚙️</div>
-<strong>Settings</strong>
-<small>Open settings</small>
-</button>
-
-<button class="quick-toggle" onclick="refreshSystemInfo()">
-<div class="qicon">↻</div>
-<strong>Refresh</strong>
-<small>System info</small>
-</button>
-
-<button class="quick-toggle" onclick="restartOS()">
-<div class="qicon">🔄</div>
-<strong>Restart</strong>
-<small>Interface</small>
-</button>
-
-</div>
-
-<div class="slider-box">
-
-<div class="slider-head">
-<strong>☀️ Brightness</strong>
-<span id="brightnessValue">100%</span>
-</div>
-
-<input id="brightnessSlider"
-type="range"
-min="30"
-max="100"
-value="100"
-oninput="changeBrightness(this.value)">
-
-</div>
-
-<div class="slider-box">
-
-<div class="slider-head">
-<strong>🔊 Volume</strong>
-<span id="volumeValue">70%</span>
-</div>
-
-<input id="volumeSlider"
-type="range"
-min="0"
-max="100"
-value="70"
-oninput="changeVolume(this.value)">
-
-</div>
-
-<div class="panel">
-
-<h3>Connection</h3>
-
-<p id="controlConnection" class="muted">
-Checking network connection...
-</p>
-
-</div>
-
-</div>
-</div>
+<!-- BOOT -->
+<div id="bootScreen">
+    <div class="bootLogo">R</div>
+    <div class="bootTitle">ROOT OS</div>
+    <div class="bootVersion">Version 1.7</div>
+
+    <div class="loader">
+        <div class="loaderBar"></div>
+    </div>
+</div>
+
+<!-- DESKTOP -->
+<div id="desktop">
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+
+        <div class="brand">
+            <div class="brandLogo">R</div>
+            <div class="brandText">ROOT <span>OS</span></div>
+        </div>
+
+        <div class="statusArea">
+            <div class="statusItem" id="networkStatus">● Online</div>
+            <div class="statusItem">🔋 100%</div>
+            <div class="statusItem" id="clock">00:00</div>
+        </div>
+
+    </div>
+
+    <!-- DESKTOP -->
+    <div class="desktopContent">
 
+        <div class="welcome">
+            <h1>Welcome to <span>ROOT OS</span></h1>
+            <p>
+                A lightweight web-based operating system experience
+                built by ROOT HUB.
+            </p>
+        </div>
 
-<!-- STORE -->
+        <div class="desktopApps">
 
-<div id="storeWindow" class="window">
+            <div class="desktopIcon" onclick="openWindow('filesWindow')">
+                <div class="desktopIconBox">📁</div>
+                <span>Files</span>
+            </div>
+
+            <div class="desktopIcon" onclick="openWindow('terminalWindow')">
+                <div class="desktopIconBox">⌨️</div>
+                <span>Terminal</span>
+            </div>
+
+            <div class="desktopIcon" onclick="openWindow('notesWindow')">
+                <div class="desktopIconBox">📝</div>
+                <span>Notes</span>
+            </div>
+
+            <div class="desktopIcon" onclick="openWindow('calculatorWindow')">
+                <div class="desktopIconBox">🧮</div>
+                <span>Calculator</span>
+            </div>
+
+            <div class="desktopIcon" onclick="openWindow('settingsWindow')">
+                <div class="desktopIconBox">⚙️</div>
+                <span>Settings</span>
+            </div>
+
+            <div class="desktopIcon" onclick="openWindow('aboutWindow')">
+                <div class="desktopIconBox">ℹ️</div>
+                <span>About ROOT</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- START MENU -->
+    <div id="startMenu">
+
+        <input
+            type="text"
+            id="appSearch"
+            class="searchBox"
+            placeholder="Search apps..."
+            oninput="searchApps()"
+        >
+
+        <div class="startHeading">Applications</div>
+
+        <div class="appGrid" id="appGrid">
+
+            <button class="appButton" data-name="files" onclick="openFromMenu('filesWindow')">
+                <span class="appEmoji">📁</span>
+                <span class="appName">Files</span>
+            </button>
+
+            <button class="appButton" data-name="terminal" onclick="openFromMenu('terminalWindow')">
+                <span class="appEmoji">⌨️</span>
+                <span class="appName">Terminal</span>
+            </button>
+
+            <button class="appButton" data-name="notes" onclick="openFromMenu('notesWindow')">
+                <span class="appEmoji">📝</span>
+                <span class="appName">Notes</span>
+            </button>
 
-<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
-<div class="window-title">🛍️ ROOT Store</div>
+            <button class="appButton" data-name="calculator" onclick="openFromMenu('calculatorWindow')">
+                <span class="appEmoji">🧮</span>
+                <span class="appName">Calculator</span>
+            </button>
 
-<div class="window-controls">
-<button onclick="minimizeWindow('storeWindow')">—</button>
-<button onclick="maximizeWindow('storeWindow')">□</button>
-<button class="close" onclick="closeWindow('storeWindow')">×</button>
-</div>
-</div>
-
-<div class="window-body">
-
-<div class="store-hero">
-<h1>ROOT Store</h1>
-<p>Discover applications designed for the ROOT OS ecosystem.</p>
-</div>
-
-<div class="store-tools">
-
-<input id="storeSearch"
-class="store-search"
-placeholder="🔍 Search applications..."
-oninput="renderStore()">
-
-<button id="catAll" class="category-btn active"
-onclick="setCategory('All')">All</button>
-
-<button id="catSystem" class="category-btn"
-onclick="setCategory('System')">System</button>
-
-<button id="catTools" class="category-btn"
-onclick="setCategory('Tools')">Tools</button>
-
-</div>
-
-<div id="storeGrid" class="store-grid"></div>
-
-</div>
-</div>
-
-
-<!-- DASHBOARD -->
-
-<div id="dashboardWindow" class="window">
-
-<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
-<div class="window-title">📊 ROOT System Information</div>
-
-<div class="window-controls">
-<button onclick="minimizeWindow('dashboardWindow')">—</button>
-<button onclick="maximizeWindow('dashboardWindow')">□</button>
-<button class="close" onclick="closeWindow('dashboardWindow')">×</button>
-</div>
-</div>
-
-<div class="window-body">
-
-<div class="welcome">
-<div class="small">SYSTEM DASHBOARD</div>
-<h1>ROOT OS Monitor</h1>
-<p>Live information available to this web-based operating system.</p>
-</div>
-
-<br>
-
-<div class="dashboard">
-
-<div class="stat-card">
-<div class="stat-top">
-<div>
-<div class="stat-label">MEMORY</div>
-<div id="memoryValue" class="stat-value">Checking...</div>
-</div>
-<div class="stat-icon">🧠</div>
-</div>
-<div id="memorySub" class="stat-sub">Browser memory information</div>
-<div class="progress"><div id="memoryBar" class="progress-bar"></div></div>
-</div>
-
-<div class="stat-card">
-<div class="stat-top">
-<div>
-<div class="stat-label">BATTERY</div>
-<div id="batteryValue" class="stat-value">Checking...</div>
-</div>
-<div class="stat-icon">🔋</div>
-</div>
-<div id="batterySub" class="stat-sub">Checking device battery</div>
-<div class="progress"><div id="batteryBar" class="progress-bar"></div></div>
-</div>
-
-<div class="stat-card">
-<div class="stat-top">
-<div>
-<div class="stat-label">NETWORK</div>
-<div id="networkValue" class="stat-value">Checking...</div>
-</div>
-<div class="stat-icon">🌐</div>
-</div>
-<div id="networkSub" class="stat-sub">Connection status</div>
-<div class="progress"><div id="networkBar" class="progress-bar"></div></div>
-</div>
-
-<div class="stat-card">
-<div class="stat-top">
-<div>
-<div class="stat-label">UPTIME</div>
-<div id="uptimeValue" class="stat-value">00:00:00</div>
-</div>
-<div class="stat-icon">⏱️</div>
-</div>
-<div class="stat-sub">ROOT OS session uptime</div>
-<div class="progress"><div id="uptimeBar" class="progress-bar"></div></div>
-</div>
-
-</div>
-
-<br>
-
-<div class="panel">
-
-<h3>System Details</h3>
-
-<table class="system-table">
-
-<tr><td>ROOT OS Version</td><td>v1.6</td></tr>
-<tr><td>Platform</td><td id="platformValue">Detecting...</td></tr>
-<tr><td>Browser</td><td id="browserValue">Detecting...</td></tr>
-<tr><td>Screen</td><td id="screenValue">Detecting...</td></tr>
-<tr><td>Language</td><td id="languageValue">Detecting...</td></tr>
-<tr><td>Online</td><td id="onlineValue">Checking...</td></tr>
-<tr><td>CPU Cores</td><td id="coresValue">Detecting...</td></tr>
-<tr><td>Device Memory</td><td id="deviceMemoryValue">Not available</td></tr>
-<tr><td>Installed Apps</td><td id="installedCountValue">0</td></tr>
-
-</table>
-
-</div>
-
-<button class="btn green-btn" onclick="refreshSystemInfo()">
-↻ Refresh System Info
-</button>
-
-<p class="muted" style="margin-top:12px">
-ROOT OS is web-based, so browser security limits direct hardware access.
-</p>
-
-</div>
-</div>
-
-
-<!-- NOTIFICATIONS -->
-
-<div id="notificationsWindow" class="window">
-
-<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
-<div class="window-title">🔔 Notifications</div>
-
-<div class="window-controls">
-<button onclick="minimizeWindow('notificationsWindow')">—</button>
-<button onclick="maximizeWindow('notificationsWindow')">□</button>
-<button class="close" onclick="closeWindow('notificationsWindow')">×</button>
-</div>
-</div>
-
-<div class="window-body">
-
-<div class="panel">
-<h2>Notification Center</h2>
-<p class="muted">ROOT OS system notifications.</p>
-</div>
-
-<div id="notificationList">
-
-<div class="notification">
-<strong>🚀 ROOT OS v1.6</strong>
-<p>User and App Management is now available.</p>
-</div>
-
-<div class="notification">
-<strong>🖥️ System Ready</strong>
-<p>ROOT OS desktop is running normally.</p>
-</div>
-
-<div class="notification">
-<strong>🛍️ ROOT Store</strong>
-<p>ROOT Store is available.</p>
-</div>
-
-</div>
-
-<button class="btn" onclick="clearNotifications()">
-Clear notifications
-</button>
-
-</div>
-</div>
-
-
-<!-- FILES -->
-
-<div id="filesWindow" class="window">
-
-<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
-<div class="window-title">📁 File Manager</div>
-
-<div class="window-controls">
-<button onclick="minimizeWindow('filesWindow')">—</button>
-<button onclick="maximizeWindow('filesWindow')">□</button>
-<button class="close" onclick="closeWindow('filesWindow')">×</button>
-</div>
-</div>
-
-<div class="window-body">
-
-<h2>Local Files</h2>
-
-<p class="muted" style="margin:8px 0 18px">
-Choose files from your device. Files are not uploaded by this interface.
-</p>
-
-<div class="file-area">
-
-<input id="fileInput"
-type="file"
-multiple
-onchange="displayFiles()">
-
-</div>
-
-<div id="fileList" class="file-list"></div>
-
-</div>
-</div>
-
-
-<!-- EDITOR -->
-
-<div id="editorWindow" class="window">
-
-<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
-<div class="window-title">📝 Text Editor</div>
-
-<div class="window-controls">
-<button onclick="minimizeWindow('editorWindow')">—</button>
-<button onclick="maximizeWindow('editorWindow')">□</button>
-<button class="close" onclick="closeWindow('editorWindow')">×</button>
-</div>
-</div>
-
-<div class="window-body">
-
-<textarea id="editor" class="editor"
-placeholder="Start writing..."></textarea>
-
-<br><br>
-
-<button class="btn green-btn" onclick="saveEditor()">Save</button>
-<button class="btn" onclick="clearEditor()">Clear</button>
-
-<span id="editorStatus" class="muted"></span>
-
-</div>
-</div>
-
-
-<!-- CALCULATOR -->
-
-<div id="calculatorWindow" class="window">
-
-<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
-<div class="window-title">🧮 Calculator</div>
-
-<div class="window-controls">
-<button onclick="minimizeWindow('calculatorWindow')">—</button>
-<button onclick="maximizeWindow('calculatorWindow')">□</button>
-<button class="close" onclick="closeWindow('calculatorWindow')">×</button>
-</div>
-</div>
+            <button class="appButton" data-name="settings" onclick="openFromMenu('settingsWindow')">
+                <span class="appEmoji">⚙️</span>
+                <span class="appName">Settings</span>
+            </button>
 
-<div class="window-body">
+            <button class="appButton" data-name="about root" onclick="openFromMenu('aboutWindow')">
+                <span class="appEmoji">ℹ️</span>
+                <span class="appName">About</span>
+            </button>
+
+        </div>
 
-<div class="calc">
+    </div>
 
-<input id="calcDisplay" class="calc-display"
-readonly value="0">
+    <!-- FILES WINDOW -->
+    <div class="window" id="filesWindow">
 
-<div class="calc-grid">
+        <div class="windowHeader">
+            <div class="windowTitle">📁 Files</div>
 
-<button onclick="calcClear()">C</button>
-<button onclick="calcInput('(')">(</button>
-<button onclick="calcInput(')')">)</button>
-<button onclick="calcInput('/')">÷</button>
+            <div class="windowControls">
+                <button class="windowControl" onclick="closeWindow('filesWindow')">✕</button>
+            </div>
+        </div>
 
-<button onclick="calcInput('7')">7</button>
-<button onclick="calcInput('8')">8</button>
-<button onclick="calcInput('9')">9</button>
-<button onclick="calcInput('*')">×</button>
+        <div class="windowBody">
 
-<button onclick="calcInput('4')">4</button>
-<button onclick="calcInput('5')">5</button>
-<button onclick="calcInput('6')">6</button>
-<button onclick="calcInput('-')">−</button>
+            <div class="filesPage">
 
-<button onclick="calcInput('1')">1</button>
-<button onclick="calcInput('2')">2</button>
-<button onclick="calcInput('3')">3</button>
-<button onclick="calcInput('+')">+</button>
+                <div class="fileCard">
+                    <span class="fileIcon">📂</span>
+                    <strong>Documents</strong>
+                    <p style="color:#8ea4bb;margin-top:6px;">
+                        Your documents folder
+                    </p>
+                </div>
 
-<button onclick="calcInput('0')">0</button>
-<button onclick="calcInput('.')">.</button>
-<button onclick="calcBack()">⌫</button>
-<button onclick="calcResult()">=</button>
+                <div class="fileCard">
+                    <span class="fileIcon">🖼️</span>
+                    <strong>Pictures</strong>
+                    <p style="color:#8ea4bb;margin-top:6px;">
+                        Your images folder
+                    </p>
+                </div>
 
-</div>
-</div>
-</div>
-</div>
-
+                <div class="fileCard">
+                    <span class="fileIcon">🎵</span>
+                    <strong>Music</strong>
+                    <p style="color:#8ea4bb;margin-top:6px;">
+                        Your music folder
+                    </p>
+                </div>
 
-<!-- IMAGE VIEWER -->
+                <div class="fileCard">
+                    <span class="fileIcon">⬇️</span>
+                    <strong>Downloads</strong>
+                    <p style="color:#8ea4bb;margin-top:6px;">
+                        Downloaded files
+                    </p>
+                </div>
 
-<div id="imagesWindow" class="window">
+            </div>
 
-<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
-<div class="window-title">🖼️ Image Viewer</div>
+        </div>
 
-<div class="window-controls">
-<button onclick="minimizeWindow('imagesWindow')">—</button>
-<button onclick="maximizeWindow('imagesWindow')">□</button>
-<button class="close" onclick="closeWindow('imagesWindow')">×</button>
-</div>
-</div>
+    </div>
 
-<div class="window-body">
+    <!-- TERMINAL WINDOW -->
+    <div class="window" id="terminalWindow">
 
-<h2>Image Viewer</h2>
+        <div class="windowHeader">
+            <div class="windowTitle">⌨️ ROOT Terminal</div>
 
-<p class="muted" style="margin:8px 0 15px">
-Select an image from your device.
-</p>
+            <div class="windowControls">
+                <button class="windowControl" onclick="closeWindow('terminalWindow')">✕</button>
+            </div>
+        </div>
 
-<input type="file" accept="image/*" onchange="loadImage(event)">
+        <div class="windowBody">
 
-<br><br>
+            <div class="terminal" id="terminal">
 
-<div class="image-preview">
+                <div class="terminalLine">
+                    <span class="terminalBlue">ROOT OS Terminal</span>
+                </div>
 
-<img id="previewImage">
+                <div class="terminalLine">
+                    Version 1.7
+                </div>
 
-<span id="imagePlaceholder" class="muted">
-No image selected
-</span>
+                <div class="terminalLine">
+                    Type <span class="terminalBlue">help</span> to see available commands.
+                </div>
 
-</div>
-
-</div>
-</div>
+                <div class="terminalLine">
+                    &nbsp;
+                </div>
 
+                <div class="terminalInputRow">
+                    <span class="terminalPrompt">root@root-os:~$</span>
 
-<!-- MEDIA -->
+                    <input
+                        id="terminalInput"
+                        autocomplete="off"
+                        onkeydown="terminalCommand(event)"
+                    >
+                </div>
 
-<div id="mediaWindow" class="window">
+            </div>
 
-<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
-<div class="window-title">🎵 Media Player</div>
+        </div>
 
-<div class="window-controls">
-<button onclick="minimizeWindow('mediaWindow')">—</button>
-<button onclick="maximizeWindow('mediaWindow')">□</button>
-<button class="close" onclick="closeWindow('mediaWindow')">×</button>
-</div>
-</div>
+    </div>
 
-<div class="window-body">
+    <!-- NOTES WINDOW -->
+    <div class="window" id="notesWindow">
 
-<div class="media-box">
+        <div class="windowHeader">
+            <div class="windowTitle">📝 Notes</div>
 
-<div class="media-icon">🎵</div>
+            <div class="windowControls">
+                <button class="windowControl" onclick="closeWindow('notesWindow')">✕</button>
+            </div>
+        </div>
 
-<h2>ROOT Player</h2>
+        <div class="windowBody">
 
-<p class="muted" style="margin:10px 0 20px">
-Select an audio file from your device.
-</p>
+            <textarea
+                id="notesArea"
+                class="notesArea"
+                placeholder="Start typing your notes..."
+            ></textarea>
 
-<input type="file" accept="audio/*" onchange="loadAudio(event)">
+        </div>
 
-<br><br>
+    </div>
 
-<audio id="audioPlayer" controls style="width:100%"></audio>
+    <!-- CALCULATOR -->
+    <div class="window" id="calculatorWindow">
 
-</div>
-</div>
-</div>
+        <div class="windowHeader">
+            <div class="windowTitle">🧮 Calculator</div>
 
+            <div class="windowControls">
+                <button class="windowControl" onclick="closeWindow('calculatorWindow')">✕</button>
+            </div>
+        </div>
 
-<!-- BROWSER -->
+        <div class="windowBody">
 
-<div id="browserWindow" class="window">
+            <div class="calculator">
 
-<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
-<div class="window-title">🌐 ROOT Browser</div>
+                <input
+                    id="calcDisplay"
+                    class="calcDisplay"
+                    type="text"
+                    readonly
+                    value=""
+                >
 
-<div class="window-controls">
-<button onclick="minimizeWindow('browserWindow')">—</button>
-<button onclick="maximizeWindow('browserWindow')">□</button>
-<button class="close" onclick="closeWindow('browserWindow')">×</button>
-</div>
-</div>
+                <div class="calcGrid">
 
-<div class="window-body">
+                    <button class="calcButton" onclick="clearCalc()">C</button>
+                    <button class="calcButton" onclick="backCalc()">⌫</button>
+                    <button class="calcButton calcOperator" onclick="addCalc('%')">%</button>
+                    <button class="calcButton calcOperator" onclick="addCalc('/')">÷</button>
 
-<div class="browser-bar">
+                    <button class="calcButton" onclick="addCalc('7')">7</button>
+                    <button class="calcButton" onclick="addCalc('8')">8</button>
+                    <button class="calcButton" onclick="addCalc('9')">9</button>
+                    <button class="calcButton calcOperator" onclick="addCalc('*')">×</button>
 
-<input id="browserURL"
-placeholder="https://example.com"
-value="https://example.com">
+                    <button class="calcButton" onclick="addCalc('4')">4</button>
+                    <button class="calcButton" onclick="addCalc('5')">5</button>
+                    <button class="calcButton" onclick="addCalc('6')">6</button>
+                    <button class="calcButton calcOperator" onclick="addCalc('-')">−</button>
 
-<button class="btn green-btn" onclick="openBrowser()">Go</button>
+                    <button class="calcButton" onclick="addCalc('1')">1</button>
+                    <button class="calcButton" onclick="addCalc('2')">2</button>
+                    <button class="calcButton" onclick="addCalc('3')">3</button>
+                    <button class="calcButton calcOperator" onclick="addCalc('+')">+</button>
 
-</div>
+                    <button class="calcButton" onclick="addCalc('0')">0</button>
+                    <button class="calcButton" onclick="addCalc('.')">.</button>
+                    <button class="calcButton calcOperator" style="grid-column:span 2;" onclick="calculate()">=</button>
 
-<iframe id="browserFrame"
-class="browser-frame"
-title="ROOT Browser">
-</iframe>
+                </div>
 
-<p class="muted" style="margin-top:8px">
-Some websites block iframe embedding for security reasons.
-</p>
+            </div>
 
-</div>
-</div>
+        </div>
 
+    </div>
 
-<!-- SETTINGS -->
+    <!-- SETTINGS -->
+    <div class="window" id="settingsWindow">
 
-<div id="settingsWindow" class="window">
+        <div class="windowHeader">
+            <div class="windowTitle">⚙️ Settings</div>
 
-<div class="window-header" onmousedown="startDrag(event,this.parentElement)">
-<div class="window-title">⚙️ Settings</div>
+            <div class="windowControls">
+                <button class="windowControl" onclick="closeWindow('settingsWindow')">✕</button>
+            </div>
+        </div>
 
-<div class="window-controls">
-<button onclick="minimizeWindow('settingsWindow')">—</button>
-<button onclick="maximizeWindow('settingsWindow')">□</button>
-<button class="close" onclick="closeWindow('settingsWindow')">×</button>
-</div>
-</div>
+        <div class="windowBody">
 
-<div class="window-body">
+            <div class="settingsPage">
 
-<h2>System Settings</h2>
+                <div class="settingCard">
+                    <h3>🌐 System</h3>
+                    <p>ROOT OS is running as a web-based operating system interface.</p>
+                </div>
 
-<div class="setting">
+                <div class="settingCard">
+                    <h3>🎨 Theme</h3>
+                    <p>ROOT Blue — the official ROOT HUB inspired interface theme.</p>
+                </div>
 
-<div>
-<strong>User Profile</strong>
-<small>Change the local ROOT OS user name and avatar.</small>
-</div>
+                <div class="settingCard">
+                    <h3>⚡ Performance</h3>
+                    <p>Lightweight interface designed to run directly in a modern browser.</p>
+                </div>
 
-<button class="btn" onclick="openWindow('userWindow')">Open</button>
+                <div class="settingCard">
+                    <h3>🔒 Privacy</h3>
+                    <p>This demo does not send your notes or terminal commands to a server.</p>
+                </div>
 
-</div>
+            </div>
 
-<div class="setting">
+        </div>
 
-<div>
-<strong>App Manager</strong>
-<small>View and remove installed ROOT Store apps.</small>
-</div>
+    </div>
 
-<button class="btn" onclick="openWindow('appManagerWindow')">Open</button>
+    <!-- ABOUT -->
+    <div class="window" id="aboutWindow">
 
-</div>
+        <div class="windowHeader">
+            <div class="windowTitle">ℹ️ About ROOT OS</div>
 
-<div class="setting">
+            <div class="windowControls">
+                <button class="windowControl" onclick="closeWindow('aboutWindow')">✕</button>
+            </div>
+        </div>
 
-<div>
-<strong>Appearance</strong>
-<small>Switch between dark and light interface.</small>
-</div>
+        <div class="windowBody">
 
-<button class="btn" onclick="toggleTheme()">Toggle</button>
+            <div class="aboutPage">
 
-</div>
+                <div class="aboutLogo">R</div>
 
-<div class="setting">
+                <h1>ROOT OS</h1>
 
-<div>
-<strong>Control Center</strong>
-<small>Manage quick settings.</small>
-</div>
+                <p style="margin-top:10px;">
+                    Version 1.7
+                </p>
 
-<button class="btn" onclick="openWindow('controlWindow')">Open</button>
+                <p style="margin-top:20px;">
+                    ROOT OS is a web-based operating system concept
+                    developed as part of the ROOT HUB project.
+                </p>
 
-</div>
+                <p style="margin-top:15px;">
+                    Building Code. Creating Tomorrow.
+                </p>
 
-<div class="setting">
+                <p style="margin-top:25px;">
+                    © 2026 ROOT HUB
+                </p>
 
-<div>
-<strong>ROOT Store</strong>
-<small>Install or remove ROOT OS applications.</small>
-</div>
+            </div>
 
-<button class="btn" onclick="openWindow('storeWindow')">Open</button>
+        </div>
 
-</div>
+    </div>
 
-<div class="setting">
+    <!-- DOCK -->
+    <div class="dock">
 
-<div>
-<strong>System Information</strong>
-<small>View ROOT OS hardware and browser information.</small>
-</div>
+        <button
+            class="dockButton startButton"
+            onclick="toggleStartMenu()"
+            title="Start"
+        >
+            R
+        </button>
 
-<button class="btn" onclick="openWindow('dashboardWindow')">Open</button>
+        <button
+            class="dockButton"
+            onclick="openWindow('filesWindow')"
+            title="Files"
+        >
+            📁
+        </button>
 
-</div>
+        <button
+            class="dockButton"
+            onclick="openWindow('terminalWindow')"
+            title="Terminal"
+        >
+            ⌨️
+        </button>
 
-<div class="setting">
+        <button
+            class="dockButton"
+            onclick="openWindow('notesWindow')"
+            title="Notes"
+        >
+            📝
+        </button>
 
-<div>
-<strong>Lock Screen</strong>
-<small>Lock the current ROOT OS session.</small>
-</div>
+        <button
+            class="dockButton"
+            onclick="openWindow('calculatorWindow')"
+            title="Calculator"
+        >
+            🧮
+        </button>
 
-<button class="btn" onclick="lockOS()">Lock</button>
+        <button
+            class="dockButton"
+            onclick="openWindow('settingsWindow')"
+            title="Settings"
+        >
+            ⚙️
+        </button>
 
-</div>
+    </div>
 
-</div>
 </div>
-
-
-</section>
-
 
 <script>
 
-/* CLOCK */
+/* ================================
+   ROOT OS v1.7
+   CORE SYSTEM
+================================ */
 
-function updateClock(){
+const bootScreen = document.getElementById("bootScreen");
+const desktop = document.getElementById("desktop");
 
-const now=new Date();
+setTimeout(() => {
+    bootScreen.style.display = "none";
+    desktop.style.display = "block";
+}, 2400);
 
-document.getElementById("lockTime").textContent=
-now.toLocaleTimeString([],{
-hour:"2-digit",
-minute:"2-digit"
-});
 
-document.getElementById("lockDate").textContent=
-now.toLocaleDateString([],{
-weekday:"long",
-day:"numeric",
-month:"long"
-});
+/* ================================
+   CLOCK
+================================ */
 
-document.getElementById("topClock").textContent=
-now.toLocaleTimeString([],{
-hour:"2-digit",
-minute:"2-digit"
-});
+function updateClock() {
 
+    const now = new Date();
+
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+
+    hours = String(hours).padStart(2, "0");
+    minutes = String(minutes).padStart(2, "0");
+
+    document.getElementById("clock").textContent =
+        `${hours}:${minutes}`;
 }
 
 updateClock();
-setInterval(updateClock,1000);
+setInterval(updateClock, 1000);
 
 
-/* SESSION */
+/* ================================
+   WINDOWS
+================================ */
 
-let sessionStart=Date.now();
+function openWindow(id) {
 
-function unlockOS(){
+    document.querySelectorAll(".window").forEach(win => {
+        win.classList.remove("active");
+    });
 
-document.getElementById("lockScreen").style.display="none";
-document.getElementById("desktop").style.display="block";
+    document.getElementById(id).classList.add("active");
 
-sessionStart=Date.now();
+    document.getElementById("startMenu").classList.remove("active");
 
-openWindow("launcherWindow");
-
-updateUserUI();
-
-}
-
-function lockOS(){
-
-closeStartMenu();
-
-document.querySelectorAll(".window").forEach(function(w){
-w.classList.remove("open");
-});
-
-document.getElementById("desktop").style.display="none";
-document.getElementById("lockScreen").style.display="flex";
-
-}
-
-function restartOS(){
-
-closePower();
-closeStartMenu();
-
-document.querySelectorAll(".window").forEach(function(w){
-w.classList.remove("open");
-});
-
-sessionStart=Date.now();
-
-setTimeout(function(){
-openWindow("launcherWindow");
-},300);
-
+    if (id === "terminalWindow") {
+        setTimeout(() => {
+            document.getElementById("terminalInput").focus();
+        }, 100);
+    }
 }
 
 
-/* POWER */
-
-function togglePower(){
-
-const menu=document.getElementById("powerMenu");
-
-menu.style.display=
-menu.style.display==="block"
-?"none"
-:"block";
-
-}
-
-function closePower(){
-
-document.getElementById("powerMenu")
-.style.display="none";
-
+function closeWindow(id) {
+    document.getElementById(id).classList.remove("active");
 }
 
 
-/* START MENU */
-
-function toggleStartMenu(){
-
-const menu=document.getElementById("startMenu");
-
-menu.classList.toggle("show");
-
-if(menu.classList.contains("show")){
-
-document.getElementById("startSearch").value="";
-
-searchStartApps();
-updateUserUI();
-
-setTimeout(function(){
-document.getElementById("startSearch").focus();
-},100);
-
+function openFromMenu(id) {
+    openWindow(id);
 }
 
+
+/* ================================
+   START MENU
+================================ */
+
+function toggleStartMenu() {
+
+    const menu = document.getElementById("startMenu");
+
+    menu.classList.toggle("active");
+
+    if (menu.classList.contains("active")) {
+        document.getElementById("appSearch").focus();
+    }
 }
 
-function closeStartMenu(){
 
-document.getElementById("startMenu")
-.classList.remove("show");
+document.addEventListener("click", function(event) {
 
-}
+    const menu = document.getElementById("startMenu");
+    const startButton = document.querySelector(".startButton");
 
-function startOpen(id){
-
-closeStartMenu();
-openWindow(id);
-
-}
-
-function searchStartApps(){
-
-const query=
-document.getElementById("startSearch")
-.value.toLowerCase();
-
-document.querySelectorAll("#startApps .start-app")
-.forEach(function(app){
-
-const name=(app.dataset.app||"").toLowerCase();
-
-app.style.display=
-name.includes(query)
-?"block"
-:"none";
+    if (
+        menu.classList.contains("active") &&
+        !menu.contains(event.target) &&
+        !startButton.contains(event.target)
+    ) {
+        menu.classList.remove("active");
+    }
 
 });
 
-}
-
-
-/* WINDOWS */
-
-let zIndex=100;
-
-function openWindow(id){
-
-const win=document.getElementById(id);
-
-if(!win)return;
-
-closeStartMenu();
-
-win.classList.add("open");
-
-zIndex++;
-win.style.zIndex=zIndex;
-
-if(id==="dashboardWindow")
-refreshSystemInfo();
-
-if(id==="storeWindow")
-renderStore();
-
-if(id==="controlWindow")
-updateControlCenter();
-
-if(id==="appManagerWindow")
-renderAppManager();
-
-if(id==="userWindow")
-updateUserUI();
-
-}
-
-function closeWindow(id){
-
-const win=document.getElementById(id);
-
-if(win)win.classList.remove("open");
-
-}
-
-function minimizeWindow(id){
-closeWindow(id);
-}
-
-function maximizeWindow(id){
-
-const win=document.getElementById(id);
-
-if(win)
-win.classList.toggle("maximized");
-
-}
-
-
-/* DRAG */
-
-let dragData=null;
-
-function startDrag(event,win){
-
-if(window.innerWidth<=650)return;
-
-if(event.target.tagName==="BUTTON")return;
-
-dragData={
-win:win,
-startX:event.clientX,
-startY:event.clientY,
-startLeft:win.offsetLeft,
-startTop:win.offsetTop
-};
-
-document.addEventListener("mousemove",dragMove);
-document.addEventListener("mouseup",stopDrag);
-
-}
-
-function dragMove(event){
-
-if(!dragData)return;
-
-const dx=event.clientX-dragData.startX;
-const dy=event.clientY-dragData.startY;
-
-dragData.win.style.left=
-(dragData.startLeft+dx)+"px";
-
-dragData.win.style.top=
-(dragData.startTop+dy)+"px";
-
-dragData.win.style.transform="none";
-
-}
-
-function stopDrag(){
-
-dragData=null;
-
-document.removeEventListener("mousemove",dragMove);
-document.removeEventListener("mouseup",stopDrag);
-
-}
-
-
-/* APP SEARCH */
-
-function searchApps(){
-
-const query=
-document.getElementById("appSearch")
-.value.toLowerCase();
-
-document.querySelectorAll(".app-tile")
-.forEach(function(app){
-
-const name=
-app.dataset.name.toLowerCase();
-
-app.style.display=
-name.includes(query)
-?"block"
-:"none";
-
-});
-
-}
-
-
-/* USER PROFILE */
-
-const avatars=[
-"👤",
-"🧑‍💻",
-"🤖",
-"🦊",
-"🐺",
-"⚡",
-"🌐",
-"🛠️"
-];
-
-function getUserName(){
-
-return localStorage.getItem("rootOS_user_name")
-||"ROOT User";
-
-}
-
-function getAvatar(){
-
-return localStorage.getItem("rootOS_avatar")
-||"👤";
-
-}
-
-function updateUserUI(){
-
-const name=getUserName();
-const avatar=getAvatar();
-
-document.getElementById("profileName").textContent=name;
-document.getElementById("userAvatar").textContent=avatar;
-document.getElementById("startUserLabel").textContent=name;
-
-}
-
-function changeUserName(){
-
-const current=getUserName();
-
-const newName=prompt(
-"Enter your ROOT OS user name:",
-current
-);
-
-if(newName===null)return;
-
-const cleanName=newName.trim();
-
-if(!cleanName)return;
-
-localStorage.setItem(
-"rootOS_user_name",
-cleanName
-);
-
-updateUserUI();
-
-addNotification(
-"👤 Profile Updated",
-"Your ROOT OS user name was changed."
-);
-
-}
-
-function changeAvatar(){
-
-const current=getAvatar();
-
-const nextIndex=
-(avatars.indexOf(current)+1)%avatars.length;
-
-localStorage.setItem(
-"rootOS_avatar",
-avatars[nextIndex]
-);
-
-updateUserUI();
-
-addNotification(
-"🎨 Avatar Updated",
-"Your ROOT OS avatar was changed."
-);
-
-}
-
-
-/* CONTROL CENTER */
-
-let controls={
-wifi:true,
-sound:true
-};
-
-function toggleControl(type){
-
-controls[type]=!controls[type];
-
-updateControlCenter();
-
-if(type==="wifi"){
-
-addNotification(
-controls.wifi?"📶 Network Enabled":"📴 Network Disabled",
-controls.wifi
-?"ROOT OS network indicator enabled."
-:"ROOT OS network indicator disabled."
-);
-
-}
-
-if(type==="sound"){
-
-addNotification(
-controls.sound?"🔊 Sound Enabled":"🔇 Sound Muted",
-controls.sound
-?"ROOT OS sound control enabled."
-:"ROOT OS sound control muted."
-);
-
-}
-
-}
-
-function updateControlCenter(){
-
-const wifi=document.getElementById("wifiToggle");
-const sound=document.getElementById("soundToggle");
-
-wifi.classList.toggle("active",controls.wifi);
-sound.classList.toggle("active",controls.sound);
-
-document.getElementById("wifiStatus").textContent=
-controls.wifi
-?(navigator.onLine?"Online":"Offline")
-:"Off";
-
-document.getElementById("soundStatus").textContent=
-controls.sound?"On":"Muted";
-
-document.getElementById("controlConnection").textContent=
-navigator.onLine
-?"🟢 Connected to the internet."
-:"🔴 No internet connection.";
-
-document.getElementById("themeStatus").textContent=
-document.body.classList.contains("light")
-?"Light"
-:"Dark";
-
-if(navigator.getBattery){
-
-navigator.getBattery().then(function(battery){
-
-document.getElementById("controlBattery")
-.textContent=
-Math.round(battery.level*100)+"%";
-
-});
-
-}
-
-}
-
-
-/* BRIGHTNESS */
-
-function changeBrightness(value){
-
-document.getElementById("brightnessValue")
-.textContent=value+"%";
-
-document.getElementById("desktop")
-.style.filter=
-"brightness("+value+"%)";
-
-localStorage.setItem(
-"rootOS_brightness",
-value
-);
-
-}
-
-
-/* VOLUME */
-
-function changeVolume(value){
-
-document.getElementById("volumeValue")
-.textContent=value+"%";
-
-localStorage.setItem(
-"rootOS_volume",
-value
-);
-
-}
-
-
-/* THEME */
-
-function toggleTheme(){
-
-document.body.classList.toggle("light");
-
-const light=
-document.body.classList.contains("light");
-
-localStorage.setItem(
-"rootOS_light",
-light?"1":"0"
-);
-
-updateControlCenter();
-
-}
-
-
-/* ROOT STORE */
-
-const rootApps=[
-
-{
-id:"terminal",
-icon:"⌨️",
-name:"ROOT Terminal",
-category:"System",
-version:"1.0",
-description:"A command-style interface for the ROOT OS ecosystem."
-},
-
-{
-id:"monitor",
-icon:"📊",
-name:"System Monitor",
-category:"System",
-version:"1.0",
-description:"Monitor browser-accessible ROOT OS information."
-},
-
-{
-id:"notes",
-icon:"📝",
-name:"ROOT Notes",
-category:"Tools",
-version:"1.0",
-description:"A lightweight local notes application."
-},
-
-{
-id:"calculator",
-icon:"🧮",
-name:"ROOT Calculator",
-category:"Tools",
-version:"1.0",
-description:"Fast calculations inside ROOT OS."
-},
-
-{
-id:"filetools",
-icon:"📁",
-name:"ROOT File Tools",
-category:"Tools",
-version:"1.0",
-description:"Tools for working with local files."
-},
-
-{
-id:"browser",
-icon:"🌐",
-name:"ROOT Browser",
-category:"System",
-version:"1.0",
-description:"A simple browser interface for ROOT OS."
-}
-
-];
-
-let selectedCategory="All";
-
-function getInstalledApps(){
-
-try{
-return JSON.parse(
-localStorage.getItem("rootOS_installed_apps")||"[]"
-);
-}catch{
-return[];
-}
-
-}
-
-function saveInstalledApps(apps){
-
-localStorage.setItem(
-"rootOS_installed_apps",
-JSON.stringify(apps)
-);
-
-}
-
-function setCategory(category){
-
-selectedCategory=category;
-
-document.querySelectorAll(".category-btn")
-.forEach(function(btn){
-btn.classList.remove("active");
-});
-
-if(category==="All")
-document.getElementById("catAll").classList.add("active");
-
-if(category==="System")
-document.getElementById("catSystem").classList.add("active");
-
-if(category==="Tools")
-document.getElementById("catTools").classList.add("active");
-
-renderStore();
-
-}
-
-function renderStore(){
-
-const grid=document.getElementById("storeGrid");
-
-const query=
-(document.getElementById("storeSearch")?.value||"")
-.toLowerCase()
-.trim();
-
-const installed=getInstalledApps();
-
-const apps=rootApps.filter(function(app){
-
-return(
-(selectedCategory==="All"||
-app.category===selectedCategory)&&
-(
-app.name.toLowerCase().includes(query)||
-app.description.toLowerCase().includes(query)||
-app.category.toLowerCase().includes(query)
-)
-);
-
-});
-
-grid.innerHTML="";
-
-if(apps.length===0){
-
-grid.innerHTML=
-'<div class="empty">🔎 No applications found.</div>';
-
-return;
-
-}
-
-apps.forEach(function(app){
-
-const isInstalled=installed.includes(app.id);
-
-const card=document.createElement("div");
-
-card.className="store-card";
-
-card.innerHTML=`
-
-<div class="store-icon">${app.icon}</div>
-
-<h3>${escapeHTML(app.name)}</h3>
-
-<p>${escapeHTML(app.description)}</p>
-
-<div class="store-meta">
-
-<span>${app.category} · v${app.version}</span>
-
-<button
-class="${isInstalled?"store-btn installed":"store-btn"}"
-onclick="toggleApp('${app.id}')">
-
-${isInstalled?"✓ Installed":"Install"}
-
-</button>
-
-</div>
-
-`;
-
-grid.appendChild(card);
-
-});
-
-}
-
-function toggleApp(id){
-
-const app=rootApps.find(function(item){
-return item.id===id;
-});
 
-if(!app)return;
+/* ================================
+   APP SEARCH
+================================ */
 
-let installed=getInstalledApps();
+function searchApps() {
 
-if(installed.includes(id)){
+    const query =
+        document.getElementById("appSearch")
+        .value
+        .toLowerCase();
 
-installed=installed.filter(function(item){
-return item!==id;
-});
+    document.querySelectorAll(".appButton").forEach(button => {
 
-saveInstalledApps(installed);
+        const name =
+            button.dataset.name.toLowerCase();
 
-addNotification(
-"🗑️ App Removed",
-app.name+" was removed."
-);
+        if (name.includes(query)) {
+            button.style.display = "block";
+        } else {
+            button.style.display = "none";
+        }
 
-}else{
+    });
 
-installed.push(id);
-
-saveInstalledApps(installed);
-
-addNotification(
-"⬇️ App Installed",
-app.name+" was installed."
-);
-
-}
-
-renderStore();
-renderAppManager();
-refreshSystemInfo();
-
-}
-
-function renderAppManager(){
-
-const list=document.getElementById("appManagerList");
-
-const installed=getInstalledApps();
-
-document.getElementById("appStorageText").textContent=
-installed.length+" installed";
-
-document.getElementById("appStorageBar").style.width=
-Math.min((installed.length/rootApps.length)*100,100)+"%";
-
-list.innerHTML="";
-
-if(installed.length===0){
-
-list.innerHTML=
-'<div class="empty">📦 No ROOT Store apps are installed.</div>';
-
-return;
-
-}
-
-installed.forEach(function(id){
-
-const app=rootApps.find(function(item){
-return item.id===id;
-});
-
-if(!app)return;
-
-const item=document.createElement("div");
-
-item.className="manager-item";
-
-item.innerHTML=`
-
-<div class="manager-icon">${app.icon}</div>
-
-<div class="manager-info">
-
-<strong>${escapeHTML(app.name)}</strong>
-
-<small>
-${escapeHTML(app.category)} · Version ${escapeHTML(app.version)}
-</small>
-
-</div>
-
-<button class="btn danger-btn"
-onclick="uninstallFromManager('${app.id}')">
-Uninstall
-</button>
-
-`;
-
-list.appendChild(item);
-
-});
-
-}
-
-function uninstallFromManager(id){
-
-const app=rootApps.find(function(item){
-return item.id===id;
-});
-
-if(!app)return;
-
-const installed=
-getInstalledApps().filter(function(item){
-return item!==id;
-});
-
-saveInstalledApps(installed);
-
-addNotification(
-"🗑️ App Uninstalled",
-app.name+" was uninstalled."
-);
-
-renderAppManager();
-renderStore();
-refreshSystemInfo();
-
-}
-
-function removeAllApps(){
-
-const installed=getInstalledApps();
-
-if(installed.length===0){
-
-addNotification(
-"📦 App Manager",
-"No installed apps to remove."
-);
-
-return;
-
-}
-
-const confirmed=confirm(
-"Remove all installed ROOT Store apps?"
-);
-
-if(!confirmed)return;
-
-localStorage.removeItem("rootOS_installed_apps");
-
-renderAppManager();
-renderStore();
-refreshSystemInfo();
-
-addNotification(
-"🗑️ Apps Removed",
-"All installed ROOT Store apps were removed."
-);
-
-}
-
-
-/* DASHBOARD */
-
-function refreshSystemInfo(){
-
-updateMemory();
-updateBattery();
-updateNetwork();
-updateSystemDetails();
-updateUptime();
-updateControlCenter();
-
-}
-
-function updateMemory(){
-
-const value=document.getElementById("memoryValue");
-const sub=document.getElementById("memorySub");
-const bar=document.getElementById("memoryBar");
-
-if(navigator.deviceMemory){
-
-const gb=navigator.deviceMemory;
-
-value.textContent=gb+" GB";
-sub.textContent="Approximate device memory";
-bar.style.width=
-Math.min((gb/16)*100,100)+"%";
-
-}else{
-
-value.textContent="N/A";
-sub.textContent="Browser memory API unavailable";
-bar.style.width="0%";
-
-}
-
-}
-
-async function updateBattery(){
-
-const value=document.getElementById("batteryValue");
-const sub=document.getElementById("batterySub");
-const bar=document.getElementById("batteryBar");
-
-if(!navigator.getBattery){
-
-value.textContent="N/A";
-sub.textContent="Battery API unavailable";
-bar.style.width="0%";
-return;
-
-}
-
-try{
-
-const battery=await navigator.getBattery();
-
-const level=Math.round(battery.level*100);
-
-value.textContent=level+"%";
-
-sub.textContent=battery.charging
-?"Charging"
-:"On battery";
-
-bar.style.width=level+"%";
-
-}catch{
-
-value.textContent="N/A";
-
-}
-
-}
-
-function updateNetwork(){
-
-const value=document.getElementById("networkValue");
-const sub=document.getElementById("networkSub");
-const bar=document.getElementById("networkBar");
-
-if(navigator.onLine){
-
-value.textContent="ONLINE";
-sub.textContent="Internet connection detected";
-bar.style.width="100%";
-
-}else{
-
-value.textContent="OFFLINE";
-sub.textContent="No internet connection";
-bar.style.width="15%";
-
-}
-
-}
-
-function updateSystemDetails(){
-
-document.getElementById("platformValue").textContent=
-navigator.platform||"Unknown";
-
-document.getElementById("browserValue").textContent=
-getBrowserName();
-
-document.getElementById("screenValue").textContent=
-window.innerWidth+" × "+window.innerHeight;
-
-document.getElementById("languageValue").textContent=
-navigator.language||"Unknown";
-
-document.getElementById("onlineValue").textContent=
-navigator.onLine?"Online":"Offline";
-
-document.getElementById("coresValue").textContent=
-navigator.hardwareConcurrency||"N/A";
-
-document.getElementById("deviceMemoryValue").textContent=
-navigator.deviceMemory
-?navigator.deviceMemory+" GB"
-:"Not available";
-
-document.getElementById("installedCountValue").textContent=
-getInstalledApps().length;
-
-}
-
-function getBrowserName(){
-
-const ua=navigator.userAgent;
-
-if(ua.includes("Edg/"))return"Microsoft Edge";
-if(ua.includes("OPR/"))return"Opera";
-if(ua.includes("Chrome/"))return"Google Chrome";
-if(ua.includes("Firefox/"))return"Firefox";
-if(ua.includes("Safari/")&&!ua.includes("Chrome/"))
-return"Safari";
-
-return"Unknown Browser";
-
-}
-
-function updateUptime(){
-
-const value=document.getElementById("uptimeValue");
-const bar=document.getElementById("uptimeBar");
-
-const seconds=Math.floor(
-(Date.now()-sessionStart)/1000
-);
-
-const h=String(Math.floor(seconds/3600)).padStart(2,"0");
-const m=String(Math.floor((seconds%3600)/60)).padStart(2,"0");
-const s=String(seconds%60).padStart(2,"0");
-
-value.textContent=h+":"+m+":"+s;
-
-bar.style.width=
-Math.min((seconds/3600)*100,100)+"%";
-
-}
-
-setInterval(updateUptime,1000);
-
-window.addEventListener("online",function(){
-refreshSystemInfo();
-});
-
-window.addEventListener("offline",function(){
-refreshSystemInfo();
-});
-
-
-/* NOTIFICATIONS */
-
-function addNotification(title,message){
-
-const list=document.getElementById("notificationList");
-
-const item=document.createElement("div");
-
-item.className="notification";
-
-item.innerHTML=
-"<strong>"+escapeHTML(title)+
-"</strong><p>"+
-escapeHTML(message)+
-"</p>";
-
-list.prepend(item);
-
-const count=document.getElementById("notificationCount");
-
-count.style.display="grid";
-
-count.textContent=
-parseInt(count.textContent||"0",10)+1;
-
-}
-
-function clearNotifications(){
-
-document.getElementById("notificationList").innerHTML=
-'<div class="notification">'+
-'<strong>✓ All clear</strong>'+
-'<p>No new notifications.</p>'+
-'</div>';
-
-document.getElementById("notificationCount")
-.style.display="none";
-
-}
-
-
-/* FILES */
-
-function displayFiles(){
-
-const input=document.getElementById("fileInput");
-const list=document.getElementById("fileList");
-
-list.innerHTML="";
-
-Array.from(input.files).forEach(function(file){
-
-const item=document.createElement("div");
-
-item.className="file-item";
-
-item.innerHTML=
-"<span>📄 "+escapeHTML(file.name)+
-"</span><small>"+
-formatBytes(file.size)+
-"</small>";
-
-list.appendChild(item);
-
-});
-
-}
-
-function formatBytes(bytes){
-
-if(bytes===0)return"0 Bytes";
-
-const units=["Bytes","KB","MB","GB"];
-
-const i=Math.floor(
-Math.log(bytes)/Math.log(1024)
-);
-
-return(
-bytes/Math.pow(1024,i)
-).toFixed(2)+" "+units[i];
-
-}
-
-
-/* EDITOR */
-
-function saveEditor(){
-
-const text=document.getElementById("editor").value;
-
-localStorage.setItem("rootOS_editor",text);
-
-document.getElementById("editorStatus")
-.textContent=" Saved locally.";
-
-}
-
-function clearEditor(){
-
-document.getElementById("editor").value="";
-
-document.getElementById("editorStatus")
-.textContent=" Cleared.";
-
-}
-
-function loadEditor(){
-
-const saved=localStorage.getItem("rootOS_editor");
-
-if(saved!==null)
-document.getElementById("editor").value=saved;
-
 }
-
-
-/* CALCULATOR */
-
-function calcInput(value){
 
-const display=document.getElementById("calcDisplay");
 
-if(display.value==="0")
-display.value="";
+/* ================================
+   TERMINAL
+================================ */
 
-display.value+=value;
+function terminalCommand(event) {
 
-}
-
-function calcClear(){
-
-document.getElementById("calcDisplay").value="0";
+    if (event.key !== "Enter") {
+        return;
+    }
 
-}
-
-function calcBack(){
+    const input =
+        document.getElementById("terminalInput");
 
-const display=document.getElementById("calcDisplay");
+    const command =
+        input.value.trim().toLowerCase();
 
-display.value=
-display.value.length>1
-?display.value.slice(0,-1)
-:"0";
+    const terminal =
+        document.getElementById("terminal");
 
-}
+    const row =
+        input.parentElement;
 
-function calcResult(){
+    const output =
+        document.createElement("div");
 
-const display=document.getElementById("calcDisplay");
+    output.className = "terminalLine";
 
-const expression=display.value;
+    output.innerHTML =
+        `<span class="terminalBlue">root@root-os:~$</span> ${escapeHTML(command)}`;
 
-if(!/^[0-9+\-*/().\s]+$/.test(expression)){
+    terminal.insertBefore(output, row);
 
-display.value="Error";
-return;
+    let response = "";
 
-}
+    if (command === "help") {
 
-try{
+        response =
+`Available commands:
+help       Show available commands
+clear      Clear terminal
+about      About ROOT OS
+version    Show OS version
+date       Show current date
+time       Show current time
+status     Show system status
+hello      ROOT greeting`;
 
-const result=Function(
-'"use strict";return ('+expression+')'
-)();
+    }
 
-display.value=
-Number.isFinite(result)
-?String(result)
-:"Error";
+    else if (command === "clear") {
 
-}catch{
+        terminal.querySelectorAll(".terminalLine")
+            .forEach(line => line.remove());
 
-display.value="Error";
+        input.value = "";
+        return;
 
-}
+    }
 
-}
+    else if (command === "about") {
 
+        response =
+            "ROOT OS is a web-based operating system concept by ROOT HUB.";
 
-/* IMAGE */
+    }
 
-function loadImage(event){
+    else if (command === "version") {
 
-const file=event.target.files[0];
+        response =
+            "ROOT OS v1.7";
 
-if(!file)return;
+    }
 
-const image=document.getElementById("previewImage");
-const placeholder=document.getElementById("imagePlaceholder");
+    else if (command === "date") {
 
-image.src=URL.createObjectURL(file);
+        response =
+            new Date().toLocaleDateString();
 
-image.style.display="block";
-placeholder.style.display="none";
+    }
 
-}
+    else if (command === "time") {
 
+        response =
+            new Date().toLocaleTimeString();
 
-/* AUDIO */
+    }
 
-function loadAudio(event){
+    else if (command === "status") {
 
-const file=event.target.files[0];
+        response =
+            "System: Online\nInterface: Operational\nNetwork: Connected";
 
-if(!file)return;
+    }
 
-const audio=document.getElementById("audioPlayer");
+    else if (command === "hello") {
 
-audio.src=URL.createObjectURL(file);
-audio.load();
+        response =
+            "Welcome to ROOT OS. 👋";
 
-}
+    }
 
+    else if (command === "") {
 
-/* BROWSER */
+        response = "";
 
-function openBrowser(){
+    }
 
-let url=
-document.getElementById("browserURL")
-.value.trim();
+    else {
 
-if(!url)return;
+        response =
+            `Command not found: ${command}. Type "help" for commands.`;
 
-if(!/^https?:\/\//i.test(url))
-url="https://"+url;
+    }
 
-document.getElementById("browserFrame")
-.src=url;
+    if (response) {
 
-}
+        const responseDiv =
+            document.createElement("div");
 
+        responseDiv.className = "terminalLine";
 
-/* UTILITY */
+        responseDiv.style.whiteSpace = "pre-line";
 
-function escapeHTML(value){
+        responseDiv.textContent = response;
 
-const div=document.createElement("div");
+        terminal.insertBefore(responseDiv, row);
 
-div.textContent=value;
+    }
 
-return div.innerHTML;
+    input.value = "";
 
+    terminal.scrollTop = terminal.scrollHeight;
 }
-
-
-/* SAVED SETTINGS */
 
-if(localStorage.getItem("rootOS_light")==="1")
-document.body.classList.add("light");
 
-const savedBrightness=
-localStorage.getItem("rootOS_brightness");
+/* ================================
+   HTML ESCAPE
+================================ */
 
-if(savedBrightness){
+function escapeHTML(text) {
 
-document.getElementById("brightnessSlider").value=
-savedBrightness;
+    const div =
+        document.createElement("div");
 
-document.getElementById("brightnessValue")
-.textContent=savedBrightness+"%";
+    div.textContent = text;
 
-document.getElementById("desktop")
-.style.filter=
-"brightness("+savedBrightness+"%)";
-
+    return div.innerHTML;
 }
 
-const savedVolume=
-localStorage.getItem("rootOS_volume");
 
-if(savedVolume){
+/* ================================
+   NOTES
+================================ */
 
-document.getElementById("volumeSlider").value=
-savedVolume;
+const notesArea =
+    document.getElementById("notesArea");
 
-document.getElementById("volumeValue")
-.textContent=savedVolume+"%";
+const savedNotes =
+    localStorage.getItem("rootOSNotes");
 
+if (savedNotes) {
+    notesArea.value = savedNotes;
 }
-
-loadEditor();
-updateUserUI();
-
 
-/* KEYBOARD */
+notesArea.addEventListener("input", () => {
 
-document.addEventListener("keydown",function(event){
-
-if(event.key==="Escape"){
-
-closeStartMenu();
-closePower();
-
-}
+    localStorage.setItem(
+        "rootOSNotes",
+        notesArea.value
+    );
 
 });
 
 
-/* OUTSIDE CLICK */
+/* ================================
+   CALCULATOR
+================================ */
 
-document.addEventListener("click",function(event){
+function addCalc(value) {
 
-const menu=document.getElementById("startMenu");
+    const display =
+        document.getElementById("calcDisplay");
 
-if(!menu)return;
+    display.value += value;
+}
 
-const inside=menu.contains(event.target);
-const dock=event.target.closest(".dock");
 
-if(!inside&&!dock)
-closeStartMenu();
+function clearCalc() {
+
+    document.getElementById("calcDisplay").value = "";
+
+}
+
+
+function backCalc() {
+
+    const display =
+        document.getElementById("calcDisplay");
+
+    display.value =
+        display.value.slice(0, -1);
+
+}
+
+
+function calculate() {
+
+    const display =
+        document.getElementById("calcDisplay");
+
+    if (!display.value) {
+        return;
+    }
+
+    try {
+
+        const expression =
+            display.value.replace(/%/g, "/100");
+
+        if (!/^[0-9+\-*/().\s]+$/.test(expression)) {
+            display.value = "Error";
+            return;
+        }
+
+        const result =
+            Function(
+                `"use strict"; return (${expression})`
+            )();
+
+        if (!Number.isFinite(result)) {
+            display.value = "Error";
+            return;
+        }
+
+        display.value = result;
+
+    } catch {
+
+        display.value = "Error";
+
+    }
+
+}
+
+
+/* ================================
+   KEYBOARD CALCULATOR
+================================ */
+
+document.addEventListener("keydown", function(event) {
+
+    const calcWindow =
+        document.getElementById("calculatorWindow");
+
+    if (!calcWindow.classList.contains("active")) {
+        return;
+    }
+
+    const allowed =
+        "0123456789+-*/().%";
+
+    if (allowed.includes(event.key)) {
+
+        addCalc(event.key);
+
+    }
+
+    if (event.key === "Enter") {
+
+        calculate();
+
+    }
+
+    if (event.key === "Backspace") {
+
+        backCalc();
+
+    }
+
+    if (event.key === "Escape") {
+
+        clearCalc();
+
+    }
 
 });
 
 
-/* INITIAL */
+/* ================================
+   ONLINE STATUS
+================================ */
 
-setTimeout(function(){
+function updateNetworkStatus() {
 
-refreshSystemInfo();
-renderStore();
-renderAppManager();
-updateControlCenter();
-updateUserUI();
+    const status =
+        document.getElementById("networkStatus");
 
-},500);
+    if (navigator.onLine) {
+
+        status.textContent = "● Online";
+
+    } else {
+
+        status.textContent = "● Offline";
+
+    }
+
+}
+
+updateNetworkStatus();
+
+window.addEventListener(
+    "online",
+    updateNetworkStatus
+);
+
+window.addEventListener(
+    "offline",
+    updateNetworkStatus
+);
+
+
+/* ================================
+   ESCAPE TO CLOSE WINDOWS
+================================ */
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Escape") {
+
+        document
+            .querySelectorAll(".window.active")
+            .forEach(win => {
+                win.classList.remove("active");
+            });
+
+        document
+            .getElementById("startMenu")
+            .classList.remove("active");
+
+    }
+
+});
+
+
+/* ================================
+   PREVENT RIGHT CLICK
+================================ */
+
+document.addEventListener("contextmenu", function(event) {
+
+    event.preventDefault();
+
+});
+
+
+/* ================================
+   ROOT OS READY
+================================ */
+
+console.log("ROOT OS v1.7 loaded successfully.");
 
 </script>
 
 </body>
 </html>
-```
