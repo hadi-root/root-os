@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#087cff">
+<meta name="theme-color" content="#061525">
 <title>ROOT OS v1.7</title>
 
 <style>
@@ -11,107 +11,116 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
-:root {
-    --blue: #087cff;
-    --blue2: #0057c7;
-    --dark: #06111f;
-    --dark2: #0a192b;
-    --glass: rgba(8, 20, 36, 0.82);
-    --border: rgba(255,255,255,0.12);
-    --text: #ffffff;
-    --muted: #9db0c7;
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 body {
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    background: #020812;
-    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    background: #020b17;
 }
 
-/* BOOT SCREEN */
-#bootScreen {
+/* =========================
+   BOOT SCREEN
+========================= */
+
+#boot {
     position: fixed;
     inset: 0;
     z-index: 9999;
-    background: #020812;
+    background: #020b17;
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
-.bootLogo {
-    width: 90px;
-    height: 90px;
-    border-radius: 24px;
-    background: linear-gradient(135deg, #087cff, #004db4);
+.boot-logo {
+    width: 82px;
+    height: 82px;
+    border-radius: 17px;
+    background: #087cff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 42px;
+    font-size: 43px;
     font-weight: 900;
-    box-shadow: 0 0 50px rgba(8,124,255,.45);
-    margin-bottom: 25px;
+    box-shadow: 0 0 45px rgba(8,124,255,.45);
 }
 
-.bootTitle {
-    font-size: 28px;
+.boot-title {
+    margin-top: 18px;
+    font-size: 27px;
     font-weight: 800;
 }
 
-.bootVersion {
-    color: var(--muted);
-    margin-top: 8px;
+.boot-version {
+    margin-top: 7px;
+    color: #8298b0;
+    font-size: 13px;
 }
 
-.loader {
-    width: 180px;
-    height: 4px;
-    background: #172638;
-    border-radius: 10px;
-    margin-top: 28px;
+.boot-loader {
+    width: 170px;
+    height: 3px;
+    margin-top: 25px;
+    background: #14283c;
     overflow: hidden;
+    border-radius: 10px;
 }
 
-.loaderBar {
+.boot-loader span {
+    display: block;
     width: 0;
     height: 100%;
-    background: var(--blue);
-    animation: load 2.2s forwards;
+    background: #087cff;
+    animation: bootload 2s forwards;
 }
 
-@keyframes load {
-    to { width: 100%; }
+@keyframes bootload {
+    100% {
+        width: 100%;
+    }
 }
 
-/* DESKTOP */
-#desktop {
+/* =========================
+   DESKTOP
+========================= */
+
+#os {
+    display: none;
     position: fixed;
     inset: 0;
-    display: none;
     background:
-        radial-gradient(circle at 20% 20%, rgba(8,124,255,.18), transparent 35%),
-        radial-gradient(circle at 80% 80%, rgba(0,90,210,.12), transparent 35%),
-        linear-gradient(135deg, #020812, #071729);
+        radial-gradient(circle at 65% 15%, rgba(8,124,255,.035), transparent 30%),
+        linear-gradient(180deg, #020b17 0%, #03101f 100%);
 }
 
-/* TOP BAR */
+/* =========================
+   TOP BAR
+========================= */
+
 .topbar {
-    height: 58px;
-    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 63px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 18px;
-    background: rgba(3,12,24,.75);
-    backdrop-filter: blur(18px);
-    border-bottom: 1px solid var(--border);
-    position: relative;
+
+    padding: 0 20px;
+
+    background: rgba(2,11,23,.92);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+
     z-index: 100;
 }
 
@@ -119,793 +128,1273 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-weight: 800;
 }
 
-.brandLogo {
-    width: 32px;
-    height: 32px;
+.brand-logo {
+    width: 34px;
+    height: 34px;
     border-radius: 9px;
-    background: linear-gradient(135deg,#087cff,#0055bd);
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    background: #087cff;
     font-weight: 900;
+    font-size: 20px;
 }
 
-.brandText span {
-    color: var(--blue);
+.brand-name {
+    font-size: 17px;
+    font-weight: 800;
 }
 
-.statusArea {
+.brand-name span {
+    color: #087cff;
+}
+
+.system-info {
     display: flex;
     align-items: center;
-    gap: 16px;
-    color: #cbd8e8;
+    gap: 18px;
+    color: #c4d0de;
     font-size: 14px;
 }
 
-.statusItem {
-    cursor: pointer;
+.online {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
-/* DESKTOP CONTENT */
-.desktopContent {
+.online-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #d5e0eb;
+}
+
+.battery {
+    color: #c4d0de;
+}
+
+/* =========================
+   MAIN DESKTOP
+   KEEPING ORIGINAL ALIGNMENT
+========================= */
+
+.desktop {
     position: absolute;
-    top: 58px;
-    bottom: 74px;
+    top: 63px;
     left: 0;
     right: 0;
-    padding: 35px;
-    overflow: hidden;
+    bottom: 0;
 }
 
+/* Welcome position deliberately kept close
+   to the screenshot */
+
 .welcome {
-    max-width: 700px;
+    position: absolute;
+    top: 38px;
+    left: 37px;
 }
 
 .welcome h1 {
-    font-size: clamp(34px, 5vw, 62px);
-    line-height: 1.05;
-    margin-bottom: 12px;
+    font-size: clamp(42px, 4vw, 68px);
+    line-height: 1.08;
+    font-weight: 800;
+    letter-spacing: -2px;
 }
 
 .welcome h1 span {
-    color: var(--blue);
+    color: #087cff;
 }
 
 .welcome p {
-    color: var(--muted);
+    margin-top: 17px;
+    color: #9eb6d0;
     font-size: 17px;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
-/* DESKTOP ICONS */
-.desktopApps {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 90px);
-    gap: 25px;
-    margin-top: 40px;
+/* =========================
+   DESKTOP ICONS
+   SAME HORIZONTAL STYLE
+========================= */
+
+.desktop-icons {
+    position: absolute;
+    top: 192px;
+    left: 54px;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 61px;
 }
 
-.desktopIcon {
-    width: 90px;
+.desktop-icon {
+    width: 65px;
     text-align: center;
     cursor: pointer;
     user-select: none;
 }
 
-.desktopIconBox {
-    width: 58px;
-    height: 58px;
-    margin: auto;
+.icon-box {
+    width: 62px;
+    height: 62px;
+
     border-radius: 17px;
-    background: rgba(8,124,255,.13);
-    border: 1px solid rgba(8,124,255,.35);
+
+    background: rgba(5,38,69,.72);
+    border: 1px solid rgba(8,124,255,.48);
+
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 27px;
-    transition: .2s;
+
+    font-size: 28px;
+
+    transition: .18s ease;
 }
 
-.desktopIcon:hover .desktopIconBox {
-    transform: translateY(-4px);
-    background: rgba(8,124,255,.25);
-    box-shadow: 0 8px 25px rgba(8,124,255,.2);
+.desktop-icon:hover .icon-box {
+    background: rgba(8,124,255,.18);
+    border-color: #087cff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(8,124,255,.17);
 }
 
-.desktopIcon span {
-    display: block;
-    margin-top: 8px;
-    color: #d7e3f2;
-    font-size: 12px;
+.desktop-icon-label {
+    margin-top: 9px;
+    font-size: 13px;
+    white-space: nowrap;
+    color: #e2e9f1;
 }
 
-/* DOCK */
+/* =========================
+   DOCK
+   KEEP ORIGINAL CENTERED
+========================= */
+
 .dock {
     position: absolute;
-    bottom: 15px;
+
     left: 50%;
+    bottom: 16px;
+
     transform: translateX(-50%);
-    height: 60px;
+
+    height: 64px;
+
     padding: 7px 12px;
-    border-radius: 20px;
-    background: rgba(5,16,30,.85);
-    border: 1px solid var(--border);
-    backdrop-filter: blur(20px);
+
     display: flex;
     align-items: center;
-    gap: 9px;
+    gap: 7px;
+
+    border-radius: 21px;
+
+    background: rgba(4,17,31,.9);
+    border: 1px solid rgba(255,255,255,.11);
+
+    box-shadow: 0 15px 40px rgba(0,0,0,.35);
+
+    z-index: 300;
+}
+
+.dock-button {
+    width: 48px;
+    height: 48px;
+
+    border: 0;
+    border-radius: 14px;
+
+    background: transparent;
+    color: white;
+
+    font-size: 23px;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: .18s ease;
+}
+
+.dock-button:hover {
+    background: rgba(8,124,255,.15);
+    transform: translateY(-2px);
+}
+
+.dock-root {
+    background: #087cff;
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.dock-root:hover {
+    background: #087cff;
+}
+
+/* =========================
+   START MENU
+========================= */
+
+.start-menu {
+    position: absolute;
+
+    left: 50%;
+    bottom: 92px;
+
+    transform: translateX(-50%);
+
+    width: 470px;
+    max-width: calc(100vw - 24px);
+
+    padding: 18px;
+
+    background: rgba(4,15,29,.97);
+
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 20px;
+
+    box-shadow: 0 25px 80px rgba(0,0,0,.55);
+
+    display: none;
+
     z-index: 500;
 }
 
-.dockButton {
-    width: 45px;
-    height: 45px;
-    border: 0;
-    border-radius: 13px;
-    color: white;
-    background: transparent;
-    cursor: pointer;
-    font-size: 21px;
-    transition: .2s;
-}
-
-.dockButton:hover {
-    background: rgba(8,124,255,.22);
-    transform: translateY(-3px);
-}
-
-.startButton {
-    background: var(--blue);
-}
-
-.startButton:hover {
-    background: #1687ff;
-}
-
-/* WINDOWS */
-.window {
-    position: absolute;
-    width: min(760px, calc(100vw - 30px));
-    height: min(540px, calc(100vh - 110px));
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(7,17,30,.95);
-    border: 1px solid rgba(255,255,255,.13);
-    border-radius: 18px;
-    box-shadow: 0 30px 80px rgba(0,0,0,.55);
-    overflow: hidden;
-    display: none;
-    z-index: 300;
-    backdrop-filter: blur(25px);
-}
-
-.window.active {
+.start-menu.show {
     display: block;
 }
 
-.windowHeader {
-    height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 14px 0 18px;
-    border-bottom: 1px solid var(--border);
-    background: rgba(255,255,255,.025);
-}
-
-.windowTitle {
-    font-weight: 700;
-}
-
-.windowControls {
-    display: flex;
-    gap: 7px;
-}
-
-.windowControl {
-    width: 31px;
-    height: 31px;
-    border: 0;
-    border-radius: 9px;
-    background: rgba(255,255,255,.07);
-    color: white;
-    cursor: pointer;
-}
-
-.windowControl:hover {
-    background: var(--blue);
-}
-
-.windowBody {
-    height: calc(100% - 52px);
-    overflow: auto;
-}
-
-/* START MENU */
-#startMenu {
-    position: absolute;
-    bottom: 86px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(500px, calc(100vw - 24px));
-    max-height: 620px;
-    background: rgba(5,15,28,.96);
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    padding: 20px;
-    display: none;
-    z-index: 900;
-    backdrop-filter: blur(25px);
-    box-shadow: 0 25px 80px rgba(0,0,0,.55);
-}
-
-#startMenu.active {
-    display: block;
-}
-
-.searchBox {
+.search {
     width: 100%;
-    padding: 14px 16px;
-    border-radius: 13px;
-    border: 1px solid var(--border);
+    height: 44px;
+
+    padding: 0 14px;
+
+    border-radius: 11px;
+
+    border: 1px solid rgba(255,255,255,.12);
     outline: none;
-    background: rgba(255,255,255,.06);
+
+    background: rgba(255,255,255,.055);
     color: white;
-    font-size: 15px;
+
+    font-size: 14px;
 }
 
-.searchBox::placeholder {
-    color: #7890aa;
+.search::placeholder {
+    color: #7890a9;
 }
 
-.startHeading {
-    margin: 22px 0 13px;
-    color: #9db0c7;
-    font-size: 12px;
+.menu-title {
+    margin: 19px 0 12px;
+
+    color: #8ea5bd;
+
+    font-size: 11px;
+    font-weight: 700;
+
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-.appGrid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-}
-
-.appButton {
-    min-height: 82px;
-    border: 0;
-    border-radius: 14px;
-    color: white;
-    background: rgba(255,255,255,.045);
-    cursor: pointer;
-    transition: .2s;
-}
-
-.appButton:hover {
-    background: rgba(8,124,255,.18);
-    transform: translateY(-2px);
-}
-
-.appEmoji {
-    font-size: 25px;
-    display: block;
-    margin-bottom: 7px;
-}
-
-.appName {
-    font-size: 12px;
-}
-
-/* TERMINAL */
-.terminal {
-    height: 100%;
-    background: #02070d;
-    padding: 18px;
-    font-family: Consolas, monospace;
-    color: #cde8ff;
-    overflow: auto;
-}
-
-.terminalLine {
-    margin-bottom: 8px;
-    line-height: 1.5;
-}
-
-.terminalBlue {
-    color: #3d9cff;
-}
-
-.terminalInputRow {
-    display: flex;
-    align-items: center;
-}
-
-.terminalPrompt {
-    color: #3d9cff;
-    margin-right: 7px;
-}
-
-#terminalInput {
-    flex: 1;
-    background: transparent;
-    border: 0;
-    outline: none;
-    color: white;
-    font-family: Consolas, monospace;
-    font-size: 14px;
-}
-
-/* NOTES */
-.notesArea {
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-    background: transparent;
-    color: white;
-    border: 0;
-    outline: none;
-    resize: none;
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-/* CALCULATOR */
-.calculator {
-    max-width: 340px;
-    margin: auto;
-    padding: 20px;
-}
-
-.calcDisplay {
-    width: 100%;
-    height: 70px;
-    border-radius: 13px;
-    background: #02070d;
-    border: 1px solid var(--border);
-    color: white;
-    font-size: 27px;
-    text-align: right;
-    padding: 15px;
-    margin-bottom: 13px;
-}
-
-.calcGrid {
+.apps {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 8px;
 }
 
-.calcButton {
-    height: 60px;
+.app {
+    min-height: 76px;
+
     border: 0;
-    border-radius: 12px;
-    color: white;
-    background: rgba(255,255,255,.07);
-    cursor: pointer;
-    font-size: 17px;
-}
-
-.calcButton:hover {
-    background: rgba(8,124,255,.35);
-}
-
-.calcOperator {
-    background: rgba(8,124,255,.22);
-}
-
-/* FILES */
-.filesPage {
-    padding: 22px;
-}
-
-.fileCard {
-    padding: 18px;
-    margin-bottom: 10px;
-    border: 1px solid var(--border);
     border-radius: 13px;
+
     background: rgba(255,255,255,.04);
+    color: white;
+
+    cursor: pointer;
+
+    transition: .18s;
 }
 
-.fileIcon {
-    font-size: 25px;
-    margin-right: 10px;
+.app:hover {
+    background: rgba(8,124,255,.17);
 }
 
-/* SETTINGS */
-.settingsPage {
-    padding: 25px;
+.app-icon {
+    display: block;
+    font-size: 23px;
+    margin-bottom: 6px;
 }
 
-.settingCard {
-    border: 1px solid var(--border);
-    border-radius: 15px;
-    padding: 18px;
-    margin-bottom: 12px;
-    background: rgba(255,255,255,.035);
+.app-name {
+    font-size: 11px;
 }
 
-.settingCard h3 {
-    margin-bottom: 7px;
+/* =========================
+   APP WINDOWS
+========================= */
+
+.window {
+    position: absolute;
+
+    width: min(760px, calc(100vw - 30px));
+    height: min(540px, calc(100vh - 100px));
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background: rgba(5,17,31,.98);
+
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 17px;
+
+    overflow: hidden;
+
+    box-shadow: 0 30px 90px rgba(0,0,0,.6);
+
+    display: none;
+
+    z-index: 400;
 }
 
-.settingCard p {
-    color: var(--muted);
+.window.show {
+    display: block;
+}
+
+.window-header {
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 13px 0 17px;
+
+    border-bottom: 1px solid rgba(255,255,255,.09);
+
+    background: rgba(255,255,255,.025);
+}
+
+.window-title {
+    font-weight: 700;
     font-size: 14px;
 }
 
-/* ABOUT */
-.aboutPage {
-    padding: 30px;
-    text-align: center;
+.close {
+    width: 31px;
+    height: 31px;
+
+    border: 0;
+    border-radius: 8px;
+
+    background: rgba(255,255,255,.06);
+    color: white;
+
+    cursor: pointer;
 }
 
-.aboutLogo {
-    width: 90px;
-    height: 90px;
-    margin: 15px auto 20px;
-    border-radius: 24px;
-    background: linear-gradient(135deg,#087cff,#0057c7);
+.close:hover {
+    background: #087cff;
+}
+
+.window-content {
+    height: calc(100% - 50px);
+    overflow: auto;
+}
+
+/* =========================
+   FILES
+========================= */
+
+.files {
+    padding: 20px;
+}
+
+.file {
+    padding: 17px;
+    margin-bottom: 10px;
+
+    border-radius: 13px;
+
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+
+    cursor: pointer;
+}
+
+.file:hover {
+    border-color: rgba(8,124,255,.45);
+}
+
+.file strong {
+    font-size: 14px;
+}
+
+.file p {
+    margin-top: 5px;
+    color: #8198b0;
+    font-size: 12px;
+}
+
+/* =========================
+   TERMINAL
+========================= */
+
+.terminal {
+    height: 100%;
+    padding: 18px;
+
+    background: #01060c;
+
+    font-family: Consolas, monospace;
+    font-size: 14px;
+
+    color: #d5e8fb;
+
+    overflow: auto;
+}
+
+.term-blue {
+    color: #3d9cff;
+}
+
+.term-line {
+    margin-bottom: 7px;
+    white-space: pre-wrap;
+}
+
+.term-row {
     display: flex;
-    justify-content: center;
+}
+
+.term-prompt {
+    color: #3d9cff;
+    margin-right: 7px;
+    white-space: nowrap;
+}
+
+#termInput {
+    flex: 1;
+
+    background: transparent;
+    border: 0;
+    outline: 0;
+
+    color: white;
+
+    font-family: Consolas, monospace;
+    font-size: 14px;
+}
+
+/* =========================
+   NOTES
+========================= */
+
+#notes {
+    width: 100%;
+    height: 100%;
+
+    padding: 20px;
+
+    border: 0;
+    outline: none;
+
+    resize: none;
+
+    background: transparent;
+    color: white;
+
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* =========================
+   CALCULATOR
+========================= */
+
+.calculator {
+    max-width: 350px;
+    margin: auto;
+    padding: 20px;
+}
+
+#calc {
+    width: 100%;
+    height: 65px;
+
+    margin-bottom: 10px;
+
+    padding: 10px;
+
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.1);
+
+    background: #01060c;
+    color: white;
+
+    text-align: right;
+
+    font-size: 25px;
+}
+
+.calc-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 7px;
+}
+
+.calc-button {
+    height: 58px;
+
+    border: 0;
+    border-radius: 11px;
+
+    background: rgba(255,255,255,.07);
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 16px;
+}
+
+.calc-button:hover {
+    background: rgba(8,124,255,.25);
+}
+
+.calc-op {
+    background: rgba(8,124,255,.18);
+}
+
+/* =========================
+   SETTINGS
+========================= */
+
+.settings {
+    padding: 22px;
+}
+
+.setting {
+    padding: 17px;
+    margin-bottom: 10px;
+
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 13px;
+
+    background: rgba(255,255,255,.035);
+}
+
+.setting h3 {
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+.setting p {
+    color: #8298b0;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* =========================
+   ABOUT
+========================= */
+
+.about {
+    text-align: center;
+    padding: 35px;
+}
+
+.about-logo {
+    width: 88px;
+    height: 88px;
+
+    margin: 5px auto 18px;
+
+    display: flex;
     align-items: center;
+    justify-content: center;
+
+    border-radius: 22px;
+
+    background: #087cff;
+
     font-size: 42px;
     font-weight: 900;
+
+    box-shadow: 0 0 35px rgba(8,124,255,.25);
 }
 
-.aboutPage h1 {
+.about h1 {
     margin-bottom: 8px;
 }
 
-.aboutPage p {
-    color: var(--muted);
+.about .version {
+    color: #087cff;
+    font-size: 13px;
+}
+
+.about p {
+    max-width: 560px;
+    margin: 20px auto 0;
+
+    color: #8da4bd;
     line-height: 1.7;
 }
 
-/* MOBILE */
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 800px) {
+
+    .desktop-icons {
+        gap: 25px;
+    }
+
+    .welcome h1 {
+        font-size: 45px;
+    }
+
+}
+
 @media (max-width: 600px) {
-    .statusItem:nth-child(1),
-    .statusItem:nth-child(2) {
-        display: none;
+
+    .topbar {
+        padding: 0 13px;
     }
 
-    .desktopContent {
-        padding: 25px 18px;
+    .system-info {
+        gap: 8px;
+        font-size: 12px;
     }
 
-    .desktopApps {
-        grid-template-columns: repeat(4, 75px);
-        gap: 18px;
+    .welcome {
+        left: 20px;
+        top: 30px;
     }
 
-    .desktopIcon {
-        width: 75px;
+    .welcome h1 {
+        font-size: 38px;
     }
 
-    .desktopIconBox {
-        width: 52px;
-        height: 52px;
+    .welcome p {
+        font-size: 14px;
+        max-width: 90%;
+    }
+
+    .desktop-icons {
+        top: 175px;
+        left: 20px;
+        right: 20px;
+
+        display: grid;
+        grid-template-columns: repeat(4, 65px);
+        gap: 23px 27px;
     }
 
     .dock {
-        max-width: calc(100vw - 20px);
-        overflow-x: auto;
+        bottom: 10px;
     }
 
-    .dockButton {
-        flex-shrink: 0;
-    }
-
-    .appGrid {
+    .apps {
         grid-template-columns: repeat(3, 1fr);
     }
+
 }
 </style>
 </head>
 
 <body>
 
-<!-- BOOT -->
-<div id="bootScreen">
-    <div class="bootLogo">R</div>
-    <div class="bootTitle">ROOT OS</div>
-    <div class="bootVersion">Version 1.7</div>
+<!-- =========================
+     BOOT
+========================= -->
 
-    <div class="loader">
-        <div class="loaderBar"></div>
+<div id="boot">
+
+    <div class="boot-logo">R</div>
+
+    <div class="boot-title">ROOT OS</div>
+
+    <div class="boot-version">
+        Version 1.7
     </div>
+
+    <div class="boot-loader">
+        <span></span>
+    </div>
+
 </div>
 
-<!-- DESKTOP -->
-<div id="desktop">
+
+<!-- =========================
+     ROOT OS
+========================= -->
+
+<div id="os">
 
     <!-- TOP BAR -->
+
     <div class="topbar">
 
         <div class="brand">
-            <div class="brandLogo">R</div>
-            <div class="brandText">ROOT <span>OS</span></div>
+
+            <div class="brand-logo">
+                R
+            </div>
+
+            <div class="brand-name">
+                ROOT <span>OS</span>
+            </div>
+
         </div>
 
-        <div class="statusArea">
-            <div class="statusItem" id="networkStatus">● Online</div>
-            <div class="statusItem">🔋 100%</div>
-            <div class="statusItem" id="clock">00:00</div>
+        <div class="system-info">
+
+            <div class="online">
+                <span class="online-dot"></span>
+                <span id="networkText">Online</span>
+            </div>
+
+            <div class="battery">
+                🔋 100%
+            </div>
+
+            <div id="clock">
+                00:00
+            </div>
+
         </div>
 
     </div>
+
 
     <!-- DESKTOP -->
-    <div class="desktopContent">
+
+    <div class="desktop">
+
+        <!-- WELCOME -->
 
         <div class="welcome">
-            <h1>Welcome to <span>ROOT OS</span></h1>
+
+            <h1>
+                Welcome to <span>ROOT OS</span>
+            </h1>
+
             <p>
-                A lightweight web-based operating system experience
-                built by ROOT HUB.
+                A lightweight web-based operating system experience built by ROOT HUB.
             </p>
-        </div>
-
-        <div class="desktopApps">
-
-            <div class="desktopIcon" onclick="openWindow('filesWindow')">
-                <div class="desktopIconBox">📁</div>
-                <span>Files</span>
-            </div>
-
-            <div class="desktopIcon" onclick="openWindow('terminalWindow')">
-                <div class="desktopIconBox">⌨️</div>
-                <span>Terminal</span>
-            </div>
-
-            <div class="desktopIcon" onclick="openWindow('notesWindow')">
-                <div class="desktopIconBox">📝</div>
-                <span>Notes</span>
-            </div>
-
-            <div class="desktopIcon" onclick="openWindow('calculatorWindow')">
-                <div class="desktopIconBox">🧮</div>
-                <span>Calculator</span>
-            </div>
-
-            <div class="desktopIcon" onclick="openWindow('settingsWindow')">
-                <div class="desktopIconBox">⚙️</div>
-                <span>Settings</span>
-            </div>
-
-            <div class="desktopIcon" onclick="openWindow('aboutWindow')">
-                <div class="desktopIconBox">ℹ️</div>
-                <span>About ROOT</span>
-            </div>
 
         </div>
 
-    </div>
 
-    <!-- START MENU -->
-    <div id="startMenu">
+        <!-- DESKTOP APPLICATIONS -->
 
-        <input
-            type="text"
-            id="appSearch"
-            class="searchBox"
-            placeholder="Search apps..."
-            oninput="searchApps()"
-        >
+        <div class="desktop-icons">
 
-        <div class="startHeading">Applications</div>
+            <div class="desktop-icon" onclick="openWindow('filesWindow')">
 
-        <div class="appGrid" id="appGrid">
-
-            <button class="appButton" data-name="files" onclick="openFromMenu('filesWindow')">
-                <span class="appEmoji">📁</span>
-                <span class="appName">Files</span>
-            </button>
-
-            <button class="appButton" data-name="terminal" onclick="openFromMenu('terminalWindow')">
-                <span class="appEmoji">⌨️</span>
-                <span class="appName">Terminal</span>
-            </button>
-
-            <button class="appButton" data-name="notes" onclick="openFromMenu('notesWindow')">
-                <span class="appEmoji">📝</span>
-                <span class="appName">Notes</span>
-            </button>
-
-            <button class="appButton" data-name="calculator" onclick="openFromMenu('calculatorWindow')">
-                <span class="appEmoji">🧮</span>
-                <span class="appName">Calculator</span>
-            </button>
-
-            <button class="appButton" data-name="settings" onclick="openFromMenu('settingsWindow')">
-                <span class="appEmoji">⚙️</span>
-                <span class="appName">Settings</span>
-            </button>
-
-            <button class="appButton" data-name="about root" onclick="openFromMenu('aboutWindow')">
-                <span class="appEmoji">ℹ️</span>
-                <span class="appName">About</span>
-            </button>
-
-        </div>
-
-    </div>
-
-    <!-- FILES WINDOW -->
-    <div class="window" id="filesWindow">
-
-        <div class="windowHeader">
-            <div class="windowTitle">📁 Files</div>
-
-            <div class="windowControls">
-                <button class="windowControl" onclick="closeWindow('filesWindow')">✕</button>
-            </div>
-        </div>
-
-        <div class="windowBody">
-
-            <div class="filesPage">
-
-                <div class="fileCard">
-                    <span class="fileIcon">📂</span>
-                    <strong>Documents</strong>
-                    <p style="color:#8ea4bb;margin-top:6px;">
-                        Your documents folder
-                    </p>
+                <div class="icon-box">
+                    📁
                 </div>
 
-                <div class="fileCard">
-                    <span class="fileIcon">🖼️</span>
-                    <strong>Pictures</strong>
-                    <p style="color:#8ea4bb;margin-top:6px;">
-                        Your images folder
-                    </p>
+                <div class="desktop-icon-label">
+                    Files
                 </div>
 
-                <div class="fileCard">
-                    <span class="fileIcon">🎵</span>
-                    <strong>Music</strong>
-                    <p style="color:#8ea4bb;margin-top:6px;">
-                        Your music folder
-                    </p>
+            </div>
+
+
+            <div class="desktop-icon" onclick="openWindow('terminalWindow')">
+
+                <div class="icon-box">
+                    ⌨️
                 </div>
 
-                <div class="fileCard">
-                    <span class="fileIcon">⬇️</span>
-                    <strong>Downloads</strong>
-                    <p style="color:#8ea4bb;margin-top:6px;">
-                        Downloaded files
-                    </p>
+                <div class="desktop-icon-label">
+                    Terminal
+                </div>
+
+            </div>
+
+
+            <div class="desktop-icon" onclick="openWindow('notesWindow')">
+
+                <div class="icon-box">
+                    📝
+                </div>
+
+                <div class="desktop-icon-label">
+                    Notes
+                </div>
+
+            </div>
+
+
+            <div class="desktop-icon" onclick="openWindow('calculatorWindow')">
+
+                <div class="icon-box">
+                    🧮
+                </div>
+
+                <div class="desktop-icon-label">
+                    Calculator
+                </div>
+
+            </div>
+
+
+            <div class="desktop-icon" onclick="openWindow('settingsWindow')">
+
+                <div class="icon-box">
+                    ⚙️
+                </div>
+
+                <div class="desktop-icon-label">
+                    Settings
+                </div>
+
+            </div>
+
+
+            <div class="desktop-icon" onclick="openWindow('aboutWindow')">
+
+                <div class="icon-box">
+                    ℹ️
+                </div>
+
+                <div class="desktop-icon-label">
+                    About ROOT
                 </div>
 
             </div>
 
         </div>
 
-    </div>
 
-    <!-- TERMINAL WINDOW -->
-    <div class="window" id="terminalWindow">
+        <!-- =========================
+             START MENU
+        ========================= -->
 
-        <div class="windowHeader">
-            <div class="windowTitle">⌨️ ROOT Terminal</div>
+        <div id="startMenu" class="start-menu">
 
-            <div class="windowControls">
-                <button class="windowControl" onclick="closeWindow('terminalWindow')">✕</button>
+            <input
+                id="appSearch"
+                class="search"
+                type="text"
+                placeholder="Search apps..."
+                oninput="searchApps()"
+            >
+
+            <div class="menu-title">
+                Applications
             </div>
+
+            <div class="apps">
+
+                <button class="app" data-name="files"
+                    onclick="openFromMenu('filesWindow')">
+                    <span class="app-icon">📁</span>
+                    <span class="app-name">Files</span>
+                </button>
+
+                <button class="app" data-name="terminal"
+                    onclick="openFromMenu('terminalWindow')">
+                    <span class="app-icon">⌨️</span>
+                    <span class="app-name">Terminal</span>
+                </button>
+
+                <button class="app" data-name="notes"
+                    onclick="openFromMenu('notesWindow')">
+                    <span class="app-icon">📝</span>
+                    <span class="app-name">Notes</span>
+                </button>
+
+                <button class="app" data-name="calculator"
+                    onclick="openFromMenu('calculatorWindow')">
+                    <span class="app-icon">🧮</span>
+                    <span class="app-name">Calculator</span>
+                </button>
+
+                <button class="app" data-name="settings"
+                    onclick="openFromMenu('settingsWindow')">
+                    <span class="app-icon">⚙️</span>
+                    <span class="app-name">Settings</span>
+                </button>
+
+                <button class="app" data-name="about root"
+                    onclick="openFromMenu('aboutWindow')">
+                    <span class="app-icon">ℹ️</span>
+                    <span class="app-name">About ROOT</span>
+                </button>
+
+            </div>
+
         </div>
 
-        <div class="windowBody">
 
-            <div class="terminal" id="terminal">
+        <!-- =========================
+             FILES WINDOW
+        ========================= -->
 
-                <div class="terminalLine">
-                    <span class="terminalBlue">ROOT OS Terminal</span>
+        <div id="filesWindow" class="window">
+
+            <div class="window-header">
+
+                <div class="window-title">
+                    📁 Files
                 </div>
 
-                <div class="terminalLine">
-                    Version 1.7
+                <button class="close"
+                    onclick="closeWindow('filesWindow')">
+                    ✕
+                </button>
+
+            </div>
+
+            <div class="window-content">
+
+                <div class="files">
+
+                    <div class="file">
+                        <strong>📂 Documents</strong>
+                        <p>Your documents folder</p>
+                    </div>
+
+                    <div class="file">
+                        <strong>🖼️ Pictures</strong>
+                        <p>Your pictures folder</p>
+                    </div>
+
+                    <div class="file">
+                        <strong>🎵 Music</strong>
+                        <p>Your music folder</p>
+                    </div>
+
+                    <div class="file">
+                        <strong>⬇️ Downloads</strong>
+                        <p>Your downloads folder</p>
+                    </div>
+
                 </div>
 
-                <div class="terminalLine">
-                    Type <span class="terminalBlue">help</span> to see available commands.
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             TERMINAL WINDOW
+        ========================= -->
+
+        <div id="terminalWindow" class="window">
+
+            <div class="window-header">
+
+                <div class="window-title">
+                    ⌨️ ROOT Terminal
                 </div>
 
-                <div class="terminalLine">
-                    &nbsp;
+                <button class="close"
+                    onclick="closeWindow('terminalWindow')">
+                    ✕
+                </button>
+
+            </div>
+
+            <div class="window-content">
+
+                <div id="terminal" class="terminal">
+
+                    <div class="term-line">
+                        <span class="term-blue">
+                            ROOT OS Terminal
+                        </span>
+                    </div>
+
+                    <div class="term-line">
+                        Version 1.7
+                    </div>
+
+                    <div class="term-line">
+                        Type "help" to see available commands.
+                    </div>
+
+                    <div class="term-line">
+                        &nbsp;
+                    </div>
+
+                    <div class="term-row">
+
+                        <span class="term-prompt">
+                            root@root-os:~$
+                        </span>
+
+                        <input
+                            id="termInput"
+                            autocomplete="off"
+                            onkeydown="terminalCommand(event)"
+                        >
+
+                    </div>
+
                 </div>
 
-                <div class="terminalInputRow">
-                    <span class="terminalPrompt">root@root-os:~$</span>
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             NOTES WINDOW
+        ========================= -->
+
+        <div id="notesWindow" class="window">
+
+            <div class="window-header">
+
+                <div class="window-title">
+                    📝 Notes
+                </div>
+
+                <button class="close"
+                    onclick="closeWindow('notesWindow')">
+                    ✕
+                </button>
+
+            </div>
+
+            <div class="window-content">
+
+                <textarea
+                    id="notes"
+                    placeholder="Start typing your notes..."
+                ></textarea>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             CALCULATOR
+        ========================= -->
+
+        <div id="calculatorWindow" class="window">
+
+            <div class="window-header">
+
+                <div class="window-title">
+                    🧮 Calculator
+                </div>
+
+                <button class="close"
+                    onclick="closeWindow('calculatorWindow')">
+                    ✕
+                </button>
+
+            </div>
+
+            <div class="window-content">
+
+                <div class="calculator">
 
                     <input
-                        id="terminalInput"
-                        autocomplete="off"
-                        onkeydown="terminalCommand(event)"
+                        id="calc"
+                        readonly
                     >
+
+                    <div class="calc-grid">
+
+                        <button class="calc-button"
+                            onclick="clearCalc()">
+                            C
+                        </button>
+
+                        <button class="calc-button"
+                            onclick="backCalc()">
+                            ⌫
+                        </button>
+
+                        <button class="calc-button calc-op"
+                            onclick="addCalc('%')">
+                            %
+                        </button>
+
+                        <button class="calc-button calc-op"
+                            onclick="addCalc('/')">
+                            ÷
+                        </button>
+
+
+                        <button class="calc-button"
+                            onclick="addCalc('7')">
+                            7
+                        </button>
+
+                        <button class="calc-button"
+                            onclick="addCalc('8')">
+                            8
+                        </button>
+
+                        <button class="calc-button"
+                            onclick="addCalc('9')">
+                            9
+                        </button>
+
+                        <button class="calc-button calc-op"
+                            onclick="addCalc('*')">
+                            ×
+                        </button>
+
+
+                        <button class="calc-button"
+                            onclick="addCalc('4')">
+                            4
+                        </button>
+
+                        <button class="calc-button"
+                            onclick="addCalc('5')">
+                            5
+                        </button>
+
+                        <button class="calc-button"
+                            onclick="addCalc('6')">
+                            6
+                        </button>
+
+                        <button class="calc-button calc-op"
+                            onclick="addCalc('-')">
+                            −
+                        </button>
+
+
+                        <button class="calc-button"
+                            onclick="addCalc('1')">
+                            1
+                        </button>
+
+                        <button class="calc-button"
+                            onclick="addCalc('2')">
+                            2
+                        </button>
+
+                        <button class="calc-button"
+                            onclick="addCalc('3')">
+                            3
+                        </button>
+
+                        <button class="calc-button calc-op"
+                            onclick="addCalc('+')">
+                            +
+                        </button>
+
+
+                        <button class="calc-button"
+                            onclick="addCalc('0')">
+                            0
+                        </button>
+
+                        <button class="calc-button"
+                            onclick="addCalc('.')">
+                            .
+                        </button>
+
+                        <button class="calc-button calc-op"
+                            style="grid-column: span 2"
+                            onclick="calculate()">
+                            =
+                        </button>
+
+                    </div>
+
                 </div>
 
             </div>
 
         </div>
 
-    </div>
 
-    <!-- NOTES WINDOW -->
-    <div class="window" id="notesWindow">
+        <!-- =========================
+             SETTINGS WINDOW
+        ========================= -->
 
-        <div class="windowHeader">
-            <div class="windowTitle">📝 Notes</div>
+        <div id="settingsWindow" class="window">
 
-            <div class="windowControls">
-                <button class="windowControl" onclick="closeWindow('notesWindow')">✕</button>
+            <div class="window-header">
+
+                <div class="window-title">
+                    ⚙️ Settings
+                </div>
+
+                <button class="close"
+                    onclick="closeWindow('settingsWindow')">
+                    ✕
+                </button>
+
             </div>
-        </div>
 
-        <div class="windowBody">
+            <div class="window-content">
 
-            <textarea
-                id="notesArea"
-                class="notesArea"
-                placeholder="Start typing your notes..."
-            ></textarea>
+                <div class="settings">
 
-        </div>
+                    <div class="setting">
 
-    </div>
+                        <h3>
+                            🌐 System
+                        </h3>
 
-    <!-- CALCULATOR -->
-    <div class="window" id="calculatorWindow">
+                        <p>
+                            ROOT OS is a web-based operating system interface.
+                        </p>
 
-        <div class="windowHeader">
-            <div class="windowTitle">🧮 Calculator</div>
+                    </div>
 
-            <div class="windowControls">
-                <button class="windowControl" onclick="closeWindow('calculatorWindow')">✕</button>
-            </div>
-        </div>
+                    <div class="setting">
 
-        <div class="windowBody">
+                        <h3>
+                            🎨 Theme
+                        </h3>
 
-            <div class="calculator">
+                        <p>
+                            ROOT Blue — inspired by the ROOT HUB design.
+                        </p>
 
-                <input
-                    id="calcDisplay"
-                    class="calcDisplay"
-                    type="text"
-                    readonly
-                    value=""
-                >
+                    </div>
 
-                <div class="calcGrid">
+                    <div class="setting">
 
-                    <button class="calcButton" onclick="clearCalc()">C</button>
-                    <button class="calcButton" onclick="backCalc()">⌫</button>
-                    <button class="calcButton calcOperator" onclick="addCalc('%')">%</button>
-                    <button class="calcButton calcOperator" onclick="addCalc('/')">÷</button>
+                        <h3>
+                            ⚡ Performance
+                        </h3>
 
-                    <button class="calcButton" onclick="addCalc('7')">7</button>
-                    <button class="calcButton" onclick="addCalc('8')">8</button>
-                    <button class="calcButton" onclick="addCalc('9')">9</button>
-                    <button class="calcButton calcOperator" onclick="addCalc('*')">×</button>
+                        <p>
+                            Lightweight interface designed for modern browsers.
+                        </p>
 
-                    <button class="calcButton" onclick="addCalc('4')">4</button>
-                    <button class="calcButton" onclick="addCalc('5')">5</button>
-                    <button class="calcButton" onclick="addCalc('6')">6</button>
-                    <button class="calcButton calcOperator" onclick="addCalc('-')">−</button>
+                    </div>
 
-                    <button class="calcButton" onclick="addCalc('1')">1</button>
-                    <button class="calcButton" onclick="addCalc('2')">2</button>
-                    <button class="calcButton" onclick="addCalc('3')">3</button>
-                    <button class="calcButton calcOperator" onclick="addCalc('+')">+</button>
+                    <div class="setting">
 
-                    <button class="calcButton" onclick="addCalc('0')">0</button>
-                    <button class="calcButton" onclick="addCalc('.')">.</button>
-                    <button class="calcButton calcOperator" style="grid-column:span 2;" onclick="calculate()">=</button>
+                        <h3>
+                            🔒 Privacy
+                        </h3>
+
+                        <p>
+                            Notes are stored locally in your browser.
+                        </p>
+
+                    </div>
 
                 </div>
 
@@ -913,278 +1402,273 @@ body {
 
         </div>
 
-    </div>
 
-    <!-- SETTINGS -->
-    <div class="window" id="settingsWindow">
+        <!-- =========================
+             ABOUT WINDOW
+        ========================= -->
 
-        <div class="windowHeader">
-            <div class="windowTitle">⚙️ Settings</div>
+        <div id="aboutWindow" class="window">
 
-            <div class="windowControls">
-                <button class="windowControl" onclick="closeWindow('settingsWindow')">✕</button>
-            </div>
-        </div>
+            <div class="window-header">
 
-        <div class="windowBody">
-
-            <div class="settingsPage">
-
-                <div class="settingCard">
-                    <h3>🌐 System</h3>
-                    <p>ROOT OS is running as a web-based operating system interface.</p>
+                <div class="window-title">
+                    ℹ️ About ROOT OS
                 </div>
 
-                <div class="settingCard">
-                    <h3>🎨 Theme</h3>
-                    <p>ROOT Blue — the official ROOT HUB inspired interface theme.</p>
-                </div>
-
-                <div class="settingCard">
-                    <h3>⚡ Performance</h3>
-                    <p>Lightweight interface designed to run directly in a modern browser.</p>
-                </div>
-
-                <div class="settingCard">
-                    <h3>🔒 Privacy</h3>
-                    <p>This demo does not send your notes or terminal commands to a server.</p>
-                </div>
+                <button class="close"
+                    onclick="closeWindow('aboutWindow')">
+                    ✕
+                </button>
 
             </div>
 
-        </div>
+            <div class="window-content">
 
-    </div>
+                <div class="about">
 
-    <!-- ABOUT -->
-    <div class="window" id="aboutWindow">
+                    <div class="about-logo">
+                        R
+                    </div>
 
-        <div class="windowHeader">
-            <div class="windowTitle">ℹ️ About ROOT OS</div>
+                    <h1>
+                        ROOT OS
+                    </h1>
 
-            <div class="windowControls">
-                <button class="windowControl" onclick="closeWindow('aboutWindow')">✕</button>
-            </div>
-        </div>
+                    <div class="version">
+                        Version 1.7
+                    </div>
 
-        <div class="windowBody">
+                    <p>
+                        ROOT OS is a web-based operating system concept
+                        developed as part of the ROOT HUB project.
+                    </p>
 
-            <div class="aboutPage">
+                    <p>
+                        Building Code. Creating Tomorrow.
+                    </p>
 
-                <div class="aboutLogo">R</div>
+                    <p>
+                        © 2026 ROOT HUB
+                    </p>
 
-                <h1>ROOT OS</h1>
-
-                <p style="margin-top:10px;">
-                    Version 1.7
-                </p>
-
-                <p style="margin-top:20px;">
-                    ROOT OS is a web-based operating system concept
-                    developed as part of the ROOT HUB project.
-                </p>
-
-                <p style="margin-top:15px;">
-                    Building Code. Creating Tomorrow.
-                </p>
-
-                <p style="margin-top:25px;">
-                    © 2026 ROOT HUB
-                </p>
+                </div>
 
             </div>
 
         </div>
 
-    </div>
 
-    <!-- DOCK -->
-    <div class="dock">
+        <!-- =========================
+             DOCK
+        ========================= -->
 
-        <button
-            class="dockButton startButton"
-            onclick="toggleStartMenu()"
-            title="Start"
-        >
-            R
-        </button>
+        <div class="dock">
 
-        <button
-            class="dockButton"
-            onclick="openWindow('filesWindow')"
-            title="Files"
-        >
-            📁
-        </button>
+            <button
+                class="dock-button dock-root"
+                onclick="toggleStart()"
+                title="ROOT Menu">
+                R
+            </button>
 
-        <button
-            class="dockButton"
-            onclick="openWindow('terminalWindow')"
-            title="Terminal"
-        >
-            ⌨️
-        </button>
+            <button
+                class="dock-button"
+                onclick="openWindow('filesWindow')"
+                title="Files">
+                📁
+            </button>
 
-        <button
-            class="dockButton"
-            onclick="openWindow('notesWindow')"
-            title="Notes"
-        >
-            📝
-        </button>
+            <button
+                class="dock-button"
+                onclick="openWindow('terminalWindow')"
+                title="Terminal">
+                ⌨️
+            </button>
 
-        <button
-            class="dockButton"
-            onclick="openWindow('calculatorWindow')"
-            title="Calculator"
-        >
-            🧮
-        </button>
+            <button
+                class="dock-button"
+                onclick="openWindow('notesWindow')"
+                title="Notes">
+                📝
+            </button>
 
-        <button
-            class="dockButton"
-            onclick="openWindow('settingsWindow')"
-            title="Settings"
-        >
-            ⚙️
-        </button>
+            <button
+                class="dock-button"
+                onclick="openWindow('calculatorWindow')"
+                title="Calculator">
+                🧮
+            </button>
+
+            <button
+                class="dock-button"
+                onclick="openWindow('settingsWindow')"
+                title="Settings">
+                ⚙️
+            </button>
+
+        </div>
 
     </div>
 
 </div>
 
+
 <script>
 
-/* ================================
-   ROOT OS v1.7
-   CORE SYSTEM
-================================ */
+/* =========================
+   BOOT
+========================= */
 
-const bootScreen = document.getElementById("bootScreen");
-const desktop = document.getElementById("desktop");
+setTimeout(function() {
 
-setTimeout(() => {
-    bootScreen.style.display = "none";
-    desktop.style.display = "block";
-}, 2400);
+    document.getElementById("boot").style.display = "none";
+
+    document.getElementById("os").style.display = "block";
+
+}, 2200);
 
 
-/* ================================
+/* =========================
    CLOCK
-================================ */
+========================= */
 
 function updateClock() {
 
     const now = new Date();
 
-    let hours = now.getHours();
-    let minutes = now.getMinutes();
+    let h = now.getHours();
+    let m = now.getMinutes();
 
-    hours = String(hours).padStart(2, "0");
-    minutes = String(minutes).padStart(2, "0");
+    h = String(h).padStart(2, "0");
+    m = String(m).padStart(2, "0");
 
     document.getElementById("clock").textContent =
-        `${hours}:${minutes}`;
+        h + ":" + m;
 }
 
 updateClock();
+
 setInterval(updateClock, 1000);
 
 
-/* ================================
+/* =========================
+   NETWORK
+========================= */
+
+function updateNetwork() {
+
+    const text =
+        document.getElementById("networkText");
+
+    text.textContent =
+        navigator.onLine ? "Online" : "Offline";
+}
+
+updateNetwork();
+
+window.addEventListener("online", updateNetwork);
+window.addEventListener("offline", updateNetwork);
+
+
+/* =========================
    WINDOWS
-================================ */
+========================= */
 
 function openWindow(id) {
 
-    document.querySelectorAll(".window").forEach(win => {
-        win.classList.remove("active");
-    });
+    document
+        .querySelectorAll(".window")
+        .forEach(function(window) {
+            window.classList.remove("show");
+        });
 
-    document.getElementById(id).classList.add("active");
+    document
+        .getElementById(id)
+        .classList.add("show");
 
-    document.getElementById("startMenu").classList.remove("active");
+    document
+        .getElementById("startMenu")
+        .classList.remove("show");
 
     if (id === "terminalWindow") {
-        setTimeout(() => {
-            document.getElementById("terminalInput").focus();
+
+        setTimeout(function() {
+
+            document
+                .getElementById("termInput")
+                .focus();
+
         }, 100);
     }
 }
 
 
 function closeWindow(id) {
-    document.getElementById(id).classList.remove("active");
+
+    document
+        .getElementById(id)
+        .classList.remove("show");
+}
+
+
+/* =========================
+   START MENU
+========================= */
+
+function toggleStart() {
+
+    document
+        .getElementById("startMenu")
+        .classList.toggle("show");
+
+    const menu =
+        document.getElementById("startMenu");
+
+    if (menu.classList.contains("show")) {
+
+        document
+            .getElementById("appSearch")
+            .focus();
+    }
 }
 
 
 function openFromMenu(id) {
+
     openWindow(id);
 }
 
 
-/* ================================
-   START MENU
-================================ */
-
-function toggleStartMenu() {
-
-    const menu = document.getElementById("startMenu");
-
-    menu.classList.toggle("active");
-
-    if (menu.classList.contains("active")) {
-        document.getElementById("appSearch").focus();
-    }
-}
-
-
-document.addEventListener("click", function(event) {
-
-    const menu = document.getElementById("startMenu");
-    const startButton = document.querySelector(".startButton");
-
-    if (
-        menu.classList.contains("active") &&
-        !menu.contains(event.target) &&
-        !startButton.contains(event.target)
-    ) {
-        menu.classList.remove("active");
-    }
-
-});
-
-
-/* ================================
+/* =========================
    APP SEARCH
-================================ */
+========================= */
 
 function searchApps() {
 
     const query =
-        document.getElementById("appSearch")
-        .value
-        .toLowerCase();
+        document
+            .getElementById("appSearch")
+            .value
+            .toLowerCase();
 
-    document.querySelectorAll(".appButton").forEach(button => {
+    document
+        .querySelectorAll(".app")
+        .forEach(function(app) {
 
-        const name =
-            button.dataset.name.toLowerCase();
+            const name =
+                app.dataset.name.toLowerCase();
 
-        if (name.includes(query)) {
-            button.style.display = "block";
-        } else {
-            button.style.display = "none";
-        }
-
-    });
-
+            app.style.display =
+                name.includes(query)
+                ? "block"
+                : "none";
+        });
 }
 
 
-/* ================================
+/* =========================
    TERMINAL
-================================ */
+========================= */
 
 function terminalCommand(event) {
 
@@ -1193,7 +1677,7 @@ function terminalCommand(event) {
     }
 
     const input =
-        document.getElementById("terminalInput");
+        document.getElementById("termInput");
 
     const command =
         input.value.trim().toLowerCase();
@@ -1204,28 +1688,30 @@ function terminalCommand(event) {
     const row =
         input.parentElement;
 
-    const output =
+    const commandLine =
         document.createElement("div");
 
-    output.className = "terminalLine";
+    commandLine.className = "term-line";
 
-    output.innerHTML =
-        `<span class="terminalBlue">root@root-os:~$</span> ${escapeHTML(command)}`;
+    commandLine.innerHTML =
+        '<span class="term-blue">root@root-os:~$</span> '
+        + escapeHTML(command);
 
-    terminal.insertBefore(output, row);
+    terminal.insertBefore(commandLine, row);
 
-    let response = "";
+    let result = "";
 
     if (command === "help") {
 
-        response =
+        result =
 `Available commands:
-help       Show available commands
+
+help       Show commands
 clear      Clear terminal
 about      About ROOT OS
-version    Show OS version
-date       Show current date
-time       Show current time
+version    Show version
+date       Show date
+time       Show time
 status     Show system status
 hello      ROOT greeting`;
 
@@ -1233,164 +1719,160 @@ hello      ROOT greeting`;
 
     else if (command === "clear") {
 
-        terminal.querySelectorAll(".terminalLine")
-            .forEach(line => line.remove());
+        terminal
+            .querySelectorAll(".term-line")
+            .forEach(function(line) {
+                line.remove();
+            });
 
         input.value = "";
-        return;
 
+        return;
     }
 
     else if (command === "about") {
 
-        response =
+        result =
             "ROOT OS is a web-based operating system concept by ROOT HUB.";
 
     }
 
     else if (command === "version") {
 
-        response =
+        result =
             "ROOT OS v1.7";
 
     }
 
     else if (command === "date") {
 
-        response =
+        result =
             new Date().toLocaleDateString();
 
     }
 
     else if (command === "time") {
 
-        response =
+        result =
             new Date().toLocaleTimeString();
 
     }
 
     else if (command === "status") {
 
-        response =
-            "System: Online\nInterface: Operational\nNetwork: Connected";
+        result =
+`System: Online
+Interface: Operational
+Network: Connected`;
 
     }
 
     else if (command === "hello") {
 
-        response =
-            "Welcome to ROOT OS. 👋";
+        result =
+            "Welcome to ROOT OS.";
 
     }
 
     else if (command === "") {
 
-        response = "";
+        result = "";
 
     }
 
     else {
 
-        response =
-            `Command not found: ${command}. Type "help" for commands.`;
+        result =
+            'Command not found: "' +
+            command +
+            '". Type "help".';
 
     }
 
-    if (response) {
+    if (result) {
 
-        const responseDiv =
+        const response =
             document.createElement("div");
 
-        responseDiv.className = "terminalLine";
+        response.className = "term-line";
 
-        responseDiv.style.whiteSpace = "pre-line";
+        response.textContent = result;
 
-        responseDiv.textContent = response;
-
-        terminal.insertBefore(responseDiv, row);
-
+        terminal.insertBefore(response, row);
     }
 
     input.value = "";
 
-    terminal.scrollTop = terminal.scrollHeight;
+    terminal.scrollTop =
+        terminal.scrollHeight;
 }
 
-
-/* ================================
-   HTML ESCAPE
-================================ */
 
 function escapeHTML(text) {
 
-    const div =
+    const element =
         document.createElement("div");
 
-    div.textContent = text;
+    element.textContent = text;
 
-    return div.innerHTML;
+    return element.innerHTML;
 }
 
 
-/* ================================
+/* =========================
    NOTES
-================================ */
+========================= */
 
-const notesArea =
-    document.getElementById("notesArea");
+const notes =
+    document.getElementById("notes");
 
-const savedNotes =
-    localStorage.getItem("rootOSNotes");
+const saved =
+    localStorage.getItem("ROOT_OS_NOTES");
 
-if (savedNotes) {
-    notesArea.value = savedNotes;
+if (saved) {
+    notes.value = saved;
 }
 
-notesArea.addEventListener("input", () => {
+notes.addEventListener("input", function() {
 
     localStorage.setItem(
-        "rootOSNotes",
-        notesArea.value
+        "ROOT_OS_NOTES",
+        notes.value
     );
 
 });
 
 
-/* ================================
+/* =========================
    CALCULATOR
-================================ */
+========================= */
 
 function addCalc(value) {
 
-    const display =
-        document.getElementById("calcDisplay");
-
-    display.value += value;
+    document.getElementById("calc").value += value;
 }
 
 
 function clearCalc() {
 
-    document.getElementById("calcDisplay").value = "";
-
+    document.getElementById("calc").value = "";
 }
 
 
 function backCalc() {
 
     const display =
-        document.getElementById("calcDisplay");
+        document.getElementById("calc");
 
     display.value =
         display.value.slice(0, -1);
-
 }
 
 
 function calculate() {
 
     const display =
-        document.getElementById("calcDisplay");
+        document.getElementById("calc");
 
     if (!display.value) {
         return;
@@ -1399,150 +1881,115 @@ function calculate() {
     try {
 
         const expression =
-            display.value.replace(/%/g, "/100");
+            display.value
+                .replace(/%/g, "/100");
 
         if (!/^[0-9+\-*/().\s]+$/.test(expression)) {
+
             display.value = "Error";
+
             return;
         }
 
-        const result =
+        const answer =
             Function(
-                `"use strict"; return (${expression})`
+                '"use strict";return (' +
+                expression +
+                ')'
             )();
 
-        if (!Number.isFinite(result)) {
+        if (!Number.isFinite(answer)) {
+
             display.value = "Error";
+
             return;
         }
 
-        display.value = result;
-
-    } catch {
-
-        display.value = "Error";
+        display.value = answer;
 
     }
 
+    catch {
+
+        display.value = "Error";
+    }
 }
 
 
-/* ================================
-   KEYBOARD CALCULATOR
-================================ */
+/* =========================
+   KEYBOARD
+========================= */
 
 document.addEventListener("keydown", function(event) {
 
-    const calcWindow =
+    if (event.key === "Escape") {
+
+        document
+            .querySelectorAll(".window")
+            .forEach(function(window) {
+                window.classList.remove("show");
+            });
+
+        document
+            .getElementById("startMenu")
+            .classList.remove("show");
+    }
+
+});
+
+
+document.addEventListener("keydown", function(event) {
+
+    const calculator =
         document.getElementById("calculatorWindow");
 
-    if (!calcWindow.classList.contains("active")) {
+    if (!calculator.classList.contains("show")) {
         return;
     }
 
-    const allowed =
-        "0123456789+-*/().%";
-
-    if (allowed.includes(event.key)) {
+    if ("0123456789+-*/().%".includes(event.key)) {
 
         addCalc(event.key);
-
     }
 
     if (event.key === "Enter") {
 
         calculate();
-
     }
 
     if (event.key === "Backspace") {
 
         backCalc();
-
-    }
-
-    if (event.key === "Escape") {
-
-        clearCalc();
-
     }
 
 });
 
 
-/* ================================
-   ONLINE STATUS
-================================ */
+/* =========================
+   CLOSE START MENU
+========================= */
 
-function updateNetworkStatus() {
+document.addEventListener("click", function(event) {
 
-    const status =
-        document.getElementById("networkStatus");
+    const menu =
+        document.getElementById("startMenu");
 
-    if (navigator.onLine) {
+    const rootButton =
+        document.querySelector(".dock-root");
 
-        status.textContent = "● Online";
+    if (
+        menu.classList.contains("show") &&
+        !menu.contains(event.target) &&
+        !rootButton.contains(event.target)
+    ) {
 
-    } else {
-
-        status.textContent = "● Offline";
-
-    }
-
-}
-
-updateNetworkStatus();
-
-window.addEventListener(
-    "online",
-    updateNetworkStatus
-);
-
-window.addEventListener(
-    "offline",
-    updateNetworkStatus
-);
-
-
-/* ================================
-   ESCAPE TO CLOSE WINDOWS
-================================ */
-
-document.addEventListener("keydown", function(event) {
-
-    if (event.key === "Escape") {
-
-        document
-            .querySelectorAll(".window.active")
-            .forEach(win => {
-                win.classList.remove("active");
-            });
-
-        document
-            .getElementById("startMenu")
-            .classList.remove("active");
-
+        menu.classList.remove("show");
     }
 
 });
 
 
-/* ================================
-   PREVENT RIGHT CLICK
-================================ */
-
-document.addEventListener("contextmenu", function(event) {
-
-    event.preventDefault();
-
-});
-
-
-/* ================================
-   ROOT OS READY
-================================ */
-
-console.log("ROOT OS v1.7 loaded successfully.");
+console.log("ROOT OS v1.7 ready.");
 
 </script>
 
